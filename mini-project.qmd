@@ -12,4 +12,4 @@ Introduction to your dataset
 
 You can download the dataset here:
 
-[Download data.csv](data/data.csv)
+[Download data.csv](https://github.com/C7091/website/tree/main/data/data.csv)

@@ -6,7 +6,7 @@ title: "Schedule"
 
 You can download the scheme of work here:
 
-[Download scheme of work.csv](scheme-of-work.docx)
+[Download scheme of work.csv](https://github.com/C7091/website/tree/main/docs/scheme-of-work.docx)
 
 ## Harper Adams Data Science
 
