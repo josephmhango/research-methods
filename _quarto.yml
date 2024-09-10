@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  favicon: "img/C7091_bg.png"
+  title: "C7091 - 2024: Professional skills for data science"
+  sidebar:
+    logo: "img/C7091_bg.png"
+    style: "docked"
+    search: true
+    contents: 
+      - section: "Information"
+        contents:
+          - index.qmd
+          - schedule.qmd
+      - section: "Labs"
+        contents:
+          - problem-sets.qmd
+          - mini-project.qmd
+format:
+  html:
+    highlight-style: a11y
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+
+editor: visual
+

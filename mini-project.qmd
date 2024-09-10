@@ -1,0 +1,15 @@
+---
+title: "mini-project"
+format: html
+editor: visual
+---
+
+## Synopsis
+
+Introduction to your dataset
+
+# Download Data
+
+You can download the dataset here:
+
+[Download data.csv](data/data.csv)
