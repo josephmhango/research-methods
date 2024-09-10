@@ -10,8 +10,8 @@ Professional Skills for Data Analytics is designed to enhance the professional c
 <br>
 ## Module content
 
-- R Language: [R language](https://github.com/C7091/website/lectures/Rlang)
-- Tidy data: [Tidy data](https://github.com/C7091/website/lectures/tidy-data)
+- R Language: [R language](https://github.com/C7091/website/tree/main/lectures/Rlang)
+- Tidy data: [Tidy data](lectures/tidy-data)
 - Markdown and Github: [Markdown and Github](https://github.com/C7091/website/lectures/git-md)
 - Statistical reporting: [Statistical reporting](https://github.com/C7091/website/lectures/Stats-reporting)
 
