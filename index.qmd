@@ -8,6 +8,7 @@ title: "Home"
 
 Professional Skills for Data Analytics is designed to enhance the professional capacity of students in data analytics. This module provides a comprehensive grounding in essential skills required for data literacy, bolstering existing skills and framing elements of best practice standards. It covers a range of topics including an introduction to ***R programming***, an introduction to traditional ***statistical analysis and visualization***, the creation of ***GitHub webpages*** to document and communicate analyses, and the use of ***Git and Markdown*** for reproducible practice.
 <br>
+
 ## Module content
 
 - R Language: [R language](https://github.com/C7091/website/tree/main/lectures/Rlang)
