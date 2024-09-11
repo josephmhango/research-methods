@@ -42,5 +42,270 @@
       "Information",
       "Home"
     ]
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#introduction",
+    "href": "lectures/Stats-reporting/stats-reporting.html#introduction",
+    "title": "Statisitical Analysis Report",
+    "section": "",
+    "text": "Importance of statistical analysis reports\nUse cases: Business, Consultancy, Scientific Research\nObjectives:\n\nGuidelines for report creation\nTailor reports to the audience"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#understanding-the-audience",
+    "href": "lectures/Stats-reporting/stats-reporting.html#understanding-the-audience",
+    "title": "Statisitical Analysis Report",
+    "section": "Understanding the Audience",
+    "text": "Understanding the Audience\n\nWho is the report for?\n\nBusiness managers, clients, scientists\n\nAdjust technical depth based on their knowledge\nWhat key information is expected by the audience?"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#defining-the-purpose-of-the-report",
+    "href": "lectures/Stats-reporting/stats-reporting.html#defining-the-purpose-of-the-report",
+    "title": "Statisitical Analysis Report",
+    "section": "Defining the Purpose of the Report",
+    "text": "Defining the Purpose of the Report\n\nClarify the objective: What are you solving or exploring?\nAddress the key questions or problems\nDefine the expected outcomes\nFor a very big analysis create a Statistical Analysis Plan"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#data-collection-and-preparation",
+    "href": "lectures/Stats-reporting/stats-reporting.html#data-collection-and-preparation",
+    "title": "Statisitical Analysis Report",
+    "section": "Data Collection and Preparation",
+    "text": "Data Collection and Preparation\n\nOverview of data:\n\nWhere did the data come from? How was it collected?\n\nData cleaning process:\n\nHandling missing data, outliers, normalization\n\nImportance of transparent data preprocessing"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#choosing-the-right-statistical-methods",
+    "href": "lectures/Stats-reporting/stats-reporting.html#choosing-the-right-statistical-methods",
+    "title": "Statisitical Analysis Report",
+    "section": "Choosing the Right Statistical Methods",
+    "text": "Choosing the Right Statistical Methods\n\nCriteria for selecting the correct statistical tests:\n\nParametric vs. Non-parametric\n\nCommon tests: T-tests, ANOVA, Regression\nMatch the method to the data type and objective"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#data-exploration-visualization",
+    "href": "lectures/Stats-reporting/stats-reporting.html#data-exploration-visualization",
+    "title": "Statisitical Analysis Report",
+    "section": "Data Exploration & Visualization",
+    "text": "Data Exploration & Visualization\n\nVisualizing data using histograms, scatter plots, box plots\nSummary statistics: Mean, Median, Standard Deviation\nHighlight key trends or anomalies in the data"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#hypothesis-testing-if-applicable",
+    "href": "lectures/Stats-reporting/stats-reporting.html#hypothesis-testing-if-applicable",
+    "title": "Statisitical Analysis Report",
+    "section": "Hypothesis Testing (If Applicable)",
+    "text": "Hypothesis Testing (If Applicable)\n\nDefine the null and alternative hypotheses\nStatistical significance and p-values explained\nInterpreting test results for non-technical stakeholders"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#regression-analysis-if-applicable",
+    "href": "lectures/Stats-reporting/stats-reporting.html#regression-analysis-if-applicable",
+    "title": "Statisitical Analysis Report",
+    "section": "Regression Analysis (If Applicable)",
+    "text": "Regression Analysis (If Applicable)\n\nUse of regression to explain relationships between variables\nKey metrics: R-squared, Coefficients\nVisualizing regression results with graphs"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#confidence-intervals",
+    "href": "lectures/Stats-reporting/stats-reporting.html#confidence-intervals",
+    "title": "Statisitical Analysis Report",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\n\nImportance of confidence intervals in analysis\nHow to interpret and explain them\nExamples of 95% confidence intervals in real-world scenarios"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#correlation-vs-causation",
+    "href": "lectures/Stats-reporting/stats-reporting.html#correlation-vs-causation",
+    "title": "Statisitical Analysis Report",
+    "section": "Correlation vs Causation",
+    "text": "Correlation vs Causation\n\nCorrelation explained: Why it doesn’t mean causation\nAvoid assumption of causality\nVisualizations like correlation matrices help convey relationships"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#interpreting-the-results",
+    "href": "lectures/Stats-reporting/stats-reporting.html#interpreting-the-results",
+    "title": "Statisitical Analysis Report",
+    "section": "Interpreting the Results",
+    "text": "Interpreting the Results\n\nKey findings from the statistical analysis\nHow to explain technical results to non-technical stakeholders\nHighlight the actionable insights"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#limitations-and-assumptions",
+    "href": "lectures/Stats-reporting/stats-reporting.html#limitations-and-assumptions",
+    "title": "Statisitical Analysis Report",
+    "section": "Limitations and Assumptions",
+    "text": "Limitations and Assumptions\n\nDiscuss the limitations of the analysis:\n\nSampling bias, data quality, test assumptions\n\nWhy transparency is important\nWhat can be done to mitigate limitations"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#visualizing-results",
+    "href": "lectures/Stats-reporting/stats-reporting.html#visualizing-results",
+    "title": "Statisitical Analysis Report",
+    "section": "Visualizing Results",
+    "text": "Visualizing Results\n\nBest practices for choosing visualizations:\n\nCharts, graphs, tables\n\nEnsure clarity and simplicity\nUse tools like Excel, R, Python for creating visuals"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#recommendations-based-on-the-analysis",
+    "href": "lectures/Stats-reporting/stats-reporting.html#recommendations-based-on-the-analysis",
+    "title": "Statisitical Analysis Report",
+    "section": "Recommendations Based on the Analysis",
+    "text": "Recommendations Based on the Analysis\n\nTranslating statistical results into actionable recommendations\nSpecific examples for business/scientific decisions:\n\nIncrease sales, improve efficiency, refine hypotheses"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#writing-the-report",
+    "href": "lectures/Stats-reporting/stats-reporting.html#writing-the-report",
+    "title": "Statisitical Analysis Report",
+    "section": "Writing the Report",
+    "text": "Writing the Report\n\nTypical components of a report:\n\nExecutive Summary\nMethodology\nResults\nDiscussion and Recommendations\n\nUse plain language, avoid technical jargon"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#delivering-the-report",
+    "href": "lectures/Stats-reporting/stats-reporting.html#delivering-the-report",
+    "title": "Statisitical Analysis Report",
+    "section": "Delivering the Report",
+    "text": "Delivering the Report\n\nTailoring the delivery format:\n\nPDF, PowerPoint, or interactive dashboards\n\nStructuring the narrative for oral presentations\nTips for engaging non-technical audiences"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#common-pitfalls-to-avoid",
+    "href": "lectures/Stats-reporting/stats-reporting.html#common-pitfalls-to-avoid",
+    "title": "Statisitical Analysis Report",
+    "section": "Common Pitfalls to Avoid",
+    "text": "Common Pitfalls to Avoid\n\nAvoid data overload or excessive jargon\nBe cautious with misinterpretation of results\nAlways contextualize insights for the audience"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#tools-and-software-for-statistical-reporting",
+    "href": "lectures/Stats-reporting/stats-reporting.html#tools-and-software-for-statistical-reporting",
+    "title": "Statisitical Analysis Report",
+    "section": "Tools and Software for Statistical Reporting",
+    "text": "Tools and Software for Statistical Reporting\n\nTools overview:\n\nR, Python, Quarto, Github, Excel, SPSS, Tableau\n\nChoosing the right tool for your audience\nReproducibility"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#conclusion",
+    "href": "lectures/Stats-reporting/stats-reporting.html#conclusion",
+    "title": "Statisitical Analysis Report",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nTakeaway messages:\n\nClear communication is key\nTailor reports to the audience\n\nFinal thoughts and any questions?"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#exploratory-data-analysis-eda",
+    "href": "lectures/Stats-reporting/stats-reporting.html#exploratory-data-analysis-eda",
+    "title": "Statisitical Analysis Report",
+    "section": "Exploratory Data Analysis (EDA)",
+    "text": "Exploratory Data Analysis (EDA)\n\nVisualizing data using histograms, scatter plots, box plots\nSummary statistics: Mean, Median, Standard Deviation\nHighlight key trends or anomalies in the data"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#hypothesis-testing",
+    "href": "lectures/Stats-reporting/stats-reporting.html#hypothesis-testing",
+    "title": "Statisitical Analysis Report",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\n\nDefine the null and alternative hypotheses\nStatistical significance and p-values explained\nInterpreting test results for non-technical stakeholders"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#regression-analysis",
+    "href": "lectures/Stats-reporting/stats-reporting.html#regression-analysis",
+    "title": "Statisitical Analysis Report",
+    "section": "Regression Analysis",
+    "text": "Regression Analysis\n\nUse of regression to explain relationships between variables\nKey metrics: R-squared, Coefficients\nVisualizing regression results with graphs"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#interpreting-results",
+    "href": "lectures/Stats-reporting/stats-reporting.html#interpreting-results",
+    "title": "Statisitical Analysis Report",
+    "section": "Interpreting Results",
+    "text": "Interpreting Results\n\nKey findings from the statistical analysis\nHow to explain technical results to non-technical stakeholders\nHighlight the actionable insights"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#visualising-results",
+    "href": "lectures/Stats-reporting/stats-reporting.html#visualising-results",
+    "title": "Statisitical Analysis Report",
+    "section": "Visualising Results",
+    "text": "Visualising Results\n\nBest practices for choosing visualisations:\n\nCharts, graphs, tables\n\nEnsure clarity and simplicity\nUse tools like Excel, R, Python for creating visuals"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#recommendations-based-on-evidence",
+    "href": "lectures/Stats-reporting/stats-reporting.html#recommendations-based-on-evidence",
+    "title": "Statisitical Analysis Report",
+    "section": "Recommendations Based on Evidence",
+    "text": "Recommendations Based on Evidence\n\nTranslating statistical results into actionable recommendations\nSpecific examples for business/scientific decisions:\n\nIncrease sales, improve efficiency, refine hypotheses"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html#live-coding-a-stats-report",
+    "href": "lectures/Stats-reporting/stats-reporting.html#live-coding-a-stats-report",
+    "title": "Statisitical Analysis Report",
+    "section": "Live Coding a Stats Report",
+    "text": "Live Coding a Stats Report"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/report_template.html",
+    "href": "lectures/Stats-reporting/report_template.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.\nWhen you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\nsummary(cars)\n\n     speed           dist       \n Min.   : 4.0   Min.   :  2.00  \n 1st Qu.:12.0   1st Qu.: 26.00  \n Median :15.0   Median : 36.00  \n Mean   :15.4   Mean   : 42.98  \n 3rd Qu.:19.0   3rd Qu.: 56.00  \n Max.   :25.0   Max.   :120.00"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/report_template.html#r-markdown",
+    "href": "lectures/Stats-reporting/report_template.html#r-markdown",
+    "title": "Untitled",
+    "section": "",
+    "text": "This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.\nWhen you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\nsummary(cars)\n\n     speed           dist       \n Min.   : 4.0   Min.   :  2.00  \n 1st Qu.:12.0   1st Qu.: 26.00  \n Median :15.0   Median : 36.00  \n Mean   :15.4   Mean   : 42.98  \n 3rd Qu.:19.0   3rd Qu.: 56.00  \n Max.   :25.0   Max.   :120.00"
+  },
+  {
+    "objectID": "lectures/Stats-reporting/report_template.html#including-plots",
+    "href": "lectures/Stats-reporting/report_template.html#including-plots",
+    "title": "Untitled",
+    "section": "Including Plots",
+    "text": "Including Plots\nYou can also embed plots, for example:\n\n\n\n\n\n\n\n\n\nNote that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "You can download the scheme of work here:\nDownload scheme of work.csv",
+    "crumbs": [
+      "Information",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#scheme-of-work",
+    "href": "schedule.html#scheme-of-work",
+    "title": "Schedule",
+    "section": "",
+    "text": "You can download the scheme of work here:\nDownload scheme of work.csv",
+    "crumbs": [
+      "Information",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "schedule.html#harper-adams-data-science",
+    "href": "schedule.html#harper-adams-data-science",
+    "title": "Schedule",
+    "section": "Harper Adams Data Science",
+    "text": "Harper Adams Data Science\n\nThis module is a part of the MSc in Data Science for Global Agriculture, Food, and Environment at Harper Adams University, led by Ed Harris.",
+    "crumbs": [
+      "Information",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "mini-project.html",
+    "href": "mini-project.html",
+    "title": "mini-project",
+    "section": "",
+    "text": "Introduction to your dataset",
+    "crumbs": [
+      "Labs",
+      "mini-project"
+    ]
+  },
+  {
+    "objectID": "mini-project.html#synopsis",
+    "href": "mini-project.html#synopsis",
+    "title": "mini-project",
+    "section": "",
+    "text": "Introduction to your dataset",
+    "crumbs": [
+      "Labs",
+      "mini-project"
+    ]
+  },
+  {
+    "objectID": "lectures/Stats-reporting/stats-reporting.html",
+    "href": "lectures/Stats-reporting/stats-reporting.html",
+    "title": "Statisitical Analysis Report",
+    "section": "",
+    "text": "Importance of statistical analysis reports\nUse cases: Business, Consultancy, Scientific Research\nObjectives:\n\nGuidelines for report creation\nTailor reports to the audience"
   }
 ]
