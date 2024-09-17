@@ -321,5 +321,1132 @@
     "title": "Professional skills for data science",
     "section": "",
     "text": "Edit the following code so that the plot accurately reflects the axis labels and the subset functions returns an object with only the contents intended (as shown in the preceding comment to the function). Using indexing and regular expression tools in base R, extend the code to calculate the proportions of manual and automatic shift cars in the study\n\ndata(mpg)\n\n# Scatter plot with base R\nplot(mpg$disp1, mpg$hwy, col = as.factor(mpg$Year), \n     xlab = \"Displacement\", ylab = \"Highway Miles per Gallon\", pch = 19)\nlegend(\"topright\", legend = unique(mpg$Year), col = unique(as.factor(mpg$Year)), pch = 19)\n\n# Use base R to filter the data where cyl equals 8\nsubset(mpg, cy1 = '8')\n\nWrite pseudocode steps for calculating the volume of a cylinder (hint, if you do not know it by heart, you may need to research the equation for the volume of a cylinder!). For a cylinder of height = 3.2 cm and end radius of 5.5 cm, report the volume in cm to 2 decimal points of accuracy. Use at least 3 decimal points of accuracy for pi (hint, the quantity named pi is a standard variable in R!)\nIn your own words, what value is required for the d argument in the pwr.t.test() function in the {pwr} package? Show the code involved including any appropriate comment code required to answer this question. (hint: you will probably need to install the package, load it, and use help() on the function name)\nUsing the code chunk below, please answer the following questions:\n\n\nWhat is the role of the set.seeed() function in the context of this code?\nWhy does calculating the mean of the copied original matrix return a numeric value while the mean of the same matrix when missing values are filled from the list returns NA?\nPlease fix the code sp that mean_of_original_copy and mean_matrix are equal\n\n# Step 1: Create a 3x3 matrix with random numbers, and introduce NAs\nset.seed(123) \nmatrix_with_na &lt;- matrix(sample(c(NA, 1:9), 9, replace = TRUE), nrow = 3)\ncopy_of_original&lt;-matrix_with_na\nmatrix_with_na[1,2] &lt;- NA  # Introduce 3 specific NAs\nmatrix_with_na[2,3] &lt;- NA\nmatrix_with_na[3,1] &lt;- NA\n\n\nprint(\"Original Matrix with NAs:\")\nprint(matrix_with_na)\n\n# Step 2: Create a list with the same structure but no NAs\nlist_with_values &lt;- as.list(as.character(matrix(1:9, nrow = 3)))\nprint(list_with_values)\n\n# Step 3: Use a for-loop to find the corresponding missing number from the list and fill the matrix\nfor (i in 1:3) {\n  for (j in 1:3) {\n    if (is.na(matrix_with_na[i,j])) {\n      matrix_with_na[i,j] &lt;- list_with_values[[(i-1)*3 + j]]  # Replace with corresponding value from list\n    }\n  }\n}\n\nprint(matrix_with_na)\n\n# Step 4: Try calculating the mean of the matrices\nmean_matrix &lt;- mean(matrix_with_na)\nmean_of_original_copy &lt;- mean(copy_of_original)\nprint(mean_of_original_copy)\nprint(mean_matrix)\n\nExplain why this function is not working and return the working equivalent. Interpret what the estimate means and rank the species\n\n# Load necessary package\ninstall.packages('emmeans')\nlibrary(emmeans)\n\nrun_anova_posthoc &lt;- function() {\n  # Perform ANOVA on the iris dataset\n  anova_result &lt;- aov(Sepal.Length ~ Species, data = iris)\n  \n  # Perform post-hoc test using emmeans\n  posthoc_result &lt;- emmeans(anova_result, pairwise ~ Species)\n  \n  comparisons &lt;- as.data.frame(posthoc_result$contrasts)\n  \n  print(comparisons)\n  comparisons_df &lt;- data.frame(Species = comparisons$species,\n                               estimate = comparisons$estimate,\n                               p.value = comparisons$p.value)\n  \n  return(comparisons_df)\n}\n\n\nrun_anova_posthoc()\n\nUsing the iris dataset in R, conduct an anova of sepal length ‘by hand’ and report the F statistic. Feel free to use other packages for data wrangling/grouping only, but for each function used, appropriately comment on what it does and which package it comes from. Show your R code.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required."
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html",
+    "title": "Professional Skills for data science",
+    "section": "",
+    "text": "Common data file types\nExcel, data setup, and the Data Dictionary\nGetting data into R\nManipulating variables in the Data Frame\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#objectives",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#objectives",
+    "title": "Professional Skills for data science",
+    "section": "",
+    "text": "Common data file types\nExcel, data setup, and the Data Dictionary\nGetting data into R\nManipulating variables in the Data Frame\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data-concept",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data-concept",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data concept",
+    "text": "Tidy data concept\n\nArchives data in accessible format\nData “transparent” to others\n“Tidy Data” credit: Hadley Wickham (lead statistician at Posit)\nWickham 2014"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data-concept-1",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data-concept-1",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data concept",
+    "text": "Tidy data concept"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#common-data-file-types",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#common-data-file-types",
+    "title": "Professional Skills for data science",
+    "section": "Common data file types",
+    "text": "Common data file types\n\n(c)sv comma separated values + others\nExcel\nAvoid (!) proprietary formats\nData Dictionary"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#untidy-data",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#untidy-data",
+    "title": "Professional Skills for data science",
+    "section": "Untidy data",
+    "text": "Untidy data"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-data",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data",
+    "text": "Tidy data"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-dictionary",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-dictionary",
+    "title": "Professional Skills for data science",
+    "section": "Tidy dictionary",
+    "text": "Tidy dictionary"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-csv",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#tidy-csv",
+    "title": "Professional Skills for data science",
+    "section": "Tidy csv",
+    "text": "Tidy csv"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#getting-data-into-r",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#getting-data-into-r",
+    "title": "Professional Skills for data science",
+    "section": "Getting data into R",
+    "text": "Getting data into R\nChoices\n\nfrom File &gt; Import Data\nreadxl::read_excel()\nopenxlsx::read.xlsx()\n\n\nDemonstration"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#manipulating-variables-in-the-data-frame",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#manipulating-variables-in-the-data-frame",
+    "title": "Professional Skills for data science",
+    "section": "Manipulating variables in the Data Frame",
+    "text": "Manipulating variables in the Data Frame\n\nclass()\nnames()\nstr()\nindexes [ , ]\nattach()"
+  },
+  {
+    "objectID": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#practice-exercises",
+    "href": "lectures/Tidy-data/5 - dataframes/tidy data and dataframes.html#practice-exercises",
+    "title": "Professional Skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html",
+    "href": "lectures/Rlang/7 - T-test/t-test.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "William Sealy Gosset is credited with inventing the t-test while working for the Guinness brewery. The idea was refined and supported by the great statistician R. A. Fisher, and the idea was initially described in a paper anonymously by “Student”, in order to protect the commercial interests of Guinness. Today, it is perhaps one of the most prevalent and basic tools in statistics, and it is a fascinating story.\n\n\n\n\nThe question of the t-test\nData and assumptions\nGraphing\nTest and alternatives\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#students-t-test",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#students-t-test",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "William Sealy Gosset is credited with inventing the t-test while working for the Guinness brewery. The idea was refined and supported by the great statistician R. A. Fisher, and the idea was initially described in a paper anonymously by “Student”, in order to protect the commercial interests of Guinness. Today, it is perhaps one of the most prevalent and basic tools in statistics, and it is a fascinating story.\n\n\n\n\nThe question of the t-test\nData and assumptions\nGraphing\nTest and alternatives\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#the-question-of-the-t-test",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#the-question-of-the-t-test",
+    "title": "Professional skills for data science",
+    "section": "2 The question of the t-test",
+    "text": "2 The question of the t-test\nThe typical premise of the t-test is that it is used to compare populations you are interested in, which you measure with independent samples. There are a few versions of the basic question."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#compare-two-independent-samples",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#compare-two-independent-samples",
+    "title": "Professional skills for data science",
+    "section": "Compare two independent samples",
+    "text": "Compare two independent samples\n\nHere you have measured a numeric variable and have two samples.\nAre the means of the two samples different (i.e. did the samples come from different populations)?\nExample: An experiment with a control and one treatment group."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#compare-1-sample-to-a-known-mean",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#compare-1-sample-to-a-known-mean",
+    "title": "Professional skills for data science",
+    "section": "Compare 1 sample to a known mean",
+    "text": "Compare 1 sample to a known mean\n\nHere you have one sample which you wish to compare to a mean value.\nDid the sample come from a population exhibiting the known mean?\nThe data are simply a single numeric vector, and the population mean for comparison."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#paired-samples",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#paired-samples",
+    "title": "Professional skills for data science",
+    "section": "Paired samples",
+    "text": "Paired samples\n\nHere the individual observation comprising the 2 samples are not independent.\nExample: Before vs After experiments\nAnother example: Measuring plots that are paired spatially\nFor each of these examples, there is a unit, patient, or plot identification, that represents the relationship of each paired measure."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#data-and-assumptions",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#data-and-assumptions",
+    "title": "Professional skills for data science",
+    "section": "3 Data and assumptions",
+    "text": "3 Data and assumptions\nThe principle assumptions of the t-test are:\n\nGaussian distribution of observations WITHIN each sample\nHeteroscedasticity (our old friend) - i.e., the variance is equal in each sample\nIndependence of observations"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#evaluating-and-testing-the-assumptions",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#evaluating-and-testing-the-assumptions",
+    "title": "Professional skills for data science",
+    "section": "3.1 Evaluating and testing the assumptions",
+    "text": "3.1 Evaluating and testing the assumptions\n\nThe t-test is thought to be somewhat robust to violation of assumptions\nTo a certain extent, Gaussian distribution and heteroscedasticiy assumption violations won’t bias your results.\nThe assumption of independence of observations is always of high importance."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#testing-assumptions",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#testing-assumptions",
+    "title": "Professional skills for data science",
+    "section": "Testing assumptions",
+    "text": "Testing assumptions"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#gaussian-distribution-of-observations-within-each-sample",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#gaussian-distribution-of-observations-within-each-sample",
+    "title": "Professional skills for data science",
+    "section": "Gaussian distribution of observations WITHIN each sample",
+    "text": "Gaussian distribution of observations WITHIN each sample\n\nPlot and evaluate a a histogram (hist()) and a q-q plot (e.g., with qqplot())\nUse a statistical test evaluating whether data are Gaussian (e.g., shapiro.test()\nNB 1 test EACH SAMPLE SEPARATELY (this is sometimes confusing for beginners)."
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#and-if-guilty",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#and-if-guilty",
+    "title": "Professional skills for data science",
+    "section": "and If guilty?…",
+    "text": "and If guilty?…\n\nMann-Whitney U-test will allow violation of assumptions\nAlso called the name Wilcoxon Test"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#heteroscedasticity-assumption",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#heteroscedasticity-assumption",
+    "title": "Professional skills for data science",
+    "section": "Heteroscedasticity assumption",
+    "text": "Heteroscedasticity assumption\n\nExamine graphically\n\n# Bartlett's Test\nbartlett.test(list(group1, group2))"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#independence-assumption",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#independence-assumption",
+    "title": "Professional skills for data science",
+    "section": "Independence assumption",
+    "text": "Independence assumption\n\nCan’t really be directly tested without supporting information\nIt’s up to you to ensure your analysis is being done on the right data\nin time series and spatial data, you can test for autocorrelations (out of scope)"
+  },
+  {
+    "objectID": "lectures/Rlang/7 - T-test/t-test.html#typical-output-of-t-test-function.",
+    "href": "lectures/Rlang/7 - T-test/t-test.html#typical-output-of-t-test-function.",
+    "title": "Professional skills for data science",
+    "section": "typical Output of t test function.",
+    "text": "typical Output of t test function.\n\nThe t value; can be be positive or negative. The absolute value of t should increase with the probability that the samples came different populations.\nThe degrees of freedom; The number of independent data points available to estimate the t-statistic.\nThe 95% confidence interval; This gives a range of values that is likely to contain the true difference in means between the populations from which the samples were taken\nThe P-value"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html",
+    "title": "Professional Skills for data science",
+    "section": "",
+    "text": "Common data file types\nExcel, data setup, and the Data Dictionary\nGetting data into R\nManipulating variables in the Data Frame\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#objectives",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#objectives",
+    "title": "Professional Skills for data science",
+    "section": "",
+    "text": "Common data file types\nExcel, data setup, and the Data Dictionary\nGetting data into R\nManipulating variables in the Data Frame\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data-concept",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data-concept",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data concept",
+    "text": "Tidy data concept\n\nArchives data in accessible format\nData “transparent” to others\n“Tidy Data” credit: Hadley Wickham (lead statistician at Posit)\nWickham 2014"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data-concept-1",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data-concept-1",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data concept",
+    "text": "Tidy data concept"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#common-data-file-types",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#common-data-file-types",
+    "title": "Professional Skills for data science",
+    "section": "Common data file types",
+    "text": "Common data file types\n\n(c)sv comma separated values + others\nExcel\nAvoid (!) proprietary formats\nData Dictionary"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#untidy-data",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#untidy-data",
+    "title": "Professional Skills for data science",
+    "section": "Untidy data",
+    "text": "Untidy data"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-data",
+    "title": "Professional Skills for data science",
+    "section": "Tidy data",
+    "text": "Tidy data"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-dictionary",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-dictionary",
+    "title": "Professional Skills for data science",
+    "section": "Tidy dictionary",
+    "text": "Tidy dictionary"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-csv",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#tidy-csv",
+    "title": "Professional Skills for data science",
+    "section": "Tidy csv",
+    "text": "Tidy csv"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#getting-data-into-r",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#getting-data-into-r",
+    "title": "Professional Skills for data science",
+    "section": "Getting data into R",
+    "text": "Getting data into R\nChoices\n\nfrom File &gt; Import Data\nreadxl::read_excel()\nopenxlsx::read.xlsx()\n\n\nDemonstration"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#manipulating-variables-in-the-data-frame",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#manipulating-variables-in-the-data-frame",
+    "title": "Professional Skills for data science",
+    "section": "Manipulating variables in the Data Frame",
+    "text": "Manipulating variables in the Data Frame\n\nclass()\nnames()\nstr()\nindexes [ , ]\nattach()"
+  },
+  {
+    "objectID": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#practice-exercises",
+    "href": "lectures/Rlang/5 - dataframes/tidy data and dataframes.html#practice-exercises",
+    "title": "Professional Skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html",
+    "href": "lectures/Rlang/4 - indexing/indexing.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Indexing concept\n-Using which() and subsetting\n-Selection on data.frame objects\n-Using aggregate()"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#objectives",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Indexing concept\n-Using which() and subsetting\n-Selection on data.frame objects\n-Using aggregate()"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nVectors, Matrices and arrays. Oh my!\nThink of houses on a street\nEach street has an address…"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-1",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-1",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nIndexing\nmy_vector &lt;- c(11.3, 11.2, 10.4, 10.4, 8.7, 10.8, 10.5, 10.3, 9.7, 11.2)\n  \nmy_vector"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-2",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-2",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nVectors\nmy_vector        \nmy_vector[ ]     \nmy_vector[ 1:10]"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-3",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#indexing-concept-3",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nMatrices\nmy_matrix &lt;- matrix(data = c(2,3,4,5,6,6,6,6), nrow = 2, byrow = T)\nmy_matrix[1:2,3:4]"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#using-which-and-subsetting",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#using-which-and-subsetting",
+    "title": "Professional skills for data science",
+    "section": "Using which() and subsetting",
+    "text": "Using which() and subsetting\nA way to exploit indices\nwhich(vector_a &gt; 5)\nwhich.min(vector_a)\nwhich.max(vector_a)"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#selection-on-data.frame-objects",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#selection-on-data.frame-objects",
+    "title": "Professional skills for data science",
+    "section": "Selection on data.frame objects",
+    "text": "Selection on data.frame objects\n\nA data frame consists of variables (columns) and observations (rows)\nAll rows of a column are coerced to have the same data type\nThe columns are named\nAccessing the contents of a data frame is again similar to accessing a matrix\nwhat is the difference between a matrix and dataframe?"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#slicing-data",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#slicing-data",
+    "title": "Professional skills for data science",
+    "section": "Slicing data",
+    "text": "Slicing data\ndata(OrchardSprays)\nOrchardSprays$treatment == \"D\""
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#using-aggregate",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#using-aggregate",
+    "title": "Professional skills for data science",
+    "section": "Using aggregate()",
+    "text": "Using aggregate()\nVery useful to summarize your data\n# NB use of list() and naming it \"treatment\"\n\naggregate(x = OrchardSprays$decrease, by = list(treatment = OrchardSprays$treatment), FUN = mean)"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/indexing.html#practice-exercises",
+    "href": "lectures/Rlang/4 - indexing/indexing.html#practice-exercises",
+    "title": "Professional skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html",
+    "href": "lectures/Rlang/2 - data structures/data structures.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Basic data types in R\nData with factors\nclass() and converting variables\nVector and Matrix fun\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#objectives",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Basic data types in R\nData with factors\nclass() and converting variables\nVector and Matrix fun\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r",
+    "title": "Professional skills for data science",
+    "section": "Basic data types in R",
+    "text": "Basic data types in R\n\nConcept of “Data Objects”\nData you can use is in the Global Environment\nData Type refers to the kind of data (important for computers)\nData Type is determined automatically in R (by the passive-aggressive Butler)\nYou often will need and want to tweak data type"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-primitive-types-in-r",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-primitive-types-in-r",
+    "title": "Professional skills for data science",
+    "section": "Basic primitive types in R",
+    "text": "Basic primitive types in R\na &lt;- 1    # numeric\nmode(a)\na &lt;- \"1\"  # character\nmode(a)\na &lt;- '1'  # character\nmode(a)\na &lt;- TRUE # logical\nmode(a)\na &lt;-  1i # complex\nmode(a)"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-1",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-1",
+    "title": "Professional skills for data science",
+    "section": "Basic data types in R",
+    "text": "Basic data types in R\n\nNULL means undefined value (absence of a vector)\n\nis.null() function can check it\n\nNA means missing value (not available)\n\nis.na()\n\ninf means infinity e.g. 1/0 of -1/0\n\nis.infinite()\n\nNaN means an invalid number e.g. 0/0\n\nis.nan()"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-2",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-2",
+    "title": "Professional skills for data science",
+    "section": "Basic data types in R",
+    "text": "Basic data types in R\nmy_list &lt;- list(a = 1, b = 2)\nmy_list &lt;- my_list$c  # Element 'c' doesn't exist, Output: NULL\n\nna_addition  &lt;- 5 + NA\nprint(na_addition)  # Output: NA"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-3",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-3",
+    "title": "Professional skills for data science",
+    "section": "Basic data types in R",
+    "text": "Basic data types in R\nThere are some rules for naming data objects\n\nCan contain letters, numbers, some symbolic characters\nBegin with a letter, Does not contain spaces\nSome things are forbidden, @, %, #, etc.\nShould be human-readable, consistent, and not too long"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-4",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#basic-data-types-in-r-4",
+    "title": "Professional skills for data science",
+    "section": "Basic data types in R",
+    "text": "Basic data types in R\nx1 &lt;- 5  \n\nx2 &lt;- \"It was a dark and stormy night\" \n\n# hard to read\nmy_variable_9283467 &lt;- 1"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#data-with-factors",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#data-with-factors",
+    "title": "Professional skills for data science",
+    "section": "Data with factors",
+    "text": "Data with factors\n\n\nLet’s you want to analyse categorical data.\nSometimes this is called a “factor”."
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#data-with-factors-1",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#data-with-factors-1",
+    "title": "Professional skills for data science",
+    "section": "Data with factors",
+    "text": "Data with factors\nTwo types of factors\n\nNon-ordered factors : the levels are the names of the categories cows = Martha, Ruth, Edith\nOrdered factors: have a specific order dose = Control &lt; Half &lt; Full"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#class-and-converting-variables",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#class-and-converting-variables",
+    "title": "Professional skills for data science",
+    "section": "class() and converting variables",
+    "text": "class() and converting variables\n\n# non-ordered factor\nvariety &lt;- c(\"short\", \"short\", \"short\",\n             \"early\", \"early\", \"early\",\n             \"hybrid\", \"hybrid\", \"hybrid\")"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun",
+    "title": "Professional skills for data science",
+    "section": "Vector and Matrix fun",
+    "text": "Vector and Matrix fun\nWays of organizing data\n\n\nVector - Homogeneous and One dimensional from 1 to i, my_vec[i]\nMatrix - Two dimensions rows, columns, my_mat[i, j]\nArray - Generalized matrix with n dimensions, my_array[i, j, k]"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun-1",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun-1",
+    "title": "Professional skills for data science",
+    "section": "Vector and Matrix fun",
+    "text": "Vector and Matrix fun\n# Vectors\n\nmyvec1 &lt;- c(1,2,3,4,5) \nmyvec1\nclass(myvec1) \n\nmyvec2 &lt;- as.character(myvec1)"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun-2",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#vector-and-matrix-fun-2",
+    "title": "Professional skills for data science",
+    "section": "Vector and Matrix fun",
+    "text": "Vector and Matrix fun\nvec1 &lt;- 1:16 \nvec1 \n\nmat1 &lt;- matrix(data = vec1, \n               ncol = 4, \n               byrow = FALSE)"
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#lists",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#lists",
+    "title": "Professional skills for data science",
+    "section": "Lists",
+    "text": "Lists\nUnlike vectors and matrices, lists can hold elements of different types. Each element in a list can be a vector, matrix, data frame, or even another list\n# Creating a list\nmy_list &lt;- list(name=\"John\", age=25, scores=c(90, 85, 88))\nprint(my_list)\nYou can access elements in a list using the $ operator or double square brackets [[]]."
+  },
+  {
+    "objectID": "lectures/Rlang/2 - data structures/data structures.html#practice-exercises",
+    "href": "lectures/Rlang/2 - data structures/data structures.html#practice-exercises",
+    "title": "Professional skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "assessments/problem set/problem set.html",
+    "href": "assessments/problem set/problem set.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Edit the following code so that the plot accurately reflects the axis labels and the subset functions returns an object with only the contents intended (as shown in the preceding comment to the function). Using indexing and regular expression tools in base R, extend the code to calculate the proportions of manual and automatic shift cars in the study\n\ndata(mpg)\n\n# Scatter plot with base R\nplot(mpg$disp1, mpg$hwy, col = as.factor(mpg$Year), \n     xlab = \"Displacement\", ylab = \"Highway Miles per Gallon\", pch = 19)\nlegend(\"topright\", legend = unique(mpg$Year), col = unique(as.factor(mpg$Year)), pch = 19)\n\n# Use base R to filter the data where cyl equals 8\nsubset(mpg, cy1 = '8')\n\nWrite pseudocode steps for calculating the volume of a cylinder (hint, if you do not know it by heart, you may need to research the equation for the volume of a cylinder!). For a cylinder of height = 3.2 cm and end radius of 5.5 cm, report the volume in cm to 2 decimal points of accuracy. Use at least 3 decimal points of accuracy for pi (hint, the quantity named pi is a standard variable in R!)\nIn your own words, what value is required for the d argument in the pwr.t.test() function in the {pwr} package? Show the code involved including any appropriate comment code required to answer this question. (hint: you will probably need to install the package, load it, and use help() on the function name)\nUsing the code chunk below, please answer the following questions:\n\n\nWhat is the role of the set.seeed() function in the context of this code?\nWhy does calculating the mean of the copied original matrix return a numeric value while the mean of the same matrix when missing values are filled from the list returns NA?\nPlease fix the code sp that mean_of_original_copy and mean_matrix are equal\n\n# Step 1: Create a 3x3 matrix with random numbers, and introduce NAs\nset.seed(123) \nmatrix_with_na &lt;- matrix(sample(c(NA, 1:9), 9, replace = TRUE), nrow = 3)\ncopy_of_original&lt;-matrix_with_na\nmatrix_with_na[1,2] &lt;- NA  # Introduce 3 specific NAs\nmatrix_with_na[2,3] &lt;- NA\nmatrix_with_na[3,1] &lt;- NA\n\n\nprint(\"Original Matrix with NAs:\")\nprint(matrix_with_na)\n\n# Step 2: Create a list with the same structure but no NAs\nlist_with_values &lt;- as.list(as.character(matrix(1:9, nrow = 3)))\nprint(list_with_values)\n\n# Step 3: Use a for-loop to find the corresponding missing number from the list and fill the matrix\nfor (i in 1:3) {\n  for (j in 1:3) {\n    if (is.na(matrix_with_na[i,j])) {\n      matrix_with_na[i,j] &lt;- list_with_values[[(i-1)*3 + j]]  # Replace with corresponding value from list\n    }\n  }\n}\n\nprint(matrix_with_na)\n\n# Step 4: Try calculating the mean of the matrices\nmean_matrix &lt;- mean(matrix_with_na)\nmean_of_original_copy &lt;- mean(copy_of_original)\nprint(mean_of_original_copy)\nprint(mean_matrix)\n\nExplain why this function is not working and return the working equivalent. Interpret what the estimate means and rank the species\n\n# Load necessary package\ninstall.packages('emmeans')\nlibrary(emmeans)\n\nrun_anova_posthoc &lt;- function() {\n  # Perform ANOVA on the iris dataset\n  anova_result &lt;- aov(Sepal.Length ~ Species, data = iris)\n  \n  # Perform post-hoc test using emmeans\n  posthoc_result &lt;- emmeans(anova_result, pairwise ~ Species)\n  \n  comparisons &lt;- as.data.frame(posthoc_result$contrasts)\n  \n  print(comparisons)\n  comparisons_df &lt;- data.frame(Species = comparisons$species,\n                               estimate = comparisons$estimate,\n                               p.value = comparisons$p.value)\n  \n  return(comparisons_df)\n}\n\n\nrun_anova_posthoc()\n\nUsing the iris dataset in R, conduct an anova of sepal length ‘by hand’ and report the F statistic. Feel free to use other packages for data wrangling/grouping only, but for each function used, appropriately comment on what it does and which package it comes from. Show your R code.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required."
+  },
+  {
+    "objectID": "assessments/problem set/problem set.html#problem-set",
+    "href": "assessments/problem set/problem set.html#problem-set",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Edit the following code so that the plot accurately reflects the axis labels and the subset functions returns an object with only the contents intended (as shown in the preceding comment to the function). Using indexing and regular expression tools in base R, extend the code to calculate the proportions of manual and automatic shift cars in the study\n\ndata(mpg)\n\n# Scatter plot with base R\nplot(mpg$disp1, mpg$hwy, col = as.factor(mpg$Year), \n     xlab = \"Displacement\", ylab = \"Highway Miles per Gallon\", pch = 19)\nlegend(\"topright\", legend = unique(mpg$Year), col = unique(as.factor(mpg$Year)), pch = 19)\n\n# Use base R to filter the data where cyl equals 8\nsubset(mpg, cy1 = '8')\n\nWrite pseudocode steps for calculating the volume of a cylinder (hint, if you do not know it by heart, you may need to research the equation for the volume of a cylinder!). For a cylinder of height = 3.2 cm and end radius of 5.5 cm, report the volume in cm to 2 decimal points of accuracy. Use at least 3 decimal points of accuracy for pi (hint, the quantity named pi is a standard variable in R!)\nIn your own words, what value is required for the d argument in the pwr.t.test() function in the {pwr} package? Show the code involved including any appropriate comment code required to answer this question. (hint: you will probably need to install the package, load it, and use help() on the function name)\nUsing the code chunk below, please answer the following questions:\n\n\nWhat is the role of the set.seeed() function in the context of this code?\nWhy does calculating the mean of the copied original matrix return a numeric value while the mean of the same matrix when missing values are filled from the list returns NA?\nPlease fix the code sp that mean_of_original_copy and mean_matrix are equal\n\n# Step 1: Create a 3x3 matrix with random numbers, and introduce NAs\nset.seed(123) \nmatrix_with_na &lt;- matrix(sample(c(NA, 1:9), 9, replace = TRUE), nrow = 3)\ncopy_of_original&lt;-matrix_with_na\nmatrix_with_na[1,2] &lt;- NA  # Introduce 3 specific NAs\nmatrix_with_na[2,3] &lt;- NA\nmatrix_with_na[3,1] &lt;- NA\n\n\nprint(\"Original Matrix with NAs:\")\nprint(matrix_with_na)\n\n# Step 2: Create a list with the same structure but no NAs\nlist_with_values &lt;- as.list(as.character(matrix(1:9, nrow = 3)))\nprint(list_with_values)\n\n# Step 3: Use a for-loop to find the corresponding missing number from the list and fill the matrix\nfor (i in 1:3) {\n  for (j in 1:3) {\n    if (is.na(matrix_with_na[i,j])) {\n      matrix_with_na[i,j] &lt;- list_with_values[[(i-1)*3 + j]]  # Replace with corresponding value from list\n    }\n  }\n}\n\nprint(matrix_with_na)\n\n# Step 4: Try calculating the mean of the matrices\nmean_matrix &lt;- mean(matrix_with_na)\nmean_of_original_copy &lt;- mean(copy_of_original)\nprint(mean_of_original_copy)\nprint(mean_matrix)\n\nExplain why this function is not working and return the working equivalent. Interpret what the estimate means and rank the species\n\n# Load necessary package\ninstall.packages('emmeans')\nlibrary(emmeans)\n\nrun_anova_posthoc &lt;- function() {\n  # Perform ANOVA on the iris dataset\n  anova_result &lt;- aov(Sepal.Length ~ Species, data = iris)\n  \n  # Perform post-hoc test using emmeans\n  posthoc_result &lt;- emmeans(anova_result, pairwise ~ Species)\n  \n  comparisons &lt;- as.data.frame(posthoc_result$contrasts)\n  \n  print(comparisons)\n  comparisons_df &lt;- data.frame(Species = comparisons$species,\n                               estimate = comparisons$estimate,\n                               p.value = comparisons$p.value)\n  \n  return(comparisons_df)\n}\n\n\nrun_anova_posthoc()\n\nUsing the iris dataset in R, conduct an anova of sepal length ‘by hand’ and report the F statistic. Feel free to use other packages for data wrangling/grouping only, but for each function used, appropriately comment on what it does and which package it comes from. Show your R code.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required.\nWrite your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required."
+  },
+  {
+    "objectID": "assessments/Mini-project/mini-project.html",
+    "href": "assessments/Mini-project/mini-project.html",
+    "title": "Mini-project",
+    "section": "",
+    "text": "We have developed a new high-potential enhancer of biological nitrogen fixation (BNF) with nanotechnology which we believe can revolutionalise agriculture. It works by fostering long term relationships between beneficial soil microbes and plants. The technology works by affecting the gene expression of certain nitrogen-fixing bacteria such that they react to the presence of certain root exudates from a plant, and the presence of other bacteria that have been exposed to the same species in the past. This “wakes-up” dormant nitrogen fixing bacteria in a soil at an early crop growth stage, contributing to higher net BNF in the soil and better outcomes for the crop. Essentially, the nanotechnology builds a microbe-based memory system that allows for plants to be regrown in the same soil and with an enhanced chance of early BNF. We tested our nanotechnology against a no-treatment control and a regular BNF inoculant in randomized and replicated experiments with soya bean in 2016 and 2017. The experiments were randomized once, so the treatments occurred in the same exact plot in both years. The nanotechnology was only applied in 2016, so that we can examine if the effect lasts into 2017. Our hypothesis is that our treatment will outperform the regular BNF inoculant and the untreated control in yield in both years. We also hypothesise that the yield of the nanotechnology treatment on the same plot will improve in the second year. Finally, we believe that the regular BNF inoculation is still better than the control because these soils have poor nitrogen fixing bacteria due to excessive monocropping with cereals overtime.\nUsing the attached tidy data, please formulate appropriate null hypotheses to test our three alternate hypotheses. Conduct a statistical analysis based on the ANOVA technique and report whether our hypotheses are true or not. Conduct all the analysis in R and document the code comprehensively in a Quarto document.\nData"
+  },
+  {
+    "objectID": "assessments/Mini-project/mini-project.html#synopsis",
+    "href": "assessments/Mini-project/mini-project.html#synopsis",
+    "title": "Mini-project",
+    "section": "",
+    "text": "We have developed a new high-potential enhancer of biological nitrogen fixation (BNF) with nanotechnology which we believe can revolutionalise agriculture. It works by fostering long term relationships between beneficial soil microbes and plants. The technology works by affecting the gene expression of certain nitrogen-fixing bacteria such that they react to the presence of certain root exudates from a plant, and the presence of other bacteria that have been exposed to the same species in the past. This “wakes-up” dormant nitrogen fixing bacteria in a soil at an early crop growth stage, contributing to higher net BNF in the soil and better outcomes for the crop. Essentially, the nanotechnology builds a microbe-based memory system that allows for plants to be regrown in the same soil and with an enhanced chance of early BNF. We tested our nanotechnology against a no-treatment control and a regular BNF inoculant in randomized and replicated experiments with soya bean in 2016 and 2017. The experiments were randomized once, so the treatments occurred in the same exact plot in both years. The nanotechnology was only applied in 2016, so that we can examine if the effect lasts into 2017. Our hypothesis is that our treatment will outperform the regular BNF inoculant and the untreated control in yield in both years. We also hypothesise that the yield of the nanotechnology treatment on the same plot will improve in the second year. Finally, we believe that the regular BNF inoculation is still better than the control because these soils have poor nitrogen fixing bacteria due to excessive monocropping with cereals overtime.\nUsing the attached tidy data, please formulate appropriate null hypotheses to test our three alternate hypotheses. Conduct a statistical analysis based on the ANOVA technique and report whether our hypotheses are true or not. Conduct all the analysis in R and document the code comprehensively in a Quarto document.\nData"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html",
+    "title": "Git, GitHub, Quarto",
+    "section": "",
+    "text": "1st session: Git and GitHub\nQuick comfort break\n2nd session: Quarto & GitHub Pages"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#plan-of-action",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#plan-of-action",
+    "title": "Git, GitHub, Quarto",
+    "section": "",
+    "text": "1st session: Git and GitHub\nQuick comfort break\n2nd session: Quarto & GitHub Pages"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-and-github",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-and-github",
+    "title": "Git, GitHub, Quarto",
+    "section": "Git and GitHub",
+    "text": "Git and GitHub\n\n\nObjectives:\n\nWhat is Git and GitHub?\nWhy use Git and GitHub?\nHow to use Git and GitHub?\n\n\n\n\n\n\nHas anyone heard of Git or GitHub? Has anyone used Git or GitHub?"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-git",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-git",
+    "title": "Git, GitHub, Quarto",
+    "section": "What is Git?",
+    "text": "What is Git?"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-git-1",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-git-1",
+    "title": "Git, GitHub, Quarto",
+    "section": "What is Git?",
+    "text": "What is Git?\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\nVersion control\n\n\n \n\n\nTrack changes"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#why-should-you-care-about-git",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#why-should-you-care-about-git",
+    "title": "Git, GitHub, Quarto",
+    "section": "Why should you care about Git?",
+    "text": "Why should you care about Git?\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n\n\nReproducible practice\n\n\n \n\n\nReduces accidental mistakes\n\n\n \n\n\nCollaboration"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#how-does-git-work",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#how-does-git-work",
+    "title": "Git, GitHub, Quarto",
+    "section": "How does Git Work?",
+    "text": "How does Git Work?\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n\n\nWatches for changes\n\n\n \n\n\nChange are tracked\n\n\n \n\n\nEvaluate changes"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-repository",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-repository",
+    "title": "Git, GitHub, Quarto",
+    "section": "Git Repository",
+    "text": "Git Repository\n\nAlso referred to as a “Repo”\nA back up version of your directory\nCloud based\nAny changes made locally need to be added to the remote repo"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-repository-1",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#git-repository-1",
+    "title": "Git, GitHub, Quarto",
+    "section": "Git Repository",
+    "text": "Git Repository\n\n\n\n\n\n\n\n\n\n\nWARNING: Do not edit .git file!"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon",
+    "title": "Git, GitHub, Quarto",
+    "section": "Jargon",
+    "text": "Jargon\n\n\n\n\n\n\nPull\n\n\n\nPulls down the current version of the repository from the remote (cloud) repository to the local repository"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon-1",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon-1",
+    "title": "Git, GitHub, Quarto",
+    "section": "Jargon",
+    "text": "Jargon\n\n\n\n\n\n\nCommit\n\n\n\nConfirm that you’re happy with the changes made and commit them"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon-2",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#jargon-2",
+    "title": "Git, GitHub, Quarto",
+    "section": "Jargon",
+    "text": "Jargon\n\n\n\n\n\n\nPush\n\n\n\nPush your changes from your local repo to the remote repo"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#workflow-overview",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#workflow-overview",
+    "title": "Git, GitHub, Quarto",
+    "section": "Workflow overview",
+    "text": "Workflow overview"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-github",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-github",
+    "title": "Git, GitHub, Quarto",
+    "section": "What is GitHub?",
+    "text": "What is GitHub?\n\n\n\n\n\n\n \n\n\n \n\n\n \n\n\n \n\n\n \n\n\n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n\n\nUser-friendly\n\n\n \n\n\nSocial & admin\n\n\n \n\n\nPopular & free"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#how-can-you-use-git-or-github",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#how-can-you-use-git-or-github",
+    "title": "Git, GitHub, Quarto",
+    "section": "How can you use Git or GitHub?",
+    "text": "How can you use Git or GitHub?\n\n\n\n\n\n\n \n\n\n \n\n\n \n\n\n \n\n\n \n\n\n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n\n\nGit command line\n\n\n \n\n\nGitHub web\n\n\n \n\n\nGitHub Desktop"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#github-readme.md",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#github-readme.md",
+    "title": "Git, GitHub, Quarto",
+    "section": "GitHub README.md",
+    "text": "GitHub README.md\n\n\n\nShould be descriptive\n\nAllows anyone to be able to understand your project\n\nSome suggestions:\n\nRepo title\nMotivation for the project\nIntended used\nLimitations & challenges"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#demo",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#demo",
+    "title": "Git, GitHub, Quarto",
+    "section": "Demo",
+    "text": "Demo\n\n\n\nGitHub Website\n\nCreating your first GitHub repo\nMaking and committing changes"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#demo-1",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#demo-1",
+    "title": "Git, GitHub, Quarto",
+    "section": "Demo",
+    "text": "Demo\n\n\n\nGitHub Website\n\nCreating your first GitHub repo\nMaking and committing changes\n\nGitHub Desktop\n\nCloning a repo to your local computer\nPulling and pushing changes from your local computer"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#quarto-and-github-pages",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#quarto-and-github-pages",
+    "title": "Git, GitHub, Quarto",
+    "section": "Quarto and GitHub Pages",
+    "text": "Quarto and GitHub Pages\nObjectives:\n\nLearn basic Quarto features\nCreate a static Quarto webpage to present your CV\nLearn how to publish a webpage using GitHub pages"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#markdown-language",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#markdown-language",
+    "title": "Git, GitHub, Quarto",
+    "section": "Markdown Language",
+    "text": "Markdown Language\n\n\n# Quackston CV\n\nMy name is Quackston.    \nI *like* debugging stats code.\n\n## Skills\n\n- Debugging expertise\n\n## Experience\n\n[Hyperlink](https://c7091.github.io/website/)\n\nHeading 1\n\nNormal text\nItalics\n\nHeading 2\n\nBullet point\n\nHeading 2\n\nHyperlinked text"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#markdown-to-quarto",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#markdown-to-quarto",
+    "title": "Git, GitHub, Quarto",
+    "section": "Markdown to Quarto",
+    "text": "Markdown to Quarto"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-quarto",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#what-is-quarto",
+    "title": "Git, GitHub, Quarto",
+    "section": "What is Quarto?",
+    "text": "What is Quarto?\n\n\n\nNewer version\nMore powerful\nEasier to use"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#rendering",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#rendering",
+    "title": "Git, GitHub, Quarto",
+    "section": "Rendering",
+    "text": "Rendering"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#live-demo-plan",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#live-demo-plan",
+    "title": "Git, GitHub, Quarto",
+    "section": "Live demo plan!",
+    "text": "Live demo plan!\n\n\n\nCreate your webpage using R and R studio\nMake your github repository for you webpage\nMake your repository a github page"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#important",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#important",
+    "title": "Git, GitHub, Quarto",
+    "section": "Important!",
+    "text": "Important!\n\n\n---\nproject: \n  type: website\n\nwebsite:\n  title: \"Quackington D. Duck\"\n  navbar:\n    left:\n      - href: index.qmd\n        text: Home\n      - href: about.qmd\n        text: about\n  \nformat: \n  html:\n    theme: cosmo\n  output-dir: docs\n---"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#turning-your-quarto-project-into-a-github-repo",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#turning-your-quarto-project-into-a-github-repo",
+    "title": "Git, GitHub, Quarto",
+    "section": "Turning your Quarto project into a GitHub repo",
+    "text": "Turning your Quarto project into a GitHub repo\n\n\n\nCreating a local repo\nPublishing your local repo using GitHub desktop\nPull, edit, push, repeat"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#creating-your-github-page",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#creating-your-github-page",
+    "title": "Git, GitHub, Quarto",
+    "section": "Creating your GitHub Page",
+    "text": "Creating your GitHub Page\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n\n\nRepository Settings\n\n\n \n\n\nPrivacy\n\n\n \n\n\nBuild and deploy"
+  },
+  {
+    "objectID": "lectures/git-md/C7091_Git_GitHub_Quarto.html#useful-links-and-resources",
+    "href": "lectures/git-md/C7091_Git_GitHub_Quarto.html#useful-links-and-resources",
+    "title": "Git, GitHub, Quarto",
+    "section": "Useful links and resources",
+    "text": "Useful links and resources\n\n\nGet Started - Quarto\nQuarto Guides\nQuarto markdown basics\nGitHub Docs"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html",
+    "href": "lectures/Rlang/3 - using functions/using functions.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Function tour\nUsing functions and getting help\nR packages\nFinding, downloading and using packages\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#objectives",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Function tour\nUsing functions and getting help\nR packages\nFinding, downloading and using packages\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#function-tour",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#function-tour",
+    "title": "Professional skills for data science",
+    "section": "Function tour",
+    "text": "Function tour\nfunction_name()\n\nNote:\n\nfunction_name is the name (usually contextual meaning)\nEVERY function has brackets ()"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#using-r-functions",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#using-r-functions",
+    "title": "Professional skills for data science",
+    "section": "Using R functions",
+    "text": "Using R functions\nfunction_name(argument_1 = value_1, \n              argument_2 = value_2, \n              ...)\n\n\nArguments are like “settings” for functions\nEach argument has a unique name\nArg values assigned by “=” and separated by “,”\n“...” means there are optional args (ignore for now)"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#function-names",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#function-names",
+    "title": "Professional skills for data science",
+    "section": "Function names",
+    "text": "Function names\n`mean()` # Calculates the arithmetic mean\n\n`log()` # Calculates the log\n\n`sd()` # Calculates the standard deviation\n\n`plot()` # Draws plots\n\n`help()` # Used to access help pages\n…you get the idea"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#using-functions-and-help",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#using-functions-and-help",
+    "title": "Professional skills for data science",
+    "section": "Using functions and help",
+    "text": "Using functions and help\nDemo\n## A workflow for using functions ####\nhelp(c) # We use this a lot - it \"combines\" numbers\nc(2, 6, 7, 8.1, 5, 6) \n\n..."
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#r-packages",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#r-packages",
+    "title": "Professional skills for data science",
+    "section": "R packages",
+    "text": "R packages\n\nExtremely useful, mandatory\nLots of them (&gt;20,000)\nCommunity made\nMust discover them\nMust learn to use them, their functions"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#installing-packages",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#installing-packages",
+    "title": "Professional skills for data science",
+    "section": "Installing packages",
+    "text": "Installing packages\nDemo\n# Step 1: install a package\n\nhelp(install.packages) # just have a look\ninstall.packages(pkgs = \"package_name\")"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#using-rstudio-gui",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#using-rstudio-gui",
+    "title": "Professional skills for data science",
+    "section": "Using RStudio GUI",
+    "text": "Using RStudio GUI"
+  },
+  {
+    "objectID": "lectures/Rlang/3 - using functions/using functions.html#practice-exercises",
+    "href": "lectures/Rlang/3 - using functions/using functions.html#practice-exercises",
+    "title": "Professional skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Indexing concept\n-Using which() and subsetting\n-Selection on data.frame objects\n-Using aggregate()"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#objectives",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Indexing concept\n-Using which() and subsetting\n-Selection on data.frame objects\n-Using aggregate()"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nVectors, Matrices and arrays. Oh my!\nThink of houses on a street\nEach street has an address…"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-1",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-1",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nIndexing\nmy_vector &lt;- c(11.3, 11.2, 10.4, 10.4, 8.7, 10.8, 10.5, 10.3, 9.7, 11.2)\n  \nmy_vector"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-2",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-2",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nVectors\nmy_vector        \nmy_vector[ ]     \nmy_vector[ 1:10]"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-3",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#indexing-concept-3",
+    "title": "Professional skills for data science",
+    "section": "Indexing concept",
+    "text": "Indexing concept\nMatrices\nmy_matrix &lt;- matrix(data = c(2,3,4,5,6,6,6,6), nrow = 2, byrow = T)\nmy_matrix[1:2,3:4]"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#using-which-and-subsetting",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#using-which-and-subsetting",
+    "title": "Professional skills for data science",
+    "section": "Using which() and subsetting",
+    "text": "Using which() and subsetting\nA way to exploit indices\nwhich(vector_a &gt; 5)\nwhich.min(vector_a)\nwhich.max(vector_a)"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#selection-on-data.frame-objects",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#selection-on-data.frame-objects",
+    "title": "Professional skills for data science",
+    "section": "Selection on data.frame objects",
+    "text": "Selection on data.frame objects\n\nA data frame consists of variables (columns) and observations (rows)\nAll rows of a column are coerced to have the same data type\nThe columns are named\nAccessing the contents of a data frame is again similar to accessing a matrix\nwhat is the difference between a matrix and dataframe?"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#slicing-data",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#slicing-data",
+    "title": "Professional skills for data science",
+    "section": "Slicing data",
+    "text": "Slicing data\ndata(OrchardSprays)\nOrchardSprays$treatment == \"D\""
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#using-aggregate",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#using-aggregate",
+    "title": "Professional skills for data science",
+    "section": "Using aggregate()",
+    "text": "Using aggregate()\nVery useful to summarize your data\n# NB use of list() and naming it \"treatment\"\n\naggregate(x = OrchardSprays$decrease, by = list(treatment = OrchardSprays$treatment), FUN = mean)"
+  },
+  {
+    "objectID": "lectures/Rlang/4 - indexing/RSB06.html#practice-exercises",
+    "href": "lectures/Rlang/4 - indexing/RSB06.html#practice-exercises",
+    "title": "Professional skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Question formulation\n-Summarize: Weighing the Pig\n-Variables and graphing\n-“Analysis” versus “EDA”\n-Statistical Analysis Plan: the concept"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#objectives",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "-Question formulation\n-Summarize: Weighing the Pig\n-Variables and graphing\n-“Analysis” versus “EDA”\n-Statistical Analysis Plan: the concept"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing",
+    "title": "Professional skills for data science",
+    "section": "Question formulation and hypothesis testing",
+    "text": "Question formulation and hypothesis testing\n-“population of interest”\n-samples and sampling\n-test statistics\n-null hypothesis\n-Let’s talk about the P-value"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#hypotheses-null-vs-alternative",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#hypotheses-null-vs-alternative",
+    "title": "Professional skills for data science",
+    "section": "Hypotheses: Null vs Alternative",
+    "text": "Hypotheses: Null vs Alternative\n\nNull Hypothesis (H₀):\nThe assumption that there is no effect or no difference.\nExample: “There is no difference in test scores between two groups.”\nAlternative Hypothesis (H₁ or Ha):\nThe assumption that there is an effect or a difference.\nExample: “There is a difference in test scores between two groups.”"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#p-value-definition-and-interpretation",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#p-value-definition-and-interpretation",
+    "title": "Professional skills for data science",
+    "section": "P-value: Definition and Interpretation",
+    "text": "P-value: Definition and Interpretation\n\nP-value:\nThe probability of obtaining results at least as extreme as the ones observed, under the assumption that the null hypothesis is true.\nInterpretation:\nA small p-value (typically &lt; 0.05) suggests that the observed data is unlikely under the null hypothesis, leading to rejection of H₀.\nA large p-value suggests that the data is consistent with the null hypothesis."
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing-1",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing-1",
+    "title": "Professional skills for data science",
+    "section": "Question formulation and hypothesis testing",
+    "text": "Question formulation and hypothesis testing\nBenefits of NHST\n-Familiar and acceptable to researchers\n-Typically robust to assumptions\n-Strong framework for evidence\n-The basic idea is simple"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing-2",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#question-formulation-and-hypothesis-testing-2",
+    "title": "Professional skills for data science",
+    "section": "Question formulation and hypothesis testing",
+    "text": "Question formulation and hypothesis testing\nCriticism of NHST\n-Often interpreted under error\n-Validation of analysis often neglected\n-Education often deficient\n-Practitioners ignorant of subtleties"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#summarize-weighing-the-pig",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#summarize-weighing-the-pig",
+    "title": "Professional skills for data science",
+    "section": "Summarize: Weighing the Pig",
+    "text": "Summarize: Weighing the Pig\nChick weight dataset\nThe hypothesis voices “how you think the world works” or what you predict to be true”\ncoding"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing",
+    "title": "Professional skills for data science",
+    "section": "Variables and graphing",
+    "text": "Variables and graphing"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing-1",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing-1",
+    "title": "Professional skills for data science",
+    "section": "Variables and graphing",
+    "text": "Variables and graphing\n-Must convey relevant information\n-Consistent in aesthetics\n-Self-contained\n-Reflect hypothesis (unless descriptive)\n-Appropriate to data"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing-2",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#variables-and-graphing-2",
+    "title": "Professional skills for data science",
+    "section": "Variables and graphing",
+    "text": "Variables and graphing\nConcept of “layering” in building graphs\ncoding"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#analysis-versus-eda",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#analysis-versus-eda",
+    "title": "Professional skills for data science",
+    "section": "“Analysis” versus “EDA”",
+    "text": "“Analysis” versus “EDA”\nEDA:\n-Informal, haphazard\n-Gain data understanding\n-Test assumptions\n-Usually not for “others”\n-Usually occurs before analysis"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#analysis-versus-eda-1",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#analysis-versus-eda-1",
+    "title": "Professional skills for data science",
+    "section": "“Analysis” versus “EDA”",
+    "text": "“Analysis” versus “EDA”\nAnalysis:\n-Designed to fit hypothesis\n-For presentation to others\n-Creation of EVIDENCE to support CLAIMS\n-Reproducible"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#statistical-analysis-plan-the-concept",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#statistical-analysis-plan-the-concept",
+    "title": "Professional skills for data science",
+    "section": "Statistical Analysis Plan: the concept",
+    "text": "Statistical Analysis Plan: the concept\nPrior to data collection\n-formally state hypothesis\n-State specific statistical model(s)\n-Specify data and data collection\n-State and justify sample size"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#taught-to-children",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#taught-to-children",
+    "title": "Professional skills for data science",
+    "section": "Taught to children",
+    "text": "Taught to children"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#best-practice",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#best-practice",
+    "title": "Professional skills for data science",
+    "section": "Best practice",
+    "text": "Best practice"
+  },
+  {
+    "objectID": "lectures/Rlang/6 - EDA and hypotheses/eda.html#practice-exercises",
+    "href": "lectures/Rlang/6 - EDA and hypotheses/eda.html#practice-exercises",
+    "title": "Professional skills for data science",
+    "section": "Practice Exercises",
+    "text": "Practice Exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html",
+    "title": "Professional skills for data science",
+    "section": "",
+    "text": "Arrange the arithmetic to compare more than two groups"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#analysis-of-variance-anova",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#analysis-of-variance-anova",
+    "title": "Professional skills for data science",
+    "section": "ANalysis Of VAriance (ANOVA)",
+    "text": "ANalysis Of VAriance (ANOVA)\n\nThe analysis of variance is not a mathematical theorem, but rather a convenient method of arranging the arithmetic. R. A. Fisher (via Wishart 1934. Sppl. J. Roy. Soc. 1(1):26-61.)"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#objectives",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#objectives",
+    "title": "Professional skills for data science",
+    "section": "1.1 Objectives",
+    "text": "1.1 Objectives\n\nThe question of 1-way ANOVA\nData and assumptions\nGraphing\nTest and alternatives\nPractice exercises"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova---when",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova---when",
+    "title": "Professional skills for data science",
+    "section": "ANOVA - When?",
+    "text": "ANOVA - When?\nanova-able scenarios:\n\none numeric continuous dependent variable of interest\na factor that contains 2 or more levels, often with a control\nWhen there are just two levels, it’s essentially a t-test"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova---scenarios",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova---scenarios",
+    "title": "Professional skills for data science",
+    "section": "ANOVA - scenarios",
+    "text": "ANOVA - scenarios\n\noverall difference At least one factor mean is different from the rest\nPlanned comparisons: Targeted orthogonal contrasts\npost-hoc tests: compare any factors you want, with some correction.\nPartition variation: What’s causing variance in the dependent variable?"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#test-statistic",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#test-statistic",
+    "title": "Professional skills for data science",
+    "section": "Test statistic",
+    "text": "Test statistic\n\nThe test statistic for ANOVA is the F ratio\nIt is the proportion of variance in the dependent variable between the groups, relative to that within the groups"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#data-and-assumptions",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#data-and-assumptions",
+    "title": "Professional skills for data science",
+    "section": "Data and assumptions",
+    "text": "Data and assumptions\n\ndata example: +experiment in animal genetics, looking at the weight of chickens (8-week old weight in grams), where weight is the continuous dependent variable. The factor is the sire identity; the chicks were sired by one of 5 sires, thus sire is a factor with 5 levels A, B, C, D, and E."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#wide-format-data",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#wide-format-data",
+    "title": "Professional skills for data science",
+    "section": "Wide format data",
+    "text": "Wide format data\nA &lt;- c(687, 691, 793, 675, 700, 753, 704, 717)\nB &lt;- c(618, 680, 592, 683, 631, 691, 694, 732)\nC &lt;- c(618, 687, 763, 747, 687, 737, 731, 603)\nD &lt;- c(600, 657, 669, 606, 718, 693, 669, 648)\nE &lt;- c(717, 658, 674, 611, 678, 788, 650, 690)"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#long-format-data-preferred",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#long-format-data-preferred",
+    "title": "Professional skills for data science",
+    "section": "Long format data (preferred)",
+    "text": "Long format data (preferred)\n\nConvert your data to long format (aov in R works with long data)\n\nweight &lt;- c(A,B,C,D,E)\nsire &lt;- c(rep(\"A\", 8),\n          rep(\"B\", 8),\n          rep(\"C\", 8),\n          rep(\"D\", 8),\n          rep(\"E\", 8) )\nnew.long&lt;-data.frame(weight, sire)"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#assumptions-of-anova",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#assumptions-of-anova",
+    "title": "Professional skills for data science",
+    "section": "Assumptions of ANOVA",
+    "text": "Assumptions of ANOVA\n\nGaussian residuals (test graphically)\nHomoscedasticity (test graphically, both overall and within factors; residuals versus fitted plot)\nIndependent observations (assumed)"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#formal-test-of-gaussian-residuals",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#formal-test-of-gaussian-residuals",
+    "title": "Professional skills for data science",
+    "section": "Formal test of Gaussian residuals",
+    "text": "Formal test of Gaussian residuals\n\nWe can use the shapiro NHST shapiro.test().\n\nshapiro.test(rstandard(m1))\n\nThere is no evidence of difference to Gaussian in our residuals for our ANOVA model (Shapiro-Wilk: W = 0.99, n = 40, P = 0.99)."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#homoscedasticity-check",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#homoscedasticity-check",
+    "title": "Professional skills for data science",
+    "section": "Homoscedasticity check",
+    "text": "Homoscedasticity check\nWe will look at the residuals relative to the fitted values.\n# Plot for homoscedasticity check\nplot(formula = rstandard(m1) ~ fitted(m1),\n     ylab = \"m1: residuals\",\n     xlab = \"m1: fitted values\",\n     main = \"Spread similar across x?\")\nabline(h = 0,\n       lty = 2, lwd = 2, col = \"red\")\n\n# Make the mean residual y points (just to check)\ny1 &lt;- aggregate(rstandard(m1), by = list(new.long$Sire), FUN = mean)[,2]\n# Make the x unique fitted values (just to check)\nx1 &lt;- unique(round(fitted(m1), 6))\n\npoints(x = x1, y = y1, \n       pch = 16, cex = 1.2, col = \"blue\")"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#bartlett-test-for-equal-variances-between-groups",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#bartlett-test-for-equal-variances-between-groups",
+    "title": "Professional skills for data science",
+    "section": "Bartlett test for equal variances between groups",
+    "text": "Bartlett test for equal variances between groups\n\nbartlett.test(): do groups have signif different variances?\nsignificant differences = homoskedasticity violated\n\nbartlett.test(formula = weight~sire, data = new.long)\n\nWe find no evidence that variance in offspring weight differs between sires (Bartlett test: K-sqared = 1.69, df = 4, P = 0.79)."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#graphing-anova",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#graphing-anova",
+    "title": "Professional skills for data science",
+    "section": "Graphing ANOVA",
+    "text": "Graphing ANOVA\nRecommended:  Boxplot, with some way to show the central tendency of the data separately for each factor level. For continuous variables, boxplots show this perfectly.\n\nFor count variables, barplots are sometimes used with the height set to the mean, along with some form of error bar."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#graphing-anova-1",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#graphing-anova-1",
+    "title": "Professional skills for data science",
+    "section": "Graphing ANOVA",
+    "text": "Graphing ANOVA\n\nboxplot(Weight ~ Sire, data = new.long,\n        ylab = \"Weight (g)\",\n        xlab = \"Sire\",\n        main = \"Effect of Sire on 8-wk weight\",\n        cex = 0) \n\nabline(h = mean(new.long$Weight), \n       lty = 2, lwd = 2, col = \"red\") # Mere vanity\n\npoints(x = jitter(rep(1:5, each = 8), amount = .1),\n       y = new.long$Weight,\n       pch = 16, cex = .8, col = \"blue\") # Mere vanity"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova-basic-output",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova-basic-output",
+    "title": "Professional skills for data science",
+    "section": "ANOVA basic output",
+    "text": "ANOVA basic output\n\nThe ANOVA Table”\n\nThere are 2 rows;for the sire effect and the residual\nThe test statistic is the F value (1.87)\nThe P-value column is named “Pr(&gt;F)” (0.14)\nThere are 4 degrees of freedom for the factor\nResidual degrees of freedom is 35\n\nNo sig evidence that sire explains variation in weight"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#contrasts-and-post-hoc-test",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#contrasts-and-post-hoc-test",
+    "title": "Professional skills for data science",
+    "section": "Contrasts and post hoc test",
+    "text": "Contrasts and post hoc test\n\nLet’s say that sire C is our reference level sire\nFor now, we’ll use lm() to compare everything to sire C\nyou can generate contrasts and make tests using emmeans e.t.c.\nLet’s interpret the coefficients\nWhat can we notice about the F value and p-value?"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#post-hoc-tests",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#post-hoc-tests",
+    "title": "Professional skills for data science",
+    "section": "Post hoc tests",
+    "text": "Post hoc tests\n\nThe phrase post hoc implies an afterthought. Tread carefully\nWhen multiple tests are made on the same data, it increases the chance of discovering a false positive (Type I error)\np-values can be adjusted to keep Type I error chance at 5%."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#bonferroni",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#bonferroni",
+    "title": "Professional skills for data science",
+    "section": "Bonferroni",
+    "text": "Bonferroni\n\nThe Bonferroni adjustment of p-values:\n\nSimply divides the P by the number of post hoc pairwise comparisons, so you end up evaluating at a lower P-value\nIt is considered conservative, and there are alternatives.\n\nalternatives exists e.g. Tukey’s e.t.c.\nWith pairwise.t.test(), the output will be a matrix of p-values"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#tukey-hsd-honestly-significant-differences",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#tukey-hsd-honestly-significant-differences",
+    "title": "Professional skills for data science",
+    "section": "Tukey HSD (Honestly Significant Differences)",
+    "text": "Tukey HSD (Honestly Significant Differences)\n\nThe Tukey HSD test is less conservative Bonferroni\nWe use the Tukey.HSD() function to apply it here.\nAlso note that the p-values tend to be smaller for the exact same comparisons, but there are sill no significant comparisons."
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#alternatives-amidst-assumption-violations",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#alternatives-amidst-assumption-violations",
+    "title": "Professional skills for data science",
+    "section": "Alternatives amidst assumption violations",
+    "text": "Alternatives amidst assumption violations\nIn case the assumptions of 1-way ANOVA cannot be met by the data, there are a few options:\n\nTransformations (log(), sqrt() e.t.c.)\nGLMs\nNon-parameteric tests: a great escape, but tend to have less power"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#kruskal-wallis-alternative-to-the-1-way-anova",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#kruskal-wallis-alternative-to-the-1-way-anova",
+    "title": "Professional skills for data science",
+    "section": "Kruskal-Wallis alternative to the 1-way ANOVA",
+    "text": "Kruskal-Wallis alternative to the 1-way ANOVA\n# Try this:\n# ?kruskal.test\nkruskal.test(formula = Weight ~ Sire,\n             data = new.long)\n\nThe result is qualitatively the same as that for our 1-way ANOVA test"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova-calculation-details",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova-calculation-details",
+    "title": "Professional skills for data science",
+    "section": "ANOVA calculation details",
+    "text": "ANOVA calculation details\n# Our data\nchicken.wide"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova-equations",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova-equations",
+    "title": "Professional skills for data science",
+    "section": "ANOVA Equations",
+    "text": "ANOVA Equations\n{width = “600px”}"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova-variables",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova-variables",
+    "title": "Professional skills for data science",
+    "section": "ANOVA Variables",
+    "text": "ANOVA Variables\n{width = “400px”}"
+  },
+  {
+    "objectID": "lectures/Rlang/8 - anova/1-way-anova.html#anova-sources-of-variation-table",
+    "href": "lectures/Rlang/8 - anova/1-way-anova.html#anova-sources-of-variation-table",
+    "title": "Professional skills for data science",
+    "section": "ANOVA Sources of variation table",
+    "text": "ANOVA Sources of variation table\n ## Do an ANOVA “by hand” programmatically\n\nFor the ANOVA code in the script, try to follow what is going on in the code\nIt is okay if not every detail is clear yet\nDo we get the same answer as aov()?"
   }
 ]

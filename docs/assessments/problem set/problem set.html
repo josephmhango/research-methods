@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ed Harris">
-<meta name="dcterms.date" content="2024-09-19">
+<meta name="author" content="Joseph Mhango">
+<meta name="dcterms.date" content="2024-09-13">
 
-<title>Statisitical Analysis Report – C7091 - 2024: Professional skills for data science</title>
+<title>Professional skills for data science – C7091 - 2024: Professional skills for data science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -85,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statisitical Analysis Report</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Professional skills for data science</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -166,36 +200,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#understanding-the-audience" id="toc-understanding-the-audience" class="nav-link" data-scroll-target="#understanding-the-audience">Understanding the Audience</a></li>
-  <li><a href="#defining-the-purpose-of-the-report" id="toc-defining-the-purpose-of-the-report" class="nav-link" data-scroll-target="#defining-the-purpose-of-the-report">Defining the Purpose of the Report</a></li>
-  <li><a href="#data-collection-and-preparation" id="toc-data-collection-and-preparation" class="nav-link" data-scroll-target="#data-collection-and-preparation">Data Collection and Preparation</a></li>
-  <li><a href="#choosing-the-right-statistical-methods" id="toc-choosing-the-right-statistical-methods" class="nav-link" data-scroll-target="#choosing-the-right-statistical-methods">Choosing the Right Statistical Methods</a></li>
-  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a></li>
-  <li><a href="#regression-analysis" id="toc-regression-analysis" class="nav-link" data-scroll-target="#regression-analysis">Regression Analysis</a></li>
-  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence Intervals</a></li>
-  <li><a href="#correlation-vs-causation" id="toc-correlation-vs-causation" class="nav-link" data-scroll-target="#correlation-vs-causation">Correlation vs Causation</a></li>
-  <li><a href="#interpreting-results" id="toc-interpreting-results" class="nav-link" data-scroll-target="#interpreting-results">Interpreting Results</a></li>
-  <li><a href="#limitations-and-assumptions" id="toc-limitations-and-assumptions" class="nav-link" data-scroll-target="#limitations-and-assumptions">Limitations and Assumptions</a></li>
-  <li><a href="#visualising-results" id="toc-visualising-results" class="nav-link" data-scroll-target="#visualising-results">Visualising Results</a></li>
-  <li><a href="#recommendations-based-on-evidence" id="toc-recommendations-based-on-evidence" class="nav-link" data-scroll-target="#recommendations-based-on-evidence">Recommendations Based on Evidence</a></li>
-  <li><a href="#writing-the-report" id="toc-writing-the-report" class="nav-link" data-scroll-target="#writing-the-report">Writing the Report</a></li>
-  <li><a href="#delivering-the-report" id="toc-delivering-the-report" class="nav-link" data-scroll-target="#delivering-the-report">Delivering the Report</a></li>
-  <li><a href="#common-pitfalls-to-avoid" id="toc-common-pitfalls-to-avoid" class="nav-link" data-scroll-target="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></li>
-  <li><a href="#tools-and-software-for-statistical-reporting" id="toc-tools-and-software-for-statistical-reporting" class="nav-link" data-scroll-target="#tools-and-software-for-statistical-reporting">Tools and Software for Statistical Reporting</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#live-coding-a-stats-report" id="toc-live-coding-a-stats-report" class="nav-link" data-scroll-target="#live-coding-a-stats-report">Live Coding a Stats Report</a></li>
+  <li><a href="#problem-set" id="toc-problem-set" class="nav-link active" data-scroll-target="#problem-set">Problem set</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="stats-reporting.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statisitical Analysis Report</h1>
-<p class="subtitle lead">A Guide for Data Analysts</p>
+<h1 class="title">Professional skills for data science</h1>
+<p class="subtitle lead">Problem set</p>
 </div>
 
 
@@ -205,14 +220,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Ed Harris </p>
+             <p>Joseph Mhango </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 19, 2024</p>
+      <p class="date">2024-09-13</p>
     </div>
   </div>
   
@@ -224,204 +239,93 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="problem-set" class="level2">
+<h2 class="anchored" data-anchor-id="problem-set">Problem set</h2>
+<ol type="1">
+<li>Edit the following code so that the plot accurately reflects the axis labels and the subset functions returns an object with only the contents intended (as shown in the preceding comment to the function). Using indexing and regular expression tools in <strong>base R</strong>, extend the code to calculate the proportions of manual and automatic shift cars in the study</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mpg)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot with base R</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg<span class="sc">$</span>disp1, mpg<span class="sc">$</span>hwy, <span class="at">col =</span> <span class="fu">as.factor</span>(mpg<span class="sc">$</span>Year), </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Displacement"</span>, <span class="at">ylab =</span> <span class="st">"Highway Miles per Gallon"</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">unique</span>(mpg<span class="sc">$</span>Year), <span class="at">col =</span> <span class="fu">unique</span>(<span class="fu">as.factor</span>(mpg<span class="sc">$</span>Year)), <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use base R to filter the data where cyl equals 8</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mpg, <span class="at">cy1 =</span> <span class="st">'8'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li><p>Write pseudocode steps for calculating the volume of a cylinder (hint, if you do not know it by heart, you may need to research the equation for the volume of a cylinder!). For a cylinder of height = 3.2 cm and end radius of 5.5 cm, report the volume in cm to 2 decimal points of accuracy. Use at least 3 decimal points of accuracy for pi (hint, the quantity named pi is a standard variable in R!)</p></li>
+<li><p>In your own words, what value is required for the <code>d</code> argument in the <code>pwr.t.test()</code> function in the <code>{pwr}</code> package? Show the code involved including any appropriate comment code required to answer this question. (hint: you will probably need to install the package, load it, and use help() on the function name)</p></li>
+<li><p>Using the code chunk below, please answer the following questions:</p></li>
+</ol>
 <ul>
-<li><strong>Importance</strong> of statistical analysis reports</li>
-<li><strong>Use cases</strong>: Business, Consultancy, Scientific Research</li>
-<li><strong>Objectives</strong>:
-<ul>
-<li>Guidelines for report creation</li>
-<li>Tailor reports to the audience</li>
-</ul></li>
+<li>What is the role of the <code>set.seeed()</code> function in the context of this code?</li>
+<li>Why does calculating the mean of the copied original matrix return a numeric value while the mean of the same matrix when missing values are filled from the list returns <code>NA</code>?</li>
+<li>Please fix the code sp that <code>mean_of_original_copy</code> and <code>mean_matrix</code> are equal</li>
 </ul>
-</section>
-<section id="understanding-the-audience" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="understanding-the-audience">Understanding the Audience</h2>
-<ul>
-<li><strong>Who is the report for?</strong>
-<ul>
-<li>Business managers, clients, scientists</li>
-</ul></li>
-<li><strong>Adjust technical depth</strong> based on their knowledge</li>
-<li>What key information is <strong>expected</strong> by the audience?</li>
-</ul>
-</section>
-<section id="defining-the-purpose-of-the-report" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="defining-the-purpose-of-the-report">Defining the Purpose of the Report</h2>
-<ul>
-<li><strong>Clarify the objective</strong>: What are you solving or exploring?</li>
-<li>Address the <strong>key questions or problems</strong></li>
-<li>Define the <strong>expected outcomes</strong></li>
-<li>For a very big analysis create a <strong>Statistical Analysis Plan</strong></li>
-</ul>
-</section>
-<section id="data-collection-and-preparation" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="data-collection-and-preparation">Data Collection and Preparation</h2>
-<ul>
-<li><strong>Overview</strong> of data:
-<ul>
-<li>Where did the data come from? How was it collected?</li>
-</ul></li>
-<li><strong>Data cleaning</strong> process:
-<ul>
-<li>Handling missing data, outliers, normalization</li>
-</ul></li>
-<li>Importance of <strong>transparent data preprocessing</strong></li>
-</ul>
-</section>
-<section id="choosing-the-right-statistical-methods" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="choosing-the-right-statistical-methods">Choosing the Right Statistical Methods</h2>
-<ul>
-<li><strong>Criteria</strong> for selecting the correct statistical tests:
-<ul>
-<li>Parametric vs.&nbsp;Non-parametric</li>
-</ul></li>
-<li>Common tests: <strong>T-tests, ANOVA, Regression</strong></li>
-<li>Match the <strong>method to the data type and objective</strong></li>
-</ul>
-</section>
-<section id="exploratory-data-analysis-eda" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
-<ul>
-<li>Visualizing data using <strong>histograms, scatter plots, box plots</strong></li>
-<li>Summary statistics: <strong>Mean, Median, Standard Deviation</strong></li>
-<li><strong>Highlight key trends</strong> or anomalies in the data</li>
-</ul>
-</section>
-<section id="hypothesis-testing" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="hypothesis-testing">Hypothesis Testing</h2>
-<ul>
-<li><strong>Define</strong> the null and alternative hypotheses</li>
-<li><strong>Statistical significance</strong> and p-values explained</li>
-<li><strong>Interpreting test results</strong> for non-technical stakeholders</li>
-</ul>
-</section>
-<section id="regression-analysis" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="regression-analysis">Regression Analysis</h2>
-<ul>
-<li>Use of <strong>regression</strong> to explain relationships between variables</li>
-<li>Key metrics: <strong>R-squared, Coefficients</strong></li>
-<li><strong>Visualizing regression results</strong> with graphs</li>
-</ul>
-</section>
-<section id="confidence-intervals" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
-<ul>
-<li>Importance of <strong>confidence intervals</strong> in analysis</li>
-<li><strong>How to interpret</strong> and explain them</li>
-<li>Examples of <strong>95% confidence intervals</strong> in real-world scenarios</li>
-</ul>
-</section>
-<section id="correlation-vs-causation" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="correlation-vs-causation">Correlation vs Causation</h2>
-<ul>
-<li><strong>Correlation</strong> explained: Why it doesn’t mean causation</li>
-<li><strong>Avoid assumption</strong> of causality</li>
-<li>Visualizations like <strong>correlation matrices</strong> help convey relationships</li>
-</ul>
-</section>
-<section id="interpreting-results" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="interpreting-results">Interpreting Results</h2>
-<ul>
-<li><strong>Key findings</strong> from the statistical analysis</li>
-<li>How to <strong>explain technical results</strong> to non-technical stakeholders</li>
-<li>Highlight the <strong>actionable insights</strong></li>
-</ul>
-</section>
-<section id="limitations-and-assumptions" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="limitations-and-assumptions">Limitations and Assumptions</h2>
-<ul>
-<li>Discuss the <strong>limitations</strong> of the analysis:
-<ul>
-<li>Sampling bias, data quality, test assumptions</li>
-</ul></li>
-<li>Why <strong>transparency</strong> is important</li>
-<li>What can be done to <strong>mitigate limitations</strong></li>
-</ul>
-</section>
-<section id="visualising-results" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="visualising-results">Visualising Results</h2>
-<ul>
-<li>Best practices for <strong>choosing visualisations</strong>:
-<ul>
-<li>Charts, graphs, tables</li>
-</ul></li>
-<li>Ensure <strong>clarity and simplicity</strong></li>
-<li>Use tools like <strong>Excel, R, Python</strong> for creating visuals</li>
-</ul>
-</section>
-<section id="recommendations-based-on-evidence" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="recommendations-based-on-evidence">Recommendations Based on Evidence</h2>
-<ul>
-<li>Translating statistical results into <strong>actionable recommendations</strong></li>
-<li>Specific examples for <strong>business/scientific decisions</strong>:
-<ul>
-<li>Increase sales, improve efficiency, refine hypotheses</li>
-</ul></li>
-</ul>
-</section>
-<section id="writing-the-report" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="writing-the-report">Writing the Report</h2>
-<ul>
-<li>Typical components of a report:
-<ul>
-<li><strong>Executive Summary</strong></li>
-<li><strong>Methodology</strong></li>
-<li><strong>Results</strong></li>
-<li><strong>Discussion and Recommendations</strong></li>
-</ul></li>
-<li><strong>Use plain language</strong>, avoid technical jargon</li>
-</ul>
-</section>
-<section id="delivering-the-report" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="delivering-the-report">Delivering the Report</h2>
-<ul>
-<li>Tailoring the <strong>delivery format</strong>:
-<ul>
-<li>PDF, PowerPoint, or interactive dashboards</li>
-</ul></li>
-<li><strong>Structuring</strong> the narrative for oral presentations</li>
-<li><strong>Tips for engaging</strong> non-technical audiences</li>
-</ul>
-</section>
-<section id="common-pitfalls-to-avoid" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="common-pitfalls-to-avoid">Common Pitfalls to Avoid</h2>
-<ul>
-<li>Avoid <strong>data overload</strong> or excessive jargon</li>
-<li>Be cautious with <strong>misinterpretation of results</strong></li>
-<li>Always <strong>contextualize insights</strong> for the audience</li>
-</ul>
-</section>
-<section id="tools-and-software-for-statistical-reporting" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="tools-and-software-for-statistical-reporting">Tools and Software for Statistical Reporting</h2>
-<ul>
-<li>Tools overview:
-<ul>
-<li><strong>R, Python, Quarto, Github, Excel, SPSS, Tableau</strong></li>
-</ul></li>
-<li>Choosing the <strong>right tool</strong> for your audience</li>
-<li>Reproducibility</li>
-</ul>
-</section>
-<section id="conclusion" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<ul>
-<li><strong>Takeaway messages</strong>:
-<ul>
-<li>Clear communication is key</li>
-<li>Tailor reports to the audience</li>
-</ul></li>
-<li><strong>Final thoughts</strong> and any questions?</li>
-</ul>
-</section>
-<section id="live-coding-a-stats-report" class="level2" data-background-image="img/slide-bg-slate.png">
-<h2 data-background-image="img/slide-bg-slate.png" class="anchored" data-anchor-id="live-coding-a-stats-report">Live Coding a Stats Report</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/duck.webp" class="quarto-figure quarto-figure-center figure-img" width="600" height="600"></p>
-</figure>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Create a 3x3 matrix with random numbers, and introduce NAs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>matrix_with_na <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>), <span class="dv">9</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>copy_of_original<span class="ot">&lt;-</span>matrix_with_na</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>matrix_with_na[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span>  <span class="co"># Introduce 3 specific NAs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>matrix_with_na[<span class="dv">2</span>,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>matrix_with_na[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Original Matrix with NAs:"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix_with_na)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Create a list with the same structure but no NAs</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>list_with_values <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">as.character</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>)))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(list_with_values)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Use a for-loop to find the corresponding missing number from the list and fill the matrix</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(matrix_with_na[i,j])) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      matrix_with_na[i,j] <span class="ot">&lt;-</span> list_with_values[[(i<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> j]]  <span class="co"># Replace with corresponding value from list</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix_with_na)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Try calculating the mean of the matrices</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>mean_matrix <span class="ot">&lt;-</span> <span class="fu">mean</span>(matrix_with_na)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>mean_of_original_copy <span class="ot">&lt;-</span> <span class="fu">mean</span>(copy_of_original)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mean_of_original_copy)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mean_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Explain why this function is not working and return the working equivalent. Interpret what the estimate means and rank the species</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary package</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'emmeans'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>run_anova_posthoc <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform ANOVA on the iris dataset</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform post-hoc test using emmeans</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  posthoc_result <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(anova_result, pairwise <span class="sc">~</span> Species)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  comparisons <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(posthoc_result<span class="sc">$</span>contrasts)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(comparisons)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  comparisons_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Species =</span> comparisons<span class="sc">$</span>species,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">estimate =</span> comparisons<span class="sc">$</span>estimate,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">p.value =</span> comparisons<span class="sc">$</span>p.value)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(comparisons_df)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">run_anova_posthoc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li><p>Using the iris dataset in R, conduct an anova of sepal length ‘by hand’ and report the F statistic. Feel free to use other packages for <strong>data wrangling/grouping only</strong>, but for each function used, appropriately comment on what it does and which package it comes from. Show your R code.</p></li>
+<li><p>Write your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required.</p></li>
+<li><p>Write your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts. Also supply a full answer including any commented code required.</p></li>
+</ol>
 
 
 </section>
