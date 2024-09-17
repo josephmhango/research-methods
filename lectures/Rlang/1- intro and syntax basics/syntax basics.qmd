@@ -52,7 +52,7 @@ https://rstats-bootcamp.github.io/website
 
 ##  R Language: General statement
 
-R is a programming language designed to help non-programmers perform statistical analyses and to make graphs. This section is intended to guide people through some of the basics of the R programming language, just enough to get started.
+R is a programming language designed to help non-programmers perform statistical analyses and to make graphs. This session is intended to guide people through some of the basics of the R programming language, just enough to get started.
 
 ##  The Life of Code...
 
@@ -113,12 +113,10 @@ For the purposes of getting started with syntax, we will work strictly with a lo
 ## The comment (#)...
 
 - Comments are useful for:
-
     +Making headers, tables of contents e.t.c.
     +Temporarily disabling undesired lines of code
     +Making code chunks
 - Example of a commenting convention:
-
     + Code chunks begin with 2 `##` signs
     + Code chunks end with a consistent pattern
 
@@ -209,7 +207,6 @@ Using the Usage and Argument fields, we can figure out how to make the function 
 
 - Under Usage:
 ``` r
-# Under Usage:
 # mean(x, ...)
 
 # The "x" is an argument that is required
