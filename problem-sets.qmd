@@ -1,5 +1,5 @@
 ---
-title: "Professional skills for data science"
+title: "Problem set"
 subtitle: "Problem set"
 format: html
 author: Joseph Mhango
