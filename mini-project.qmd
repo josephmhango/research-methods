@@ -10,4 +10,4 @@ We have developed a new high-potential enhancer of biological nitrogen fixation 
 
 Using the attached tidy data, please formulate appropriate null hypotheses to test our three alternate hypotheses. Conduct a statistical analysis based on the ANOVA technique and report whether our hypotheses are true or not. Conduct all the analysis in R and document the code comprehensively in a Quarto document.
 
-[Data](https://github.com/C7091/_C7091-Professional-Skills-for-Data-Science/blob/main/2024_25/Content/Assessments/Mini-project/data.xlsx)
+[Data](https://github.com/C7091/website/tree/main/assessments/Mini-project)
