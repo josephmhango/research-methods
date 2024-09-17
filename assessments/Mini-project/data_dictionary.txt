@@ -1,0 +1,4 @@
+yr		Year, integer or factor
+soil	Treatment type, character or factor, more than 2 levels including control
+rep		Experimental replicate, integer or factor
+Yield	Yield, numeric, unknown units
