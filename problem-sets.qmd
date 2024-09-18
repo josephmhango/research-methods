@@ -33,7 +33,7 @@ subset(mpg, cy1 = '8')
 4. Using the code chunk below, please answer the following questions:
   - What is the role of the `set.seeed()` function in the context of this code?
   - Why does calculating the mean of the copied original matrix return a numeric value while the mean of the same matrix when missing values are filled from the list returns `NA`?
-  - Please fix the code sp that `mean_of_original_copy` and `mean_matrix` are equal
+  - Please fix the code such that `mean_of_original_copy` and `mean_matrix` are equal
 
 
 ```r
@@ -105,4 +105,4 @@ run_anova_posthoc()
 
 7. Write your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts.  Also supply a full answer including any commented code required.
 
-8. Write your own question similar in spirit, difficulty and scope to questions 3-6 above. Provide a full question including any code prompts.  Also supply a full answer including any commented code required.
+8. Write your own question similar in spirit, difficulty and scope to questions 3-6 above but involving the creation nested lists and indexing of elements from within the deepest nest. the list must have more than 2 levels of nesting and no names. Provide a full question including any code prompts.  Also supply a full answer including any commented code required.
