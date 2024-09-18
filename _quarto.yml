@@ -14,7 +14,7 @@ website:
         contents:
           - index.qmd
           - schedule.qmd
-      - section: "Labs"
+      - section: "Assessments"
         contents:
           - problem-sets.qmd
           - mini-project.qmd
