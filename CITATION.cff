@@ -1,0 +1,45 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+title: "Professional skills for data science"
+abstract: "A foundational course covering essential professional skills for data analytics including R programming, data organization principles, and reproducible research practices. Designed for data science students, featuring modules on tidy data, statistical visualization, Git/Markdown workflows, and GitHub documentation for effective communication of analytical work."
+authors:
+- family-names: "Harris"
+  given-names: "W. E."
+  orcid: "https://orcid.org/0000-0002-9038-8656"
+- family-names: "Mhango"
+  given-names: "J."
+- family-names: "Lewis"
+  given-names: "M."
+title: "Professional skills for data science"
+version: 2022.1.0
+doi: 10.5281/zenodo.15670356
+date-released: 2024-08-01
+url: "https://c7091.github.io/website/"
+license: MIT
+keywords:
+  - R programming
+  - statistics
+  - data analysis
+  - reproducible research
+  - educational materials
+  - self-paced learning
+  - RStudio
+  - R Markdown
+  - GitHub
+preferred-citation:
+  type: misc
+  authors:
+  - family-names: "Harris"
+    given-names: "W. E."
+    orcid: "https://orcid.org/0000-0002-9038-8656"
+  - family-names: "Mhango"
+    given-names: "J."
+  - family-names: "Lewis"
+    given-names: "M."
+    affiliation: "Centre for Agricultural Data Science, Harper Adams University"
+  title: "Professional skills for data science"
+  year: 2024  # Update to your publication year
+  url: "https://c7091.github.io/website/"
+  doi: "10.5281/zenodo.15670356"
+  publisher: "Centre for Agricultural Data Science, Harper Adams University"
+  notes: "Open educational resource for learning R programming, statistical analysis, and reproducible research practices"
