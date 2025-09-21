@@ -1,0 +1,248 @@
+---
+title: "Fisher's F and ANOVA"
+format:
+  html:
+    toc: true
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## The World Before Fisher
+
+At the turn of the 20th century, statistics was beginning to find its voice.
+
+Galton had introduced the world to correlation and regression, inspired by the orderly shapes he observed in human height and heredity. His cousin Darwin had sparked a hunger to understand variation, and Galton's statistical tools gave it mathematical form. Karl Pearson, Galton's student, took these ideas further — formalising correlation, fitting curves, and building the great machinery of early statistical inference. 
+
+Gosset, working quietly under the alias “Student,” challenged the assumption that large samples were always needed, showing that even small batches — like those in the Guinness brewery — could yield meaningful insight, as long as one accounted properly for uncertainty. This gave birth to the *t-distribution*, a gentler bell curve for modest data.
+
+These pioneers were building tools to understand **individual differences**, to compare **pairs of means**, and to measure **relationships** between variables. Their assumptions were grounded in the bell-shaped **normal distribution** — a mathematical model that made much of early statistics possible.
+
+But beneath this elegant structure, a tension was growing.
+
+## The Complexity of Experimentation
+
+What if you weren’t comparing just **two groups**, but **three or four**?
+
+What if you weren’t just curious about a **relationship**, but trying to **design an experiment** to test multiple treatments, under uncertain conditions, in the unpredictable world of nature?
+
+This is the world Ronald A. Fisher walked into — not a world of idealised variables on chalkboards, but muddy fields, inconsistent weather, and the unglamorous grind of crop yield records.
+
+It was 1919, and Fisher had just taken a position at the **Rothamsted Experimental Station** in England, home to some of the oldest agricultural experiments in the world. Here, researchers had been testing fertilisers, seed varieties, and farming practices for decades. But their analysis of the results had become a guessing game, relying more on intuition than inference.
+
+Fisher wasn’t content with that. He believed that even the **chaos of the real world** could be tamed — if only we could understand how **randomness itself** behaves.
+
+## The Problem of Many Means
+
+Picture this: you’re a scientist testing **three fertilisers** on wheat. You assign each to several plots of land, let the crops grow, then record the **yields**.
+
+Now, you want to know — did any fertiliser perform better than the others?
+
+Previously, you might compare fertiliser A vs B with a t-test, then B vs C, then A vs C. But this has two major flaws:
+
+1. **It’s inefficient**: You perform multiple tests when you really just want one answer.
+2. **It’s dangerous**: Each test increases your chance of a false positive. Do enough of them, and eventually, one will scream “significant” just by chance.
+
+Fisher saw through this. Instead of asking *Which two groups are different?*, he asked:
+
+> **Is there evidence that not all group means are equal?**
+
+A single question. One test. But to answer it, Fisher had to change the way scientists thought about data.
+
+## From Means to Variance
+
+Rather than comparing **means directly**, Fisher proposed a new idea:
+
+> If there’s a true difference in treatment, it should show up as **increased variation between the group means**.
+
+But we also expect some variation to occur **within** each group — just from randomness.
+
+So Fisher constructed a **ratio**:
+
+$$
+F = \frac{\text{Variance Between Groups}}{\text{Variance Within Groups}}
+$$
+
+This was the birth of the **F-statistic**.
+
+If the fertilisers all had the same effect, the variation between group means would be about the same as the variation within groups — the F-ratio would be close to 1. But if one fertiliser truly boosted yields, the means would diverge, increasing the numerator and pushing the F-statistic higher.
+
+This wasn’t just clever — it was radical. Fisher had moved the conversation away from **point estimates** (means) and toward **patterns of variability**.
+
+## Why Variance?
+
+The decision to use **variance** wasn’t arbitrary. Fisher was steeped in the work of Gauss, whose **normal distribution** described measurement error in astronomy and was later adopted by Galton to explain natural traits.
+
+The **formula for the normal curve** involved the population variance $\sigma^2$, which quantified spread. In Pearson’s world, this was assumed known. Gosset challenged that, showing that when estimating variance from the data, the result was a **distribution with heavier tails** — the *t-distribution*.
+
+Fisher extended this thinking. He understood that **variance wasn’t just noise** — it was a signal in itself. By analysing how **total variation** could be **partitioned**, he could infer whether treatment effects existed.
+
+In this way, variance became more than a mathematical artefact — it became a **lens** through which to view structure.
+
+## What Is a Sum of Squares?
+
+To understand how variance is used in ANOVA, we must introduce the idea of **Sum of Squares (SS)** — the building block of variance.
+
+Recall that variance is calculated as:
+
+$$
+\text{Variance} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+The numerator of this formula — the sum of squared deviations from the mean — is the **Sum of Squares**. It tells us the total squared distance that the data points are from their group mean.
+
+We don’t divide by $n - 1$ yet — that’s what turns SS into variance. But by keeping it as a total, we can compare sources of variation before standardising them.
+
+In ANOVA:
+
+- **SSB (Between)**: How far group means are from the overall mean
+- **SSW (Within)**: How scattered values are inside each group
+- **SST (Total)**: Total variation across all observations
+
+Then, dividing each SS by its degrees of freedom gives us **Mean Squares (MS)** — which are essentially variances.
+
+And the F-statistic is:
+
+$$
+F = \frac{MS_B}{MS_W} = \frac{SS_B / (k - 1)}{SS_W / (N - k)}
+$$
+
+This ratio of two variances is what Fisher realised could detect true experimental effects beyond random variation.
+
+## A New Distribution: The F
+
+To make this ratio of variances meaningful, Fisher derived its sampling distribution — the **F-distribution**.
+
+- It was bounded below at zero (variance can’t be negative)
+- It was skewed right (large values are possible, but rare)
+- Its shape depended on two degrees of freedom:
+  - One for the numerator (between-group)
+  - One for the denominator (within-group)
+
+This distribution gave Fisher a **reference**: if your F-statistic was unusually large compared to what randomness would typically produce, you had evidence that **not all groups were the same**.
+
+## From F-Test to ANOVA
+
+Fisher formalised his approach as **Analysis of Variance** — or **ANOVA**. Here’s the elegant logic:
+
+- **Total variability** in your data = variation due to **treatments** + **random variation**
+- If the treatment effect is real, the treatment component should be **large** relative to random noise
+- ANOVA computes this comparison using the **F-statistic**
+
+It wasn’t just a test — it was a **framework** for experimental design.
+
+## The ANOVA Table (Simplified)
+
+| Source of Variation | Sum of Squares (SS) | Degrees of Freedom | Mean Square (MS) | F-Ratio             |
+|---------------------|---------------------|---------------------|------------------|---------------------|
+| Between Groups      | $SS_B$              | $k - 1$              | $MS_B$           | $F = MS_B / MS_W$   |
+| Within Groups       | $SS_W$              | $N - k$              | $MS_W$           |                     |
+| Total               | $SS_T$              | $N - 1$              |                  |                     |
+
+---
+
+## Understanding Variability: Within vs Between Groups
+
+Let’s break it down with examples.
+
+### Example 1: Fertiliser Treatments on Wheat Yields
+
+You have three fertiliser types: A, B, and C.
+
+```{r}
+# Group A yields
+A <- c(20, 22, 19, 21)
+B <- c(34, 35, 36, 34)
+C <- c(27, 28, 29, 28)
+```
+
+### Step 1: Variability Within Groups
+
+```{r}
+var_A <- var(A)
+var_B <- var(B)
+var_C <- var(C)
+MS_within <- mean(c(var_A, var_B, var_C))
+```
+
+> This shows how much **scatter** there is *within* each group.
+
+### Step 2: Variability Between Groups
+
+```{r}
+mean_A <- mean(A)
+mean_B <- mean(B)
+mean_C <- mean(C)
+grand_mean <- mean(c(A, B, C))
+
+MS_between <- mean(c((mean_A - grand_mean)^2,
+                     (mean_B - grand_mean)^2,
+                     (mean_C - grand_mean)^2))
+```
+
+> This shows how **different** the group means are from the overall average.
+
+### Final F-statistic
+
+```{r}
+F_value <- MS_between / MS_within
+```
+
+> If `F_value` is large, the treatment is likely responsible for group differences.
+
+But we don't need to do all than manually in R. If we have a table of our data loaded, we can just do the analysis with an inbuilt ANOVA function called aov
+
+```{r}
+# Combine into dataframe
+values <- c(A, B, C)
+groups <- factor(rep(c("A", "B", "C"), each = 4))
+df <- data.frame(values, groups)
+
+
+# Use aov to perform ANOVA
+model <- aov(values ~ groups, data = df)
+summary(model)
+```
+
+
+> This performs a full ANOVA using R’s `aov()` function. You’ll see the F-statistic and the p-value that tells you whether group means are significantly different.
+
+
+This output matches the logic of our manual calculation above and reinforces the beauty of Fisher’s framework: a comparison of **structured variation** against **random noise**.
+
+## Post Hoc Testing: Tukey HSD and Pairwise Comparisons
+
+
+If the ANOVA indicates significant differences, we can perform post hoc tests to identify **which groups differ**.
+
+
+### Tukey's Honest Significant Difference (HSD)
+```{r}
+TukeyHSD(model)
+```
+This adjusts for multiple comparisons and tells you where the significant differences lie.
+
+
+### Pairwise t-tests with Adjustment
+
+```{r}
+pairwise.t.test(df$values, df$groups, p.adjust.method = "bonferroni")
+```
+This compares all pairs while adjusting for Type I error.
+
+
+> Always use these **after** a significant ANOVA result to avoid data dredging.
+
+---
+
+## A Revolution in Reasoning
+
+Fisher's genius was in shifting from comparison of values to **partitioning of variability**. He gave science a framework for asking:
+
+> “Where does the variation come from — and is it more than just noise?”
+
+---

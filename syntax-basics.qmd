@@ -1,0 +1,383 @@
+---
+title: "Introductory R"
+subtitle: "Syntax bootcamp"
+format:
+  html:
+    theme: united   # or cosmo, litera, united, etc.
+    toc: true
+author: "Joseph Mhango"
+date: "2024-09-13"
+date-format: "iso"
+center: true
+---
+
+## Objectives
+
+- Install R and RStudio or set up RStudio Cloud
+- RStudio components and setup
+- Workflow for scripts in R
+
+## Why R
+
+- R is objectively the best statistical software available
+- R is designed for people with no programming experience to perform sophisticated statistical analysis with minimum effort
+- In wide use at universities, companies: job demand
+- Very large community of users
+- Free and open source
+- Works well on all computers and OSes, old and new
+
+## How to setup R and R studio
+
+- Install R and R Studio locally
+    - [Help for Windows](https://www.google.com/search?q=how+do+I+install+R+for+windows)
+    - [Help for Mac](https://www.google.com/search?q=how+do+I+install+R+for+mac)
+    
+## RStudio components and setup
+![](./images/rstudio.png){ width=100%, height=100%}
+
+
+
+##  R Language: General statement
+
+R is a programming language designed to help non-programmers perform statistical analyses and to make graphs. This session is intended to guide people through some of the basics of the R programming language, just enough to get started.
+
+##  The Life of Code...
+
+- R code can live comfortably in the following formats:
+  + `.R` (Scripts)
+  + `.Rmd` (R Markdown)
+  + `.Qmd` (Quarto Markdown)
+  + `.ipynb` (Jupyter Notebooks)
+
+
+---
+
+
+R projects and data can be saved in the following formats:
+
+-  RStudio Project files, organizing scripts and data (`.Rproj`)
+
+-  Workspace or multiple R objects (`.RData`)
+
+-  Single R object (`.Rds`)
+
+##  Things can get all woven up...
+
+***Example:***
+
+This presentation comes from a .Qmd document. It has a bunch of text called markdown, sprinkled around R code. The slides and images for the presentation are all organised neatly into an R project in a folder, with a `.Rproj` overlord 
+<br> 
+<br> 
+
+For the purposes of getting started with syntax, we will work strictly with a lone script
+
+## Writing R Scripts: Best Practices
+
+- Document Your Work: Scripts are a a record of your progress
+
+- Organise Your Code: Proper structure improves reproducibility
+
+- Write for Others: e.g. your future self or supervisor
+
+-  Use Comments & Pseudocode: human readable with obvious flow
+
+## Important
+
+- Work through the instructions here in RStudio as you go along
+
+- Type you own code rather than using copy and paste
+
+- Document all the code in your own script and write clear, concise comments
+
+## The comment (#)...
+
+- The hashtag is used to declare comments
+
+- Anything that comes after a `#` on the same line is ignored by the R interpreter during execution
+
+- Don't just litter everywhere (e.g. storing code as comments)
+
+## The comment (#)...
+
+- Comments are useful for:
+    +Making headers, tables of contents e.t.c.
+    +Temporarily disabling undesired lines of code
+    +Making code chunks
+- Example of a commenting convention:
+    + Code chunks begin with 2 `##` signs
+    + Code chunks end with a consistent pattern
+
+## Header
+
+Always have a header that introduces what the script is about, hopefully with a version number
+
+``` r
+## HEADER ####
+## Who: <YOUR NAME>
+## What: R syntax basics
+## Last edited: <DATE TODAY in yyyy-mm-dd format>
+## Version: 1.000
+####
+```
+
+## Contents
+
+``` r
+## CONTENTS ####
+## 1.1.1 Example script, help, pseudocode  
+## 1.1.2 Math operators  
+## 1.1.3 Logical Boolean operators  
+## 1.1.4 Regarding base R and the Tidyverse   
+## 1.1.5 Practice exercises  
+```
+## Outlines
+
+- Outlines enable you to jump around your script,
+- If you have clear delimiters in comments, RStudio recognises them as outlines
+
+```
+# ---- Loading libraries ----
+library(stats)
+# ---- Iris scatter plots ----
+plot(iris)
+```
+# Getting Help in R
+
+## Community and Resources
+
+-   R has a strong community with many websites, books, blogs, and more.
+
+-   The vast array of resources can be overwhelming for beginners.
+
+-   Best Practice: Start with the R Help System + Use the built-in R Help system first before exploring external resources
+
+## Accessing Built-in Help in R
+
+-   The basic way to get help is by using the `help()` function.
+
+**Syntax**:\
+`help(function_name)`
+
+-   Get help on the `mean()` function
+
+``` r
+# Display help page for the function mean
+help(mean)
+```
+
+---
+
+![](./images/help_mean.png){ width=100%, height=100%}
+
+---
+
+## Help page format
+
+- Help pages have a consistent structure
+
+- **1 Function name {Package name}: ** Tells you the package of the function
+
+**2 Short description: ** What the function does in brief.
+
+**3 (longer) description: ** What the function does
+
+**4 Usage: ** An example of the function in use and "arguments"
+
+**5 Argument definitions: ** What the argument are and what they do!
+
+**Value: ** What the function returns
+
+
+## Making Help work for us
+
+Using the Usage and Argument fields, we can figure out how to make the function do the work we want.
+
+- Under Usage:
+``` r
+# mean(x, ...)
+
+# The "x" is an argument that is required
+# The "..." means there are other optional arguments
+```
+## Under Arguments:
+``` r
+# x 
+# An R object... for numeric/logical vectors ...
+```
+- Try this code in your own script
+``` r
+
+my_length <- c(101, 122, 97) # 3 numerical measures
+mean(x = my_length) 
+```
+## Pseudocode
+
+- **Pseudocode** is a way to break up a big task into a series of smaller tasks. For example:
+
+  + Read data into R
+  + Perform exploratory analysis
+  + Perform statistical tests
+  + Organize outputs to communicate in a report
+
+## Submitting code to the interpreter
+
+- Run whole line of code your cursor rests on Ctrl+Enter (Cmd+Return in Macs)
+- Run code you have selected Ctrl+Enter (Cmd+Return in Macs)
+- Use the “Run” menu above the Script window
+- Use the Code > Run dropdown menu
+
+
+## Now let's put the interpreter to work...
+
+
+## Math operators
+
+Basic manipulation of numbers in R is very easy and intuitive. Let's try this non-exhaustive list:
+
+**Arithmetic**
+
+``` r
+# Add with "+"
+2 + 5
+# Subtract with "-"
+10 - 15
+# Multiply with "*" and Divide by "/"
+(6 * 4.2)+(10 / 4)
+```
+## More arithmetic
+``` r
+# raise to the power of x
+2^3 
+2**3
+9^(1/2) # same as sqrt()!
+9**(1/2) # same as sqrt()!
+# There are a few others, but these are the basics
+```
+
+
+## Order of operation
+
+For complicated phrases like 2 + 2 \* 8 - 6. the BODMAS/PEMDAS rule is followed unless unless a specific order is coded.
+
+``` r
+# Try this
+4 + 2 * 3
+
+# Order control - same
+4 + (2 * 3)
+
+# Order control - different...
+(4 + 2) * 3
+```
+
+## Use of spaces
+
+``` r
+# Try this
+6+10                                  # no spaces
+7     -5                              # uneven spaces
+1.6             /                2.3  # large spaces
+16 * 3                                # exactly 1 space
+# exactly 1 space is easiest to read...
+```
+## Boolean operators
+
+Boolean operators are expressions that resolve TRUE (treated as "1" in most computing systems including R) versus FALSE ("0"). A typical expression might be something like asking if 5 \> 3, which is TRUE. More sophisticated phrases are possible, and sometimes useful.
+
+``` r
+3 > 5
+
+# 3 is compared to each element
+3 < c(1, 2, 3, 4, 5, 6) 
+```
+
+## Logic and math
+- & (ampersand) means "and"
+- | (pipe) means "or"
+
+```
+#This asks if both phrases are true
+3 > 1 & 1 < 5
+
+3 < 1 | 1 < 5
+
+3 < 1 | 1 > 5
+```
+
+## Using Booleans
+
+- Booleans can be useful to select data
+- Put some data into a variable and then print the variable
+- Note `<-` is the ASSIGNMENT syntax in R, which puts the value on the left "into" x
+- The square brackets are there to allow us to specify an index of the data vector... more later
+
+```{r}
+#| echo: true
+#| output-location: column
+
+
+x <- c(21, 3, 5, 6, 22)
+x[x > 20]
+```
+
+## The "not" operator - !
+
+``` r
+# Try this
+TRUE # plain true
+
+!FALSE # not false is true!
+
+6 < 5 #definitely false
+
+!(6 < 5) #not false...
+
+!(c(23, 44, 16, 51, 12) > 50) 
+
+```
+## Base R and the Tidyverse
+
+## Base R
+
+- **Base R: ** the basic functions which let R function as a language
+- `library(help = "base")`
+- Examples include functions like `read.table()`, `data.frame()`, etc.
+- Here's the thing; mastering R is mastering Base R
+- **Base R** provides the tools you need to eventually even write your own R packages.
+
+---
+
+## The Tidyverse
+
+- **The Tidyverse** is **collection of R packages**.
+- Developed by **RStudio** (Hadley Wickham and others), now called **Posit**.
+- Core packages: `ggplot2`, `dplyr`, `tidyr`, `readr`, `tibble`, and `purrr`.
+- Tidyverse focuses on:
+  - Human-readable code.
+  - Consistency across functions.
+  - Easy-to-use tools for common data manipulation and visualization
+
+---
+
+## Differences Between Base R and the Tidyverse
+
+- Base R provides lower-level intuitive functions; the Tidyverse provides **simplified, higher-level abstractions**.
+- **Tidyverse** emphasizes abstractions that make data wrangling easier
+- But guess what, most of the tidyverse is written on top of Base R
+- Base R is pretty stable, the tidyverse has a deprecation problem
+
+---
+
+## The error traceback
+
+- Don't be intimidated by the screaming red text
+- It's all bark and no bite
+- if it looks confusing, use `traceback()`
+-Most of the times, it's because:
+  + you're making calculations on an invalid datatype
+  + you're passing the wrong things to function arguments
+  + you've made a syntax error somewhere
+
+
+
+

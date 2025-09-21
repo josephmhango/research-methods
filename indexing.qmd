@@ -1,0 +1,187 @@
+---
+title: "Indexing"
+subtitle: "Indexing in R"
+format: html
+author: Joseph Mhango
+date: 2024-09-13
+date-format: iso
+center: true
+---
+
+## Objectives
+
+By the end of this section, you should be able to:
+
+1. Explain the concept of indexing in R and why it is useful.  
+2. Use the `which()` function to identify elements that satisfy a condition.  
+3. Perform subsetting on vectors, matrices, and data frames.  
+4. Apply the `aggregate()` function to summarise data efficiently.  
+
+---
+
+## The concept of indexing
+
+In R, *indexing* is how we locate and extract elements from data structures. Think of it like house numbers on a street: every house has a unique number (its “index”), and if you know the number, you can directly access that house.  
+
+This same idea applies to vectors, matrices, and data frames in R. Instead of manually searching through your data, you use indices to point to exactly the values you want. This is one of the most powerful features of R, because it allows you to extract, modify, and analyse subsets of data without rewriting or duplicating it.  
+
+---
+
+## Indexing with vectors
+
+A **vector** is the simplest type of data structure in R: a one-dimensional collection of values. Every element in a vector has a position (its index), starting at **1** (unlike Python, which starts at 0).  
+
+For example:
+
+```{r}
+my_vector <- c(11.3, 11.2, 10.4, 10.4, 8.7, 10.8, 10.5, 10.3, 9.7, 11.2)
+my_vector
+```
+
+To extract elements, we place indices in square brackets:
+
+```{r}
+my_vector[1]      # first element
+my_vector[3:5]    # third to fifth elements
+my_vector[c(2,4)] # second and fourth elements
+```
+
+If you leave the square brackets empty, R returns the whole vector:
+
+```{r}
+my_vector[]
+```
+
+This is useful when you want to check the full content.
+
+---
+
+## Indexing with matrices
+
+A **matrix** is a two-dimensional data structure in R (rows × columns). Indexing works in a similar way to vectors, but now you have to specify both row and column positions.
+
+For example:
+
+```{r}
+my_matrix <- matrix(
+  data = c(2, 3, 4, 5, 6, 6, 6, 6), 
+  nrow = 2, 
+  byrow = TRUE
+)
+
+my_matrix
+```
+
+To extract data, use the format `matrix[row, column]`:
+
+```{r}
+my_matrix[1, 2]     # element in row 1, column 2
+my_matrix[1:2, 3:4] # rows 1–2, columns 3–4
+```
+
+This is like reading a spreadsheet: first locate the row, then the column.
+
+---
+
+## Using `which()` and subsetting
+
+Sometimes you don’t know the exact position of the element you want — you only know a condition it must satisfy. The function `which()` is designed for this situation.  
+
+It tells you the index (or indices) of elements that meet a condition:
+
+```{r}
+vector_a <- c(4, 7, 2, 9, 6)
+
+which(vector_a > 5)   # returns positions of elements greater than 5
+which.min(vector_a)   # position of the smallest value
+which.max(vector_a)   # position of the largest value
+```
+
+Notice that `which()` does not return the values themselves, but their positions. You can then use those positions to extract the actual elements if you want:
+
+```{r}
+vector_a[which(vector_a > 5)]
+```
+
+---
+
+## Selection on `data.frame` objects
+
+A **data frame** is a two-dimensional structure similar to a matrix, but with one key difference:  
+- In a matrix, every element must have the same data type (all numbers, or all characters).  
+- In a data frame, each column can be of a different type (e.g. one column numeric, another character, another factor).  
+
+This makes data frames much more flexible for real-world datasets.  
+
+Accessing data frames follows similar rules to matrices:  
+- `df[row, column]` extracts specific cells.  
+- `df$column_name` extracts an entire column.  
+
+For example:
+
+```{r}
+head(OrchardSprays)
+OrchardSprays[1:3, "treatment"] # first three rows of treatment column
+OrchardSprays$treatment         # entire column
+```
+
+Think about this question: what are the advantages of a data frame over a matrix when analysing survey or experimental data?
+
+---
+
+## Slicing data
+
+Slicing means selecting rows that satisfy certain conditions. This is where indexing combines with logical operations.  
+
+For example, using the built-in `OrchardSprays` dataset:
+
+```{r}
+OrchardSprays$treatment == "D"
+```
+
+This returns a logical vector (`TRUE` or `FALSE`) for each row, depending on whether the treatment is equal to `"D"`.  
+
+You can use this logical vector directly to filter the data:
+
+```{r}
+OrchardSprays[OrchardSprays$treatment == "D", ]
+```
+
+This gives you only the rows where treatment equals D.
+
+---
+
+## Using `aggregate()`
+
+The `aggregate()` function is very useful for summarising data. It allows you to group data by one or more factors (e.g. treatment groups) and apply a function (e.g. mean, sum, standard deviation) to each group.  
+
+For example, to calculate the average decrease by treatment group in the `OrchardSprays` dataset:
+
+```{r}
+aggregate(
+  x = OrchardSprays$decrease,
+  by = list(treatment = OrchardSprays$treatment),
+  FUN = mean
+)
+```
+
+Here, `x` is the variable to summarise, `by` defines the grouping factor, and `FUN` specifies the summary function.  
+
+This gives you a quick way to compute group statistics without manually splitting your data.
+
+---
+
+## Summary
+
+Indexing is the foundation of working with data in R. Whether you are pulling out a single value from a vector, slicing a matrix, filtering rows of a data frame, or summarising groups with `aggregate()`, the same principles apply:  
+- Data are stored in structures.  
+- Structures have indices.  
+- You can use indices and conditions to extract, analyse, and summarise data efficiently.
+````
+
+## Practice makes perfect
+
+<center>
+
+![](pics/laptop_dog.png)
+</center>

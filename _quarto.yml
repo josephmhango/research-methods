@@ -3,21 +3,26 @@ project:
   output-dir: docs
 
 website:
-  favicon: "img/C7091_bg.png"
-  title: "C7091 - 2024: Professional skills for data science"
+  favicon: "img/rmgis.png"
+  title: "C5025HF Research methods and Geographical Information Systems"
   sidebar:
-    logo: "img/C7091_bg.png"
+    logo: "img/rmgis.png"
     style: "docked"
     search: true
     contents: 
-      - section: "Information"
+      - section: "Sessions"
         contents:
-          - index.qmd
-          - schedule.qmd
-      - section: "Assessments"
-        contents:
-          - problem-sets.qmd
-          - mini-project.qmd
+          - syntax-basics.qmd
+          - data-structures.qmd
+          - indexing.qmd
+          - tidy-data.qmd
+          - eda.qmd
+          - galton.qmd
+          - chisquare.qmd
+          - gosset.qmd
+          - t-test.qmd
+          - fisher.qmd
+          - 1-way-anova.qmd
 format:
   html:
     highlight-style: a11y

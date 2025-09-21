@@ -1,0 +1,116 @@
+---
+title: "T-test"
+subtitle: "T-test"
+format: html
+author: Joseph Mhango
+date: 2024-09-13
+date-format: iso
+center: true
+---
+
+
+## 1 Student's T-test
+
+William Sealy Gosset is credited with inventing the t-test while working for the Guinness brewery. The idea was refined and supported by the great statistician R. A. Fisher, and the idea was initially described in a paper anonymously by "Student", in order to protect the commercial interests of Guinness. Today, it is perhaps one of the most prevalent and basic tools in statistics, and [it is a fascinating story](https://priceonomics.com/the-guinness-brewer-who-revolutionized-statistics/).
+
+<br>
+
+### 1.1 Objectives
+
+-   The question of the t-test
+
+-   Data and assumptions
+
+-   Graphing
+
+-   Test and alternatives
+
+-   Practice exercises
+
+<br>
+
+## 2 The question of the t-test
+
+
+The typical premise of the t-test is that it is used to compare populations you are interested in, which you measure with independent samples. There are a few versions of the basic question.
+
+## Compare two independent samples
+
+- Here you have measured a numeric variable and have two samples. 
+- Are the means of the two samples different (i.e. did the samples come from different populations)?
+- Example: An experiment with a control and one treatment group.
+
+
+## Compare 1 sample to a known mean
+
+- Here you have one sample which you wish to compare to a mean value.
+- Did the sample come from a population exhibiting the known mean?
+- The data are simply a single numeric vector, and the population mean for comparison.
+
+## Paired samples
+
+- Here the individual observation comprising the 2 samples are not independent.
+- Example: Before vs After experiments
+- Another example: Measuring plots that are paired spatially
+- For each of these examples, there is a unit, patient, or plot identification, that represents the relationship of each **paired measure**.
+
+## 3 Data and assumptions
+
+The principle assumptions of the t-test are:
+
+-   **Gaussian distribution of observations WITHIN each sample**
+
+-   **Heteroscedasticity** (our old friend) - i.e., the variance is equal in each sample
+
+-   **Independence of observations**
+
+<br>
+
+## 3.1 Evaluating and testing the assumptions
+
+- The t-test is thought to be somewhat robust to violation of assumptions
+- To a certain extent, Gaussian distribution and heteroscedasticiy assumption violations won't bias your results.
+- The assumption of independence of observations is always of high importance.
+
+
+<br>
+
+## Testing assumptions
+
+## Gaussian distribution of observations WITHIN each sample
+
+- Plot and evaluate a a histogram (`hist()`) and a q-q plot (e.g., with `qqplot()`)
+
+- Use a statistical test evaluating whether data are Gaussian (e.g., `shapiro.test()`
+- `NB 1` test EACH SAMPLE SEPARATELY (this is sometimes confusing for beginners).
+
+## and If guilty?...
+- Mann-Whitney U-test will allow violation of assumptions
+- Also called the name Wilcoxon Test
+
+
+## Heteroscedasticity assumption
+
+- Examine graphically
+``` 
+# Bartlett's Test
+bartlett.test(list(group1, group2))
+```
+<br>
+
+## Independence assumption
+
+- Can't really be directly tested without supporting information
+- It's up to you to ensure your analysis is being done on the right data
+- in time series and spatial data, you can test for autocorrelations (out of scope)
+
+
+## typical Output of t test function.
+
+- The t value; can be be positive or negative. The absolute value of t should increase with the probability that the samples came different populations.
+
+- The degrees of freedom; The number of independent data points available to estimate the t-statistic.
+
+- The 95% confidence interval; This gives a range of values that is likely to contain the true difference in means between the populations from which the samples were taken
+
+- The P-value
