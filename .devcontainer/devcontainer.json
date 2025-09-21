@@ -1,0 +1,9 @@
+{
+  "name": "RStudio Codespace (Rocker)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [8787],
+  "remoteUser": "rstudio"
+}
+
