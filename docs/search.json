@@ -1920,175 +1920,275 @@
     "href": "nonparam.html#what-you-will-learn-today",
     "title": "Non-Parametric Statistics",
     "section": "What You Will Learn Today",
-    "text": "What You Will Learn Today\n\nParametric vs non-parametric intuition\nRanking logic and distribution-free ideas\nMann–Whitney, Wilcoxon, Kruskal–Wallis\nCorrelations: Spearman & Kendall\nExact tests (Fisher)"
+    "text": "What You Will Learn Today\n\nParametric vs non-parametric intuition\nRanking logic and distribution-free ideas\nMann–Whitney, Wilcoxon, Kruskal–Wallis\nCorrelations: Spearman & Kendall\nExact tests (Fisher)",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#when-parametric-assumptions-break",
     "href": "nonparam.html#when-parametric-assumptions-break",
     "title": "Non-Parametric Statistics",
     "section": "When parametric assumptions break",
-    "text": "When parametric assumptions break\n\nNon-normal data\nSkewed distributions\nOrdinal measurements\nHeterogeneous variances\nSmall samples\nOutliers"
+    "text": "When parametric assumptions break\n\nNon-normal data\nSkewed distributions\nOrdinal measurements\nHeterogeneous variances\nSmall samples\nOutliers",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#ranking-based-thinking-the-race-analogy",
     "href": "nonparam.html#ranking-based-thinking-the-race-analogy",
     "title": "Non-Parametric Statistics",
     "section": "Ranking-based thinking: The “Race” Analogy",
-    "text": "Ranking-based thinking: The “Race” Analogy\nInstead of looking at exact times (values), look at finishing positions (ranks).\nThe Intuition: Team A vs Team B (Independent)\nImagine a race between two teams.\n\nParametric (t-test): Compares the Average Time of Team A vs Team B.\n\nIf one runner in Team A takes 5 hours (outlier), Team A’s average is ruined.\n\nNon-Parametric (Mann-Whitney): Compares the Finishing Positions (Ranks).\n\nIt combines everyone (both teams) into one single lineup from 1st to last.\nThen it looks at where Team A falls vs Team B.\nIf that slow runner takes 5 hours or 5 days, they are still just “Last Place”. The rank (last) is the same.\n\n\nThe Intuition: Before vs After (Paired)\nImagine the same runner running twice (Race 1 vs Race 2).\n\nParametric (Paired t-test): Calculates the improvement (Time 1 - Time 2) for each runner, then averages them.\n\nOne runner improving by 5 hours makes the whole group look vastly improved on average.\n\nNon-Parametric (Wilcoxon Signed-Rank):\n\nIt calculates the change for each runner.\nIt ranks these changes by size (ignoring direction). Small change = Rank 1, Huge change = Rank 100.\nThen it asks: “Are the biggest ranks associated with getting faster or getting slower?”\nIf one runner improves by 5 hours, they get the highest rank, but they don’t pull the magnitude of the sum to infinity. It caps the influence of the outlier.\n\n\nWhy this is useful\n\nRobust to Outliers: Extreme values don’t pull the results (unlike the mean).\nSkew doesn’t matter: We are testing the order, not the bell curve.\nAny units work: cm, mm, log-transformed, or “Likert scales” — as long as you can say “A &gt; B”, you can rank.\n\nWhat the tests actually ask\n\nMann–Whitney (2 groups): If I pick one random value from Group A and one from Group B, is A likely to be higher than B?\nWilcoxon (Paired): It looks at the change in each pair. Do the big changes tend to be increases or decreases?\n\n(It ranks the size of the changes, then checks if the positive ranks outweigh the negative ranks).\n\nKruskal–Wallis (&gt;2 groups): Do some groups systematically rank higher than others?\n\nWhat to report\n\nDescriptive stats: Medians and Interquartile Ranges (IQR) for each group.\nEffect size / Direction: Explain the direction of the difference in plain English.\n\nInstead of just “p &lt; 0.05”, say: “Species A tends to have higher values than Species B.”\nOptional but good: “The probability that a random value from Group A exceeds Group B is approx X%.”\n\nVisuals: Always include a boxplot or jitter plot to show the spread and overlap."
+    "text": "Ranking-based thinking: The “Race” Analogy\nInstead of looking at exact times (values), look at finishing positions (ranks).\nThe Intuition: Team A vs Team B (Independent)\nImagine a race between two teams.\n\nParametric (t-test): Compares the Average Time of Team A vs Team B.\n\nIf one runner in Team A takes 5 hours (outlier), Team A’s average is ruined.\n\nNon-Parametric (Mann-Whitney): Compares the Finishing Positions (Ranks).\n\nIt combines everyone (both teams) into one single lineup from 1st to last.\nThen it looks at where Team A falls vs Team B.\nIf that slow runner takes 5 hours or 5 days, they are still just “Last Place”. The rank (last) is the same.\n\n\nThe Intuition: Before vs After (Paired)\nImagine the same runner running twice (Race 1 vs Race 2).\n\nParametric (Paired t-test): Calculates the improvement (Time 1 - Time 2) for each runner, then averages them.\n\nOne runner improving by 5 hours makes the whole group look vastly improved on average.\n\nNon-Parametric (Wilcoxon Signed-Rank):\n\nIt calculates the change for each runner.\nIt ranks these changes by size (ignoring direction). Small change = Rank 1, Huge change = Rank 100.\nThen it asks: “Are the biggest ranks associated with getting faster or getting slower?”\nIf one runner improves by 5 hours, they get the highest rank, but they don’t pull the magnitude of the sum to infinity. It caps the influence of the outlier.\n\n\nWhy this is useful\n\nRobust to Outliers: Extreme values don’t pull the results (unlike the mean).\nSkew doesn’t matter: We are testing the order, not the bell curve.\nAny units work: cm, mm, log-transformed, or “Likert scales” — as long as you can say “A &gt; B”, you can rank.\n\nWhat the tests actually ask\n\nMann–Whitney (2 groups): If I pick one random value from Group A and one from Group B, is A likely to be higher than B?\nWilcoxon (Paired): It looks at the change in each pair. Do the big changes tend to be increases or decreases?\n\n(It ranks the size of the changes, then checks if the positive ranks outweigh the negative ranks).\n\nKruskal–Wallis (&gt;2 groups): Do some groups systematically rank higher than others?\n\nWhat to report\n\nDescriptive stats: Medians and Interquartile Ranges (IQR) for each group.\nEffect size / Direction: Explain the direction of the difference in plain English.\n\nInstead of just “p &lt; 0.05”, say: “Species A tends to have higher values than Species B.”\nOptional but good: “The probability that a random value from Group A exceeds Group B is approx X%.”\n\nVisuals: Always include a boxplot or jitter plot to show the spread and overlap.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#cheat-sheet",
     "href": "nonparam.html#cheat-sheet",
     "title": "Non-Parametric Statistics",
     "section": "Cheat Sheet",
-    "text": "Cheat Sheet\n\n\n\nDesign\nParametric\nNon-parametric\n\n\n\n\n2 independent groups\nt-test\nMann–Whitney\n\n\n2 paired measures\npaired t\nWilcoxon signed-rank\n\n\n&gt;2 independent groups\nANOVA\nKruskal–Wallis\n\n\nCorrelation\nPearson\nSpearman, Kendall\n\n\n2×2 association\nχ² test\nFisher exact"
+    "text": "Cheat Sheet\n\n\n\nDesign\nParametric\nNon-parametric\n\n\n\n\n2 independent groups\nt-test\nMann–Whitney\n\n\n2 paired measures\npaired t\nWilcoxon signed-rank\n\n\n&gt;2 independent groups\nANOVA\nKruskal–Wallis\n\n\nCorrelation\nPearson\nSpearman, Kendall\n\n\n2×2 association\nχ² test\nFisher exact",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#goal",
     "href": "nonparam.html#goal",
     "title": "Non-Parametric Statistics",
     "section": "Goal",
-    "text": "Goal\nCompare Sepal.Length between two species. We subset to two species for a t-test:\n\n\nCode\niris2 &lt;- subset(iris, Species %in% c(\"setosa\", \"versicolor\"))\n\n\nVisualise\n\n\nCode\nlibrary(ggplot2)\nggplot(iris2, aes(x = Species, y = Sepal.Length, fill = Species)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.5) +\n  theme_minimal() +\n  ggtitle(\"Sepal Length by Species\")"
+    "text": "Goal\nCompare Sepal.Length between two species. We subset to two species for a t-test:\n\n\nCode\niris2 &lt;- subset(iris, Species %in% c(\"setosa\", \"versicolor\"))\n\n\nVisualise\n\n\nCode\nlibrary(ggplot2)\nggplot(iris2, aes(x = Species, y = Sepal.Length, fill = Species)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.5) +\n  theme_minimal() +\n  ggtitle(\"Sepal Length by Species\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-t-test-assumptions",
     "href": "nonparam.html#parametric-t-test-assumptions",
     "title": "Non-Parametric Statistics",
     "section": "Parametric t-test Assumptions",
-    "text": "Parametric t-test Assumptions\n\nIndependence\n\nObservations must be independent.\nIn iris, each flower is a unique specimen → ✔ OK.\n\nNormality of the outcome within each group\n\nTest with Shapiro–Wilk.\n\n\n\n\nCode\nshapiro.test(iris2$Sepal.Length[iris2$Species==\"setosa\"])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris2$Sepal.Length[iris2$Species == \"setosa\"]\nW = 0.9777, p-value = 0.4595\n\n\nCode\nshapiro.test(iris2$Sepal.Length[iris2$Species==\"versicolor\"])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris2$Sepal.Length[iris2$Species == \"versicolor\"]\nW = 0.97784, p-value = 0.4647\n\n\n\nIf p &lt; 0.05 in either group, normality is questionable for that group.\n\nAlso use Q–Q plot:\n\n\n\n\nCode\nlibrary(ggplot2)\nggplot(iris2, aes(sample = Sepal.Length)) + stat_qq() + stat_qq_line() + facet_wrap(~Species)\n\n\n\n\nPoints close to the straight line suggest normality; strong bends or S‑shapes suggest non‑normality.\n\n\nHomogeneity of variances (Levene test)\n\n\n\nCode\nlibrary(car)\nleveneTest(Sepal.Length ~ Species, data = iris2)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value   Pr(&gt;F)   \ngroup  1  8.1727 0.005196 **\n      98                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIf p &lt; 0.05, variances differ notably between the two species."
+    "text": "Parametric t-test Assumptions\n\nIndependence\n\nObservations must be independent.\nIn iris, each flower is a unique specimen → ✔ OK.\n\nNormality of the outcome within each group\n\nTest with Shapiro–Wilk.\n\n\n\n\nCode\nshapiro.test(iris2$Sepal.Length[iris2$Species==\"setosa\"])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris2$Sepal.Length[iris2$Species == \"setosa\"]\nW = 0.9777, p-value = 0.4595\n\n\nCode\nshapiro.test(iris2$Sepal.Length[iris2$Species==\"versicolor\"])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris2$Sepal.Length[iris2$Species == \"versicolor\"]\nW = 0.97784, p-value = 0.4647\n\n\n\nIf p &lt; 0.05 in either group, normality is questionable for that group.\n\nAlso use Q–Q plot:\n\n\n\n\nCode\nlibrary(ggplot2)\nggplot(iris2, aes(sample = Sepal.Length)) + stat_qq() + stat_qq_line() + facet_wrap(~Species)\n\n\n\n\nPoints close to the straight line suggest normality; strong bends or S‑shapes suggest non‑normality.\n\n\nHomogeneity of variances (Levene test)\n\n\n\nCode\nlibrary(car)\nleveneTest(Sepal.Length ~ Species, data = iris2)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value   Pr(&gt;F)   \ngroup  1  8.1727 0.005196 **\n      98                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIf p &lt; 0.05, variances differ notably between the two species.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#what-if-assumptions-fail",
     "href": "nonparam.html#what-if-assumptions-fail",
     "title": "Non-Parametric Statistics",
     "section": "What if assumptions fail?",
-    "text": "What if assumptions fail?\n\nNon-normality → use Mann–Whitney (Wilcoxon rank-sum).\nHeterogeneous variances → Welch t-test OR non-parametric."
+    "text": "What if assumptions fail?\n\nNon-normality → use Mann–Whitney (Wilcoxon rank-sum).\nHeterogeneous variances → Welch t-test OR non-parametric.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-test",
     "href": "nonparam.html#parametric-test",
     "title": "Non-Parametric Statistics",
     "section": "Parametric test",
-    "text": "Parametric test\n\n\nCode\nt.test(Sepal.Length ~ Species, data = iris2)\n\n\n\n    Welch Two Sample t-test\n\ndata:  Sepal.Length by Species\nt = -10.521, df = 86.538, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group setosa and group versicolor is not equal to 0\n95 percent confidence interval:\n -1.1057074 -0.7542926\nsample estimates:\n    mean in group setosa mean in group versicolor \n                   5.006                    5.936 \n\n\n\nLook for the p-value and the confidence interval; with normality and similar variances, this is appropriate."
+    "text": "Parametric test\n\n\nCode\nt.test(Sepal.Length ~ Species, data = iris2)\n\n\n\n    Welch Two Sample t-test\n\ndata:  Sepal.Length by Species\nt = -10.521, df = 86.538, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group setosa and group versicolor is not equal to 0\n95 percent confidence interval:\n -1.1057074 -0.7542926\nsample estimates:\n    mean in group setosa mean in group versicolor \n                   5.006                    5.936 \n\n\n\nLook for the p-value and the confidence interval; with normality and similar variances, this is appropriate.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#non-parametric-alternative-if-assumptions-break",
     "href": "nonparam.html#non-parametric-alternative-if-assumptions-break",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative (if assumptions break)",
-    "text": "Non-parametric alternative (if assumptions break)\n\n\nCode\nwilcox.test(Sepal.Length ~ Species, data = iris2)\n\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  Sepal.Length by Species\nW = 168.5, p-value = 8.346e-14\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nUse this when data are skewed or have outliers; the p-value tests if one group tends to have higher values.\n\nExample output and interpretation (R)\n\n\nCode\n# Run both to compare\n\ntt_res &lt;- t.test(Sepal.Length ~ Species, data = iris2)\nmw_res &lt;- wilcox.test(Sepal.Length ~ Species, data = iris2, exact = FALSE)\n\ntt_res\n\n\n\n    Welch Two Sample t-test\n\ndata:  Sepal.Length by Species\nt = -10.521, df = 86.538, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group setosa and group versicolor is not equal to 0\n95 percent confidence interval:\n -1.1057074 -0.7542926\nsample estimates:\n    mean in group setosa mean in group versicolor \n                   5.006                    5.936 \n\n\nCode\nmw_res\n\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  Sepal.Length by Species\nW = 168.5, p-value = 8.346e-14\nalternative hypothesis: true location shift is not equal to 0\n\n\nCode\n# Print key summaries for the slide\ncat(\"t-test p-value:\", format.pval(tt_res$p.value, digits = 3), \"\\n\")\n\n\nt-test p-value: &lt;2e-16 \n\n\nCode\ncat(\"Mann–Whitney p-value:\", format.pval(mw_res$p.value, digits = 3), \"\\n\")\n\n\nMann–Whitney p-value: 8.35e-14 \n\n\n\nInterpret the p-values and medians.\nInterpretation: If data look non-normal or have outliers, prefer Mann–Whitney. Report simply, e.g., “Species A tends to have longer sepals than Species B.”"
+    "text": "Non-parametric alternative (if assumptions break)\n\n\nCode\nwilcox.test(Sepal.Length ~ Species, data = iris2)\n\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  Sepal.Length by Species\nW = 168.5, p-value = 8.346e-14\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nUse this when data are skewed or have outliers; the p-value tests if one group tends to have higher values.\n\nExample output and interpretation (R)\n\n\nCode\n# Run both to compare\n\ntt_res &lt;- t.test(Sepal.Length ~ Species, data = iris2)\nmw_res &lt;- wilcox.test(Sepal.Length ~ Species, data = iris2, exact = FALSE)\n\ntt_res\n\n\n\n    Welch Two Sample t-test\n\ndata:  Sepal.Length by Species\nt = -10.521, df = 86.538, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group setosa and group versicolor is not equal to 0\n95 percent confidence interval:\n -1.1057074 -0.7542926\nsample estimates:\n    mean in group setosa mean in group versicolor \n                   5.006                    5.936 \n\n\nCode\nmw_res\n\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  Sepal.Length by Species\nW = 168.5, p-value = 8.346e-14\nalternative hypothesis: true location shift is not equal to 0\n\n\nCode\n# Print key summaries for the slide\ncat(\"t-test p-value:\", format.pval(tt_res$p.value, digits = 3), \"\\n\")\n\n\nt-test p-value: &lt;2e-16 \n\n\nCode\ncat(\"Mann–Whitney p-value:\", format.pval(mw_res$p.value, digits = 3), \"\\n\")\n\n\nMann–Whitney p-value: 8.35e-14 \n\n\n\nInterpret the p-values and medians.\nInterpretation: If data look non-normal or have outliers, prefer Mann–Whitney. Report simply, e.g., “Species A tends to have longer sepals than Species B.”",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#goal-1",
     "href": "nonparam.html#goal-1",
     "title": "Non-Parametric Statistics",
     "section": "Goal",
-    "text": "Goal\nCompare Sepal.Length vs Sepal.Width for the same flowers. Since these measurements come from the same flower, they are paired.\nVisualise\n\n\nCode\n# Reshape data to long format for plotting\nlibrary(tidyr)\niris_long &lt;- pivot_longer(iris, \n                          cols = c(\"Sepal.Length\", \"Sepal.Width\"), \n                          names_to = \"Measure\", \n                          values_to = \"Value\")\n\nggplot(iris_long, aes(x = Measure, y = Value, fill = Measure)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.2) +\n  theme_minimal() +\n  ggtitle(\"Comparison of Paired Measurements\")"
+    "text": "Goal\nCompare Sepal.Length vs Sepal.Width for the same flowers. Since these measurements come from the same flower, they are paired.\nVisualise\n\n\nCode\n# Reshape data to long format for plotting\nlibrary(tidyr)\niris_long &lt;- pivot_longer(iris, \n                          cols = c(\"Sepal.Length\", \"Sepal.Width\"), \n                          names_to = \"Measure\", \n                          values_to = \"Value\")\n\nggplot(iris_long, aes(x = Measure, y = Value, fill = Measure)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.2) +\n  theme_minimal() +\n  ggtitle(\"Comparison of Paired Measurements\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#paired-t-test-assumptions",
     "href": "nonparam.html#paired-t-test-assumptions",
     "title": "Non-Parametric Statistics",
     "section": "Paired t-test Assumptions",
-    "text": "Paired t-test Assumptions\n\nIndependence of pairs\n\nEach flower is independent of others → ✔ OK.\n\nNormality of the differences\n\nWe care about the distribution of \\((Sepal.Length - Sepal.Width)\\).\n\n\n\n\nCode\ndiffs &lt;- iris$Sepal.Length - iris$Sepal.Width\nshapiro.test(diffs)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  diffs\nW = 0.94628, p-value = 1.628e-05\n\n\n\nIf p &lt; 0.05, the differences are not normally distributed.\nCheck visually:\n\n\n\nCode\nggplot(data.frame(diffs), aes(sample = diffs)) + stat_qq() + stat_qq_line() +\n  ggtitle(\"Q-Q Plot of Differences\")"
+    "text": "Paired t-test Assumptions\n\nIndependence of pairs\n\nEach flower is independent of others → ✔ OK.\n\nNormality of the differences\n\nWe care about the distribution of \\((Sepal.Length - Sepal.Width)\\).\n\n\n\n\nCode\ndiffs &lt;- iris$Sepal.Length - iris$Sepal.Width\nshapiro.test(diffs)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  diffs\nW = 0.94628, p-value = 1.628e-05\n\n\n\nIf p &lt; 0.05, the differences are not normally distributed.\nCheck visually:\n\n\n\nCode\nggplot(data.frame(diffs), aes(sample = diffs)) + stat_qq() + stat_qq_line() +\n  ggtitle(\"Q-Q Plot of Differences\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-paired-test",
     "href": "nonparam.html#parametric-paired-test",
     "title": "Non-Parametric Statistics",
     "section": "Parametric paired test",
-    "text": "Parametric paired test\n\n\nCode\nt.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\n\n\n    Paired t-test\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nt = 34.815, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 2.627874 2.944126\nsample estimates:\nmean difference \n          2.786 \n\n\n\nChecks if the mean difference is non-zero."
+    "text": "Parametric paired test\n\n\nCode\nt.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\n\n\n    Paired t-test\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nt = 34.815, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 2.627874 2.944126\nsample estimates:\nmean difference \n          2.786 \n\n\n\nChecks if the mean difference is non-zero.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#non-parametric-alternative-if-assumptions-break-1",
     "href": "nonparam.html#non-parametric-alternative-if-assumptions-break-1",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative (if assumptions break)",
-    "text": "Non-parametric alternative (if assumptions break)\nWilcoxon Signed-Rank Test\n\n\nCode\nwilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\n\n\n    Wilcoxon signed rank test with continuity correction\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nV = 11325, p-value &lt; 2.2e-16\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nTests if the median difference is non-zero (symmetric assumption) or if the distribution of differences is symmetric around zero.\n\nExample output and interpretation (R)\n\n\nCode\npair_t &lt;- t.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\npair_w &lt;- wilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\npair_t\n\n\n\n    Paired t-test\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nt = 34.815, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 2.627874 2.944126\nsample estimates:\nmean difference \n          2.786 \n\n\nCode\npair_w\n\n\n\n    Wilcoxon signed rank test with continuity correction\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nV = 11325, p-value &lt; 2.2e-16\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nInterpretation: “Sepal length is significantly different from sepal width within the same flowers.”"
+    "text": "Non-parametric alternative (if assumptions break)\nWilcoxon Signed-Rank Test\n\n\nCode\nwilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\n\n\n    Wilcoxon signed rank test with continuity correction\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nV = 11325, p-value &lt; 2.2e-16\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nTests if the median difference is non-zero (symmetric assumption) or if the distribution of differences is symmetric around zero.\n\nExample output and interpretation (R)\n\n\nCode\npair_t &lt;- t.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\npair_w &lt;- wilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)\n\npair_t\n\n\n\n    Paired t-test\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nt = 34.815, df = 149, p-value &lt; 2.2e-16\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 2.627874 2.944126\nsample estimates:\nmean difference \n          2.786 \n\n\nCode\npair_w\n\n\n\n    Wilcoxon signed rank test with continuity correction\n\ndata:  iris$Sepal.Length and iris$Sepal.Width\nV = 11325, p-value &lt; 2.2e-16\nalternative hypothesis: true location shift is not equal to 0\n\n\n\nInterpretation: “Sepal length is significantly different from sepal width within the same flowers.”",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#goal-2",
     "href": "nonparam.html#goal-2",
     "title": "Non-Parametric Statistics",
     "section": "Goal",
-    "text": "Goal\nTest independence between Species and a discretised version of Sepal.Width. We bin Sepal.Width:\n\n\nCode\niris$WidthClass &lt;- cut(iris$Sepal.Width, breaks = 3, labels = c(\"Narrow\", \"Medium\", \"Wide\"))\ntab &lt;- table(iris$Species, iris$WidthClass)\n\n\nVisualise\n\n\nCode\nggplot(iris, aes(x = Species, fill = WidthClass)) +\n  geom_bar(position = \"fill\") +\n  theme_minimal() +\n  labs(y = \"Proportion\", title = \"Width Class Distribution by Species\") +\n  scale_fill_brewer(palette = \"Pastel1\")"
+    "text": "Goal\nTest independence between Species and a discretised version of Sepal.Width. We bin Sepal.Width:\n\n\nCode\niris$WidthClass &lt;- cut(iris$Sepal.Width, breaks = 3, labels = c(\"Narrow\", \"Medium\", \"Wide\"))\ntab &lt;- table(iris$Species, iris$WidthClass)\n\n\nVisualise\n\n\nCode\nggplot(iris, aes(x = Species, fill = WidthClass)) +\n  geom_bar(position = \"fill\") +\n  theme_minimal() +\n  labs(y = \"Proportion\", title = \"Width Class Distribution by Species\") +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#chi-square-assumptions",
     "href": "nonparam.html#chi-square-assumptions",
     "title": "Non-Parametric Statistics",
     "section": "Chi-square Assumptions",
-    "text": "Chi-square Assumptions\n\nIndependence of observations → ✔ OK.\nExpected cell counts ≥ 5 in most cells.\n\n\n\nCode\nchisq.test(tab)$expected\n\n\n            \n               Narrow   Medium Wide\n  setosa     15.66667 29.33333    5\n  versicolor 15.66667 29.33333    5\n  virginica  15.66667 29.33333    5\n\n\nIf expected counts are too small → chi-square invalid. - Scan the table: if any expected cell count is &lt; 5, prefer Fisher’s Exact Test."
+    "text": "Chi-square Assumptions\n\nIndependence of observations → ✔ OK.\nExpected cell counts ≥ 5 in most cells.\n\n\n\nCode\nchisq.test(tab)$expected\n\n\n            \n               Narrow   Medium Wide\n  setosa     15.66667 29.33333    5\n  versicolor 15.66667 29.33333    5\n  virginica  15.66667 29.33333    5\n\n\nIf expected counts are too small → chi-square invalid. - Scan the table: if any expected cell count is &lt; 5, prefer Fisher’s Exact Test.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-style-categorical-test",
     "href": "nonparam.html#parametric-style-categorical-test",
     "title": "Non-Parametric Statistics",
     "section": "Parametric-style categorical test",
-    "text": "Parametric-style categorical test\n\n\nCode\nchisq.test(tab)\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 45.125, df = 4, p-value = 3.746e-09\n\n\n\nChi-square p-value tests association; warnings about small counts mean the test may be unreliable."
+    "text": "Parametric-style categorical test\n\n\nCode\nchisq.test(tab)\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 45.125, df = 4, p-value = 3.746e-09\n\n\n\nChi-square p-value tests association; warnings about small counts mean the test may be unreliable.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#non-parametric-alternative-when-assumptions-fail",
     "href": "nonparam.html#non-parametric-alternative-when-assumptions-fail",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative when assumptions fail",
-    "text": "Non-parametric alternative when assumptions fail\nFisher’s Exact Test\nWorks even with small expected cell counts.\n\n\nCode\nfisher.test(tab)\n\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  tab\np-value = 8.429e-11\nalternative hypothesis: two.sided\n\n\n\nFisher’s p-value is reliable even with small expected counts.\n\nExample output and interpretation (R)\n\n\nCode\nchisq_res &lt;- suppressWarnings(chisq.test(tab))  # warning if small counts\nfisher_res &lt;- fisher.test(tab)\n\nchisq_res\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 45.125, df = 4, p-value = 3.746e-09\n\n\nCode\nfisher_res\n\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  tab\np-value = 8.429e-11\nalternative hypothesis: two.sided\n\n\nCode\nchisq_expected &lt;- chisq_res$expected\n\nchisq_expected\n\n\n            \n               Narrow   Medium Wide\n  setosa     15.66667 29.33333    5\n  versicolor 15.66667 29.33333    5\n  virginica  15.66667 29.33333    5\n\n\n\nCheck expected counts; if any are &lt; 5, prefer Fisher’s result.\nInterpretation: “Species and width class show evidence of association.”"
+    "text": "Non-parametric alternative when assumptions fail\nFisher’s Exact Test\nWorks even with small expected cell counts.\n\n\nCode\nfisher.test(tab)\n\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  tab\np-value = 8.429e-11\nalternative hypothesis: two.sided\n\n\n\nFisher’s p-value is reliable even with small expected counts.\n\nExample output and interpretation (R)\n\n\nCode\nchisq_res &lt;- suppressWarnings(chisq.test(tab))  # warning if small counts\nfisher_res &lt;- fisher.test(tab)\n\nchisq_res\n\n\n\n    Pearson's Chi-squared test\n\ndata:  tab\nX-squared = 45.125, df = 4, p-value = 3.746e-09\n\n\nCode\nfisher_res\n\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  tab\np-value = 8.429e-11\nalternative hypothesis: two.sided\n\n\nCode\nchisq_expected &lt;- chisq_res$expected\n\nchisq_expected\n\n\n            \n               Narrow   Medium Wide\n  setosa     15.66667 29.33333    5\n  versicolor 15.66667 29.33333    5\n  virginica  15.66667 29.33333    5\n\n\n\nCheck expected counts; if any are &lt; 5, prefer Fisher’s result.\nInterpretation: “Species and width class show evidence of association.”",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#goal-3",
     "href": "nonparam.html#goal-3",
     "title": "Non-Parametric Statistics",
     "section": "Goal",
-    "text": "Goal\nCompare Petal.Length across all three species.\n\n\nCode\niris$Species &lt;- factor(iris$Species)\n\n\nVisualise\n\n\nCode\nggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.5) +\n  theme_minimal() +\n  ggtitle(\"Petal Length by Species (3 Groups)\")"
+    "text": "Goal\nCompare Petal.Length across all three species.\n\n\nCode\niris$Species &lt;- factor(iris$Species)\n\n\nVisualise\n\n\nCode\nggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +\n  geom_boxplot(alpha = 0.6,width=0.2) +\n  geom_jitter(width = 0.1, alpha = 0.5) +\n  theme_minimal() +\n  ggtitle(\"Petal Length by Species (3 Groups)\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#anova-assumptions",
     "href": "nonparam.html#anova-assumptions",
     "title": "Non-Parametric Statistics",
     "section": "ANOVA Assumptions",
-    "text": "ANOVA Assumptions\n\nIndependence → ✔ by design.\nNormality within each group\n\n\n\nCode\nby(iris$Petal.Length, iris$Species, shapiro.test)\n\n\niris$Species: setosa\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.95498, p-value = 0.05481\n\n------------------------------------------------------------ \niris$Species: versicolor\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.966, p-value = 0.1585\n\n------------------------------------------------------------ \niris$Species: virginica\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.96219, p-value = 0.1098\n\n\n\nIf some species have p &lt; 0.05, normality is doubtful for those groups.\n\n\nHomogeneity of variances (Levene)\n\n\n\nCode\nleveneTest(Petal.Length ~ Species, data = iris)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   2   19.48 3.129e-08 ***\n      147                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIf p &lt; 0.05, variances differ across species.\n\nIf either normality or variance equality fails → cannot trust ANOVA F-test."
+    "text": "ANOVA Assumptions\n\nIndependence → ✔ by design.\nNormality within each group\n\n\n\nCode\nby(iris$Petal.Length, iris$Species, shapiro.test)\n\n\niris$Species: setosa\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.95498, p-value = 0.05481\n\n------------------------------------------------------------ \niris$Species: versicolor\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.966, p-value = 0.1585\n\n------------------------------------------------------------ \niris$Species: virginica\n\n    Shapiro-Wilk normality test\n\ndata:  dd[x, ]\nW = 0.96219, p-value = 0.1098\n\n\n\nIf some species have p &lt; 0.05, normality is doubtful for those groups.\n\n\nHomogeneity of variances (Levene)\n\n\n\nCode\nleveneTest(Petal.Length ~ Species, data = iris)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   2   19.48 3.129e-08 ***\n      147                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIf p &lt; 0.05, variances differ across species.\n\nIf either normality or variance equality fails → cannot trust ANOVA F-test.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-anova",
     "href": "nonparam.html#parametric-anova",
     "title": "Non-Parametric Statistics",
     "section": "Parametric ANOVA",
-    "text": "Parametric ANOVA\n\n\nCode\nsummary(aov(Petal.Length ~ Species, data = iris))\n\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)    \nSpecies       2  437.1  218.55    1180 &lt;2e-16 ***\nResiduals   147   27.2    0.19                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIn the ANOVA table, check the row for Species: Pr(&gt;F) is the p-value for group differences."
+    "text": "Parametric ANOVA\n\n\nCode\nsummary(aov(Petal.Length ~ Species, data = iris))\n\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)    \nSpecies       2  437.1  218.55    1180 &lt;2e-16 ***\nResiduals   147   27.2    0.19                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nIn the ANOVA table, check the row for Species: Pr(&gt;F) is the p-value for group differences.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#non-parametric-alternative",
     "href": "nonparam.html#non-parametric-alternative",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative",
-    "text": "Non-parametric alternative\nKruskal–Wallis Test\n\n\nCode\nkruskal.test(Petal.Length ~ Species, data = iris)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Petal.Length by Species\nKruskal-Wallis chi-squared = 130.41, df = 2, p-value &lt; 2.2e-16\n\n\n\nKruskal–Wallis p-value tests whether at least one group tends to have higher ranks than the others.\n\nIf significant → perform post-hoc Dunn tests.\n\n\nCode\nif (!requireNamespace(\"FSA\", quietly = TRUE)) {\n  cat(\"Package 'FSA' not installed; skipping Dunn post-hoc tests. Install with install.packages('FSA').\\n\")\n} else {\n  library(FSA)\n  dunnTest(Petal.Length ~ Species, data = iris, method = \"bonferroni\")\n}\n\n\n              Comparison          Z      P.unadj        P.adj\n1    setosa - versicolor  -5.862997 4.545875e-09 1.363763e-08\n2     setosa - virginica -11.418385 3.384664e-30 1.015399e-29\n3 versicolor - virginica  -5.555388 2.769957e-08 8.309872e-08\n\n\n\nPost-hoc Dunn tests (when available) show which pairs differ; use adjusted p-values to report significant pairs. If skipped, you can still report the Kruskal–Wallis result and show group medians/IQRs.\n\nExample output and interpretation (R)\n\n\nCode\naov_res &lt;- aov(Petal.Length ~ Species, data = iris)\nkw_res  &lt;- kruskal.test(Petal.Length ~ Species, data = iris)\n\nsummary(aov_res)\n\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)    \nSpecies       2  437.1  218.55    1180 &lt;2e-16 ***\nResiduals   147   27.2    0.19                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nCode\nkw_res\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Petal.Length by Species\nKruskal-Wallis chi-squared = 130.41, df = 2, p-value &lt; 2.2e-16\n\n\nCode\n# Extract and print concise p-values for the slide\ns &lt;- summary(aov_res)[[1]]\naov_p &lt;- s[[\"Pr(&gt;F)\"]][1]\n\n\n\nInterpretation: With skew/outliers or non-normality, rely on Kruskal–Wallis. If significant, follow with pairwise comparisons (e.g., Dunn tests) and report which species differ."
+    "text": "Non-parametric alternative\nKruskal–Wallis Test\n\n\nCode\nkruskal.test(Petal.Length ~ Species, data = iris)\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Petal.Length by Species\nKruskal-Wallis chi-squared = 130.41, df = 2, p-value &lt; 2.2e-16\n\n\n\nKruskal–Wallis p-value tests whether at least one group tends to have higher ranks than the others.\n\nIf significant → perform post-hoc Dunn tests.\n\n\nCode\nif (!requireNamespace(\"FSA\", quietly = TRUE)) {\n  cat(\"Package 'FSA' not installed; skipping Dunn post-hoc tests. Install with install.packages('FSA').\\n\")\n} else {\n  library(FSA)\n  dunnTest(Petal.Length ~ Species, data = iris, method = \"bonferroni\")\n}\n\n\n              Comparison          Z      P.unadj        P.adj\n1    setosa - versicolor  -5.862997 4.545875e-09 1.363763e-08\n2     setosa - virginica -11.418385 3.384664e-30 1.015399e-29\n3 versicolor - virginica  -5.555388 2.769957e-08 8.309872e-08\n\n\n\nPost-hoc Dunn tests (when available) show which pairs differ; use adjusted p-values to report significant pairs. If skipped, you can still report the Kruskal–Wallis result and show group medians/IQRs.\n\nExample output and interpretation (R)\n\n\nCode\naov_res &lt;- aov(Petal.Length ~ Species, data = iris)\nkw_res  &lt;- kruskal.test(Petal.Length ~ Species, data = iris)\n\nsummary(aov_res)\n\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)    \nSpecies       2  437.1  218.55    1180 &lt;2e-16 ***\nResiduals   147   27.2    0.19                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nCode\nkw_res\n\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Petal.Length by Species\nKruskal-Wallis chi-squared = 130.41, df = 2, p-value &lt; 2.2e-16\n\n\nCode\n# Extract and print concise p-values for the slide\ns &lt;- summary(aov_res)[[1]]\naov_p &lt;- s[[\"Pr(&gt;F)\"]][1]\n\n\n\nInterpretation: With skew/outliers or non-normality, rely on Kruskal–Wallis. If significant, follow with pairwise comparisons (e.g., Dunn tests) and report which species differ.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#goal-4",
     "href": "nonparam.html#goal-4",
     "title": "Non-Parametric Statistics",
     "section": "Goal",
-    "text": "Goal\nAssess the relationship between Sepal.Length and Petal.Length.\nVisualise\n\n\nCode\nggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +\n  geom_point(alpha = 0.6, color = \"darkblue\") +\n  geom_smooth(method = \"loess\", color = \"red\", se = FALSE) +\n  theme_minimal() +\n  ggtitle(\"Sepal vs Petal Length\")"
+    "text": "Goal\nAssess the relationship between Sepal.Length and Petal.Length.\nVisualise\n\n\nCode\nggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +\n  geom_point(alpha = 0.6, color = \"darkblue\") +\n  geom_smooth(method = \"loess\", color = \"red\", se = FALSE) +\n  theme_minimal() +\n  ggtitle(\"Sepal vs Petal Length\")",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-correlation-pearson-assumptions",
     "href": "nonparam.html#parametric-correlation-pearson-assumptions",
     "title": "Non-Parametric Statistics",
     "section": "Parametric Correlation (Pearson) Assumptions",
-    "text": "Parametric Correlation (Pearson) Assumptions\n\nLinearity\n\nThe relationship should be a straight line.\n\nNormality\n\nBoth variables should be normally distributed.\n\n\n\n\nCode\nshapiro.test(iris$Sepal.Length)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris$Sepal.Length\nW = 0.97609, p-value = 0.01018\n\n\nCode\nshapiro.test(iris$Petal.Length)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris$Petal.Length\nW = 0.87627, p-value = 7.412e-10\n\n\n\nIf p &lt; 0.05, normality assumption is violated."
+    "text": "Parametric Correlation (Pearson) Assumptions\n\nLinearity\n\nThe relationship should be a straight line.\n\nNormality\n\nBoth variables should be normally distributed.\n\n\n\n\nCode\nshapiro.test(iris$Sepal.Length)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris$Sepal.Length\nW = 0.97609, p-value = 0.01018\n\n\nCode\nshapiro.test(iris$Petal.Length)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  iris$Petal.Length\nW = 0.87627, p-value = 7.412e-10\n\n\n\nIf p &lt; 0.05, normality assumption is violated.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#parametric-test-pearson",
     "href": "nonparam.html#parametric-test-pearson",
     "title": "Non-Parametric Statistics",
     "section": "Parametric test (Pearson)",
-    "text": "Parametric test (Pearson)\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nt = 21.646, df = 148, p-value &lt; 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.8270363 0.9055080\nsample estimates:\n      cor \n0.8717538 \n\n\n\nTests for linear correlation."
+    "text": "Parametric test (Pearson)\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nt = 21.646, df = 148, p-value &lt; 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.8270363 0.9055080\nsample estimates:\n      cor \n0.8717538 \n\n\n\nTests for linear correlation.",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "nonparam.html#non-parametric-alternative-if-assumptions-break-2",
     "href": "nonparam.html#non-parametric-alternative-if-assumptions-break-2",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative (if assumptions break)",
-    "text": "Non-parametric alternative (if assumptions break)\nSpearman’s Rank Correlation\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"spearman\")\n\n\n\n    Spearman's rank correlation rho\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nS = 66429, p-value &lt; 2.2e-16\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8818981 \n\n\n\nUses ranks; tests for monotonic relationship (doesn’t have to be a straight line, just consistently increasing or decreasing).\n\nKendall’s Tau\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"kendall\")\n\n\n\n    Kendall's rank correlation tau\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nz = 12.647, p-value &lt; 2.2e-16\nalternative hypothesis: true tau is not equal to 0\nsample estimates:\n      tau \n0.7185159 \n\n\n\nBetter for small samples or many ties.\nInterpretation: “There is a strong positive monotonic correlation between sepal length and petal length.”"
+    "text": "Non-parametric alternative (if assumptions break)\nSpearman’s Rank Correlation\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"spearman\")\n\n\n\n    Spearman's rank correlation rho\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nS = 66429, p-value &lt; 2.2e-16\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8818981 \n\n\n\nUses ranks; tests for monotonic relationship (doesn’t have to be a straight line, just consistently increasing or decreasing).\n\nKendall’s Tau\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"kendall\")\n\n\n\n    Kendall's rank correlation tau\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nz = 12.647, p-value &lt; 2.2e-16\nalternative hypothesis: true tau is not equal to 0\nsample estimates:\n      tau \n0.7185159 \n\n\n\nBetter for small samples or many ties.\nInterpretation: “There is a strong positive monotonic correlation between sepal length and petal length.”",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
   },
   {
     "objectID": "t-test.html",
