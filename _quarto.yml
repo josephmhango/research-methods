@@ -24,6 +24,7 @@ website:
           - fisher.qmd
           - anova.qmd
           - 1-way-anova.qmd
+          - nonparams.qmd
 format:
   html:
     highlight-style: a11y

@@ -1,0 +1,439 @@
+---
+title: "Non-Parametric Statistics"
+subtitle: "C5025HF"
+author: "Dr K.J. Mhango"
+css: scroll.css
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    toc: true
+    toc-depth: 3
+    incremental: false
+    code-line-numbers: false
+    chalkboard: true
+    code-fold: true
+    code-tools: true
+execute:
+  echo: true
+editor: visual
+---
+
+# Welcome
+
+## What You Will Learn Today
+- Parametric vs non-parametric intuition
+- Ranking logic and distribution-free ideas
+- Mann–Whitney, Wilcoxon, Kruskal–Wallis
+- Correlations: Spearman & Kendall
+- Exact tests (Fisher)
+
+
+# 1: Why Non‑Parametrics?
+
+## When parametric assumptions break
+- Non-normal data
+- Skewed distributions
+- Ordinal measurements
+- Heterogeneous variances
+- Small samples
+- Outliers
+
+## Ranking-based thinking: The "Race" Analogy
+Instead of looking at exact times (values), look at finishing positions (ranks).
+
+### The Intuition: Team A vs Team B (Independent)
+Imagine a race between two teams.
+
+- **Parametric (t-test):** Compares the **Average Time** of Team A vs Team B.
+  - If **one** runner in Team A takes 5 hours (outlier), Team A's *average* is ruined.
+  
+- **Non-Parametric (Mann-Whitney):** Compares the **Finishing Positions** (Ranks).
+  - **It combines everyone** (both teams) into one single lineup from 1st to last.
+  - Then it looks at where Team A falls vs Team B.
+  - If that slow runner takes 5 hours or 5 days, they are still just **"Last Place"**. The rank (last) is the same.
+
+### The Intuition: Before vs After (Paired)
+Imagine the **same runner** running twice (Race 1 vs Race 2).
+
+- **Parametric (Paired t-test):** Calculates the improvement (Time 1 - Time 2) for each runner, then averages them.
+  - One runner improving by 5 hours makes the *whole group* look vastly improved on average.
+
+- **Non-Parametric (Wilcoxon Signed-Rank):** 
+  - It calculates the change for each runner.
+  - **It ranks these changes by size** (ignoring direction). Small change = Rank 1, Huge change = Rank 100.
+  - Then it asks: **"Are the biggest ranks associated with getting faster or getting slower?"**
+  - If one runner improves by 5 hours, they get the highest rank, but they don't pull the *magnitude* of the sum to infinity. It caps the influence of the outlier.
+
+### Why this is useful
+- **Robust to Outliers:** Extreme values don't pull the results (unlike the mean).
+- **Skew doesn't matter:** We are testing the order, not the bell curve.
+- **Any units work:** cm, mm, log-transformed, or "Likert scales" — as long as you can say "A > B", you can rank.
+
+### What the tests actually ask
+- **Mann–Whitney (2 groups):** If I pick one random value from Group A and one from Group B, is A likely to be higher than B?
+- **Wilcoxon (Paired):** It looks at the *change* in each pair. Do the **big changes** tend to be increases or decreases?
+  - (It ranks the size of the changes, then checks if the positive ranks outweigh the negative ranks).
+- **Kruskal–Wallis (>2 groups):** Do some groups systematically rank higher than others?
+
+### What to report
+- **Descriptive stats:** Medians and Interquartile Ranges (IQR) for each group.
+- **Effect size / Direction:** Explain the *direction* of the difference in plain English.
+  - Instead of just "p < 0.05", say: "Species A tends to have higher values than Species B."
+  - Optional but good: "The probability that a random value from Group A exceeds Group B is approx X%."
+- **Visuals:** Always include a boxplot or jitter plot to show the spread and overlap.
+
+# 2: Choosing the Right Test
+
+## Cheat Sheet
+| Design | Parametric | Non-parametric |
+|--------|------------|----------------|
+| 2 independent groups | t-test | Mann–Whitney |
+| 2 paired measures | paired t | Wilcoxon signed-rank |
+| >2 independent groups | ANOVA | Kruskal–Wallis |
+| Correlation | Pearson | Spearman, Kendall |
+| 2×2 association | χ² test | Fisher exact |
+
+
+# 3: t-test Using *iris*
+
+## Goal
+Compare **Sepal.Length** between two species.
+We subset to two species for a t-test:
+```{r}
+iris2 <- subset(iris, Species %in% c("setosa", "versicolor"))
+```
+
+### Visualise
+```{r}
+#| fig-height: 3.5
+library(ggplot2)
+ggplot(iris2, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot(alpha = 0.6,width=0.2) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  theme_minimal() +
+  ggtitle("Sepal Length by Species")
+```
+
+## Parametric t-test Assumptions
+1. **Independence**
+   - Observations must be independent.
+   - In *iris*, each flower is a unique specimen → ✔ OK.
+
+2. **Normality of the outcome within each group**
+   - Test with Shapiro–Wilk.
+```{r}
+shapiro.test(iris2$Sepal.Length[iris2$Species=="setosa"])
+shapiro.test(iris2$Sepal.Length[iris2$Species=="versicolor"])
+```
+ - If p < 0.05 in either group, normality is questionable for that group.
+   - Also use Q–Q plot:
+```{r}
+library(ggplot2)
+ggplot(iris2, aes(sample = Sepal.Length)) + stat_qq() + stat_qq_line() + facet_wrap(~Species)
+```
+ - Points close to the straight line suggest normality; strong bends or S‑shapes suggest non‑normality.
+
+3. **Homogeneity of variances** (Levene test)
+```{r}
+library(car)
+leveneTest(Sepal.Length ~ Species, data = iris2)
+```
+ - If p < 0.05, variances differ notably between the two species.
+
+## What if assumptions fail?
+- Non-normality → use **Mann–Whitney (Wilcoxon rank-sum)**.
+- Heterogeneous variances → Welch t-test OR non-parametric.
+
+## Parametric test
+```{r}
+t.test(Sepal.Length ~ Species, data = iris2)
+```
+ - Look for the p-value and the confidence interval; with normality and similar variances, this is appropriate.
+
+## Non-parametric alternative (if assumptions break)
+```{r}
+wilcox.test(Sepal.Length ~ Species, data = iris2)
+```
+ - Use this when data are skewed or have outliers; the p-value tests if one group tends to have higher values.
+
+### Example output and interpretation (R)
+```{r}
+# Run both to compare
+
+tt_res <- t.test(Sepal.Length ~ Species, data = iris2)
+mw_res <- wilcox.test(Sepal.Length ~ Species, data = iris2, exact = FALSE)
+
+tt_res
+mw_res
+
+# Print key summaries for the slide
+cat("t-test p-value:", format.pval(tt_res$p.value, digits = 3), "\n")
+cat("Mann–Whitney p-value:", format.pval(mw_res$p.value, digits = 3), "\n")
+```
+
+- Interpret the p-values and medians.
+- Interpretation: If data look non-normal or have outliers, prefer Mann–Whitney. Report simply, e.g., “Species A tends to have longer sepals than Species B.”
+
+# Paired t-test Using *iris*
+
+## Goal
+Compare **Sepal.Length** vs **Sepal.Width** for the same flowers.
+Since these measurements come from the *same* flower, they are paired.
+
+### Visualise
+```{r}
+#| fig-height: 3.5
+# Reshape data to long format for plotting
+library(tidyr)
+iris_long <- pivot_longer(iris, 
+                          cols = c("Sepal.Length", "Sepal.Width"), 
+                          names_to = "Measure", 
+                          values_to = "Value")
+
+ggplot(iris_long, aes(x = Measure, y = Value, fill = Measure)) +
+  geom_boxplot(alpha = 0.6,width=0.2) +
+  geom_jitter(width = 0.1, alpha = 0.2) +
+  theme_minimal() +
+  ggtitle("Comparison of Paired Measurements")
+```
+
+
+## Paired t-test Assumptions
+1. **Independence of pairs**
+   - Each flower is independent of others → ✔ OK.
+
+2. **Normality of the differences**
+   - We care about the distribution of $(Sepal.Length - Sepal.Width)$.
+```{r}
+diffs <- iris$Sepal.Length - iris$Sepal.Width
+shapiro.test(diffs)
+```
+   - If p < 0.05, the differences are not normally distributed.
+   - Check visually:
+```{r}
+#| fig-height: 4
+ggplot(data.frame(diffs), aes(sample = diffs)) + stat_qq() + stat_qq_line() +
+  ggtitle("Q-Q Plot of Differences")
+```
+
+## Parametric paired test
+```{r}
+t.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)
+```
+ - Checks if the mean difference is non-zero.
+
+## Non-parametric alternative (if assumptions break)
+### Wilcoxon Signed-Rank Test
+```{r}
+wilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)
+```
+ - Tests if the median difference is non-zero (symmetric assumption) or if the distribution of differences is symmetric around zero.
+
+### Example output and interpretation (R)
+```{r}
+pair_t <- t.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)
+pair_w <- wilcox.test(iris$Sepal.Length, iris$Sepal.Width, paired = TRUE)
+
+pair_t
+
+
+pair_w
+
+```
+- Interpretation: “Sepal length is significantly different from sepal width within the same flowers.”
+
+# Chi-square Test Using *iris*
+
+## Goal
+Test independence between **Species** and a discretised version of **Sepal.Width**.
+We bin Sepal.Width:
+```{r}
+iris$WidthClass <- cut(iris$Sepal.Width, breaks = 3, labels = c("Narrow", "Medium", "Wide"))
+tab <- table(iris$Species, iris$WidthClass)
+```
+
+### Visualise
+```{r}
+#| fig-height: 3.5
+ggplot(iris, aes(x = Species, fill = WidthClass)) +
+  geom_bar(position = "fill") +
+  theme_minimal() +
+  labs(y = "Proportion", title = "Width Class Distribution by Species") +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+## Chi-square Assumptions
+1. **Independence of observations** → ✔ OK.
+2. **Expected cell counts ≥ 5** in most cells.
+```{r}
+chisq.test(tab)$expected
+```
+If expected counts are too small → chi-square invalid.
+ - Scan the table: if any expected cell count is < 5, prefer Fisher’s Exact Test.
+
+## Parametric-style categorical test
+```{r}
+chisq.test(tab)
+```
+ - Chi-square p-value tests association; warnings about small counts mean the test may be unreliable.
+
+## Non-parametric alternative when assumptions fail
+### Fisher's Exact Test
+Works even with small expected cell counts.
+```{r}
+fisher.test(tab)
+```
+ - Fisher’s p-value is reliable even with small expected counts.
+
+### Example output and interpretation (R)
+```{r}
+chisq_res <- suppressWarnings(chisq.test(tab))  # warning if small counts
+fisher_res <- fisher.test(tab)
+
+chisq_res
+fisher_res
+
+chisq_expected <- chisq_res$expected
+
+chisq_expected
+
+```
+
+- Check expected counts; if any are < 5, prefer Fisher’s result.
+- Interpretation: “Species and width class show evidence of association.”
+
+# ANOVA Using *iris*
+
+## Goal
+Compare **Petal.Length** across all three species.
+```{r}
+iris$Species <- factor(iris$Species)
+```
+
+### Visualise
+```{r}
+#| fig-height: 3.5
+ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot(alpha = 0.6,width=0.2) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  theme_minimal() +
+  ggtitle("Petal Length by Species (3 Groups)")
+```
+
+## ANOVA Assumptions
+1. **Independence** → ✔ by design.
+2. **Normality within each group**
+```{r}
+by(iris$Petal.Length, iris$Species, shapiro.test)
+```
+ - If some species have p < 0.05, normality is doubtful for those groups.
+3. **Homogeneity of variances** (Levene)
+```{r}
+leveneTest(Petal.Length ~ Species, data = iris)
+```
+ - If p < 0.05, variances differ across species.
+
+If either normality or variance equality fails → cannot trust ANOVA F-test.
+
+## Parametric ANOVA
+```{r}
+summary(aov(Petal.Length ~ Species, data = iris))
+```
+ - In the ANOVA table, check the row for Species: Pr(>F) is the p-value for group differences.
+
+## Non-parametric alternative
+### Kruskal–Wallis Test
+```{r}
+kruskal.test(Petal.Length ~ Species, data = iris)
+```
+ - Kruskal–Wallis p-value tests whether at least one group tends to have higher ranks than the others.
+
+If significant → perform post-hoc Dunn tests.
+```{r}
+if (!requireNamespace("FSA", quietly = TRUE)) {
+  cat("Package 'FSA' not installed; skipping Dunn post-hoc tests. Install with install.packages('FSA').\n")
+} else {
+  library(FSA)
+  dunnTest(Petal.Length ~ Species, data = iris, method = "bonferroni")
+}
+```
+ - Post-hoc Dunn tests (when available) show which pairs differ; use adjusted p-values to report significant pairs. If skipped, you can still report the Kruskal–Wallis result and show group medians/IQRs.
+
+### Example output and interpretation (R)
+```{r}
+aov_res <- aov(Petal.Length ~ Species, data = iris)
+kw_res  <- kruskal.test(Petal.Length ~ Species, data = iris)
+
+summary(aov_res)
+kw_res
+
+# Extract and print concise p-values for the slide
+s <- summary(aov_res)[[1]]
+aov_p <- s[["Pr(>F)"]][1]
+
+```
+
+- Interpretation: With skew/outliers or non-normality, rely on Kruskal–Wallis. If significant, follow with pairwise comparisons (e.g., Dunn tests) and report which species differ.
+
+# Correlation Using *iris*
+
+## Goal
+Assess the relationship between **Sepal.Length** and **Petal.Length**.
+
+### Visualise
+```{r}
+#| fig-height: 3.5
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point(alpha = 0.6, color = "darkblue") +
+  geom_smooth(method = "loess", color = "red", se = FALSE) +
+  theme_minimal() +
+  ggtitle("Sepal vs Petal Length")
+```
+
+
+## Parametric Correlation (Pearson) Assumptions
+1. **Linearity**
+   - The relationship should be a straight line.
+2. **Normality**
+   - Both variables should be normally distributed.
+```{r}
+shapiro.test(iris$Sepal.Length)
+shapiro.test(iris$Petal.Length)
+```
+   - If p < 0.05, normality assumption is violated.
+
+## Parametric test (Pearson)
+```{r}
+cor.test(iris$Sepal.Length, iris$Petal.Length, method = "pearson")
+```
+ - Tests for linear correlation.
+
+## Non-parametric alternative (if assumptions break)
+### Spearman's Rank Correlation
+```{r}
+cor.test(iris$Sepal.Length, iris$Petal.Length, method = "spearman")
+```
+ - Uses ranks; tests for *monotonic* relationship (doesn't have to be a straight line, just consistently increasing or decreasing).
+
+### Kendall's Tau
+```{r}
+cor.test(iris$Sepal.Length, iris$Petal.Length, method = "kendall")
+```
+ - Better for small samples or many ties.
+
+
+- Interpretation: "There is a strong positive monotonic correlation between sepal length and petal length."
+
+
+# Summary of When to Use Non-Parametric Methods 
+
+
+### Use a non-parametric test when:
+
+- Data are **clearly non-normal** (Shapiro–Wilk fails; Q–Q plots bend strongly).
+- **Variances differ strongly** across groups (Levene fails).
+- Data are **ordinal** (ranks, Likert scores).
+- There are **outliers** that distort means.
+- Sample size is **small**, making CLT unreliable.
+- Group distributions have **different shapes**, not just shifted means.
