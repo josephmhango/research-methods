@@ -2184,7 +2184,18 @@
     "href": "nonparam.html#non-parametric-alternative-if-assumptions-break-2",
     "title": "Non-Parametric Statistics",
     "section": "Non-parametric alternative (if assumptions break)",
-    "text": "Non-parametric alternative (if assumptions break)\nSpearman’s Rank Correlation\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"spearman\")\n\n\n\n    Spearman's rank correlation rho\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nS = 66429, p-value &lt; 2.2e-16\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8818981 \n\n\n\nUses ranks; tests for monotonic relationship (doesn’t have to be a straight line, just consistently increasing or decreasing).\n\nKendall’s Tau\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"kendall\")\n\n\n\n    Kendall's rank correlation tau\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nz = 12.647, p-value &lt; 2.2e-16\nalternative hypothesis: true tau is not equal to 0\nsample estimates:\n      tau \n0.7185159 \n\n\n\nBetter for small samples or many ties.\nInterpretation: “There is a strong positive monotonic correlation between sepal length and petal length.”\n\nSummary: Use a non-parametric test when:\n\nData are clearly non-normal (Shapiro–Wilk fails; Q–Q plots bend strongly).\nVariances differ strongly across groups (Levene fails).\nData are ordinal (ranks, Likert scores).\nThere are outliers that distort means.\nSample size is small, making CLT unreliable.\nGroup distributions have different shapes, not just shifted means.",
+    "text": "Non-parametric alternative (if assumptions break)\nSpearman’s Rank Correlation\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"spearman\")\n\n\n\n    Spearman's rank correlation rho\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nS = 66429, p-value &lt; 2.2e-16\nalternative hypothesis: true rho is not equal to 0\nsample estimates:\n      rho \n0.8818981 \n\n\n\nUses ranks; tests for monotonic relationship (doesn’t have to be a straight line, just consistently increasing or decreasing).\n\nKendall’s Tau\n\n\nCode\ncor.test(iris$Sepal.Length, iris$Petal.Length, method = \"kendall\")\n\n\n\n    Kendall's rank correlation tau\n\ndata:  iris$Sepal.Length and iris$Petal.Length\nz = 12.647, p-value &lt; 2.2e-16\nalternative hypothesis: true tau is not equal to 0\nsample estimates:\n      tau \n0.7185159 \n\n\n\nBetter for small samples or many ties.\nInterpretation: “There is a strong positive monotonic correlation between sepal length and petal length.”",
+    "crumbs": [
+      "Sessions",
+      "Non-Parametric Statistics"
+    ]
+  },
+  {
+    "objectID": "nonparam.html#summary-use-a-non-parametric-test-when",
+    "href": "nonparam.html#summary-use-a-non-parametric-test-when",
+    "title": "Non-Parametric Statistics",
+    "section": "Summary: Use a non-parametric test when:",
+    "text": "Summary: Use a non-parametric test when:\n\nData are clearly non-normal (Shapiro–Wilk fails; Q–Q plots bend strongly).\nVariances differ strongly across groups (Levene fails).\nData are ordinal (ranks, Likert scores).\nThere are outliers that distort means.\nSample size is small, making CLT unreliable.\nGroup distributions have different shapes, not just shifted means.",
     "crumbs": [
       "Sessions",
       "Non-Parametric Statistics"

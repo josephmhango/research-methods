@@ -428,7 +428,7 @@ cor.test(iris$Sepal.Length, iris$Petal.Length, method = "kendall")
 
 
 
-### Summary: Use a non-parametric test when:
+## Summary: Use a non-parametric test when:
 
 - Data are **clearly non-normal** (Shapiro–Wilk fails; Q–Q plots bend strongly).
 - **Variances differ strongly** across groups (Levene fails).
