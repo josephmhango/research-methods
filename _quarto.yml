@@ -25,6 +25,8 @@ website:
           - anova.qmd
           - 1-way-anova.qmd
           - nonparam.qmd
+          - sampling.qmd
+          - samplingtut.qmd
 format:
   html:
     highlight-style: a11y

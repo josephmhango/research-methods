@@ -1,0 +1,537 @@
+---
+title: "Spatial Sampling in R"
+subtitle: "Simple Random, Stratified, and Cluster Designs"
+author: "Dr K.J. Mhango"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| label: setup
+#| include: true
+
+# Core packages
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(tidyr)
+
+set.seed(1234)
+```
+
+# 1. Aim of this tutorial
+
+In this 2-hour, hands-on tutorial you will learn how to:
+
+- Start from a **single (monolithic) polygon** representing your study area (e.g. a field, farm, or region) in GeoJSON format.
+
+- Create a **regular grid** over this polygon using `sf`.
+
+- Use the grid as a **sampling frame**.
+
+- Implement **simple random sampling**, **stratified sampling**, and **cluster sampling**.
+
+- Visualise the results.
+
+# 2. Study area: loading the monolithic GeoJSON polygon
+
+We assume you have a file named **starter.geojson**.
+To load our study area polygon, we use the [`sf`](https://r-spatial.github.io/sf/) package, which is the standard for handling spatial vector data in R. The function `st_read()` is used to read the GeoJSON file (`starter.geojson`) into R as an `sf` object. This allows us to work with the polygon using other spatial functions and operations.
+
+We then use `st_transform()` to reproject the polygon to a projected coordinate reference system (CRS), specifically **EPSG:3857** (Web Mercator). This is important because many spatial operations (such as creating grids or measuring area/distance) require coordinates in metres (projected), not degrees (geographic coordinates like WGS84/EPSG:4326). Projected CRS ensures accurate units for spatial sampling and visualisation.
+
+The object is then plotted using the `ggplot2` package, leveraging its `geom_sf()` function which is designed for simple plotting of spatial features stored as `sf` objects. This produces a clean visualisation of the study area polygon.
+
+**Summary of Packages and Functions:**
+
+- `sf::st_read()` loads the GeoJSON polygon into R as an `sf` object.
+
+- `sf::st_transform()` projects the geometry to a CRS in metres (for spatial operations).
+
+- `ggplot2::ggplot()` with `geom_sf()` visualises the spatial object.
+
+This workflow establishes a ready-to-use, projected (`sf`) version of our study area for further spatial sampling steps.
+
+```{r load-study-area}
+#| label: load-study-area
+#| fig-cap: "Study area polygon."
+
+study_area <- st_read("starter.geojson") |>
+  st_transform(3857)  # Transform to projected CRS if needed
+
+study_area
+```
+
+```{r plot-study-area}
+#| label: plot-study-area
+#| fig-cap: "Study area polygon."
+
+ggplot() +
+  geom_sf(data = study_area, fill = NA, colour = "black", linewidth = 1) +
+  ggtitle("Study Area Polygon") +
+  theme_minimal()
+```
+
+# 3. Creating a regular grid over the polygon
+To perform spatial sampling, we need a set of distinct, spatially-defined *sampling units* within our study area. Rather than randomly picking arbitrary points, it's much more structured and reproducible to overlay a **regular grid** of cells (often squares) over the polygon. Each cell then represents a possible sampling unit.
+
+**Why create a grid?**
+
+- **Sampling Frame**: The grid provides a *sampling frame* of discrete, countable units, ensuring every part of the study area has a clear chance to be included in the sample.
+
+- **Spatial Representation**: It helps translate abstract sampling concepts (like "Simple Random Sample") into concrete spatial terms—cells are equivalent to population members in survey sampling.
+
+- **Versatility**: The grid supports stratified, cluster, and systematic sampling, and is easy to adapt for spatial analyses or visualisation.
+
+- **Geometric Compatibility**: Regular cell shapes (squares) simplify measurement, distance, coverage checks, and stratification.
+
+Without a grid (i.e., just sampling random points), it is difficult to control for spatial distribution, equal-area representation, or to implement more advanced sampling strategies. The grid is a foundation for *all downstream steps*—it allows us to choose sample cells (or their centroids), visualise inclusion, and later allocate samples to specific locations, all within a reproducible framework.
+
+```{r make-grid}
+#| label: make-grid
+#| fig-cap: "Regular grid covering the study area."
+
+cell_size <- 25
+
+grid_raw <- st_make_grid(
+  study_area,
+  cellsize = cell_size,
+  square   = TRUE
+)
+
+grid_sf <- st_sf(cell_id = 1:length(grid_raw), geometry = grid_raw) |>
+  st_intersection(study_area)
+
+grid_sf
+```
+
+```{r plot-grid}
+#| label: plot-grid
+#| fig-cap: "Grid cells intersecting the study area."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey50") +
+  geom_sf(data = study_area, fill = NA, colour = "black", linewidth = 1) +
+  ggtitle("Grid Over Study Area") +
+  theme_minimal()
+```
+
+## 3.1 Creating centroids
+**Why do we create centroids if we already have a grid?**
+
+While the grid defines *cells* (the spatial sampling units), centroids provide a simple, representative *point* within each cell. There are several reasons why working with centroids is often preferred in practice:
+
+- **Simplicity**: Centroids reduce each (sometimes complex) polygonal cell to just a single (x, y) coordinate, making calculations, visualisation, and point-based sampling straightforward.
+
+- **Homogeneity Assumption**: In most grid sampling applications, we assume the conditions inside each cell are sufficiently homogeneous for the centroid to represent the whole cell ("quadrat" approach). This means any measurement at the centroid is considered "typical" of the cell.
+
+- **Statistical Compatibility**: Many statistical and geostatistical methods require point data or simpler spatial relationships, which centroids provide.
+
+- **Sampling Practicality**: It's operationally easier to visit or target a coordinate (the centroid) than a whole area, especially in field or remote sensing sampling.
+
+**Composite sampling in every quadrat (cell)**
+
+However, scientists often recommend **composite sampling** within each quadrat: Instead of measuring only at the centroid, you take multiple (sub-)samples at various spots within the cell and average (or pool) their values. This makes the sample more representative of the cell:
+
+- **Reduces micro-scale bias**: A single point might miss local heterogeneity, while a composite (e.g., averaging 3+ sub-samples per cell) reflects cell-wide conditions.
+
+- **Improved inference**: Composite samples ensure the grid-cell truly represents an area, not just the conditions at its centre.
+
+In summary: Centroids are practical and serve as a default representative location for each cell, but composite sampling within quadrats is often advised for a more robust, area-based spatial sample.
+
+```{r centroids}
+#| label: centroids
+#| fig-cap: "Grid centroids within the study area."
+
+grid_centroids <- st_centroid(grid_sf)
+
+grid_centroids <- grid_centroids |>
+  mutate(
+    x = st_coordinates(geometry)[, 1],
+    y = st_coordinates(geometry)[, 2]
+  )
+
+grid_centroids
+```
+
+```{r plot-centroids}
+#| label: plot-centroids
+#| fig-cap: "Grid centroids representing sampling units."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey80") +
+  geom_sf(data = grid_centroids, colour = "red", size = 2) +
+  ggtitle("Grid Centroids") +
+  theme_minimal()
+```
+
+# 4. Simple random sampling
+## 4. Simple Random Sampling (SRS)
+
+Simple Random Sampling (SRS) is the simplest probability-based sampling design. In SRS, each possible sampling unit (here, each grid cell or its centroid) has an **equal probability** of being selected. There is no stratification, clustering, or any imposed structure — cells are chosen entirely at random.
+
+### Key features of SRS:
+
+- **Equal Probability:** Every cell in the grid frame has the same chance of inclusion.
+
+- **Independence:** The selection of one cell does *not* affect the selection of any other; there are no restrictions.
+
+- **Simplicity:** SRS is easy to implement and analyse statistically, with many estimators and confidence intervals relying on its properties.
+
+### How it's used:
+
+- You specify a desired sample size, say, \\( n = 10 \\).
+
+- Randomly select \\( n \\) cells (or centroids) from the full set of available grid cells.
+
+- Each selected cell forms part of your sample for field measurement or further study.
+
+**When is SRS appropriate?**
+
+- When the sampling frame is homogeneous, or when there is no strong motivation to incorporate additional structure (like stratification or clustering).
+
+- For pilot studies or when simplicity and unbiasedness are the priorities.
+
+**Limitations:**
+
+- If the study area has strong environmental gradients or is heterogeneous, SRS may result in poor representation of certain sub-regions.
+
+- May lead to spatially "clumped" samples purely by chance (less spatial coverage).
+
+The next code block will implement SRS on the centroids within the study area grid.
+
+```{r simple-random-sample}
+#| label: simple-random-sample
+#| fig-cap: "Simple random sample."
+
+n_srs <- 10
+
+srs_sample <- grid_centroids |>
+  st_drop_geometry() |>
+  sample_n(n_srs) |>
+  pull(cell_id)
+
+srs_cells <- grid_sf |>
+  filter(cell_id %in% srs_sample)
+
+srs_points <- grid_centroids |>
+  filter(cell_id %in% srs_sample)
+
+srs_cells
+```
+
+```{r plot-srs}
+#| label: plot-srs
+#| fig-cap: "Simple random sample of cells and centroids."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey90") +
+  geom_sf(data = srs_cells, fill = NA, colour = "blue") +
+  geom_sf(data = srs_points, colour = "blue", size = 2) +
+  ggtitle("Simple Random Sample") +
+  theme_minimal()
+```
+
+# 5. Stratified sampling
+## What is stratified sampling?
+
+Stratified sampling is a probability-based sampling technique in which the entire population (here, the area to be sampled) is divided into **non-overlapping subgroups**, called **strata**, based on a chosen characteristic (stratification variable). Each stratum is **internally homogeneous** (similar within), but **distinct from other strata** (different between strata). The key idea is to ensure that the sample **represents all parts of the population**, especially subgroups that may otherwise be under- (or over-) represented if using simple random sampling.
+
+In spatial studies, common strata are based on geography (e.g., north/south, ecological zones, land cover types, altitude bands), administrative units, or other relevant variables. Stratified sampling is especially valuable if the variable of interest is expected to **vary systematically across strata**.
+
+**How does stratified sampling work?**
+
+1. **Define strata:** Partition your population (here: grid cells covering the study area) into subsets. In our example, we use a median split on the 'y' coordinate, dividing the area into "North" and "South" strata.
+
+2. **Decide sample size per stratum:** This can be *proportional* (sample size per stratum proportional to stratum size), or *equal* allocation, or other allocation rules. Proportional allocation is very common.
+
+3. **Random sample within strata:** For each stratum, select the desired number of units randomly.
+
+**Advantages:**
+
+- Ensures all sub-regions are represented.
+
+- Can yield more precise (lower-variance) estimates if strata are meaningful.
+
+- Reduces risk of missing rare or important sub-populations.
+
+**Limitations:**
+
+- Requires information to define suitable strata.
+
+- More complex to design and implement than SRS.
+
+---
+
+## How is stratified sampling implemented here?
+
+In the code below, stratified sampling is implemented in a stepwise fashion:
+
+1. **Create strata:**  
+   The code first calculates the median 'y' coordinate (i.e., latitude-like position) of grid centroids, then assigns each centroid to "North" (if `y >= median`) or "South" (otherwise). This creates *North/South strata* that split the area horizontally.
+
+2. **Count grid cells per stratum:**  
+   The number of grid centroids in each stratum is counted. These counts determine the proportional allocation for sampling.
+
+3. **Determine proportional sample sizes:**  
+   Given a desired *total* sample size (e.g., `n_total <- 20`), each stratum is allocated a sample size proportional to its share of the total grid (rounded). For example, if "North" contains 44% of all grid cells, it receives 44% of the sample.
+
+4. **Draw stratified random samples:**  
+   For each stratum, the code randomly selects the corresponding number of units (using `sample_n()`), ensuring every stratum is represented.
+
+This ensures that sampling is geographically balanced (here, by north/south position), and that every sub-region gets sampled fairly relative to its size.
+
+**In summary:**  
+Stratified sampling divides the sampling frame according to a chosen characteristic, then randomly samples *within* each stratum, with allocation (how many per stratum) according to the stratum's relative size. The implementation here is spatially intuitive and ensures both "North" and "South" gets covered.
+
+
+## 5.1 Creating strata
+
+```{r create-strata}
+#| label: create-strata
+
+y_median <- median(grid_centroids$y)
+
+grid_centroids <- grid_centroids |>
+  mutate(
+    stratum_ns = ifelse(y >= y_median, "North", "South")
+  )
+
+grid_centroids |>
+  st_drop_geometry() |>
+  count(stratum_ns)
+```
+
+```{r plot-strata}
+#| label: plot-strata
+#| fig-cap: "North/South strata."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey90") +
+  geom_sf(data = grid_centroids, aes(colour = stratum_ns), size = 2) +
+  ggtitle("Strata: North vs South") +
+  theme_minimal()
+```
+
+## 5.2 Proportional stratified sampling
+
+```{r stratified-sample}
+#| label: stratified-sample
+
+n_total <- 20
+
+stratum_counts <- grid_centroids |>
+  st_drop_geometry() |>
+  count(stratum_ns) |>
+  mutate(prop = n / sum(n)) |>
+  mutate(n_stratum = round(prop * n_total))
+
+stratum_counts
+```
+
+```{r draw-stratified-sample}
+#| label: draw-stratified-sample
+
+strat_sample_ids <- grid_centroids |>
+  st_drop_geometry() |>
+  left_join(stratum_counts, by = "stratum_ns") |>
+  group_by(stratum_ns) |>
+  group_modify(~ slice_sample(.x, n = .x$n_stratum[1])) |>
+  pull(cell_id)
+
+strat_cells <- grid_sf |>
+  filter(cell_id %in% strat_sample_ids)
+
+strat_points <- grid_centroids |>
+  filter(cell_id %in% strat_sample_ids)
+
+strat_cells
+```
+
+```{r plot-stratified}
+#| label: plot-stratified
+#| fig-cap: "Stratified sample."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey90") +
+  geom_sf(data = strat_cells, fill = NA, colour = "darkgreen") +
+  geom_sf(data = strat_points, aes(colour = stratum_ns), size = 2) +
+  ggtitle("Stratified Sample") +
+  theme_minimal()
+```
+
+# 6. Cluster sampling
+Cluster sampling is a technique used in survey sampling where the population is divided into groups—called clusters—that are each intended to be “mini-populations” representing the population as a whole. Instead of sampling individuals directly from the full population, whole clusters are randomly selected, and then all (or a sample of) units within those clusters are surveyed. This approach is particularly useful when:
+
+- The population is large and geographically dispersed,
+
+- Collecting a simple random sample would be costly or logistically complex,
+
+- Natural groupings already exist (e.g., schools, villages, spatial grid regions).
+
+**Key features of cluster sampling:**
+
+- **Clusters are ideally heterogeneous:** Each cluster should be as representative as possible of the overall population. If clusters differ greatly, cluster sampling can increase sampling error.
+
+- **Sampling happens in stages:** First, a subset of clusters is selected at random. Then, data are collected from all or a sample of units within those clusters.
+
+- **Design effects:** Estimates from cluster samples need to take clustering into account during statistical analysis, as individuals within the same cluster are often more similar to each other.
+
+**How is cluster sampling implemented here?**
+
+In this example, the spatial grid is first divided into clusters based on cell locations. We:
+
+1. **Assign cluster IDs:** Grid cells are grouped together into clusters by location (see code in the `create-clusters` chunk).
+
+2. **Summarise clusters:** The number of cells in each cluster is counted.
+
+3. **Randomly select clusters:** A fixed number of clusters are chosen at random (see the `cluster-sampling` chunk).
+
+4. **Sample within clusters:** For each selected cluster, a specified number of cells are drawn (see the following code chunk).
+
+5. **Visualise the sample:** On a map, you can see which clusters (and cells within clusters) were selected.
+
+This approach reduces costs by focusing effort in a limited number of locations while still allowing for statistical inference, provided proper analysis methods are used to account for the clustering.
+
+
+## 6.1 Creating clusters
+
+```{r create-clusters}
+#| label: create-clusters
+#| fig-cap: "Cluster assignment."
+
+cluster_size <- cell_size * 2
+
+grid_centroids <- grid_centroids |>
+  mutate(
+    cluster_x = floor((x - min(x)) / cluster_size),
+    cluster_y = floor((y - min(y)) / cluster_size),
+    cluster_id = paste(cluster_x, cluster_y, sep = "_")
+  )
+
+cluster_summary <- grid_centroids |>
+  st_drop_geometry() |>
+  count(cluster_id, sort = TRUE)
+
+cluster_summary
+```
+
+```{r plot-clusters}
+#| label: plot-clusters
+#| fig-cap: "Clusters of grid cells."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey80") +
+  geom_sf(data = grid_centroids, aes(colour = cluster_id), size = 2) +
+  ggtitle("Clusters") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## 6.2 Sampling clusters
+
+```{r cluster-sampling}
+#| label: cluster-sampling
+
+n_clusters_to_sample <- 3
+n_cells_per_cluster  <- 3
+
+clusters_to_sample <- cluster_summary |>
+  slice_sample(n = n_clusters_to_sample) |>
+  pull(cluster_id)
+
+clusters_to_sample
+```
+
+```{r sample-within-clusters}
+#| label: sample-within-clusters
+
+cluster_sample_ids <- grid_centroids |>
+  st_drop_geometry() |>
+  filter(cluster_id %in% clusters_to_sample) |>
+  group_by(cluster_id) |>
+  slice_sample(n = n_cells_per_cluster) |>
+  pull(cell_id)
+
+cluster_cells <- grid_sf |>
+  filter(cell_id %in% cluster_sample_ids)
+
+cluster_points <- grid_centroids |>
+  filter(cell_id %in% cluster_sample_ids)
+
+cluster_cells
+```
+
+```{r plot-cluster-sample}
+#| label: plot-cluster-sample
+#| fig-cap: "Cluster sample."
+
+all_cells_in_sampled_clusters <- grid_centroids |>
+  st_drop_geometry() |>
+  filter(cluster_id %in% clusters_to_sample) |>
+  pull(cell_id)
+
+clusters_all_cells <- grid_sf |>
+  filter(cell_id %in% all_cells_in_sampled_clusters)
+
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey90") +
+  geom_sf(data = clusters_all_cells, fill = NA, colour = "orange") +
+  geom_sf(data = cluster_cells, fill = NA, colour = "red") +
+  geom_sf(data = cluster_points, colour = "red", size = 2) +
+  ggtitle("Cluster Sampling") +
+  theme_minimal()
+```
+
+# 7. Generating random points within sampled cells
+
+```{r random-point-in-cell}
+#| label: random-point-in-cell
+
+random_point_in_polygon <- function(poly, n = 1) {
+  st_sample(poly, size = n, type = "random")
+}
+
+srs_random_points_geom <- map(
+  st_geometry(srs_cells),
+  ~ random_point_in_polygon(.x, n = 1)[[1]]
+) |>
+  st_sfc(crs = st_crs(study_area))
+
+srs_random_points <- st_sf(
+  cell_id = srs_cells$cell_id,
+  geometry = srs_random_points_geom
+)
+
+srs_random_points
+```
+
+```{r plot-srs-random-points}
+#| label: plot-srs-random-points
+#| fig-cap: "Random points in SRS cells."
+
+ggplot() +
+  geom_sf(data = grid_sf, fill = NA, colour = "grey90") +
+  geom_sf(data = srs_cells, fill = NA, colour = "blue") +
+  geom_sf(data = srs_random_points, colour = "black", size = 2) +
+  ggtitle("Random Points within Sampled Cells") +
+  theme_minimal()
+```
+
+# 8. Exercises
+
+1. Change `cell_size` and re-run the grid creation.
+2. Create three strata instead of two.
+3. Adjust `cluster_size` and compare.
+4. Generate two random points per sampled cell.
+5. Export results using `st_write()`. 
