@@ -781,6 +781,391 @@
     ]
   },
   {
+    "objectID": "regression.html#what-were-doing-today",
+    "href": "regression.html#what-were-doing-today",
+    "title": "Linear Regression",
+    "section": "What we’re doing today",
+    "text": "What we’re doing today\nBy the end, you should be able to:\n\nExplain what a linear model is (and what “linear” actually means)\nFit and interpret a simple linear regression in R (lm())\nDistinguish prediction vs explanation (and the traps in each)\nCheck assumptions with diagnostic plots\nReport results in a professional, reproducible way\nRecognise when you need extensions: multiple predictors, interactions, blocks, random intercepts\n\n\nSuggested pacing: - Part A: what a model is + regression idea - Part B: fit, interpret, confidence intervals, R², p-values - Break: quick stretch - Part C: diagnostics + fixes - Part D: extensions + reporting + mini-assessment",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#setup-r",
+    "href": "regression.html#setup-r",
+    "title": "Linear Regression",
+    "section": "Setup (R)",
+    "text": "Setup (R)\nWe’ll use a small, friendly dataset.\n\nIf you prefer: swap in mtcars or your own agronomy dataset. We use penguins because it has clear relationships and is widely used in teaching.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#definition-statistical-model",
+    "href": "regression.html#definition-statistical-model",
+    "title": "Linear Regression",
+    "section": "Definition: statistical model",
+    "text": "Definition: statistical model\nA statistical model is a simplified mathematical description of a real system.\n\nIt focuses on relationships between variables (and uncertainty),\nnot just drawing a curve through points.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#linear-vs-non-linear-intuition",
+    "href": "regression.html#linear-vs-non-linear-intuition",
+    "title": "Linear Regression",
+    "section": "Linear vs non-linear (intuition)",
+    "text": "Linear vs non-linear (intuition)\nA relationship can be:\n\nlinear additive: a fixed change in x gives a fixed change in expected y\nnon-linear: diminishing returns, saturation, thresholds, etc.\n\n\nUse this to motivate “linear regression is a tool, not the truth”.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#linear-vs-non-linear",
+    "href": "regression.html#linear-vs-non-linear",
+    "title": "Linear Regression",
+    "section": "Linear vs non-linear",
+    "text": "Linear vs non-linear",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#linear-means-linear-in-the-parameters",
+    "href": "regression.html#linear-means-linear-in-the-parameters",
+    "title": "Linear Regression",
+    "section": "“Linear” means linear in the parameters",
+    "text": "“Linear” means linear in the parameters\nA linear model can include transformed predictors:\n\n✅ y = β0 + β1 x + β2 x^2 + ε is linear in β’s\n✅ y = β0 + β1 log(x) + ε is linear in β’s\n❌ y = β0 + exp(β1 x) + ε is not linear in β’s",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#the-linear-model-in-matrix-form",
+    "href": "regression.html#the-linear-model-in-matrix-form",
+    "title": "Linear Regression",
+    "section": "The linear model in matrix form",
+    "text": "The linear model in matrix form\n\\[\n\\mathbf{y} = \\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\varepsilon}\n\\]\n\ny: response/outcome\nX: design matrix (predictors encoded as columns)\nβ: coefficients/parameters\nε: residual error (unexplained part)",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#what-regression-is-for",
+    "href": "regression.html#what-regression-is-for",
+    "title": "Linear Regression",
+    "section": "What regression is for",
+    "text": "What regression is for\nSimple regression often answers at least one of:\n\nPrediction: estimate y at new x\nExplanation: quantify change in y per unit x\nVariance accounting: how much variation in y is associated with x\nInference: hypothesis tests and confidence intervals",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#regression-to-the-mean-intuition",
+    "href": "regression.html#regression-to-the-mean-intuition",
+    "title": "Linear Regression",
+    "section": "Regression to the mean (intuition)",
+    "text": "Regression to the mean (intuition)\nRegression to the mean happens when you pick people (or things) because they had an extreme result once, then measure them again.\nWhat you see: the extreme scores move closer to average on the second measurement.\nWhy? Every measurement has some randomness (luck, conditions, mood, error). When you pick “the best” or “the worst” from one measurement, you accidentally pick people who got lucky (or unlucky) that day. Next time, their luck is different—so their score drifts back toward their usual level.\nKey examples:\n\nStudents who bombed an exam → tend to do better on a retest (even with no extra study)\n“Rookie of the year” → often has a more normal second season\nWorst-performing stores → often improve next quarter (even with no intervention)\n\nThe trap: this looks like improvement (or decline), but it’s just randomness evening out. Nothing actually changed.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#why-is-it-called-regression",
+    "href": "regression.html#why-is-it-called-regression",
+    "title": "Linear Regression",
+    "section": "Why is it called “regression”?",
+    "text": "Why is it called “regression”?\nThe connection: linear regression literally models regression to the mean.\nHistory: Francis Galton (1886) studied parent and child heights. He noticed:\n\nVery tall parents → children are tall, but closer to average height\nVery short parents → children are short, but closer to average height\n\nHe called this “regression toward mediocrity” (we now say “regression to the mean”).\nMathematics: When you fit a regression line \\(\\hat{y} = \\alpha + \\beta x\\), you’re estimating the conditional mean: the average y for a given x.\n\nIf correlation is perfect (\\(\\rho = 1\\)), the line has slope = 1 (no regression to mean)\nIf correlation is imperfect (\\(\\rho &lt; 1\\)), the line is flatter than 45°, which means extreme x values predict y values closer to the mean\n\nSo: linear regression is the mathematical tool that quantifies how much extreme values regress back toward the mean. The phenomenon gave the method its name!",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#caution-correlation-causation",
+    "href": "regression.html#caution-correlation-causation",
+    "title": "Linear Regression",
+    "section": "Caution: correlation ≠ causation",
+    "text": "Caution: correlation ≠ causation\nRegression describes association in your dataset.\nTo talk about causality you need:\n\ndesign (randomisation, controls),\nor a strong causal argument (assumptions you can defend).",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#the-simple-regression-model",
+    "href": "regression.html#the-simple-regression-model",
+    "title": "Linear Regression",
+    "section": "The simple regression model",
+    "text": "The simple regression model\n\\[\ny_i = \\alpha + \\beta x_i + \\varepsilon_i,\\quad \\varepsilon_i \\sim \\mathcal{N}(0, \\sigma^2)\n\\]\n\nα: intercept (expected y when x = 0)\nβ: slope (change in expected y for +1 in x)\nε: residual (what’s left)",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#example-body-mass-vs-bill-length",
+    "href": "regression.html#example-body-mass-vs-bill-length",
+    "title": "Linear Regression",
+    "section": "Example: body mass vs bill length",
+    "text": "Example: body mass vs bill length\nHere’s the relationship we’ll model:",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#fit-the-model-with-lm",
+    "href": "regression.html#fit-the-model-with-lm",
+    "title": "Linear Regression",
+    "section": "Fit the model with lm()",
+    "text": "Fit the model with lm()\n\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm, data = penguins)\n\nCoefficients:\n   (Intercept)  bill_length_mm  \n        362.31           87.42",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#add-the-regression-line",
+    "href": "regression.html#add-the-regression-line",
+    "title": "Linear Regression",
+    "section": "Add the regression line",
+    "text": "Add the regression line",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#model-coefficients",
+    "href": "regression.html#model-coefficients",
+    "title": "Linear Regression",
+    "section": "Model coefficients",
+    "text": "Model coefficients\nThe fitted regression coefficients with 95% confidence intervals:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n362.31\n283.35\n1.28\n0.2\n-195.02\n919.64\n\n\nbill_length_mm\n87.42\n6.40\n13.65\n0.0\n74.82\n100.01\n\n\n\n\n\nInterpretation template:\n\nSlope β: for a 1-unit increase in x, expected y changes by β (holding other predictors constant)\nIntercept α: expected y when x = 0 (sometimes not meaningful!)",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#prediction-vs-residuals",
+    "href": "regression.html#prediction-vs-residuals",
+    "title": "Linear Regression",
+    "section": "Prediction vs residuals",
+    "text": "Prediction vs residuals\nTwo concepts:\n\nFitted value: \\(\\hat{y}_i\\) (model’s predicted mean)\nResidual: \\(e_i = y_i - \\hat{y}_i\\)\n\nFirst few observations with fitted values and residuals:\n\n\n\n\n\nBody mass (g)\nBill length (mm)\nFitted\nResidual\n\n\n\n\n3750\n39.1\n3780.2\n-30.2\n\n\n3800\n39.5\n3815.2\n-15.2\n\n\n3250\n40.3\n3885.1\n-635.1\n\n\n3450\n36.7\n3570.4\n-120.4\n\n\n3650\n39.3\n3797.7\n-147.7\n\n\n3625\n38.9\n3762.8\n-137.8",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#residuals",
+    "href": "regression.html#residuals",
+    "title": "Linear Regression",
+    "section": "Residuals",
+    "text": "Residuals",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#where-do-the-coefficients-come-from",
+    "href": "regression.html#where-do-the-coefficients-come-from",
+    "title": "Linear Regression",
+    "section": "Where do the coefficients come from?",
+    "text": "Where do the coefficients come from?\nOrdinary Least Squares (OLS)\nOrdinary least squares chooses alpha, beta to minimise:\n\\[\n\\sum_i (y_i - \\hat{y}_i)^2\n\\]\nThis is the sum of squared residuals.\nWhy least squares?\n\nSquaring makes all errors positive\nLarger errors are penalised more heavily\nThe mathematics becomes tractable (closed-form solution)\n\nWhy ordinary?\nBecause we assume:\n\nall observations have equal variance\nall observations are equally reliable\nerrors are independent\n\nIf these are not true, we move to:\n\nWeighted least squares (different variances)\nGeneralised least squares (correlated errors)\nMixed models (hierarchical structure)\n\nSo “ordinary” = the simplest, default case.\nOrdinary least squares (OLS) chooses α, β that minimise:\n\\[\n\\sum_i (y_i - \\hat{y}_i)^2\n\\]\nThis is why you’ll hear “least squares line of best fit”.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#r²-variance-explained",
+    "href": "regression.html#r²-variance-explained",
+    "title": "Linear Regression",
+    "section": "R² (variance explained)",
+    "text": "R² (variance explained)\nHow much variation does the model explain?\n\n\n\n\n\nR²\nAdjusted R²\nResidual SD\n\n\n\n\n0.354\n0.352\n645.433\n\n\n\n\n\nCaution:\n\nhigh R² ≠ causal truth\nR² can increase just by adding predictors (use adjusted R², or better, validation)",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#p-values-confidence-intervals-and-power",
+    "href": "regression.html#p-values-confidence-intervals-and-power",
+    "title": "Linear Regression",
+    "section": "p-values, confidence intervals, and power",
+    "text": "p-values, confidence intervals, and power\nFull model summary:\n\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm, data = penguins)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1762.08  -446.98    32.59   462.31  1636.86 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     362.307    283.345   1.279    0.202    \nbill_length_mm   87.415      6.402  13.654   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 645.4 on 340 degrees of freedom\nMultiple R-squared:  0.3542,    Adjusted R-squared:  0.3523 \nF-statistic: 186.4 on 1 and 340 DF,  p-value: &lt; 2.2e-16\n\n\nWhat is being tested?\nFor each coefficient \\(\\beta_j\\), the null hypothesis is:\n\\[\nH_0: \\beta_j = 0\n\\]\nThe test statistic is:\n\\[\nt = \\frac{\\hat{\\beta}_j}{SE(\\hat{\\beta}_j)}\n\\]\nThis follows a t-distribution under the model assumptions.\nANOVA view of regression\n\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n                Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nbill_length_mm   1  77669072 77669072  186.44 &lt; 2.2e-16 ***\nResiduals      340 141638626   416584                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nANOVA partitions variance into:\n\nModel (Regression) sum of squares\nResidual (Error) sum of squares\n\nThe F-statistic is:\n\\[\nF = \\frac{MS_{model}}{MS_{error}}\n\\]\nIf this ratio is large, the model explains much more variance than expected by chance.\nConfidence intervals\n\n\n                    2.5 %   97.5 %\n(Intercept)    -195.02364 919.6371\nbill_length_mm   74.82279 100.0078\n\n\nA 95% CI is the range of slopes compatible with the data under the model.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#interpreting-the-regression-table",
+    "href": "regression.html#interpreting-the-regression-table",
+    "title": "Linear Regression",
+    "section": "Interpreting the regression table",
+    "text": "Interpreting the regression table\nThe coefficient table shows estimates, standard errors, t-statistics, and p-values:\n\n\n\n\n\n\nEstimate\nStd. Error\nt value\nPr(&gt;|t|)\n\n\n\n\n(Intercept)\n362.307\n283.345\n1.279\n0.202\n\n\nbill_length_mm\n87.415\n6.402\n13.654\n0.000\n\n\n\n\n\nTypical output:\n\n\n\nTerm\nEstimate\nStd. Error\nt value\nPr(&gt;\n\n\n\n\n(Intercept)\nalpha\nSE(alpha)\nt\np\n\n\nx\nbeta\nSE(beta)\nt\np\n\n\n\nHow to read this\n\nEstimate: the fitted coefficient (alpha or beta)\nStd. Error: uncertainty in that estimate\nt value: Estimate / Std. Error\nPr(&gt;|t|): p-value for H0: coefficient = 0\n\nIntercept\nThe intercept is the expected value of y when all predictors = 0.\n\nSometimes meaningful (e.g. baseline control)\nOften meaningless (e.g. bill length = 0 mm is impossible)\n\nSlope (beta)\nThe slope is the expected change in y per 1-unit increase in x, holding other predictors constant.\nUnits always matter:\n\ng per mm, kg per ha, t per °C, etc.\n\nWith factors\n\n\n\nCall:\nlm(formula = body_mass_g ~ species, data = penguins)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1126.02  -333.09   -33.09   316.91  1223.98 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       3700.66      37.62   98.37   &lt;2e-16 ***\nspeciesChinstrap    32.43      67.51    0.48    0.631    \nspeciesGentoo     1375.35      56.15   24.50   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 462.3 on 339 degrees of freedom\nMultiple R-squared:  0.6697,    Adjusted R-squared:  0.6677 \nF-statistic: 343.6 on 2 and 339 DF,  p-value: &lt; 2.2e-16\n\n\nHere:\n\nOne level is the reference (baseline)\nOther coefficients are differences from that reference\n\nExample interpretation:\n\n(Intercept) = mean of reference species\nspeciesChinstrap = difference between Chinstrap and reference\n\nWith interactions\nModel with interaction term:\n\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm * species, data = penguins)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-918.76 -245.89   -8.65  238.44 1126.27 \n\nCoefficients:\n                                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                        34.88     443.18   0.079    0.937    \nbill_length_mm                     94.50      11.40   8.291 2.73e-15 ***\nspeciesChinstrap                  811.26     799.81   1.014    0.311    \nspeciesGentoo                    -158.71     683.19  -0.232    0.816    \nbill_length_mm:speciesChinstrap   -35.38      17.75  -1.994    0.047 *  \nbill_length_mm:speciesGentoo       14.96      15.79   0.948    0.344    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 371.8 on 336 degrees of freedom\nMultiple R-squared:  0.7882,    Adjusted R-squared:  0.7851 \nF-statistic: 250.1 on 5 and 336 DF,  p-value: &lt; 2.2e-16\n\n\nInterpretation:\n\nMain slope = effect in reference species\nInteraction term = change in slope for the other species\n\nyield ~ variety * fertiliser: how different is the yield for variety A with fertiliser B from yield for variety A with fertiliser A?\n\n\nThe big rule\n\nEvery coefficient is a conditional comparison.\n\nIt is always interpreted given the other terms in the model are held constant.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#core-assumptions",
+    "href": "regression.html#core-assumptions",
+    "title": "Linear Regression",
+    "section": "Core assumptions",
+    "text": "Core assumptions\nIn practice we check these assumptions about residuals:\n\nLinearity of mean structure\nHomoscedasticity (constant variance)\nIndependence\nApproximate normality of residuals (mainly for small samples)",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#diagnostic-plots-in-r",
+    "href": "regression.html#diagnostic-plots-in-r",
+    "title": "Linear Regression",
+    "section": "Diagnostic plots in R",
+    "text": "Diagnostic plots in R\n\nWhat to look for:\n\nResiduals vs fitted: pattern? funnel shape?\nQ–Q: strong deviations?\nScale–Location: heteroscedasticity\nResiduals vs leverage: influential points",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#linearity-residual-pattern",
+    "href": "regression.html#linearity-residual-pattern",
+    "title": "Linear Regression",
+    "section": "Linearity: residual pattern",
+    "text": "Linearity: residual pattern\nIf you see curvature in residuals vs fitted:\n\nmissing non-linearity (transform x, add polynomial term, or use a better model)\n\n\n\nAnalysis of Variance Table\n\nModel 1: body_mass_g ~ bill_length_mm\nModel 2: body_mass_g ~ poly(bill_length_mm, 2)\n  Res.Df       RSS Df Sum of Sq      F   Pr(&gt;F)   \n1    340 141638626                                \n2    339 138722819  1   2915807 7.1254 0.007966 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#homoscedasticity-fan-shape",
+    "href": "regression.html#homoscedasticity-fan-shape",
+    "title": "Linear Regression",
+    "section": "Homoscedasticity: “fan” shape",
+    "text": "Homoscedasticity: “fan” shape\nIf residual spread increases with fitted values:\n\nconsider transforming the response (e.g., log)\nconsider robust SEs (later modules), or different model family",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#independence-design-matters",
+    "href": "regression.html#independence-design-matters",
+    "title": "Linear Regression",
+    "section": "Independence: design matters",
+    "text": "Independence: design matters\nIndependence is usually not visible from a single plot.\nBreaks happen with:\n\nrepeated measures (same subject multiple times)\nspatial dependence\ntime series\n\nIf independence is violated, standard errors can be wrong → misleading p-values.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#normality-mostly-about-small-sample-inference",
+    "href": "regression.html#normality-mostly-about-small-sample-inference",
+    "title": "Linear Regression",
+    "section": "Normality: mostly about small-sample inference",
+    "text": "Normality: mostly about small-sample inference\nNormal residuals matter most when:\n\nsample size is small\nyou need accurate confidence intervals/tests\n\nWith moderate/large samples, regression is often robust, but you still diagnose.",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#influential-points",
+    "href": "regression.html#influential-points",
+    "title": "Linear Regression",
+    "section": "Influential points",
+    "text": "Influential points\nCook’s distance identifies observations that strongly influence the fit. The top 10 most influential observations:\n\n\n\n\n\nBody mass (g)\nBill length (mm)\nCook’s D\n\n\n\n\n3700\n58.0\n0.085\n\n\n4000\n55.8\n0.032\n\n\n3250\n51.5\n0.027\n\n\n3450\n52.2\n0.026\n\n\n3725\n52.7\n0.020\n\n\n6300\n49.2\n0.018\n\n\n3300\n50.3\n0.018\n\n\n3400\n50.5\n0.017\n\n\n3550\n50.9\n0.015\n\n\n3400\n50.1\n0.015",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#practical-fixes-not-magic",
+    "href": "regression.html#practical-fixes-not-magic",
+    "title": "Linear Regression",
+    "section": "Practical fixes (not “magic”)",
+    "text": "Practical fixes (not “magic”)\nWhen assumptions fail:\n\nrethink the question (is linear regression appropriate?)\ntransform variables (log, sqrt)\nadd terms (non-linear mean, interactions)\nmodel grouping (blocks/random intercepts)\nuse alternative families (GLMs) or robust methods",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#multiple-regression-main-effects",
+    "href": "regression.html#multiple-regression-main-effects",
+    "title": "Linear Regression",
+    "section": "Multiple regression (main effects)",
+    "text": "Multiple regression (main effects)\n\\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\varepsilon\n\\]\nInterpretation: holding other predictors constant.\n\n\n# A tibble: 3 × 7\n  term              estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)       -5737.      308.      -18.6  7.80e-54 -6343.     -5131. \n2 bill_length_mm        6.05      5.18      1.17 2.44e- 1    -4.14      16.2\n3 flipper_length_mm    48.1       2.01     23.9  7.56e-75    44.2       52.1",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#interactions-effect-modification",
+    "href": "regression.html#interactions-effect-modification",
+    "title": "Linear Regression",
+    "section": "Interactions (effect modification)",
+    "text": "Interactions (effect modification)\nAn interaction means: the effect of x1 depends on x2.\nModel with interaction between bill length and species:\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n34.88\n443.18\n0.08\n0.94\n\n\nbill_length_mm\n94.50\n11.40\n8.29\n0.00\n\n\nspeciesChinstrap\n811.26\n799.81\n1.01\n0.31\n\n\nspeciesGentoo\n-158.71\n683.19\n-0.23\n0.82\n\n\nbill_length_mm:speciesChinstrap\n-35.38\n17.75\n-1.99\n0.05\n\n\nbill_length_mm:speciesGentoo\n14.96\n15.79\n0.95\n0.34\n\n\n\n\n\nVisualise:",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#blocking-fixed-effects-for-batchessites",
+    "href": "regression.html#blocking-fixed-effects-for-batchessites",
+    "title": "Linear Regression",
+    "section": "Blocking (fixed effects for batches/sites)",
+    "text": "Blocking (fixed effects for batches/sites)\nBlocks are nuisance structure you control for.\nAdding island as a blocking factor:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n1225.79\n243.18\n5.04\n0\n747.45\n1704.13\n\n\nbill_length_mm\n77.12\n5.31\n14.53\n0\n66.68\n87.56\n\n\nislandDream\n-919.07\n58.62\n-15.68\n0\n-1034.38\n-803.76\n\n\nislandTorgersen\n-523.29\n85.55\n-6.12\n0\n-691.57\n-355.02",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#random-intercepts-preview",
+    "href": "regression.html#random-intercepts-preview",
+    "title": "Linear Regression",
+    "section": "Random intercepts (preview)",
+    "text": "Random intercepts (preview)\nIf you have repeated measures, you often want:\n\\[\ny_{ij} = \\beta_0 + b_{0i} + \\beta_1 x_{ij} + \\varepsilon_{ij}\n\\]\n\n(b_{0i}) is a group-specific intercept deviation (random effect)\n\nIn R: lme4::lmer() (covered in mixed models).",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
+    "objectID": "regression.html#reporting-results-what-good-looks-like",
+    "href": "regression.html#reporting-results-what-good-looks-like",
+    "title": "Linear Regression",
+    "section": "Reporting results (what good looks like)",
+    "text": "Reporting results (what good looks like)\nMinimum professional reporting:\n\nmodel formula and context (units!)\ncoefficient estimate with CI (and p-value if required)\na goodness-of-fit statement (R², residual SD)\ndiagnostics statement (what you checked, any issues)\na plot (scatter + fitted line; residual checks)\n\nExample sentence:\n\nA linear model indicated that body mass increased with bill length (β = … g/mm, 95% CI …), explaining R² = … of variance; residual plots suggested …",
+    "crumbs": [
+      "Sessions",
+      "Linear Regression"
+    ]
+  },
+  {
     "objectID": "mini-project.html",
     "href": "mini-project.html",
     "title": "Mini-project",
@@ -2452,6 +2837,83 @@
     "crumbs": [
       "Sessions",
       "Non-Parametric Statistics"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html",
+    "href": "regression_tutorial.html",
+    "title": "Regression tutorial",
+    "section": "",
+    "text": "We’ll keep this simple. Just three essential packages:\n\nlibrary(ggplot2)      # for pretty plots\nlibrary(dplyr)        # for data wrangling\nlibrary(palmerpenguins)  # our dataset\n\n# Load the data and remove rows with missing values\ndata(penguins)\npenguins &lt;- penguins %&gt;%\n  filter(!is.na(bill_length_mm), \n         !is.na(body_mass_g), \n         !is.na(species),\n         !is.na(flipper_length_mm))\n\n# Take a quick look\nhead(penguins)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n2007\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n2007\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n2007\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n2007\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale\n2007\n\n\nAdelie\nTorgersen\n38.9\n17.8\n181\n3625\nfemale\n2007\n\n\n\n\n\n\nWhat we’re looking at: Data on 333 penguins from three species. We’ll use their physical measurements to understand regression.",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#setup",
+    "href": "regression_tutorial.html#setup",
+    "title": "Regression tutorial",
+    "section": "",
+    "text": "We’ll keep this simple. Just three essential packages:\n\nlibrary(ggplot2)      # for pretty plots\nlibrary(dplyr)        # for data wrangling\nlibrary(palmerpenguins)  # our dataset\n\n# Load the data and remove rows with missing values\ndata(penguins)\npenguins &lt;- penguins %&gt;%\n  filter(!is.na(bill_length_mm), \n         !is.na(body_mass_g), \n         !is.na(species),\n         !is.na(flipper_length_mm))\n\n# Take a quick look\nhead(penguins)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n2007\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n2007\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n2007\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n2007\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale\n2007\n\n\nAdelie\nTorgersen\n38.9\n17.8\n181\n3625\nfemale\n2007\n\n\n\n\n\n\nWhat we’re looking at: Data on 333 penguins from three species. We’ll use their physical measurements to understand regression.",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#the-question-does-bill-length-predict-body-mass",
+    "href": "regression_tutorial.html#the-question-does-bill-length-predict-body-mass",
+    "title": "Regression tutorial",
+    "section": "The Question: Does bill length predict body mass?",
+    "text": "The Question: Does bill length predict body mass?\nLet’s start with the most basic regression: one predictor, one outcome.\n\nStep 1: Always plot your data first\nNever fit a model before looking at your data. Seriously, never.\n\n# Create a scatter plot\nggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +\n  geom_point(alpha = 0.6, size = 2) +\n  labs(\n    x = \"Bill length (mm)\",\n    y = \"Body mass (g)\",\n    title = \"Do penguins with longer bills weigh more?\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nWhat do we see? There’s definitely a positive relationship—longer bills tend to go with heavier penguins. But there’s a lot of scatter. Let’s quantify this relationship with regression.\n\n\nStep 2: Fit the model\nThe lm() function fits a linear model. The formula y ~ x means “y is predicted by x”.\n\n# Fit the regression: body mass predicted by bill length\nmodel1 &lt;- lm(body_mass_g ~ bill_length_mm, data = penguins)\n\n# The model object is now stored in model1\n# Let's see what's inside\nclass(model1)\n\n[1] \"lm\"\n\nnames(model1)\n\n [1] \"coefficients\"  \"residuals\"     \"effects\"       \"rank\"         \n [5] \"fitted.values\" \"assign\"        \"qr\"            \"df.residual\"  \n [9] \"xlevels\"       \"call\"          \"terms\"         \"model\"        \n\n\nWhat just happened? We created a model object called model1. It’s a list containing everything R calculated: coefficients, residuals, fitted values, and more.\n\n\nStep 3: Look at the output\n\n# The summary() function shows us the key results\nsummary(model1)\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm, data = penguins)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1762.08  -446.98    32.59   462.31  1636.86 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     362.307    283.345   1.279    0.202    \nbill_length_mm   87.415      6.402  13.654   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 645.4 on 340 degrees of freedom\nMultiple R-squared:  0.3542,    Adjusted R-squared:  0.3523 \nF-statistic: 186.4 on 1 and 340 DF,  p-value: &lt; 2.2e-16\n\n\nLet’s break this down:\n\nCoefficients table: Shows our intercept and slope\nResidual standard error: How far off our predictions typically are (645.43g)\nR-squared: Proportion of variance explained (0.35 = 35%)\nF-statistic: Tests if the model is better than just using the mean (it is!)\n\n\n\nStep 4: Extract and interpret the coefficients\nInstead of just reading the summary, let’s pull out the numbers we need:\n\n# Get the coefficients\ncoefficients(model1)\n\n   (Intercept) bill_length_mm \n     362.30672       87.41528 \n\n# Or access them directly from the model object\nmodel1$coefficients\n\n   (Intercept) bill_length_mm \n     362.30672       87.41528 \n\n\nWhat do these mean?\n\nIntercept = 362.31: A penguin with 0mm bill length would weigh 362.31g. (Obviously impossible—this is just where the line crosses the y-axis)\nSlope = 87.42: For every 1mm increase in bill length, body mass increases by 87.42 grams on average\n\nLet’s get confidence intervals too:\n\n# 95% confidence intervals for our coefficients\nci1 &lt;- confint(model1)\nci1\n\n                    2.5 %   97.5 %\n(Intercept)    -195.02364 919.6371\nbill_length_mm   74.82279 100.0078\n\n\nWe’re 95% confident the true slope is between 74.82 and 100.01 grams per mm.\n\n\nStep 5: Get R-squared\nHow much of the variation in body mass does bill length explain?\n\n# Extract R-squared from the summary\nr2_model1 &lt;- summary(model1)$r.squared\nr2_model1\n\n[1] 0.3541557\n\n# For adjusted R-squared\nsummary(model1)$adj.r.squared\n\n[1] 0.3522562\n\n\n35% explained. That means bill length accounts for about a third of why some penguins are heavier than others. Not bad, but there’s clearly more to the story.\n\n\nStep 6: Add the regression line to our plot\n\nggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +\n  geom_point(alpha = 0.6, size = 2) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"steelblue\") +\n  labs(\n    x = \"Bill length (mm)\",\n    y = \"Body mass (g)\",\n    title = \"Bill length vs body mass with regression line\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThe shaded area shows our uncertainty about where the true line is.\n\n\nStep 7: Understand predictions and residuals\nLet’s manually see what the model predicts:\n\n# Get fitted (predicted) values for each penguin\nfitted_values &lt;- fitted(model1)\n\n# Get residuals (observed - predicted)\nresiduals_values &lt;- residuals(model1)\n\n# Look at first 10 penguins\ndata.frame(\n  observed = penguins$body_mass_g[1:10],\n  predicted = fitted_values[1:10],\n  residual = residuals_values[1:10]\n)\n\n\n\n\n\nobserved\npredicted\nresidual\n\n\n\n\n3750\n3780.244\n-30.24405\n\n\n3800\n3815.210\n-15.21017\n\n\n3250\n3885.142\n-635.14239\n\n\n3450\n3570.447\n-120.44739\n\n\n3650\n3797.727\n-147.72711\n\n\n3625\n3762.761\n-137.76100\n\n\n4675\n3788.986\n886.01442\n\n\n3475\n3343.168\n131.83233\n\n\n4250\n4033.748\n216.25164\n\n\n3300\n3666.604\n-366.60419\n\n\n\n\n\n\nWhat’s a residual? It’s how wrong we were. If a penguin weighs 3750g but we predicted 3600g, the residual is +150g. Positive residuals mean we underestimated; negative means we overestimated.",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#the-question-does-adding-flipper-length-improve-our-predictions",
+    "href": "regression_tutorial.html#the-question-does-adding-flipper-length-improve-our-predictions",
+    "title": "Regression tutorial",
+    "section": "The Question: Does adding flipper length improve our predictions?",
+    "text": "The Question: Does adding flipper length improve our predictions?\nWe saw that bill length explains 35% of body mass variation. Can we do better by adding another predictor?\n\nStep 1: Visualize both predictors\n\n# Create two plots side by side\nlibrary(gridExtra)\n\np1 &lt;- ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +\n  geom_point(alpha = 0.6) +\n  labs(x = \"Bill length (mm)\", y = \"Body mass (g)\") +\n  theme_minimal()\n\np2 &lt;- ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(alpha = 0.6) +\n  labs(x = \"Flipper length (mm)\", y = \"Body mass (g)\") +\n  theme_minimal()\n\ngrid.arrange(p1, p2, ncol = 2)\n\n\n\n\n\n\n\n\nBoth show positive relationships. Now let’s include both in one model.\n\n\nStep 2: Fit the multiple regression\nThe + sign means “include both predictors”:\n\n# Fit model with two predictors\nmodel2 &lt;- lm(body_mass_g ~ bill_length_mm + flipper_length_mm, data = penguins)\n\nsummary(model2)\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm + flipper_length_mm, \n    data = penguins)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1090.5  -285.7   -32.1   244.2  1287.5 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       -5736.897    307.959 -18.629   &lt;2e-16 ***\nbill_length_mm        6.047      5.180   1.168    0.244    \nflipper_length_mm    48.145      2.011  23.939   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 394.1 on 339 degrees of freedom\nMultiple R-squared:   0.76, Adjusted R-squared:  0.7585 \nF-statistic: 536.6 on 2 and 339 DF,  p-value: &lt; 2.2e-16\n\n\n\n\nStep 3: Interpret the coefficients carefully\nThis is where multiple regression gets interesting:\n\ncoefficients(model2)\n\n      (Intercept)    bill_length_mm flipper_length_mm \n     -5736.897161          6.047488         48.144859 \n\nci2 &lt;- confint(model2)\nci2\n\n                        2.5 %      97.5 %\n(Intercept)       -6342.64860 -5131.14573\nbill_length_mm       -4.14117    16.23615\nflipper_length_mm    44.18902    52.10069\n\n\nWhat do these mean?\n\nbill_length_mm = 6.05: Holding flipper length constant, a 1mm increase in bill length increases body mass by 6.05g\nflipper_length_mm = 48.14: Holding bill length constant, a 1mm increase in flipper length increases body mass by 48.14g\n\nWait, what happened? The bill length effect dropped from 87.42g to 6.05g! Why? Because bill length and flipper length are correlated—they both measure “penguin size”. Once we account for flipper length, bill length doesn’t add as much.\n\n\nStep 4: Compare model fit\nDid adding flipper length help?\n\n# Model 1 R-squared\nr2_model1\n\n[1] 0.3541557\n\n# Model 2 R-squared  \nr2_model2 &lt;- summary(model2)$r.squared\nr2_model2\n\n[1] 0.7599577\n\n\nHuge improvement! We went from 35% to 76% variance explained. Flipper length is clearly an important predictor.\n\n\nStep 5: Formal model comparison\nWe can test if model2 is significantly better than model1:\n\n# ANOVA compares nested models\nanova(model1, model2)\n\n\n\n\n\nRes.Df\nRSS\nDf\nSum of Sq\nF\nPr(&gt;F)\n\n\n\n\n340\n141638626\nNA\nNA\nNA\nNA\n\n\n339\n52643125\n1\n88995501\n573.0943\n0\n\n\n\n\n\n\nReading the output: The p-value is tiny (&lt; 0.001), confirming that adding flipper length significantly improves the model.",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#the-question-does-the-bill-length-effect-differ-by-species",
+    "href": "regression_tutorial.html#the-question-does-the-bill-length-effect-differ-by-species",
+    "title": "Regression tutorial",
+    "section": "The Question: Does the bill-length effect differ by species?",
+    "text": "The Question: Does the bill-length effect differ by species?\nMaybe the relationship between bill length and body mass isn’t the same for all three species.\n\nStep 1: Plot by species\n\nggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) +\n  geom_point(alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(\n    x = \"Bill length (mm)\",\n    y = \"Body mass (g)\",\n    title = \"Does the relationship differ by species?\",\n    color = \"Species\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nWhat do we see? Three different regression lines with different slopes. Adelie (pink) has a gentler slope than Gentoo (green). This suggests an interaction.\n\n\nStep 2: Fit the interaction model\nThe * symbol means “include both main effects AND their interaction”:\n\n# Main effects + interaction\nmodel3 &lt;- lm(body_mass_g ~ bill_length_mm * species, data = penguins)\n\nsummary(model3)\n\n\nCall:\nlm(formula = body_mass_g ~ bill_length_mm * species, data = penguins)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-918.76 -245.89   -8.65  238.44 1126.27 \n\nCoefficients:\n                                Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                        34.88     443.18   0.079    0.937    \nbill_length_mm                     94.50      11.40   8.291 2.73e-15 ***\nspeciesChinstrap                  811.26     799.81   1.014    0.311    \nspeciesGentoo                    -158.71     683.19  -0.232    0.816    \nbill_length_mm:speciesChinstrap   -35.38      17.75  -1.994    0.047 *  \nbill_length_mm:speciesGentoo       14.96      15.79   0.948    0.344    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 371.8 on 336 degrees of freedom\nMultiple R-squared:  0.7882,    Adjusted R-squared:  0.7851 \nF-statistic: 250.1 on 5 and 336 DF,  p-value: &lt; 2.2e-16\n\n\n\n\nStep 3: Interpret interaction coefficients\nThis is the trickiest part of regression. Let’s go slowly:\n\ncoefficients(model3)\n\n                    (Intercept)                  bill_length_mm \n                       34.88299                        94.49982 \n               speciesChinstrap                   speciesGentoo \n                      811.26034                      -158.71092 \nbill_length_mm:speciesChinstrap    bill_length_mm:speciesGentoo \n                      -35.38208                        14.95935 \n\n\nHow to read this:\n\nIntercept and bill_length_mm: These apply to the reference species (Adelie, alphabetically first)\nspeciesChinstrap and speciesGentoo: These are adjustments to the intercept for those species\nbill_length_mm:speciesChinstrap and bill_length_mm:speciesGentoo: These are adjustments to the slope for those species\n\nSpecies-specific slopes:\n\n# Extract coefficients\ncoef3 &lt;- coefficients(model3)\n\n# Calculate species-specific slopes\nslope_adelie &lt;- coef3[\"bill_length_mm\"]\nslope_chinstrap &lt;- coef3[\"bill_length_mm\"] + coef3[\"bill_length_mm:speciesChinstrap\"]\nslope_gentoo &lt;- coef3[\"bill_length_mm\"] + coef3[\"bill_length_mm:speciesGentoo\"]\n\n# Display them\ndata.frame(\n  Species = c(\"Adelie\", \"Chinstrap\", \"Gentoo\"),\n  Slope = round(c(slope_adelie, slope_chinstrap, slope_gentoo), 2)\n)\n\n\n\n\n\nSpecies\nSlope\n\n\n\n\nAdelie\n94.50\n\n\nChinstrap\n59.12\n\n\nGentoo\n109.46\n\n\n\n\n\n\n\nAdelie: 94.5 g/mm\nChinstrap: 59.12 g/mm\n\nGentoo: 109.46 g/mm\n\n\n\nStep 4: Do we need the interaction?\nTest if the interaction terms improve the model:\n\n# Model without interaction\nmodel3_simple &lt;- lm(body_mass_g ~ bill_length_mm + species, data = penguins)\n\n# Compare\nanova_comparison &lt;- anova(model3_simple, model3)\nanova_comparison\n\n\n\n\n\nRes.Df\nRSS\nDf\nSum of Sq\nF\nPr(&gt;F)\n\n\n\n\n338\n47613707\nNA\nNA\nNA\nNA\n\n\n336\n46447006\n2\n1166702\n4.21999\n0.0154854\n\n\n\n\n\n\nThe p-value is 0.015. Since this is less than 0.05, the interaction is statistically significant. The slopes really do differ across species. We should keep the interaction in the model!",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#the-big-reveal-anova-regression-with-categorical-predictors",
+    "href": "regression_tutorial.html#the-big-reveal-anova-regression-with-categorical-predictors",
+    "title": "Regression tutorial",
+    "section": "The Big Reveal: ANOVA = Regression with categorical predictors",
+    "text": "The Big Reveal: ANOVA = Regression with categorical predictors\nThis blows people’s minds every time. Let’s prove it.\n\nTraditional ANOVA approach\nDo the three species have different average body masses?\n\n# Fit ANOVA\naov_model &lt;- aov(body_mass_g ~ species, data = penguins)\naov_summary &lt;- summary(aov_model)\naov_summary\n\n             Df    Sum Sq  Mean Sq F value Pr(&gt;F)    \nspecies       2 146864214 73432107   343.6 &lt;2e-16 ***\nResiduals   339  72443483   213698                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nANOVA says: F = 343.63, p &lt; 0.001. Species significantly affect body mass.\n\n\nRegression approach\nNow let’s use lm() with a categorical predictor:\n\n# Fit regression with species as predictor\nlm_model &lt;- lm(body_mass_g ~ species, data = penguins)\nlm_summary &lt;- summary(lm_model)\nlm_summary\n\n\nCall:\nlm(formula = body_mass_g ~ species, data = penguins)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1126.02  -333.09   -33.09   316.91  1223.98 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       3700.66      37.62   98.37   &lt;2e-16 ***\nspeciesChinstrap    32.43      67.51    0.48    0.631    \nspeciesGentoo     1375.35      56.15   24.50   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 462.3 on 339 degrees of freedom\nMultiple R-squared:  0.6697,    Adjusted R-squared:  0.6677 \nF-statistic: 343.6 on 2 and 339 DF,  p-value: &lt; 2.2e-16\n\n\nNotice the bottom line: F-statistic: 343.63, p &lt; 0.001\n\n\nThey’re identical!\n\n# Get ANOVA table from the lm model\nanova(lm_model)\n\n\n\n\n\n\nDf\nSum Sq\nMean Sq\nF value\nPr(&gt;F)\n\n\n\n\nspecies\n2\n146864214\n73432107.1\n343.6263\n0\n\n\nResiduals\n339\n72443483\n213697.6\nNA\nNA\n\n\n\n\n\n\nSame F-statistic, same p-value, same conclusion. ANOVA is just regression where the predictor is categorical instead of continuous.\n\n\nWhat do the regression coefficients mean?\n\ncoef_lm &lt;- coefficients(lm_model)\ncoef_lm\n\n     (Intercept) speciesChinstrap    speciesGentoo \n      3700.66225         32.42598       1375.35401 \n\n\n\nIntercept (3700.66): Mean body mass for Adelie (the reference group)\nspeciesChinstrap (32.43): Chinstrap penguins weigh 32.43g less than Adelie, on average\nspeciesGentoo (1375.35): Gentoo penguins weigh 1375.35g more than Adelie, on average\n\nLet’s verify this by calculating group means directly:\n\n# Calculate means by species\nspecies_means &lt;- penguins %&gt;%\n  group_by(species) %&gt;%\n  summarise(mean_mass = mean(body_mass_g))\nspecies_means\n\n\n\n\n\nspecies\nmean_mass\n\n\n\n\nAdelie\n3700.662\n\n\nChinstrap\n3733.088\n\n\nGentoo\n5076.016\n\n\n\n\n\n\n\nAdelie: 3700.66g (= intercept)\nChinstrap: 3733.09g = 3700.66 + 32.43 ✓\nGentoo: 5076.02g = 3700.66 + 1375.35 ✓\n\nThe regression coefficients directly tell us group differences!",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
+    ]
+  },
+  {
+    "objectID": "regression_tutorial.html#why-diagnostics-matter",
+    "href": "regression_tutorial.html#why-diagnostics-matter",
+    "title": "Regression tutorial",
+    "section": "Why diagnostics matter",
+    "text": "Why diagnostics matter\nRegression makes assumptions. If those assumptions are violated, your p-values and confidence intervals are unreliable. We need to check:\n\nLinearity: Is the relationship actually linear?\nHomoscedasticity: Is the variance constant?\nNormality: Are residuals roughly normal?\nIndependence: Are observations independent? (Check by study design)\n\n\nThe four diagnostic plots\nR gives us four helpful plots. Let’s use model2 (body mass ~ bill length + flipper length):\n\n# Create all four diagnostic plots\npar(mfrow = c(2, 2))  # 2x2 grid of plots\nplot(model2)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))  # reset to single plot\n\n\n\nHow to read each plot\nPlot 1: Residuals vs Fitted\n\nWhat to look for: Random scatter around the horizontal line at zero\nRed flag: A pattern (curve, U-shape) means the relationship isn’t linear\nRed flag: A funnel shape (wider on one side) means variance isn’t constant\n\nPlot 2: Normal Q-Q\n\nWhat to look for: Points following the diagonal line\nRed flag: Points curving away from the line means residuals aren’t normal\nNote: Small deviations at the ends are usually okay\n\nPlot 3: Scale-Location\n\nWhat to look for: Random scatter, roughly flat red line\nRed flag: Red line sloping up means variance increases with fitted values\nThis checks: Homoscedasticity (constant variance)\n\nPlot 4: Residuals vs Leverage\n\nWhat to look for: All points inside the dashed lines (Cook’s distance)\nRed flag: Points outside the dashed lines have high influence\nWhat it means: These observations strongly affect the regression line\n\n\n\nWhat does model2 look like?\nLooking at our four plots:\n\n✓ Residuals vs Fitted: Pretty random, no strong pattern\n✓ Q-Q plot: Points mostly follow the line; residuals are roughly normal\n✓ Scale-Location: Fairly flat; variance looks constant\n✓ Residuals vs Leverage: No points way outside; no highly influential observations\n\nVerdict: This model looks good! Assumptions are reasonably met.\n\n\nWhen things go wrong: An example\nLet’s see what bad diagnostics look like. We’ll fit a model that doesn’t account for species:\n\n# Deliberately ignoring species\nbad_model &lt;- lm(body_mass_g ~ bill_length_mm, data = penguins)\n\npar(mfrow = c(2, 2))\nplot(bad_model)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nWhat’s wrong here?\n\nResiduals vs Fitted: You can see some pattern/grouping—we’re missing an important predictor (species)\nQ-Q plot: Tails deviate more from the line\nThis shows why model2 (which includes flipper length) is better",
+    "crumbs": [
+      "Sessions",
+      "Regression tutorial"
     ]
   },
   {

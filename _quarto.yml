@@ -27,6 +27,8 @@ website:
           - nonparam.qmd
           - sampling.qmd
           - samplingtut.qmd
+          - regression.qmd
+          - regression_tutorial.qmd
 format:
   html:
     highlight-style: a11y
