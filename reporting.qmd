@@ -1,0 +1,889 @@
+---
+title: "Scientific Reporting (IMRaD)"
+subtitle: "Lecture: write section-by-section with clarity, integrity, and strong visuals"
+author: "Dr Kanthu Joseph Mhango"
+date: "2026-01-22"
+css: scroll.css
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    toc: true
+    toc-depth: 2
+    incremental: false
+    code-line-numbers: false
+    chalkboard: true
+    code-fold: false
+    code-tools: true
+    scrollable: true
+execute:
+  echo: false
+  warning: false
+  message: false
+editor: visual
+---
+
+## Goal of this lecture
+
+This is a **scientific reporting lecture** focused on writing and presenting **IMRaD**:
+
+-   **Introduction** (why did you start?)
+-   **Methods** (what did you do?)
+-   **Results** (what answer did you get?)
+-   **Discussion** (what does it mean?)
+
+We will not cover “the scientific method” basics.
+
+------------------------------------------------------------------------
+
+## Session overview
+
+-   Why IMRaD exists + how to read the structure as a “contract with the reader”
+-   **Introduction** — question, gap, aim, contribution, and framing
+-   **Methods** — experimental design + measurement + analysis transparency
+-   **Results** — descriptive + inferential, table design, and visualisation (deep dive)
+-   **Discussion** — interpretation, limits, implications, and claims discipline
+
+------------------------------------------------------------------------
+
+## Why a rigid structure?
+
+Scientific writing is a **creative process** (rhetoric + science), but journals enforce structure because it:
+
+-   helps authors remember **what to include** and **in what order**
+-   helps reviewers/editors evaluate completeness
+-   helps readers locate information without reading everything
+
+------------------------------------------------------------------------
+
+## IMRaD
+
+From the historical argument for structure, readers need authors to answer:
+
+-   **Why did you start?** → **Introduction**
+-   **What did you do?** → **Materials & Methods**
+-   **What answer did you get?** → **Results**
+-   **What does it mean?** → **Discussion**
+
+------------------------------------------------------------------------
+
+## What IMRaD buys you (as a reader)
+
+-   **Facts vs interpretation**:
+    -   facts: **Methods + Results**
+    -   comment/theory: **Introduction + Discussion**
+-   **Modular reading** (especially digitally): jump to what you need
+-   **Findability**: easier to locate key information
+-   **Less clutter**: discourages unnecessary detail
+
+------------------------------------------------------------------------
+
+## Before you write: align to the journal + reporting guidelines
+
+-   Always check the journal’s **Instructions to Authors**
+-   Use the right reporting guideline for your study type:
+    -   **CONSORT** (randomised trials)
+    -   **STROBE** (observational studies)
+    -   **PRISMA** (systematic reviews/meta-analyses)
+    -   **STARD** (diagnostic accuracy)
+
+------------------------------------------------------------------------
+
+## IMRaD as a “reader journey”
+
+```{mermaid}
+flowchart TB
+  A["Introduction<br/>Problem -> gap -> question -> aim"] --> B["Methods<br/>Design -> measures -> analysis plan"]
+  B --> C["Results<br/>What we found (no interpretation)"] --> D["Discussion<br/>Meaning, limits, implications"]
+  D --> E["Conclusion / take-home"]
+```
+
+------------------------------------------------------------------------
+
+## Writing principle (applies everywhere)
+
+**Respect the contract**:
+
+-   **Intro**: motivates + frames the question
+-   **Methods**: makes evaluation and replication possible
+-   **Results**: presents the evidence cleanly
+-   **Discussion**: interprets without over-claiming
+
+------------------------------------------------------------------------
+
+## The hidden triad: claims, evidence, and uncertainty
+
+Every paper implicitly argues:
+
+-   **Claim**: what you want the reader to believe
+-   **Evidence**: what you measured/analysed
+-   **Uncertainty**: how wrong you might be
+
+Strong IMRaD keeps these aligned and explicit.
+
+------------------------------------------------------------------------
+
+## Common failure mode
+
+When papers are hard to trust, it’s usually because:
+
+-   the **question** is unclear (Intro)
+-   the **design/measurement** is underspecified (Methods)
+-   the **results** are over-compressed or selectively shown (Results)
+-   the **claims exceed the evidence** (Discussion)
+
+------------------------------------------------------------------------
+
+## Roadmap
+
+Next we go section-by-section:
+
+-   **Introduction**: the problem funnel
+-   **Methods**: design principles + reproducibility
+-   **Results**: descriptive → inferential → tables → figures
+-   **Discussion**: disciplined interpretation
+
+------------------------------------------------------------------------
+
+## Introduction (the “why did you start?” section)
+
+The Introduction must answer:
+
+-   What problem exists?
+-   What is already known?
+-   What is the gap/limitation?
+-   What is your **research question** and **aim**?
+-   Why should the reader care **now**?
+
+------------------------------------------------------------------------
+
+## Introduction structure: the funnel
+
+```{mermaid}
+flowchart TB
+  A["Big picture: domain and importance"] --> B["Known: key prior findings"]
+  B --> C["Gap: what's missing / inconsistent / unknown"]
+  C --> D["Question: specific research question"]
+  D --> E["Aim / hypothesis / contribution"]
+```
+
+------------------------------------------------------------------------
+
+## Intro: build a “problem statement” paragraph
+
+One paragraph that includes:
+
+-   **Context** (1–2 sentences)
+-   **Gap** (“However…”, “Yet…”, “Little is known about…”)
+-   **Consequence** (why the gap matters)
+-   **Your move** (“Therefore, we…”)
+
+------------------------------------------------------------------------
+
+## Intro: define your terms
+
+Define only what the paper *needs*:
+
+-   ambiguous key terms
+-   population and context boundaries
+-   how you’ll use terms consistently
+
+Avoid: - long history lessons - definitions that do not matter to the design or interpretation
+
+------------------------------------------------------------------------
+
+## Intro: write the research question as a testable sentence
+
+Use a one-sentence question with explicit variables:
+
+-   Population/context
+-   Exposure/intervention or predictor(s)
+-   Outcome(s)
+-   Comparator (if applicable)
+-   Time window (if relevant)
+
+------------------------------------------------------------------------
+
+## Intro: hypotheses and objectives
+
+Be explicit about:
+
+-   **Primary objective** (the one the study is powered for / centred on)
+-   **Secondary objectives** (supporting or exploratory)
+-   **Hypothesis** (directional when justified)
+
+Avoid “hypothesis fishing” in the Intro: don’t pretend everything was planned.
+
+------------------------------------------------------------------------
+
+## Intro: “paragraph about statistics used”
+
+Many journals expect the Intro to mention (briefly):
+
+-   what type of evidence you will present (e.g., group comparisons, regression)
+-   the primary outcome and planned comparison/model
+
+Keep it high-level; details belong in Methods.
+
+------------------------------------------------------------------------
+
+## Intro: the last paragraph
+
+End your Introduction with:
+
+-   your aim + question
+-   study design (in 5–10 words)
+-   primary outcome(s)
+-   one sentence preview of the paper structure (optional)
+
+------------------------------------------------------------------------
+
+## Intro: quick quality checklist
+
+-   Does the reader know *exactly* what you tested?
+-   Is the gap real (supported by citations)?
+-   Is your contribution clear (new data, new method, new synthesis)?
+-   Can someone predict what will appear in Methods/Results?
+
+------------------------------------------------------------------------
+
+## Methods (the “what did you do?” section)
+
+Methods exist so readers can judge:
+
+-   Was the question approached **thoroughly**?
+-   Were the tools/design **appropriate**?
+-   Could the work be **replicated**?
+
+------------------------------------------------------------------------
+
+## Methods: rule of thumb
+
+Write Methods as if the reader wants to answer:
+
+-   “Could I **repeat this** exactly?”
+-   “Could I **audit this** for bias and errors?”
+
+------------------------------------------------------------------------
+
+## Methods: standard subheadings
+
+-   Study design and setting
+-   Participants / sampling / eligibility criteria
+-   Variables, measures, instruments
+-   Interventions/exposures (if any)
+-   Procedure and timeline
+-   Outcomes (primary/secondary)
+-   Sample size / power (when applicable)
+-   Statistical analysis plan
+-   Ethics approvals / consent (if applicable)
+-   Data/code availability (where appropriate)
+
+------------------------------------------------------------------------
+
+## Methods: experimental design principles
+
+Even in non-lab domains, these ideas transfer:
+
+-   **Control/comparison**: what is the baseline?
+-   **Randomisation**: reduces selection bias and confounding
+-   **Blinding**: reduces measurement and expectation bias
+-   **Replication**: stabilises estimates and reveals variability
+-   **Standardisation**: same protocol across units/time
+
+------------------------------------------------------------------------
+
+## Methods: define the experimental unit
+
+One of the most common errors:
+
+-   confusing **experimental unit** (what was randomised) with
+-   measurement unit (what was measured)
+
+This affects:
+
+-   independence assumptions
+
+-   valid sample size (n)
+
+-   appropriate modelling (clustered / repeated measures)
+
+------------------------------------------------------------------------
+
+## Methods: controls and comparators
+
+Specify:
+
+-   what the control group/condition represents
+-   how comparability was ensured (randomisation, matching, adjustment)
+
+------------------------------------------------------------------------
+
+## Methods: randomisation
+
+If randomised:
+
+-   method (simple, block, stratified)
+-   How random allocation was assured
+
+------------------------------------------------------------------------
+
+## Methods: replication and repeated measures
+
+Be explicit about:
+
+-   number of replicates per condition
+-   whether replicates are:
+    -   biological: different plants/plots etc
+    -   technical: same plant, measured multiple times to estimate measurement error
+    -   temporal: same plant, replicaion over time
+-   how repeated measures were handled (averaging vs modelling)
+
+------------------------------------------------------------------------
+
+## Methods: inclusion/exclusion criteria
+
+Report eligibility criteria so readers can judge:
+
+-   selection bias risk
+-   generalisability limits
+-   whether exclusion introduces collider bias (in observational studies)
+
+------------------------------------------------------------------------
+
+## Methods: measurement (variables + units + instruments)
+
+For each key variable:
+
+-   definition (operationalisation)
+-   units and scale
+-   instrument/procedure used
+-   timing (when measured)
+-   quality control (calibration, inter-rater reliability, missingness)
+
+------------------------------------------------------------------------
+
+## Methods: missing data (plan + handling)
+
+State:
+
+-   what “missing” means in your context
+-   how much missingness occurred (Results often shows amounts)
+-   handling strategy (complete case, imputation, model-based)
+
+------------------------------------------------------------------------
+
+## Methods: sample size and power (when relevant)
+
+If confirmatory:
+
+-   target effect size / minimal important difference
+-   assumed variability or event rate
+-   alpha and power targets
+-   expected attrition
+
+If exploratory, say so; don’t pretend it was powered for everything.
+
+------------------------------------------------------------------------
+
+## Methods: statistical analysis plan (SAP) essentials
+
+Readers need to know:
+
+-   primary outcome + primary comparison/model
+-   covariates (pre-specified vs exploratory)
+-   assumptions checked and diagnostics used
+-   multiple comparisons adjustments (if relevant)
+-   software (and version) used
+
+------------------------------------------------------------------------
+
+## Methods: report the analysis in reproducible units
+
+At minimum:
+
+-   software + versions
+-   packages/libraries + versions
+-   random seeds (where used)
+-   data processing steps (what changed, when, why)
+
+------------------------------------------------------------------------
+
+## Methods: preregistration and protocols (if any)
+
+If preregistered:
+
+-   link to registration/protocol
+-   deviations and why (Discussion often revisits this)
+
+If not preregistered, come clean.
+
+------------------------------------------------------------------------
+
+## Methods: ethics and transparency
+
+State (as applicable):
+
+-   ethics approval body + reference
+-   consent process
+-   data privacy and anonymisation
+-   conflicts of interest and funding
+
+------------------------------------------------------------------------
+
+## Methods: quick checklist
+
+-   Can a reviewer reproduce the analysis from your description?
+-   Is the experimental unit unambiguous?
+-   Are primary vs secondary outcomes distinct?
+-   Are measurement units and timing explicit?
+-   Is the SAP clear enough to prevent “analysis drift”?
+
+------------------------------------------------------------------------
+
+## Results (the “what answer did you get?” section)
+
+Results should be:
+
+-   **evidence-first**
+-   **structured**
+-   **interpretation-light** (save meaning for Discussion)
+
+------------------------------------------------------------------------
+
+## Results: the story arc
+
+```{mermaid}
+flowchart TB
+  A["Study flow + sample description"] --> B["Primary outcome: descriptive results"]
+  B --> C["Primary outcome: inferential/model results"]
+  C --> D["Secondary outcomes"]
+  D --> E["Robustness / sensitivity (if used)"]
+```
+
+------------------------------------------------------------------------
+
+## Results: a simple discipline
+
+For every key result, report:
+
+-   the **estimate**
+-   the **uncertainty** (CI/SE/SD depending on purpose)
+-   the **n** (denominator matters)
+-   and, if hypothesis testing is used, the **p-value**
+
+Avoid reporting p-values without effect sizes.
+
+------------------------------------------------------------------------
+
+## Descriptive statistics: what they are for
+
+Descriptives answer:
+
+-   “What does the data look like?”
+-   “Are values plausible?”
+-   “How variable is this phenomenon?”
+
+Descriptives are not “inferior”; they are the foundation of trust.
+
+------------------------------------------------------------------------
+
+## Descriptive stats: choose summaries that match distributions
+
+Common pairings:
+
+-   approximately symmetric: **mean ± SD**
+-   skewed / heavy tails: **median + IQR**
+-   counts: **n (%)**
+
+Always include **units** and **time window** where relevant.
+
+------------------------------------------------------------------------
+
+## Descriptive stats: show distributions, not only summaries
+
+Prefer visuals that reveal shape:
+
+-   histograms / density plots
+-   boxplots / violin plots
+-   jittered points (when n is moderate)
+
+This prevents “summary masking” (different distributions, same mean).
+
+------------------------------------------------------------------------
+
+## Inferential statistics: what they are for
+
+Inferentials answer:
+
+-   “Is the observed pattern plausibly due to chance under a null model?”
+-   “How big might the effect be in the population?”
+
+Inferential work should align to the **analysis plan** stated in Methods.
+
+------------------------------------------------------------------------
+
+## Inferentials: what to report (minimum)
+
+For each key test/model:
+
+-   effect estimate (difference, ratio, slope, etc.)
+-   uncertainty (95% CI when possible)
+-   test statistic (t, χ², F, z) and degrees of freedom (when applicable)
+-   p-value (with sensible precision)
+
+------------------------------------------------------------------------
+
+## Inferentials: practical vs statistical significance
+
+Teach your reader the difference:
+
+-   statistical: unlikely under a null model
+-   practical: big enough to matter in the real world
+
+Use domain thresholds when possible (clinically meaningful, policy meaningful, etc.).
+
+------------------------------------------------------------------------
+
+## Multiple comparisons (when it matters)
+
+If you test many outcomes/groups:
+
+-   state how many tests were run
+-   indicate whether adjustment was applied (and which)
+-   consider prioritising:
+    -   one primary outcome
+    -   a small set of planned contrasts
+
+------------------------------------------------------------------------
+
+## Tables: why they still matter in 2026
+
+Tables are best when readers need:
+
+-   exact values (not approximate)
+-   many numbers with consistent meaning
+-   compact comparison across groups/conditions
+
+Figures are best for pattern recognition.
+
+------------------------------------------------------------------------
+
+## Table design principle: make tables scannable
+
+Good tables are:
+
+-   **minimalist** (avoid heavy gridlines)
+-   aligned (decimals align; text aligns)
+-   explicit about denominators (n)
+-   explicit about units
+-   clear about what summary is shown (mean±SD vs median \[IQR\])
+
+------------------------------------------------------------------------
+
+## Boxed vs open tables (a practical guideline)
+
+-   **Boxed tables**: strong outer border; useful for slides/handouts where the table floats visually.
+-   **Open/minimal tables**: no vertical lines; few horizontal rules; best for journals and readability.
+
+Rule: reduce ink that doesn’t carry data.
+
+------------------------------------------------------------------------
+
+## Table: a “minimalist” layout example (template)
+
+| Outcome                 | Group A (n= ) | Group B (n= ) | Effect (A−B) |   95% CI |   p |
+|---------------|-----------:|-----------:|-----------:|-----------:|-----------:|
+| Primary outcome (units) |     mean (SD) |     mean (SD) |            Δ | \[L, U\] |     |
+| Secondary outcome       |               |               |              |          |     |
+
+Notes (footnotes): definition of outcomes, time window, model adjustment, missingness handling.
+
+------------------------------------------------------------------------
+
+## Tables: common mistakes
+
+-   mixing different summaries in one column without labels
+-   unclear denominators in fractional values (n changes across rows but not indicated)
+-   too many decimal places (false precision)
+-   p-values without effect sizes
+-   “significant” stars without explanation
+
+------------------------------------------------------------------------
+
+## Figures: when to use a plot instead of a table
+
+Use figures when the goal is:
+
+-   show distributions or variability
+-   show relationships (x→y)
+-   compare patterns across many groups (small multiples)
+-   communicate uncertainty visually (error bars, ribbons, intervals)
+
+------------------------------------------------------------------------
+
+## Visualisation: why design principles belong in Results
+
+Results often fail because:
+
+-   graphs are decorative, not explanatory
+-   legends/axes hide the meaning
+-   comparisons are hard (no common scale, clutter)
+
+Design is not cosmetic; it’s evidential clarity.
+
+------------------------------------------------------------------------
+
+## Visualisation foundations (three lenses)
+
+-   **Perception**: how humans group and interpret marks
+-   **Integrity**: graphical honesty + data-ink discipline
+-   **Structure (Grammar of Graphics)**: build plots as compositional statements
+
+------------------------------------------------------------------------
+
+## Gestalt principles (applied to Results figures)
+
+Use intentionally:
+
+-   **Proximity**: group related items so that they are easy to spot
+-   **Similarity**: use colour/shape consistently for meaning
+-   **Figure–ground**: make data pop; de-emphasise scaffolding
+-   **Focal point**: highlight what matters (sparingly)
+
+------------------------------------------------------------------------
+
+## The Grammar of Graphics (the mental model)
+
+Think of a plot as a structured sentence:
+
+-   **DATA**: what you have
+-   **AESTHETIC MAPPINGS** : how variables map to position/colour/size
+-   **GEOMETRY**: points/lines/bars (what gets drawn)
+-   **SCALES**: how values become colours, sizes, axes
+-   **COORDS**: coordinate system
+-   **GUIDES**: legends, labels, theme
+
+------------------------------------------------------------------------
+
+## A quick grammar table
+
+| Grammar component | Meaning                 | ggplot2 analogue                |
+|------------------|-----------------------|-------------------------------|
+| DATA              | dataset                 | `data = ...`                    |
+| TRANS             | transformations         | `log()`, `cut()`, `stat_*()`    |
+| SCALE             | map values → aesthetics | `scale_*()`                     |
+| COORD             | coordinate system       | `coord_*()`                     |
+| ELEMENT           | marks to draw           | `geom_*()`                      |
+| GUIDE             | interpretation aids     | `labs()`, `theme()`, `guides()` |
+
+------------------------------------------------------------------------
+
+## Progressive construction of a ggplot (the discipline)
+
+Build plots piece by piece:
+
+1)  empty canvas\
+2)  add data\
+3)  map aesthetics\
+4)  add geometry\
+5)  refine scales\
+6)  add guides (labels/themes)\
+7)  facet (small multiples)
+
+------------------------------------------------------------------------
+
+## Example: start with an empty plot
+
+``` r
+library(ggplot2)
+ggplot()
+```
+
+Meaning: empty coordinate space—no data, no mapping, no marks.
+
+------------------------------------------------------------------------
+
+## Example: add data
+
+``` r
+ggplot(data = iris)
+```
+
+Still nothing visible: we have not mapped variables or chosen a geometry.
+
+------------------------------------------------------------------------
+
+## Example: add aes() (mapping)
+
+``` r
+ggplot(
+  data = iris,
+  aes(x = Sepal.Length, y = Petal.Length)
+)
+```
+
+Now we’ve specified *meaning* (what x and y represent), but still no marks.
+
+------------------------------------------------------------------------
+
+## Example: add a geometry (marks)
+
+``` r
+ggplot(iris, aes(Sepal.Length, Petal.Length)) +
+  geom_point()
+```
+
+This is the minimal “sentence”: plot y against x as points.
+
+------------------------------------------------------------------------
+
+## Example: scale and guide (make it readable)
+
+``` r
+ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point(size = 2) +
+  labs(
+    title = "Iris morphology",
+    x = "Sepal length (cm)",
+    y = "Petal length (cm)",
+    colour = "Species"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+## Example: facets (small multiples)
+
+``` r
+ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  facet_wrap(~ Species) +
+  labs(title = "Iris morphology by species") +
+  theme_bw()
+```
+
+Facets often beat colour alone when the goal is comparison.
+
+------------------------------------------------------------------------
+
+## Uncertainty in plots: don’t hide it
+
+Prefer:
+
+-   intervals (CI ribbons, error bars) with clear definition
+-   raw points (when feasible) alongside summaries
+-   annotation that states what the interval means
+
+Never assume the reader knows whether bars are SD/SE/CI.
+
+------------------------------------------------------------------------
+
+## Error bars: label them explicitly
+
+In captions or notes, state:
+
+-   what the centre is (mean/median/model estimate)
+-   what the bars represent (SD/SE/95% CI)
+-   what n is (per group/condition)
+
+------------------------------------------------------------------------
+
+## Captions: a Results figure is incomplete without one
+
+A good caption answers:
+
+-   what’s plotted (variables + units)
+-   what each colour/shape/facet means
+-   what summary and uncertainty are shown
+-   what model (if any) generated the estimate
+-   any key data exclusions or transformations
+
+------------------------------------------------------------------------
+
+## Results writing: keep interpretation out
+
+In Results, prefer:
+
+-   “Group A had higher X than Group B (Δ=…, 95% CI …)”
+
+Avoid:
+
+-   “This demonstrates that…” (interpretation)
+-   “Surprisingly…” (interpretation)
+-   “Importantly…” (evaluation)
+
+Save meaning for Discussion.
+
+------------------------------------------------------------------------
+
+## Results: a paragraph template (repeat for each key outcome)
+
+1)  **What** outcome and groups/conditions
+2)  **Descriptive** summary (n, centre, spread)
+3)  **Inferential** result (estimate, CI, p; model if relevant)
+4)  **Pointer** to table/figure
+
+------------------------------------------------------------------------
+
+## Discussion (the “what does it mean?” section)
+
+The Discussion:
+
+-   interprets results in context
+-   explains plausibility and mechanisms
+-   acknowledges uncertainty and limitations
+-   avoids over-claiming
+
+------------------------------------------------------------------------
+
+## Discussion structure (practical)
+
+1)  one-paragraph **summary** of main findings
+2)  **comparison** to prior literature (agreement/disagreement)
+3)  **interpretation** (mechanisms, meaning)
+4)  **limitations** (bias, confounding, measurement, generalisability)
+5)  **implications** (practice/policy/theory)
+6)  **future work** + closing take-home
+
+------------------------------------------------------------------------
+
+## Discussion: claims discipline
+
+Match claim strength to design:
+
+-   RCTs → stronger causal claims (still bounded by context)
+-   observational studies → cautious causal language; emphasise association + robustness
+-   exploratory analyses → framed as hypothesis-generating
+
+------------------------------------------------------------------------
+
+## Discussion: limitations (write them like a scientist)
+
+Good limitations:
+
+-   are specific (not generic “small sample size” only)
+-   describe direction and impact (how might bias change estimates?)
+-   show what you did to mitigate (sensitivity, robustness, measurement checks)
+
+------------------------------------------------------------------------
+
+## Discussion: avoid “spin”
+
+Red flags:
+
+-   focusing only on significant results
+-   changing the primary outcome after seeing results
+-   overusing causal language when design doesn’t support it
+-   burying null results
+
+------------------------------------------------------------------------
+
+## Conclusion slide (what you should remember)
+
+-   IMRaD is a disciplined way to answer a reader’s four questions.
+-   Methods earn trust by making evaluation and replication possible.
+-   Results are evidence-first: **effect sizes + uncertainty**.
+-   Tables and figures are part of reporting integrity, not decoration.
+-   Discussion interprets with humility: claims proportional to evidence.

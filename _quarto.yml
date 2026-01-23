@@ -29,6 +29,8 @@ website:
           - samplingtut.qmd
           - regression.qmd
           - regression_tutorial.qmd
+          - reporting.qmd
+          - vistut.qmd
 format:
   html:
     highlight-style: a11y

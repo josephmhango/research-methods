@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Kanthu Joseph Mhango">
+<meta name="dcterms.date" content="2026-01-23">
+
+<title>Data Visualisation Tutorial – C5025HF Research methods and Geographical Information Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syntax-basics.html">Sessions</a></li><li class="breadcrumb-item"><a href="./vistut.html">Data Visualisation Tutorial</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sessions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syntax-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introductory R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Structures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indexing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data frames and tidy data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./galton.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The mean: Beginnings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chisquare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Chi-Square story</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gosset.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The t-Test story</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">T-test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fisher’s F and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">F-Test and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA - 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Non-Parametric Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingtut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Sampling in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scientific Reporting (IMRaD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vistut.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Data Visualisation Tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome-read-this-first" id="toc-welcome-read-this-first" class="nav-link active" data-scroll-target="#welcome-read-this-first"><span class="header-section-number">1</span> Welcome (read this first)</a>
+  <ul class="collapse">
+  <li><a href="#what-base-r-plotting-means-the-default-plotting-engine" id="toc-what-base-r-plotting-means-the-default-plotting-engine" class="nav-link" data-scroll-target="#what-base-r-plotting-means-the-default-plotting-engine"><span class="header-section-number">1.1</span> What “Base R plotting” means (the default plotting engine)</a></li>
+  <li><a href="#what-ggplot2-is-and-why-people-use-it" id="toc-what-ggplot2-is-and-why-people-use-it" class="nav-link" data-scroll-target="#what-ggplot2-is-and-why-people-use-it"><span class="header-section-number">1.2</span> What ggplot2 is (and why people use it)</a></li>
+  <li><a href="#the-big-advantage-of-ggplot2-consistency" id="toc-the-big-advantage-of-ggplot2-consistency" class="nav-link" data-scroll-target="#the-big-advantage-of-ggplot2-consistency"><span class="header-section-number">1.3</span> The big advantage of ggplot2 (consistency)</a></li>
+  <li><a href="#the-anatomy-of-ggplot-code-learn-this-pattern" id="toc-the-anatomy-of-ggplot-code-learn-this-pattern" class="nav-link" data-scroll-target="#the-anatomy-of-ggplot-code-learn-this-pattern"><span class="header-section-number">1.4</span> The anatomy of ggplot code (learn this pattern)</a></li>
+  <li><a href="#how-this-tutorial-works-base-r-think-ggplot-discuss" id="toc-how-this-tutorial-works-base-r-think-ggplot-discuss" class="nav-link" data-scroll-target="#how-this-tutorial-works-base-r-think-ggplot-discuss"><span class="header-section-number">1.5</span> How this tutorial works (Base R → think → ggplot → discuss)</a></li>
+  </ul></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a>
+  <ul class="collapse">
+  <li><a href="#load-packages-and-set-defaults" id="toc-load-packages-and-set-defaults" class="nav-link" data-scroll-target="#load-packages-and-set-defaults"><span class="header-section-number">2.1</span> Load packages and set defaults</a></li>
+  <li><a href="#what-we-will-use" id="toc-what-we-will-use" class="nav-link" data-scroll-target="#what-we-will-use"><span class="header-section-number">2.2</span> What we will use</a></li>
+  </ul></li>
+  <li><a href="#scatter-plot-with-legend-reference-line" id="toc-scatter-plot-with-legend-reference-line" class="nav-link" data-scroll-target="#scatter-plot-with-legend-reference-line"><span class="header-section-number">3</span> 1 — Scatter plot with legend + reference line</a>
+  <ul class="collapse">
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal"><span class="header-section-number">3.1</span> Goal</a></li>
+  <li><a href="#step-1-base-r-version-shown-first" id="toc-step-1-base-r-version-shown-first" class="nav-link" data-scroll-target="#step-1-base-r-version-shown-first"><span class="header-section-number">3.2</span> Step 1: Base R version (shown first)</a></li>
+  <li><a href="#step-2-pause-and-predict-the-ggplot2-version" id="toc-step-2-pause-and-predict-the-ggplot2-version" class="nav-link" data-scroll-target="#step-2-pause-and-predict-the-ggplot2-version"><span class="header-section-number">3.3</span> Step 2: pause and predict the ggplot2 version</a></li>
+  <li><a href="#step-3-ggplot2-version-solution" id="toc-step-3-ggplot2-version-solution" class="nav-link" data-scroll-target="#step-3-ggplot2-version-solution"><span class="header-section-number">3.4</span> Step 3: ggplot2 version (solution)</a></li>
+  <li><a href="#step-4-discussion-what-you-should-notice" id="toc-step-4-discussion-what-you-should-notice" class="nav-link" data-scroll-target="#step-4-discussion-what-you-should-notice"><span class="header-section-number">3.5</span> Step 4: discussion (what you should notice)</a></li>
+  </ul></li>
+  <li><a href="#grouped-line-plot" id="toc-grouped-line-plot" class="nav-link" data-scroll-target="#grouped-line-plot"><span class="header-section-number">4</span> 2 — Grouped line plot</a>
+  <ul class="collapse">
+  <li><a href="#goal-1" id="toc-goal-1" class="nav-link" data-scroll-target="#goal-1"><span class="header-section-number">4.1</span> Goal</a></li>
+  <li><a href="#step-1-base-r-version-shown-first-1" id="toc-step-1-base-r-version-shown-first-1" class="nav-link" data-scroll-target="#step-1-base-r-version-shown-first-1"><span class="header-section-number">4.2</span> Step 1: Base R version (shown first)</a></li>
+  <li><a href="#step-2-pause-and-predict-the-ggplot2-version-1" id="toc-step-2-pause-and-predict-the-ggplot2-version-1" class="nav-link" data-scroll-target="#step-2-pause-and-predict-the-ggplot2-version-1"><span class="header-section-number">4.3</span> Step 2: pause and predict the ggplot2 version</a></li>
+  <li><a href="#step-3-ggplot2-version-solution-1" id="toc-step-3-ggplot2-version-solution-1" class="nav-link" data-scroll-target="#step-3-ggplot2-version-solution-1"><span class="header-section-number">4.4</span> Step 3: ggplot2 version (solution)</a></li>
+  <li><a href="#step-4-discussion-why-ggplot-feels-easier-here" id="toc-step-4-discussion-why-ggplot-feels-easier-here" class="nav-link" data-scroll-target="#step-4-discussion-why-ggplot-feels-easier-here"><span class="header-section-number">4.5</span> Step 4: discussion (why ggplot feels easier here)</a></li>
+  </ul></li>
+  <li><a href="#labelled-plot-text-marks" id="toc-labelled-plot-text-marks" class="nav-link" data-scroll-target="#labelled-plot-text-marks"><span class="header-section-number">5</span> 3 — Labelled plot (text marks)</a>
+  <ul class="collapse">
+  <li><a href="#goal-2" id="toc-goal-2" class="nav-link" data-scroll-target="#goal-2"><span class="header-section-number">5.1</span> Goal</a></li>
+  <li><a href="#step-1-base-r-version-shown-first-2" id="toc-step-1-base-r-version-shown-first-2" class="nav-link" data-scroll-target="#step-1-base-r-version-shown-first-2"><span class="header-section-number">5.2</span> Step 1: Base R version (shown first)</a></li>
+  <li><a href="#step-2-pause-and-predict-the-ggplot2-version-2" id="toc-step-2-pause-and-predict-the-ggplot2-version-2" class="nav-link" data-scroll-target="#step-2-pause-and-predict-the-ggplot2-version-2"><span class="header-section-number">5.3</span> Step 2: pause and predict the ggplot2 version</a></li>
+  <li><a href="#step-3-ggplot2-version-solution-2" id="toc-step-3-ggplot2-version-solution-2" class="nav-link" data-scroll-target="#step-3-ggplot2-version-solution-2"><span class="header-section-number">5.4</span> Step 3: ggplot2 version (solution)</a></li>
+  <li><a href="#step-4-discussion-what-ggplot-is-doing-for-you" id="toc-step-4-discussion-what-ggplot-is-doing-for-you" class="nav-link" data-scroll-target="#step-4-discussion-what-ggplot-is-doing-for-you"><span class="header-section-number">5.5</span> Step 4: discussion (what ggplot is doing for you)</a></li>
+  </ul></li>
+  <li><a href="#small-multiples-base-r-vs-ggplot2-facets" id="toc-small-multiples-base-r-vs-ggplot2-facets" class="nav-link" data-scroll-target="#small-multiples-base-r-vs-ggplot2-facets"><span class="header-section-number">6</span> 4 — Small multiples: Base R vs ggplot2 facets</a>
+  <ul class="collapse">
+  <li><a href="#goal-3" id="toc-goal-3" class="nav-link" data-scroll-target="#goal-3"><span class="header-section-number">6.1</span> Goal</a></li>
+  <li><a href="#step-1-base-r-version-shown-first-3" id="toc-step-1-base-r-version-shown-first-3" class="nav-link" data-scroll-target="#step-1-base-r-version-shown-first-3"><span class="header-section-number">6.2</span> Step 1: Base R version (shown first)</a></li>
+  <li><a href="#step-2-pause-and-predict-the-ggplot2-version-3" id="toc-step-2-pause-and-predict-the-ggplot2-version-3" class="nav-link" data-scroll-target="#step-2-pause-and-predict-the-ggplot2-version-3"><span class="header-section-number">6.3</span> Step 2: pause and predict the ggplot2 version</a></li>
+  <li><a href="#step-3-ggplot2-version-solution-3" id="toc-step-3-ggplot2-version-solution-3" class="nav-link" data-scroll-target="#step-3-ggplot2-version-solution-3"><span class="header-section-number">6.4</span> Step 3: ggplot2 version (solution)</a></li>
+  <li><a href="#step-4-discussion-why-ggplot2-is-scalable-here" id="toc-step-4-discussion-why-ggplot2-is-scalable-here" class="nav-link" data-scroll-target="#step-4-discussion-why-ggplot2-is-scalable-here"><span class="header-section-number">6.5</span> Step 4: discussion (why ggplot2 is “scalable” here)</a></li>
+  </ul></li>
+  <li><a href="#scatter-smoother-scale-thinking" id="toc-scatter-smoother-scale-thinking" class="nav-link" data-scroll-target="#scatter-smoother-scale-thinking"><span class="header-section-number">7</span> 5 — Scatter + smoother + scale thinking</a>
+  <ul class="collapse">
+  <li><a href="#goal-4" id="toc-goal-4" class="nav-link" data-scroll-target="#goal-4"><span class="header-section-number">7.1</span> Goal</a></li>
+  <li><a href="#step-1-base-r-version-shown-first-4" id="toc-step-1-base-r-version-shown-first-4" class="nav-link" data-scroll-target="#step-1-base-r-version-shown-first-4"><span class="header-section-number">7.2</span> Step 1: Base R version (shown first)</a></li>
+  <li><a href="#step-2-pause-and-predict-the-ggplot2-version-4" id="toc-step-2-pause-and-predict-the-ggplot2-version-4" class="nav-link" data-scroll-target="#step-2-pause-and-predict-the-ggplot2-version-4"><span class="header-section-number">7.3</span> Step 2: pause and predict the ggplot2 version</a></li>
+  <li><a href="#step-3-ggplot2-version-solution-4" id="toc-step-3-ggplot2-version-solution-4" class="nav-link" data-scroll-target="#step-3-ggplot2-version-solution-4"><span class="header-section-number">7.4</span> Step 3: ggplot2 version (solution)</a></li>
+  <li><a href="#step-4-discussion-what-is-simpler-in-ggplot2" id="toc-step-4-discussion-what-is-simpler-in-ggplot2" class="nav-link" data-scroll-target="#step-4-discussion-what-is-simpler-in-ggplot2"><span class="header-section-number">7.5</span> Step 4: discussion (what is simpler in ggplot2)</a></li>
+  </ul></li>
+  <li><a href="#mini-section-visualisation-principles-checklist" id="toc-mini-section-visualisation-principles-checklist" class="nav-link" data-scroll-target="#mini-section-visualisation-principles-checklist"><span class="header-section-number">8</span> Mini-section — Visualisation principles checklist</a></li>
+  <li><a href="#optional-extensions" id="toc-optional-extensions" class="nav-link" data-scroll-target="#optional-extensions"><span class="header-section-number">9</span> Optional extensions</a>
+  <ul class="collapse">
+  <li><a href="#extension-1-make-labels-unambiguous" id="toc-extension-1-make-labels-unambiguous" class="nav-link" data-scroll-target="#extension-1-make-labels-unambiguous"><span class="header-section-number">9.1</span> Extension 1 — Make labels unambiguous</a></li>
+  <li><a href="#extension-2-use-facets-to-replace-colour" id="toc-extension-2-use-facets-to-replace-colour" class="nav-link" data-scroll-target="#extension-2-use-facets-to-replace-colour"><span class="header-section-number">9.2</span> Extension 2 — Use facets to replace colour</a></li>
+  <li><a href="#extension-3-write-a-caption-that-completes-the-figure" id="toc-extension-3-write-a-caption-that-completes-the-figure" class="nav-link" data-scroll-target="#extension-3-write-a-caption-that-completes-the-figure"><span class="header-section-number">9.3</span> Extension 3 — Write a “caption that completes the figure”</a></li>
+  </ul></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">10</span> Wrap-up</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syntax-basics.html">Sessions</a></li><li class="breadcrumb-item"><a href="./vistut.html">Data Visualisation Tutorial</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Data Visualisation Tutorial</h1>
+<p class="subtitle lead">A self-guided Quarto tutorial</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Kanthu Joseph Mhango </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="welcome-read-this-first" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="welcome-read-this-first"><span class="header-section-number">1</span> Welcome (read this first)</h2>
+<p>This tutorial assumes <strong>you are at the beginning of your journey with R</strong> and <strong>you are seeing ggplot2 for the first time</strong>. That is completely fine. We will be very slow, very explicit, and we will repeat the same ideas until they feel familiar.</p>
+<section id="what-base-r-plotting-means-the-default-plotting-engine" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="what-base-r-plotting-means-the-default-plotting-engine"><span class="header-section-number">1.1</span> What “Base R plotting” means (the default plotting engine)</h3>
+<p>R comes with a built-in plotting system. It is often called <strong>Base R graphics</strong>.</p>
+<ul>
+<li>It is the <strong>default</strong> because it is included with R.</li>
+<li>You do <strong>not</strong> need to install anything to use it.</li>
+<li>You usually build a plot by giving R <strong>step-by-step drawing instructions</strong>:
+<ul>
+<li>“draw the points”</li>
+<li>“now draw a line”</li>
+<li>“now add a legend”</li>
+<li>“now change the axis labels”</li>
+</ul></li>
+</ul>
+<p>This is called an <strong>imperative</strong> style: you tell the computer what to do next, like giving directions.</p>
+</section>
+<section id="what-ggplot2-is-and-why-people-use-it" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="what-ggplot2-is-and-why-people-use-it"><span class="header-section-number">1.2</span> What ggplot2 is (and why people use it)</h3>
+<p><code>ggplot2</code> is a very popular R package for plots. It is based on an idea called the <strong>Grammar of Graphics</strong>.</p>
+<p>The beginner-friendly meaning is:</p>
+<ul>
+<li>A plot is not just a picture.</li>
+<li>A plot is a <strong>structured description</strong> of how data becomes marks (points/lines/bars) on axes.</li>
+</ul>
+<p>So instead of manually drawing each element, you <em>describe the meaning</em>:</p>
+<ul>
+<li>which dataset</li>
+<li>which variable goes on x and y</li>
+<li>which variable controls colour (or size, or shape)</li>
+<li>what mark to draw (points? lines? bars?)</li>
+<li>whether to split into panels (facets)</li>
+</ul>
+<p>This is called a <strong>declarative</strong> style: you declare what the plot means, and ggplot draws it.</p>
+</section>
+<section id="the-big-advantage-of-ggplot2-consistency" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="the-big-advantage-of-ggplot2-consistency"><span class="header-section-number">1.3</span> The big advantage of ggplot2 (consistency)</h3>
+<p>Base R can make good plots, but complex plots often require many manual steps.</p>
+<p>ggplot2 is easier for many people because the code is <strong>consistent</strong>:</p>
+<ul>
+<li>the beginning is almost always <code>ggplot(data, aes(...))</code></li>
+<li>each new visual layer looks like <code>+ geom_*()</code></li>
+<li>legends usually appear automatically from the mapping in <code>aes()</code></li>
+<li>multi-panel plots are usually one line: <code>facet_*()</code></li>
+</ul>
+</section>
+<section id="the-anatomy-of-ggplot-code-learn-this-pattern" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="the-anatomy-of-ggplot-code-learn-this-pattern"><span class="header-section-number">1.4</span> The anatomy of ggplot code (learn this pattern)</h3>
+<p>Most ggplot graphs follow this repeatable “sentence”:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DATA, <span class="fu">aes</span>(MAPPINGS)) <span class="sc">+</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_SOMETHING</span>(...) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_SOMETHING</span>(...) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_SOMETHING</span>(...) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_SOMETHING</span>(...) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(...) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_SOMETHING</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now in plain English:</p>
+<ul>
+<li><code>ggplot(DATA, ...)</code>: “I am making a plot from this dataset.”</li>
+<li><code>aes(...)</code>: “Here is what variables mean visually (x, y, colour, etc.).”</li>
+<li><code>geom_*()</code>: “Here is how to draw the data (points, lines, bars…).”</li>
+<li><code>scale_*()</code>: “Here is how to translate values into colours/axes/labels.”</li>
+<li><code>coord_*()</code>: “Here is the coordinate system / viewing window.”</li>
+<li><code>facet_*()</code>: “Split into multiple panels (small multiples).”</li>
+<li><code>labs(...)</code>: “Titles and axis labels so humans can read it.”</li>
+<li><code>theme_*()</code>: “Styling rules (font sizes, background, grid lines).”</li>
+</ul>
+</section>
+<section id="how-this-tutorial-works-base-r-think-ggplot-discuss" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="how-this-tutorial-works-base-r-think-ggplot-discuss"><span class="header-section-number">1.5</span> How this tutorial works (Base R → think → ggplot → discuss)</h3>
+<p>Every module follows the same rhythm:</p>
+<ol type="1">
+<li><strong>We show the Base R version first</strong> (manual drawing, step by step).</li>
+<li><strong>You pause and predict the ggplot version</strong> (you try to guess the pieces).</li>
+<li><strong>We show the ggplot version</strong> (using the same grammar pattern).</li>
+<li><strong>We discuss</strong> the differences in very simple language.</li>
+</ol>
+</section>
+</section>
+<section id="setup" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="load-packages-and-set-defaults" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="load-packages-and-set-defaults"><span class="header-section-number">2.1</span> Load packages and set defaults</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># this below code is optional, it just makes plots consistent in this tutorial</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">8</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="fl">4.8</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-we-will-use" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="what-we-will-use"><span class="header-section-number">2.2</span> What we will use</h3>
+<ul>
+<li>Dataset: <code>iris</code></li>
+<li>Tools: <strong>Base R</strong> graphics and <strong>ggplot2</strong></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A beginner-friendly way to think about good visualisation</strong></p>
+<p>Every plot should answer a question. In this tutorial, we repeatedly ask:</p>
+<ul>
+<li>What comparison or pattern should the reader see <em>in one glance</em>?</li>
+<li>What is the <strong>main visual signal</strong> (x position, y position, colour, panels, text)?</li>
+<li>What is the <strong>most likely misread</strong> (and how do we prevent it)?</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="scatter-plot-with-legend-reference-line" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="scatter-plot-with-legend-reference-line"><span class="header-section-number">3</span> 1 — Scatter plot with legend + reference line</h2>
+<section id="goal" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="goal"><span class="header-section-number">3.1</span> Goal</h3>
+<p>Create a scatter plot of:</p>
+<ul>
+<li>x = <code>Sepal.Length</code></li>
+<li>y = <code>Petal.Length</code></li>
+<li>colour by <code>Species</code></li>
+</ul>
+<p>Add:</p>
+<ul>
+<li>a <strong>dashed 1:1 reference line</strong></li>
+<li>a <strong>legend</strong> with clear labels</li>
+<li>axis labels with <strong>units</strong></li>
+</ul>
+</section>
+<section id="step-1-base-r-version-shown-first" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="step-1-base-r-version-shown-first"><span class="header-section-number">3.2</span> Step 1: Base R version (shown first)</h3>
+<p>In Base R, you build a plot by telling R what to draw <strong>one step at a time</strong>.</p>
+<p>Read the next code like a recipe:</p>
+<ul>
+<li><code>plot(...)</code> draws the points</li>
+<li><code>abline(...)</code> draws the dashed 1:1 line</li>
+<li><code>legend(...)</code> creates the legend</li>
+</ul>
+<p>Here is the Base R code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Scatter with Dashed Reference Line"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Species"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Principles used</strong></p>
+<ul>
+<li><strong>Reference lines are arguments</strong>: a 1:1 line creates an immediate benchmark for “above vs below”.</li>
+<li><strong>Figure–ground</strong>: keep non-data ink light (dashed line) so points remain the focus.</li>
+<li><strong>Legends must be decodable</strong>: if colour encodes groups, the legend must be present and readable.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-2-pause-and-predict-the-ggplot2-version" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="step-2-pause-and-predict-the-ggplot2-version"><span class="header-section-number">3.3</span> Step 2: pause and predict the ggplot2 version</h3>
+<p>Now we do the same figure in ggplot2. Before looking at the solution, pause and ask:</p>
+<ul>
+<li>What is the dataset? (<strong>iris</strong>)</li>
+<li>What goes on x? (<strong>Sepal.Length</strong>)</li>
+<li>What goes on y? (<strong>Petal.Length</strong>)</li>
+<li>What does colour mean? (<strong>Species</strong>)</li>
+<li>What do we draw? (<strong>points</strong>)</li>
+<li>What extra guide line do we add? (<strong>a 1:1 line</strong>)</li>
+</ul>
+<p>Try writing a ggplot “sentence” in your head first. If you want to sketch code, use this practice chunk (it will not run):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, colour = Species)) +</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point(...) +</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_abline(...) +</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(...) +</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_...()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-3-ggplot2-version-solution" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="step-3-ggplot2-version-solution"><span class="header-section-number">3.4</span> Step 3: ggplot2 version (solution)</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Petal.Length, <span class="at">colour =</span> Species)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Species"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Scatter with Dashed Reference Line"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-discussion-what-you-should-notice" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="step-4-discussion-what-you-should-notice"><span class="header-section-number">3.5</span> Step 4: discussion (what you should notice)</h3>
+<ul>
+<li>In <strong>Base R</strong>, you built the plot by issuing separate commands.</li>
+<li>In <strong>ggplot2</strong>, you declared the meaning once (inside <code>aes(...)</code>), and ggplot handled the legend automatically.</li>
+<li>The ggplot version is easier to extend consistently: if you want another layer later, you add another line starting with <code>+</code>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="grouped-line-plot" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="grouped-line-plot"><span class="header-section-number">4</span> 2 — Grouped line plot</h2>
+<section id="goal-1" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="goal-1"><span class="header-section-number">4.1</span> Goal</h3>
+<p>Plot three lines (one per species) over an index <code>x = 1:5</code> using the provided means:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>setosa_means     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.4</span>, <span class="fl">1.45</span>, <span class="fl">1.5</span>, <span class="fl">1.55</span>, <span class="fl">1.6</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>versicolor_means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.0</span>, <span class="fl">4.1</span>, <span class="fl">4.2</span>, <span class="fl">4.3</span>, <span class="fl">4.4</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>virginica_means  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>, <span class="fl">5.6</span>, <span class="fl">5.7</span>, <span class="fl">5.8</span>, <span class="fl">5.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-1-base-r-version-shown-first-1" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="step-1-base-r-version-shown-first-1"><span class="header-section-number">4.2</span> Step 1: Base R version (shown first)</h3>
+<p>In Base R, a “grouped line plot” often means:</p>
+<ul>
+<li>plot the first line with <code>plot(..., type = "l")</code></li>
+<li>then manually add other lines with <code>lines(...)</code></li>
+<li>then manually add a legend</li>
+</ul>
+<p>Here is the Base R code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  x, setosa_means,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">1</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Index"</span>, <span class="at">ylab =</span> <span class="st">"Mean Petal Length"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Grouped Line Plot by Species"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, versicolor_means, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, virginica_means,  <span class="at">col =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>, <span class="st">"virginica"</span>),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">title =</span> <span class="st">"Species"</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-pause-and-predict-the-ggplot2-version-1" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="step-2-pause-and-predict-the-ggplot2-version-1"><span class="header-section-number">4.3</span> Step 2: pause and predict the ggplot2 version</h3>
+<p>Now think in ggplot terms.</p>
+<p>In ggplot2, you strongly prefer your data to be in a simple table where:</p>
+<ul>
+<li>each row is one observation you want to draw</li>
+<li>each column is a variable (x, y, group, etc.)</li>
+</ul>
+<p>So, to draw three lines, we should build a table with:</p>
+<ul>
+<li><code>Index</code> (x)</li>
+<li><code>MeanPetalLength</code> (y)</li>
+<li><code>Species</code> (which line / which colour)</li>
+</ul>
+</section>
+<section id="step-3-ggplot2-version-solution-1" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="step-3-ggplot2-version-solution-1"><span class="header-section-number">4.4</span> Step 3: ggplot2 version (solution)</h3>
+<p>First we create a tidy dataframe:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>means_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Index =</span> <span class="fu">rep</span>(x, <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Species =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>, <span class="st">"virginica"</span>), <span class="at">each =</span> <span class="fu">length</span>(x)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">MeanPetalLength =</span> <span class="fu">c</span>(setosa_means, versicolor_means, virginica_means)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(means_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Index    Species MeanPetalLength
+1     1     setosa            1.40
+2     2     setosa            1.45
+3     3     setosa            1.50
+4     4     setosa            1.55
+5     5     setosa            1.60
+6     1 versicolor            4.00</code></pre>
+</div>
+</div>
+<p>Now we plot it with the repeatable ggplot pattern:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(means_df, <span class="fu">aes</span>(<span class="at">x =</span> Index, <span class="at">y =</span> MeanPetalLength, <span class="at">colour =</span> Species)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Index"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean Petal Length"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Species"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Grouped Line Plot by Species (ggplot2)"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-discussion-why-ggplot-feels-easier-here" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="step-4-discussion-why-ggplot-feels-easier-here"><span class="header-section-number">4.5</span> Step 4: discussion (why ggplot feels easier here)</h3>
+<ul>
+<li>In <strong>Base R</strong>, you wrote separate code for each group (<code>setosa</code>, <code>versicolor</code>, <code>virginica</code>).</li>
+<li>In <strong>ggplot2</strong>, groups are just <strong>values in a column</strong> (<code>Species</code>), so adding a new group would just mean adding rows to the data.</li>
+<li>The legend is automatic again because we mapped <code>colour = Species</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Principles used</strong></p>
+<ul>
+<li><strong>Proximity + continuity</strong>: line plots are best when the story is “change across ordered x”.</li>
+<li><strong>Common scales</strong>: fixed <code>ylim</code> (Base R) prevents misleading comparisons caused by autoscaling.</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="labelled-plot-text-marks" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="labelled-plot-text-marks"><span class="header-section-number">5</span> 3 — Labelled plot (text marks)</h2>
+<section id="goal-2" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="goal-2"><span class="header-section-number">5.1</span> Goal</h3>
+<p>Replace points with initials:</p>
+<ul>
+<li>setosa → “s”</li>
+<li>versicolor → “v”</li>
+<li>virginica → “v” (problem!)</li>
+</ul>
+<p>This exposes a design issue: <strong>labels can collide</strong> and <strong>symbols can be ambiguous</strong>.</p>
+</section>
+<section id="step-1-base-r-version-shown-first-2" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="step-1-base-r-version-shown-first-2"><span class="header-section-number">5.2</span> Step 1: Base R version (shown first)</h3>
+<p>In Base R, a labelled plot usually works like this:</p>
+<ul>
+<li>first you create a blank plotting area (<code>type = "n"</code>)</li>
+<li>then you place text labels using <code>text(...)</code></li>
+</ul>
+<p>Here we label each point using the first letter of the species name.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution (Base R)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"n"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sepal Length"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Petal Length"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Labelled Plot (Initials Instead of Points)"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">substr</span>(iris<span class="sc">$</span>Species, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">15</span>, <span class="at">title =</span> <span class="st">"Species"</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-pause-and-predict-the-ggplot2-version-2" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="step-2-pause-and-predict-the-ggplot2-version-2"><span class="header-section-number">5.3</span> Step 2: pause and predict the ggplot2 version</h3>
+<p>In ggplot2, the Base R function <code>text(...)</code> is replaced by a layer called <strong><code>geom_text()</code></strong>.</p>
+<p>So the “translation” is:</p>
+<ul>
+<li>Base R: “draw blank plot, then write text at coordinates”</li>
+<li>ggplot2: “map x and y, map the label, then choose the text geometry”</li>
+</ul>
+<p>Before looking at the solution, try to predict:</p>
+<ul>
+<li>What should go in <code>aes(...)</code> if you want text labels? (hint: <code>label = ...</code>)</li>
+<li>What geom draws text? (hint: <code>geom_text()</code>)</li>
+</ul>
+</section>
+<section id="step-3-ggplot2-version-solution-2" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="step-3-ggplot2-version-solution-2"><span class="header-section-number">5.4</span> Step 3: ggplot2 version (solution)</h3>
+<p>First, we create labels that are not ambiguous. “s/v/v” is confusing, so we will use <strong>Se / Ve / Vi</strong>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>iris_lbl <span class="ot">&lt;-</span> <span class="fu">transform</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  iris,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Abbr =</span> <span class="fu">c</span>(<span class="st">"Se"</span>, <span class="st">"Ve"</span>, <span class="st">"Vi"</span>)[<span class="fu">as.numeric</span>(Species)]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris_lbl, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length, <span class="at">label =</span> Abbr, <span class="at">colour =</span> Species)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Species"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Labelled Plot with Text Marks (ggplot2)"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-discussion-what-ggplot-is-doing-for-you" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="step-4-discussion-what-ggplot-is-doing-for-you"><span class="header-section-number">5.5</span> Step 4: discussion (what ggplot is doing for you)</h3>
+<ul>
+<li>In <strong>Base R</strong>, you had to remember a special trick: <code>type = "n"</code> to make a blank canvas, then <code>text(...)</code> to place labels.</li>
+<li>In <strong>ggplot2</strong>, you use the same pattern as always:
+<ul>
+<li><code>ggplot(data, aes(...))</code> to declare meaning</li>
+<li><code>+ geom_text()</code> to choose the mark</li>
+<li><code>+ labs()</code> and <code>+ theme_*()</code> for readability</li>
+</ul></li>
+<li>This consistency is a big reason ggplot is easier for beginners.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Principle (avoid ambiguous encodings):</strong> two classes share the same initial (“v”). If you use text marks, choose labels that are <strong>unique</strong> and <strong>legible</strong> (e.g., “Se”, “Ve”, “Vi”), or use colour + shape, or facets.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="small-multiples-base-r-vs-ggplot2-facets" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="small-multiples-base-r-vs-ggplot2-facets"><span class="header-section-number">6</span> 4 — Small multiples: Base R vs ggplot2 facets</h2>
+<section id="goal-3" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="goal-3"><span class="header-section-number">6.1</span> Goal</h3>
+<p>Create <strong>three random subsets</strong> of <code>iris</code> and show them side-by-side to compare patterns.</p>
+<p>Key requirement:</p>
+<ul>
+<li>all panels must share the <strong>same axis limits</strong> so comparisons are valid.</li>
+</ul>
+</section>
+<section id="step-1-base-r-version-shown-first-3" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="step-1-base-r-version-shown-first-3"><span class="header-section-number">6.2</span> Step 1: Base R version (shown first)</h3>
+<p>This is a classic situation where ggplot tends to feel easier: <strong>small multiples</strong> (many similar plots side-by-side).</p>
+<p>In Base R you typically have to:</p>
+<ul>
+<li>set the layout manually (<code>par(mfrow = ...)</code>)</li>
+<li>use a loop to draw each panel</li>
+<li>fix axis limits yourself so the panels are comparable</li>
+</ul>
+<p>Here is the Base R code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>n_subsets <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>subset_size <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">range</span>(iris<span class="sc">$</span>Sepal.Length)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ylim <span class="ot">&lt;-</span> <span class="fu">range</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, n_subsets), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_subsets) {</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> iris[<span class="fu">sample</span>(<span class="fu">nrow</span>(iris), subset_size), ]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    sub<span class="sc">$</span>Sepal.Length, sub<span class="sc">$</span>Petal.Length,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">as.numeric</span>(sub<span class="sc">$</span>Species),</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> xlim, <span class="at">ylim =</span> ylim,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sepal Length"</span>, <span class="at">ylab =</span> <span class="st">"Petal Length"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Subset"</span>, i)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-pause-and-predict-the-ggplot2-version-3" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="step-2-pause-and-predict-the-ggplot2-version-3"><span class="header-section-number">6.3</span> Step 2: pause and predict the ggplot2 version</h3>
+<p>Now think in ggplot terms:</p>
+<ul>
+<li>“If I had one table where every row is a point, and I add a column called <code>Subset</code>, then I can facet by that column.”</li>
+</ul>
+<p>So your prediction should be:</p>
+<ul>
+<li>create a column <code>Subset</code></li>
+<li>draw one scatter plot</li>
+<li>ask ggplot to split into panels with <code>facet_wrap(~ Subset)</code></li>
+</ul>
+</section>
+<section id="step-3-ggplot2-version-solution-3" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="step-3-ggplot2-version-solution-3"><span class="header-section-number">6.4</span> Step 3: ggplot2 version (solution)</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>n_subsets <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>subset_size <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>subset_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>n_subsets, <span class="cf">function</span>(i) {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> iris[<span class="fu">sample</span>(<span class="fu">nrow</span>(iris), subset_size), ]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  sub<span class="sc">$</span>Subset <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Subset"</span>, i)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  sub</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>iris_subs <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, subset_list)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris_subs, <span class="fu">aes</span>(Sepal.Length, Petal.Length, <span class="at">colour =</span> Species)) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>, <span class="st">"darkorange"</span>)) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">range</span>(iris<span class="sc">$</span>Sepal.Length),</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">range</span>(iris<span class="sc">$</span>Petal.Length)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Subset) <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Species"</span>,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Random Subsets of the Iris Dataset"</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-discussion-why-ggplot2-is-scalable-here" class="level3" data-number="6.5">
+<h3 data-number="6.5" class="anchored" data-anchor-id="step-4-discussion-why-ggplot2-is-scalable-here"><span class="header-section-number">6.5</span> Step 4: discussion (why ggplot2 is “scalable” here)</h3>
+<ul>
+<li>In <strong>Base R</strong>, making 10 panels means more layout thinking, more looping, and more manual control.</li>
+<li>In <strong>ggplot2</strong>, the plot code stays almost the same. You mostly change the <strong>data</strong> (more rows / more subsets), and ggplot keeps the layout consistent.</li>
+<li>This is one of the main advantages of the Grammar of Graphics approach: once the mapping is declared, “many panels” becomes a data problem, not a drawing problem.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Principles used</strong></p>
+<ul>
+<li><strong>Small multiples</strong>: comparisons become easier when panels share scales and design.</li>
+<li><strong>Consistency beats decoration</strong>: repeatable structure reduces cognitive load.</li>
+<li><strong>Grammar of Graphics</strong>: once the mapping is declared, faceting is a data operation rather than a manual layout job.</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="scatter-smoother-scale-thinking" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="scatter-smoother-scale-thinking"><span class="header-section-number">7</span> 5 — Scatter + smoother + scale thinking</h2>
+<section id="goal-4" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="goal-4"><span class="header-section-number">7.1</span> Goal</h3>
+<p>Add a group-wise smoother to <code>Sepal.Length</code> vs <code>Petal.Length</code>:</p>
+<ul>
+<li>Base R: <code>lowess()</code> per species</li>
+<li>ggplot2: <code>geom_smooth(method = "loess")</code></li>
+</ul>
+<p>Also practice <strong>scale discipline</strong>:</p>
+<ul>
+<li>choose breaks intentionally</li>
+<li>label them clearly</li>
+</ul>
+</section>
+<section id="step-1-base-r-version-shown-first-4" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="step-1-base-r-version-shown-first-4"><span class="header-section-number">7.2</span> Step 1: Base R version (shown first)</h3>
+<p>In Base R, adding a “trend line” per group usually means:</p>
+<ul>
+<li>draw the scatter plot</li>
+<li>split the data by group (Species)</li>
+<li>for each group, compute a smoother (here we use <code>lowess(...)</code>)</li>
+<li>draw that smoother line with <code>lines(...)</code></li>
+</ul>
+<p>Here is the Base R code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Petal.Length,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">as.numeric</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sepal Length"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Sepal vs Petal Length with Mean Smoother"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  sub <span class="ot">&lt;-</span> iris[iris<span class="sc">$</span>Species <span class="sc">==</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species)[i], ]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">lowess</span>(sub<span class="sc">$</span>Sepal.Length, sub<span class="sc">$</span>Petal.Length), <span class="at">col =</span> i, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Iris Species"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-pause-and-predict-the-ggplot2-version-4" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="step-2-pause-and-predict-the-ggplot2-version-4"><span class="header-section-number">7.3</span> Step 2: pause and predict the ggplot2 version</h3>
+<p>In ggplot2, the “translation” is usually:</p>
+<ul>
+<li>points → <code>geom_point()</code></li>
+<li>smoother → <code>geom_smooth()</code></li>
+<li>grouping by Species happens automatically because colour is mapped to Species</li>
+</ul>
+<p>So before you look, predict what the ggplot sentence will look like:</p>
+<ul>
+<li>start: <code>ggplot(iris, aes(...))</code></li>
+<li>then: <code>+ geom_point(...)</code></li>
+<li>then: <code>+ geom_smooth(...)</code></li>
+<li>then: labels and theme</li>
+</ul>
+</section>
+<section id="step-3-ggplot2-version-solution-4" class="level3" data-number="7.4">
+<h3 data-number="7.4" class="anchored" data-anchor-id="step-3-ggplot2-version-solution-4"><span class="header-section-number">7.4</span> Step 3: ggplot2 version (solution)</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Petal.Length, <span class="at">colour =</span> Species)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>, <span class="st">"darkorange"</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Iris Species"</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sepal Length (cm)"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Petal Length (cm)"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sepal vs Petal Length with Mean Smoother"</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistut_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-discussion-what-is-simpler-in-ggplot2" class="level3" data-number="7.5">
+<h3 data-number="7.5" class="anchored" data-anchor-id="step-4-discussion-what-is-simpler-in-ggplot2"><span class="header-section-number">7.5</span> Step 4: discussion (what is simpler in ggplot2)</h3>
+<ul>
+<li>In <strong>Base R</strong>, you manually looped over species and manually drew each smoother line.</li>
+<li>In <strong>ggplot2</strong>, you told ggplot “colour means Species”, and ggplot uses that grouping to draw separate smoothers automatically.</li>
+<li>This is the same “consistency advantage” again: you add layers, and ggplot handles grouping + legends in a predictable way.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Principle (don’t let smoothers over-claim):</strong> a smoother is not “truth”; it’s a modelling choice. Always ask:</p>
+<ul>
+<li>Is the smoother appropriate for the data density and noise?</li>
+<li>Would a linear model or summary by bins be clearer?</li>
+<li>Should you show uncertainty (SE/CI ribbon) or keep it simple?</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="mini-section-visualisation-principles-checklist" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="mini-section-visualisation-principles-checklist"><span class="header-section-number">8</span> Mini-section — Visualisation principles checklist</h2>
+<p>Before you submit a figure, check:</p>
+<ul>
+<li><strong>Integrity</strong>: are scales honest? any distortion? any unnecessary ink?</li>
+<li><strong>Perception</strong>:
+<ul>
+<li>proximity: are related items grouped?</li>
+<li>similarity: are colours/shapes consistent?</li>
+<li>figure–ground: is the data visually dominant?</li>
+</ul></li>
+<li><strong>Structure (Grammar of Graphics)</strong>:
+<ul>
+<li>are mappings (<code>aes</code>) explicit and consistent across plots?</li>
+<li>are scales and guides clearly labelled?</li>
+</ul></li>
+<li><strong>Accessibility</strong>:
+<ul>
+<li>can it be read in grayscale?</li>
+<li>is colour the <em>only</em> encoding?</li>
+<li>is text large enough for projection/print?</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="optional-extensions" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="optional-extensions"><span class="header-section-number">9</span> Optional extensions</h2>
+<section id="extension-1-make-labels-unambiguous" class="level3" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="extension-1-make-labels-unambiguous"><span class="header-section-number">9.1</span> Extension 1 — Make labels unambiguous</h3>
+<p>Replace initials with unique labels: “Se”, “Ve”, “Vi”.</p>
+</section>
+<section id="extension-2-use-facets-to-replace-colour" class="level3" data-number="9.2">
+<h3 data-number="9.2" class="anchored" data-anchor-id="extension-2-use-facets-to-replace-colour"><span class="header-section-number">9.2</span> Extension 2 — Use facets to replace colour</h3>
+<p>Create a <code>facet_wrap(~ Species)</code> plot and move legend off (or drop colour entirely).</p>
+</section>
+<section id="extension-3-write-a-caption-that-completes-the-figure" class="level3" data-number="9.3">
+<h3 data-number="9.3" class="anchored" data-anchor-id="extension-3-write-a-caption-that-completes-the-figure"><span class="header-section-number">9.3</span> Extension 3 — Write a “caption that completes the figure”</h3>
+<p>Write 3–4 sentences:</p>
+<ul>
+<li>what is shown (variables + units)</li>
+<li>what colour encodes</li>
+<li>what the smoother means (if present)</li>
+<li>what the key takeaway is (one sentence)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="wrap-up" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">10</span> Wrap-up</h2>
+<p>You now have a repeatable workflow:</p>
+<ul>
+<li>start with the <strong>question</strong></li>
+<li>choose encodings that support perception (Gestalt)</li>
+<li>keep figures honest and minimal (Tufte)</li>
+<li>build plots as structured statements (Grammar of Graphics)</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

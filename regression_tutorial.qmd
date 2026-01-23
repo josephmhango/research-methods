@@ -39,7 +39,7 @@ head(penguins)
 
 **What we're looking at:** Data on 333 penguins from three species. We'll use their physical measurements to understand regression.
 
----
+------------------------------------------------------------------------
 
 # Part 1: Simple Linear Regression
 
@@ -90,10 +90,10 @@ summary(model1)
 
 **Let's break this down:**
 
-- **Coefficients table**: Shows our intercept and slope
-- **Residual standard error**: How far off our predictions typically are (`r round(summary(model1)$sigma, 2)`g)
-- **R-squared**: Proportion of variance explained (`r round(summary(model1)$r.squared, 2)` = `r round(summary(model1)$r.squared * 100, 0)`%)
-- **F-statistic**: Tests if the model is better than just using the mean (it is!)
+-   **Coefficients table**: Shows our intercept and slope
+-   **Residual standard error**: How far off our predictions typically are (`r round(summary(model1)$sigma, 2)`g)
+-   **R-squared**: Proportion of variance explained (`r round(summary(model1)$r.squared, 2)` = `r round(summary(model1)$r.squared * 100, 0)`%)
+-   **F-statistic**: Tests if the model is better than just using the mean (it is!)
 
 ### Step 4: Extract and interpret the coefficients
 
@@ -109,8 +109,8 @@ model1$coefficients
 
 **What do these mean?**
 
-- **Intercept = `r round(coefficients(model1)[1], 2)`**: A penguin with 0mm bill length would weigh `r round(coefficients(model1)[1], 2)`g. (Obviously impossible—this is just where the line crosses the y-axis)
-- **Slope = `r round(coefficients(model1)[2], 2)`**: For every 1mm increase in bill length, body mass increases by **`r round(coefficients(model1)[2], 2)` grams** on average
+-   **Intercept = `r round(coefficients(model1)[1], 2)`**: A penguin with 0mm bill length would weigh `r round(coefficients(model1)[1], 2)`g. (Obviously impossible—this is just where the line crosses the y-axis)
+-   **Slope = `r round(coefficients(model1)[2], 2)`**: For every 1mm increase in bill length, body mass increases by **`r round(coefficients(model1)[2], 2)` grams** on average
 
 Let's get confidence intervals too:
 
@@ -174,7 +174,7 @@ data.frame(
 
 **What's a residual?** It's how wrong we were. If a penguin weighs 3750g but we predicted 3600g, the residual is +150g. Positive residuals mean we underestimated; negative means we overestimated.
 
----
+------------------------------------------------------------------------
 
 # Part 2: Multiple Regression
 
@@ -226,8 +226,8 @@ ci2
 
 **What do these mean?**
 
-- **bill_length_mm = `r round(coefficients(model2)[2], 2)`**: Holding flipper length constant, a 1mm increase in bill length increases body mass by `r round(coefficients(model2)[2], 2)`g
-- **flipper_length_mm = `r round(coefficients(model2)[3], 2)`**: Holding bill length constant, a 1mm increase in flipper length increases body mass by `r round(coefficients(model2)[3], 2)`g
+-   **bill_length_mm = `r round(coefficients(model2)[2], 2)`**: Holding flipper length constant, a 1mm increase in bill length increases body mass by `r round(coefficients(model2)[2], 2)`g
+-   **flipper_length_mm = `r round(coefficients(model2)[3], 2)`**: Holding bill length constant, a 1mm increase in flipper length increases body mass by `r round(coefficients(model2)[3], 2)`g
 
 **Wait, what happened?** The bill length effect dropped from `r round(coefficients(model1)[2], 2)`g to `r round(coefficients(model2)[2], 2)`g! Why? Because bill length and flipper length are correlated—they both measure "penguin size". Once we account for flipper length, bill length doesn't add as much.
 
@@ -255,9 +255,9 @@ We can test if model2 is significantly better than model1:
 anova(model1, model2)
 ```
 
-**Reading the output:** The p-value is tiny (< 0.001), confirming that adding flipper length significantly improves the model.
+**Reading the output:** The p-value is tiny (\< 0.001), confirming that adding flipper length significantly improves the model.
 
----
+------------------------------------------------------------------------
 
 # Part 3: Interactions
 
@@ -303,9 +303,9 @@ coefficients(model3)
 
 **How to read this:**
 
-1. **Intercept** and **bill_length_mm**: These apply to the *reference species* (Adelie, alphabetically first)
-2. **speciesChinstrap** and **speciesGentoo**: These are *adjustments* to the intercept for those species
-3. **bill_length_mm:speciesChinstrap** and **bill_length_mm:speciesGentoo**: These are *adjustments* to the slope for those species
+1.  **Intercept** and **bill_length_mm**: These apply to the *reference species* (Adelie, alphabetically first)
+2.  **speciesChinstrap** and **speciesGentoo**: These are *adjustments* to the intercept for those species
+3.  **bill_length_mm:speciesChinstrap** and **bill_length_mm:speciesGentoo**: These are *adjustments* to the slope for those species
 
 **Species-specific slopes:**
 
@@ -325,9 +325,9 @@ data.frame(
 )
 ```
 
-- Adelie: `r round(slope_adelie, 2)` g/mm
-- Chinstrap: `r round(slope_chinstrap, 2)` g/mm  
-- Gentoo: `r round(slope_gentoo, 2)` g/mm
+-   Adelie: `r round(slope_adelie, 2)` g/mm
+-   Chinstrap: `r round(slope_chinstrap, 2)` g/mm\
+-   Gentoo: `r round(slope_gentoo, 2)` g/mm
 
 ### Step 4: Do we need the interaction?
 
@@ -344,7 +344,7 @@ anova_comparison
 
 The p-value is `r round(anova_comparison$"Pr(>F)"[2], 3)`. Since this is less than 0.05, the interaction **is** statistically significant. The slopes really do differ across species. We should keep the interaction in the model!
 
----
+------------------------------------------------------------------------
 
 # Part 4: ANOVA is Just Regression
 
@@ -363,7 +363,7 @@ aov_summary <- summary(aov_model)
 aov_summary
 ```
 
-**ANOVA says:** F = `r round(aov_summary[[1]]["species", "F value"], 2)`, p < 0.001. Species significantly affect body mass.
+**ANOVA says:** F = `r round(aov_summary[[1]]["species", "F value"], 2)`, p \< 0.001. Species significantly affect body mass.
 
 ### Regression approach
 
@@ -376,7 +376,7 @@ lm_summary <- summary(lm_model)
 lm_summary
 ```
 
-Notice the bottom line: **F-statistic: `r round(lm_summary$fstatistic[1], 2)`, p < 0.001**
+Notice the bottom line: **F-statistic: `r round(lm_summary$fstatistic[1], 2)`, p \< 0.001**
 
 ### They're identical!
 
@@ -394,9 +394,9 @@ coef_lm <- coefficients(lm_model)
 coef_lm
 ```
 
-- **Intercept (`r round(coef_lm[1], 2)`)**: Mean body mass for Adelie (the reference group)
-- **speciesChinstrap (`r round(coef_lm[2], 2)`)**: Chinstrap penguins weigh `r round(coef_lm[2], 2)`g less than Adelie, on average
-- **speciesGentoo (`r round(coef_lm[3], 2)`)**: Gentoo penguins weigh `r round(coef_lm[3], 2)`g more than Adelie, on average
+-   **Intercept (`r round(coef_lm[1], 2)`)**: Mean body mass for Adelie (the reference group)
+-   **speciesChinstrap (`r round(coef_lm[2], 2)`)**: Chinstrap penguins weigh `r round(coef_lm[2], 2)`g less than Adelie, on average
+-   **speciesGentoo (`r round(coef_lm[3], 2)`)**: Gentoo penguins weigh `r round(coef_lm[3], 2)`g more than Adelie, on average
 
 Let's verify this by calculating group means directly:
 
@@ -408,13 +408,13 @@ species_means <- penguins %>%
 species_means
 ```
 
-- Adelie: `r round(species_means$mean_mass[1], 2)`g (= intercept)
-- Chinstrap: `r round(species_means$mean_mass[1] + coef_lm[2], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[2], 2)` ✓
-- Gentoo: `r round(species_means$mean_mass[1] + coef_lm[3], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[3], 2)` ✓
+-   Adelie: `r round(species_means$mean_mass[1], 2)`g (= intercept)
+-   Chinstrap: `r round(species_means$mean_mass[1] + coef_lm[2], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[2], 2)` ✓
+-   Gentoo: `r round(species_means$mean_mass[1] + coef_lm[3], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[3], 2)` ✓
 
 **The regression coefficients directly tell us group differences!**
 
----
+------------------------------------------------------------------------
 
 # Part 5: Checking Your Model (Diagnostics)
 
@@ -422,14 +422,14 @@ species_means
 
 Regression makes assumptions. If those assumptions are violated, your p-values and confidence intervals are unreliable. We need to check:
 
-1. **Linearity**: Is the relationship actually linear?
-2. **Homoscedasticity**: Is the variance constant?
-3. **Normality**: Are residuals roughly normal?
-4. **Independence**: Are observations independent? (Check by study design)
+1.  **Linearity**: Is the relationship actually linear?
+2.  **Homoscedasticity**: Is the variance constant?
+3.  **Normality**: Are residuals roughly normal?
+4.  **Independence**: Are observations independent? (Check by study design)
 
 ### The four diagnostic plots
 
-R gives us four helpful plots. Let's use model2 (body mass ~ bill length + flipper length):
+R gives us four helpful plots. Let's use model2 (body mass \~ bill length + flipper length):
 
 ```{r}
 # Create all four diagnostic plots
@@ -442,36 +442,36 @@ par(mfrow = c(1, 1))  # reset to single plot
 
 **Plot 1: Residuals vs Fitted**
 
-- **What to look for**: Random scatter around the horizontal line at zero
-- **Red flag**: A pattern (curve, U-shape) means the relationship isn't linear
-- **Red flag**: A funnel shape (wider on one side) means variance isn't constant
+-   **What to look for**: Random scatter around the horizontal line at zero
+-   **Red flag**: A pattern (curve, U-shape) means the relationship isn't linear
+-   **Red flag**: A funnel shape (wider on one side) means variance isn't constant
 
 **Plot 2: Normal Q-Q**
 
-- **What to look for**: Points following the diagonal line
-- **Red flag**: Points curving away from the line means residuals aren't normal
-- **Note**: Small deviations at the ends are usually okay
+-   **What to look for**: Points following the diagonal line
+-   **Red flag**: Points curving away from the line means residuals aren't normal
+-   **Note**: Small deviations at the ends are usually okay
 
 **Plot 3: Scale-Location**
 
-- **What to look for**: Random scatter, roughly flat red line
-- **Red flag**: Red line sloping up means variance increases with fitted values
-- **This checks**: Homoscedasticity (constant variance)
+-   **What to look for**: Random scatter, roughly flat red line
+-   **Red flag**: Red line sloping up means variance increases with fitted values
+-   **This checks**: Homoscedasticity (constant variance)
 
 **Plot 4: Residuals vs Leverage**
 
-- **What to look for**: All points inside the dashed lines (Cook's distance)
-- **Red flag**: Points outside the dashed lines have high influence
-- **What it means**: These observations strongly affect the regression line
+-   **What to look for**: All points inside the dashed lines (Cook's distance)
+-   **Red flag**: Points outside the dashed lines have high influence
+-   **What it means**: These observations strongly affect the regression line
 
 ### What does model2 look like?
 
 Looking at our four plots:
 
-- ✓ **Residuals vs Fitted**: Pretty random, no strong pattern
-- ✓ **Q-Q plot**: Points mostly follow the line; residuals are roughly normal
-- ✓ **Scale-Location**: Fairly flat; variance looks constant
-- ✓ **Residuals vs Leverage**: No points way outside; no highly influential observations
+-   [x] **Residuals vs Fitted**: Pretty random, no strong pattern
+-   [x] **Q-Q plot**: Points mostly follow the line; residuals are roughly normal
+-   [x] **Scale-Location**: Fairly flat; variance looks constant
+-   [x] **Residuals vs Leverage**: No points way outside; no highly influential observations
 
 **Verdict:** This model looks good! Assumptions are reasonably met.
 
@@ -490,11 +490,11 @@ par(mfrow = c(1, 1))
 
 **What's wrong here?**
 
-- **Residuals vs Fitted**: You can see some pattern/grouping—we're missing an important predictor (species)
-- **Q-Q plot**: Tails deviate more from the line
-- This shows why model2 (which includes flipper length) is better
+-   **Residuals vs Fitted**: You can see some pattern/grouping—we're missing an important predictor (species)
+-   **Q-Q plot**: Tails deviate more from the line
+-   This shows why model2 (which includes flipper length) is better
 
----
+------------------------------------------------------------------------
 
 # Summary: The Essential R Commands
 
@@ -525,32 +525,32 @@ anova(model1, model2)       # test if model2 is better
 plot(model)                 # creates 4 diagnostic plots
 ```
 
----
+------------------------------------------------------------------------
 
 # Practice Exercises
 
 **Try these yourself:**
 
-1. Fit a simple regression predicting `body_mass_g` from `flipper_length_mm`. What's the slope? Interpret it in plain English.
+1.  Fit a simple regression predicting `body_mass_g` from `flipper_length_mm`. What's the slope? Interpret it in plain English.
 
-2. Add `bill_length_mm` to create a multiple regression. How did the flipper length coefficient change?
+2.  Add `bill_length_mm` to create a multiple regression. How did the flipper length coefficient change?
 
-3. Fit separate regressions for each species (use `filter()`). Do Adelie, Chinstrap, and Gentoo have different slopes?
+3.  Fit separate regressions for each species (use `filter()`). Do Adelie, Chinstrap, and Gentoo have different slopes?
 
-4. Use `lm()` to test if body mass differs between male and female penguins. Then verify your answer using `t.test()`.
+4.  Use `lm()` to test if body mass differs between male and female penguins. Then verify your answer using `t.test()`.
 
-5. Check the diagnostics for your models. Do any assumptions look violated?
+5.  Check the diagnostics for your models. Do any assumptions look violated?
 
----
+------------------------------------------------------------------------
 
 # What You've Learned
 
-- How to fit linear models with `lm()`
-- How to extract and interpret coefficients
-- The difference between simple and multiple regression
-- What interactions mean and how to test them
-- That ANOVA is secretly just regression
-- How to check if your model assumptions are met
+-   How to fit linear models with `lm()`
+-   How to extract and interpret coefficients
+-   The difference between simple and multiple regression
+-   What interactions mean and how to test them
+-   That ANOVA is secretly just regression
+-   How to check if your model assumptions are met
 
 **Most importantly:** You learned to interrogate model objects directly using base R, not relying on fancy packages. This is how you really understand what's going on under the hood.
 
