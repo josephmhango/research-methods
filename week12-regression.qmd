@@ -1,0 +1,686 @@
+---
+title: "Linear Regression"
+subtitle: "Concepts and intuition"
+author: "Harper Adams University"
+format:
+  revealjs:
+    theme: simple
+    css: scroll.css
+    slide-number: true
+    incremental: false
+    preview-links: true
+    code-fold: false
+    width: 1280
+    height: 720
+    transition: fade
+    toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## What we're doing today
+
+By the end, you should be able to:
+
+- Explain what a *linear model* is (and what "linear" actually means)
+- Fit and interpret a simple linear regression in R (`lm()`)
+- Distinguish *prediction* vs *explanation* (and the traps in each)
+- Check assumptions with diagnostic plots
+- Report results in a professional, reproducible way
+- Recognise when you need extensions: multiple predictors, interactions, blocks, random intercepts
+
+::: notes
+Suggested pacing:
+- Part A: what a model is + regression idea
+- Part B: fit, interpret, confidence intervals, R², p-values
+- Break: quick stretch
+- Part C: diagnostics + fixes
+- Part D: extensions + reporting + mini-assessment
+:::
+
+---
+
+## Setup (R)
+
+We'll use a small, friendly dataset.
+
+```{r, include=FALSE}
+# Install if needed
+# install.packages(c("ggplot2", "dplyr", "tidyr", "broom", "palmerpenguins", "knitr"))
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(broom)
+library(palmerpenguins)
+library(knitr)
+
+data(penguins)
+penguins <- penguins %>%
+  drop_na(bill_length_mm, body_mass_g, species, flipper_length_mm, island)
+```
+
+::: notes
+If you prefer: swap in mtcars or your own agronomy dataset.
+We use penguins because it has clear relationships and is widely used in teaching.
+:::
+
+---
+
+# Part A — What is a statistical model?
+
+## Definition: statistical model
+
+A **statistical model** is a simplified mathematical description of a real system.
+
+- It focuses on relationships between variables (and uncertainty),
+- not just *drawing a curve through points*.
+
+---
+
+## Linear vs non-linear (intuition)
+
+A relationship can be:
+
+- **linear additive**: a fixed change in *x* gives a fixed change in expected *y*
+- **non-linear**: diminishing returns, saturation, thresholds, etc.
+
+::: notes
+Use this to motivate "linear regression is a tool, not the truth".
+:::
+
+---
+
+## Linear vs non-linear
+
+```{r}
+set.seed(1)
+toy <- tibble(
+  x = seq(0, 10, length.out = 200)
+) %>%
+  mutate(
+    y_linear = 2 + 0.7 * x + rnorm(n(), sd = 0.7),
+    y_nonlinear = 2 + 8 * (1 - exp(-x / 2)) + rnorm(n(), sd = 0.7)
+  ) %>%
+  pivot_longer(starts_with("y_"), names_to = "relationship", values_to = "y") %>%
+  mutate(
+    relationship = recode(
+      relationship,
+      y_linear = "Linear (constant change per 1 unit of x)",
+      y_nonlinear = "Non-linear (diminishing returns)"
+    )
+  )
+
+ggplot(toy, aes(x, y)) +
+  geom_point(alpha = 0.35, size = 1) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1) +
+  facet_wrap(~relationship, ncol = 2) +
+  labs(x = "x", y = "y (with noise)")
+```
+
+---
+
+## "Linear" means linear in the parameters
+
+A **linear model** can include transformed predictors:
+
+- ✅ `y = β0 + β1 x + β2 x^2 + ε` is *linear in β's*
+- ✅ `y = β0 + β1 log(x) + ε` is *linear in β's*
+- ❌ `y = β0 + exp(β1 x) + ε` is *not* linear in β's
+
+---
+
+## The linear model in matrix form
+
+$$
+\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}
+$$
+
+- **y**: response/outcome
+- **X**: design matrix (predictors encoded as columns)
+- **β**: coefficients/parameters
+- **ε**: residual error (unexplained part)
+
+---
+
+## What regression is for
+
+Simple regression often answers at least one of:
+
+- **Prediction**: estimate *y* at new *x*
+- **Explanation**: quantify change in *y* per unit *x*
+- **Variance accounting**: how much variation in *y* is associated with *x*
+- **Inference**: hypothesis tests and confidence intervals
+
+---
+
+## Regression to the mean (intuition)
+
+**Regression to the mean** happens when you pick people (or things) because they had an **extreme result once**, then measure them again.
+
+**What you see:** the extreme scores move closer to average on the second measurement.
+
+**Why?** Every measurement has some **randomness** (luck, conditions, mood, error). When you pick "the best" or "the worst" from one measurement, you accidentally pick people who got lucky (or unlucky) that day. Next time, their luck is different—so their score drifts back toward their usual level.
+
+**Key examples:**
+
+- Students who bombed an exam → tend to do better on a retest (even with no extra study)
+- "Rookie of the year" → often has a more normal second season
+- Worst-performing stores → often improve next quarter (even with no intervention)
+
+**The trap:** this looks like improvement (or decline), but it's just randomness evening out. **Nothing actually changed.**
+
+---
+
+## Why is it called "regression"?
+
+**The connection:** linear regression literally models regression to the mean.
+
+**History:** Francis Galton (1886) studied parent and child heights. He noticed:
+
+- Very tall parents → children are tall, but closer to average height
+- Very short parents → children are short, but closer to average height
+
+He called this **"regression toward mediocrity"** (we now say "regression to the mean").
+
+**Mathematics:** When you fit a regression line $\hat{y} = \alpha + \beta x$, you're estimating the **conditional mean**: the average *y* for a given *x*.
+
+- If correlation is perfect ($\rho = 1$), the line has slope = 1 (no regression to mean)
+- If correlation is imperfect ($\rho < 1$), the line is **flatter** than 45°, which means extreme *x* values predict *y* values closer to the mean
+
+**So:** linear regression is the mathematical tool that quantifies how much extreme values regress back toward the mean. The phenomenon gave the method its name!
+
+---
+
+## Caution: correlation ≠ causation
+
+Regression describes association *in your dataset*.
+
+To talk about causality you need:
+
+- design (randomisation, controls),
+- or a strong causal argument (assumptions you can defend).
+
+---
+
+# Part B — Simple linear regression
+
+## The simple regression model
+
+$$
+y_i = \alpha + \beta x_i + \varepsilon_i,\quad \varepsilon_i \sim \mathcal{N}(0, \sigma^2)
+$$
+
+- **α**: intercept (expected *y* when *x = 0*)
+- **β**: slope (change in expected *y* for +1 in *x*)
+- **ε**: residual (what's left)
+
+---
+
+## Example: body mass vs bill length
+
+Here's the relationship we'll model:
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  labs(x = "Bill length (mm)", y = "Body mass (g)")
+```
+
+---
+
+## Fit the model with `lm()`
+
+```{r}
+m1 <- lm(body_mass_g ~ bill_length_mm, data = penguins)
+m1
+```
+
+---
+
+## Add the regression line
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(x = "Bill length (mm)", y = "Body mass (g)")
+```
+
+---
+
+## Model coefficients
+
+The fitted regression coefficients with 95% confidence intervals:
+
+```{r}
+tidy(m1, conf.int = TRUE) %>% kable(digits = 2)
+```
+
+Interpretation template:
+
+- **Slope β:** for a 1-unit increase in *x*, expected *y* changes by β (holding other predictors constant)
+- **Intercept α:** expected *y* when *x = 0* (sometimes not meaningful!)
+
+---
+
+## Prediction vs residuals
+
+Two concepts:
+
+- **Fitted value**: $\hat{y}_i$ (model's predicted mean)
+- **Residual**: $e_i = y_i - \hat{y}_i$
+
+First few observations with fitted values and residuals:
+
+```{r}
+aug <- augment(m1)
+aug %>% 
+  select(body_mass_g, bill_length_mm, .fitted, .resid) %>%
+  head(6) %>%
+  kable(digits = 1, col.names = c("Body mass (g)", "Bill length (mm)", "Fitted", "Residual"))
+```
+
+---
+
+## Residuals
+
+```{r}
+ggplot(aug, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.55) +
+  geom_line(aes(y = .fitted), color = "steelblue", linewidth = 1) +
+  geom_segment(
+    aes(xend = bill_length_mm, yend = .fitted),
+    alpha = 0.25
+  ) +
+  labs(
+    x = "Bill length (mm)",
+    y = "Body mass (g)"
+  )
+```
+
+---
+
+## Where do the coefficients come from?
+
+### Ordinary Least Squares (OLS)
+
+**Ordinary least squares** chooses alpha, beta to minimise:
+
+$$
+\sum_i (y_i - \hat{y}_i)^2
+$$
+
+This is the **sum of squared residuals**.
+
+### Why *least squares*?
+
+- Squaring makes all errors positive
+- Larger errors are penalised more heavily
+- The mathematics becomes tractable (closed-form solution)
+
+### Why *ordinary*?
+
+Because we assume:
+
+- all observations have **equal variance**
+- all observations are **equally reliable**
+- errors are **independent**
+
+If these are not true, we move to:
+
+- **Weighted least squares** (different variances)
+- **Generalised least squares** (correlated errors)
+- **Mixed models** (hierarchical structure)
+
+So "ordinary" = *the simplest, default case*.
+
+
+**Ordinary least squares (OLS)** chooses α, β that minimise:
+
+$$
+\sum_i (y_i - \hat{y}_i)^2
+$$
+
+This is why you'll hear *"least squares line of best fit"*.
+
+---
+
+## R² (variance explained)
+
+How much variation does the model explain?
+
+```{r}
+glance(m1) %>% 
+  select(r.squared, adj.r.squared, sigma) %>%
+  kable(digits = 3, col.names = c("R²", "Adjusted R²", "Residual SD"))
+```
+
+Caution:
+
+- high R² ≠ causal truth
+- R² can increase just by adding predictors (use adjusted R², or better, validation)
+
+---
+
+## p-values, confidence intervals, and power
+
+Full model summary:
+
+```{r}
+summary(m1)
+```
+
+### What is being tested?
+
+For each coefficient $\beta_j$, the null hypothesis is:
+
+$$
+H_0: \beta_j = 0
+$$
+
+The test statistic is:
+
+$$
+t = \frac{\hat{\beta}_j}{SE(\hat{\beta}_j)}
+$$
+
+This follows a t-distribution under the model assumptions.
+
+### ANOVA view of regression
+
+```{r}
+anova(m1)
+```
+
+ANOVA partitions variance into:
+
+- **Model (Regression)** sum of squares
+- **Residual (Error)** sum of squares
+
+The F-statistic is:
+
+$$
+F = \frac{MS_{model}}{MS_{error}}
+$$
+
+If this ratio is large, the model explains much more variance than expected by chance.
+
+### Confidence intervals
+
+```{r}
+confint(m1)
+```
+
+A 95% CI is the range of slopes compatible with the data under the model.
+
+
+## Interpreting the regression table
+
+The coefficient table shows estimates, standard errors, t-statistics, and p-values:
+
+```{r}
+summary(m1)$coefficients %>% kable(digits = 3)
+```
+
+Typical output:
+
+| Term        | Estimate | Std. Error | t value | Pr(>|t|) |
+|-------------|----------|------------|---------|-----------|
+| (Intercept) | alpha    | SE(alpha)  | t       | p         |
+| x           | beta     | SE(beta)   | t       | p         |
+
+### How to read this
+
+- **Estimate**: the fitted coefficient (alpha or beta)
+- **Std. Error**: uncertainty in that estimate
+- **t value**: Estimate / Std. Error
+- **Pr(>|t|)**: p-value for H0: coefficient = 0
+
+### Intercept
+
+The intercept is the expected value of y when **all predictors = 0**.
+
+- Sometimes meaningful (e.g. baseline control)
+- Often meaningless (e.g. bill length = 0 mm is impossible)
+
+### Slope (beta)
+
+The slope is the **expected change in y per 1-unit increase in x**, holding other predictors constant.
+
+Units always matter:
+
+> g per mm, kg per ha, t per °C, etc.
+
+### With factors
+
+```{r}
+m_cat <- lm(body_mass_g ~ species, data = penguins)
+summary(m_cat)
+```
+
+Here:
+
+- One level is the **reference** (baseline)
+- Other coefficients are **differences from that reference**
+
+Example interpretation:
+
+- (Intercept) = mean of reference species
+- speciesChinstrap = difference between Chinstrap and reference
+
+### With interactions
+
+Model with interaction term:
+
+```{r}
+m_int <- lm(body_mass_g ~ bill_length_mm * species, data = penguins)
+summary(m_int)
+```
+
+Interpretation:
+
+- Main slope = effect in reference species
+- Interaction term = **change in slope** for the other species
+  - yield ~ variety * fertiliser: how different is the yield for variety A with fertiliser B from yield for variety A with fertiliser A?
+
+### The big rule
+
+> **Every coefficient is a conditional comparison.**
+
+It is always interpreted **given the other terms in the model are held constant**.
+
+---
+
+# Part C — Assumptions and diagnostics
+
+## Core assumptions
+
+In practice we check these assumptions about **residuals**:
+
+1. Linearity of mean structure
+2. Homoscedasticity (constant variance)
+3. Independence
+4. Approximate normality of residuals (mainly for small samples)
+
+---
+
+## Diagnostic plots in R
+
+```{r}
+par(mfrow = c(2, 2))
+plot(m1)
+par(mfrow = c(1, 1))
+```
+
+What to look for:
+
+- Residuals vs fitted: pattern? funnel shape?
+- Q–Q: strong deviations?
+- Scale–Location: heteroscedasticity
+- Residuals vs leverage: influential points
+
+---
+
+## Linearity: residual pattern
+
+If you see curvature in residuals vs fitted:
+
+- missing non-linearity (transform x, add polynomial term, or use a better model)
+
+```{r}
+m2 <- lm(body_mass_g ~ poly(bill_length_mm, 2), data = penguins)
+anova(m1, m2)
+```
+
+---
+
+## Homoscedasticity: "fan" shape
+
+If residual spread increases with fitted values:
+
+- consider transforming the response (e.g., log)
+- consider robust SEs (later modules), or different model family
+
+```{r}
+m1_log <- lm(log(body_mass_g) ~ bill_length_mm, data = penguins)
+par(mfrow = c(2, 2)); plot(m1_log); par(mfrow = c(1, 1))
+```
+
+---
+
+## Independence: design matters
+
+Independence is usually **not** visible from a single plot.
+
+Breaks happen with:
+
+- repeated measures (same subject multiple times)
+- spatial dependence
+- time series
+
+If independence is violated, standard errors can be wrong → misleading p-values.
+
+---
+
+## Normality: mostly about small-sample inference
+
+Normal residuals matter most when:
+
+- sample size is small
+- you need accurate confidence intervals/tests
+
+With moderate/large samples, regression is often robust, but you still diagnose.
+
+---
+
+## Influential points
+
+Cook's distance identifies observations that strongly influence the fit. The top 10 most influential observations:
+
+```{r}
+aug %>%
+  mutate(cooks = cooks.distance(m1)) %>%
+  arrange(desc(cooks)) %>%
+  select(body_mass_g, bill_length_mm, cooks) %>%
+  head(10) %>%
+  kable(digits = 3, col.names = c("Body mass (g)", "Bill length (mm)", "Cook's D"))
+```
+
+---
+
+## Practical fixes (not "magic")
+
+When assumptions fail:
+
+- **rethink the question** (is linear regression appropriate?)
+- transform variables (log, sqrt)
+- add terms (non-linear mean, interactions)
+- model grouping (blocks/random intercepts)
+- use alternative families (GLMs) or robust methods
+
+---
+
+
+# Part D — Extensions you'll meet soon
+
+## Multiple regression (main effects)
+
+$$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \varepsilon
+$$
+
+Interpretation: **holding other predictors constant**.
+
+```{r}
+m3 <- lm(body_mass_g ~ bill_length_mm + flipper_length_mm, data = penguins)
+tidy(m3, conf.int = TRUE)
+```
+
+---
+
+## Interactions (effect modification)
+
+An interaction means: the effect of *x1* depends on *x2*.
+
+Model with interaction between bill length and species:
+
+```{r}
+m4 <- lm(body_mass_g ~ bill_length_mm * species, data = penguins)
+tidy(m4) %>% kable(digits = 2)
+```
+
+Visualise:
+
+```{r}
+ggplot(penguins, aes(bill_length_mm, body_mass_g, color = species)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+---
+
+## Blocking (fixed effects for batches/sites)
+
+Blocks are nuisance structure you *control for*.
+
+Adding island as a blocking factor:
+
+```{r}
+m5 <- lm(body_mass_g ~ bill_length_mm + island, data = penguins)
+tidy(m5, conf.int = TRUE) %>% kable(digits = 2)
+```
+
+---
+
+## Random intercepts (preview)
+
+If you have repeated measures, you often want:
+
+$$
+y_{ij} = \beta_0 + b_{0i} + \beta_1 x_{ij} + \varepsilon_{ij}
+$$
+
+- \(b_{0i}\) is a group-specific intercept deviation (random effect)
+
+In R: `lme4::lmer()` (covered in mixed models).
+
+---
+
+## Reporting results (what good looks like)
+
+Minimum professional reporting:
+
+- model formula and context (units!)
+- coefficient estimate with CI (and p-value if required)
+- a goodness-of-fit statement (R², residual SD)
+- diagnostics statement (what you checked, any issues)
+- a plot (scatter + fitted line; residual checks)
+
+Example sentence:
+
+> A linear model indicated that body mass increased with bill length (β = … g/mm, 95% CI …), explaining R² = … of variance; residual plots suggested …
+
+---

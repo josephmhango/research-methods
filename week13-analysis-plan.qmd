@@ -1,0 +1,680 @@
+---
+title: "Preparing a Statistical Analysis Plan (SAP)"
+subtitle: "A practical guide to analytical thinking, defensible methodology, and reproducible research"
+author: "Harper Adams University"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    chalkboard: true
+    transition: fade
+    scrollable: true
+    smaller: false
+    css: scroll.css
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+### Based on:
+Stevens et al. (2023), *A template for the authoring of statistical analysis plans*
+
+---
+
+# Why This Session Matters
+
+A common misconception among early-career professionals is that statistical analysis is mainly about choosing tests.
+
+It is not.
+
+Professional statistical work begins *before* analysis.
+
+The real task is:
+
+- defining the analytical objective clearly
+- understanding the structure of the data
+- anticipating weaknesses and complications
+- planning diagnostics
+- defining fallback strategies
+- ensuring reproducibility and transparency
+
+A Statistical Analysis Plan (SAP) formalises this process.
+
+---
+
+# Learning Objectives
+
+By the end of this session, you should be able to:
+
+- explain the purpose of a Statistical Analysis Plan
+- distinguish between statistical procedures and analytical reasoning
+- structure a professional SAP
+- justify analytical decisions logically
+- identify assumptions associated with common analyses
+- define diagnostics and fallback strategies
+- write analysis plans that are transparent and reproducible
+
+---
+
+# What is a Statistical Analysis Plan?
+
+A Statistical Analysis Plan (SAP) is a formal document that explains:
+
+- what analyses will be conducted
+- how variables will be prepared
+- how assumptions will be assessed
+- how models will be evaluated
+- how missing data will be handled
+- how results will be interpreted
+- what will happen if assumptions fail
+
+The SAP is not simply:
+
+> “We will run a t-test.”
+
+It is a blueprint for defensible analytical decision-making.
+
+---
+
+# The Core Philosophy of an SAP
+
+Stevens et al. describe the SAP as a mechanism for:
+
+- rigor
+- transparency
+- reproducibility
+- objective analysis
+
+One of the most important ideas in the paper is:
+
+> If multiple statisticians were given the dataset and the SAP, they should arrive at essentially the same analysis.
+
+This means:
+
+- analytical decisions should not be vague
+- assumptions should not be implicit
+- diagnostics should be predefined
+- alternative methods should already be planned
+
+---
+
+# Why SAPs Exist
+
+Without a predefined analysis plan:
+
+- analysts may choose methods after seeing results
+- assumptions may be ignored
+- outliers may be removed selectively
+- transformations may be chosen opportunistically
+- statistical significance may drive decisions
+
+This creates:
+
+- bias
+- irreproducibility
+- p-hacking
+- weak scientific inference
+
+SAPs exist to reduce these risks.
+
+---
+
+# Statistical Thinking vs Test Memorisation
+
+Weak analytical thinking:
+
+> “This looks like a t-test question.”
+
+Professional analytical thinking:
+
+1. What is the research aim?
+2. What are the variable types?
+3. What assumptions are required?
+4. Are those assumptions plausible?
+5. How will they be checked?
+6. What if they fail?
+7. How robust is the conclusion?
+
+The statistical test is the *final* step, not the first.
+
+---
+
+# The SAP Workflow
+
+For each research question:
+
+1. Research aim
+2. Variables and data types
+3. Data preparation
+4. Proposed method
+5. Assumptions
+6. Diagnostics and model checks
+7. Fallback strategy
+8. Interpretation and presentation
+
+This structure transforms analysis from:
+
+> “running statistics”
+
+to:
+
+> defensible scientific reasoning.
+
+---
+
+# Step 1 — Defining the Research Aim
+
+A research aim should clearly define:
+
+- what relationship is being studied
+- what variable is the outcome
+- what variable(s) may explain variation
+- whether the goal is:
+  - comparison
+  - association
+  - prediction
+  - explanation
+
+Weak:
+
+> “Investigate the variables.”
+
+Better:
+
+> “Assess whether variation in the outcome differs systematically across groups.”
+
+---
+
+# Why Research Aims Matter
+
+Poorly defined aims create:
+
+- inappropriate methods
+- unclear interpretations
+- post-hoc reasoning
+- over-analysis
+
+A strong research aim determines:
+
+- the modelling strategy
+- the assumptions
+- the interpretation framework
+
+The entire analysis flows from the aim.
+
+---
+
+# Step 2 — Understanding Variable Types
+
+Statistical methods depend fundamentally on:
+
+- the outcome variable type
+- the explanatory variable type
+
+Common variable types:
+
+| Type | Examples |
+|---|---|
+| Continuous numeric | height, weight, income |
+| Binary | yes/no, success/failure |
+| Categorical | species, region |
+| Ordinal | satisfaction scores |
+| Count | number of events |
+
+Variable structure determines the analytical family.
+
+---
+
+# Why Variable Types Matter
+
+Different variable structures imply different:
+
+- assumptions
+- distributions
+- models
+- interpretations
+
+For example:
+
+| Outcome | Predictor | Typical analytical family |
+|---|---|---|
+| Numeric | Group | Group comparison |
+| Numeric | Numeric | Regression |
+| Categorical | Categorical | Association testing |
+| Count | Multiple predictors | Count models |
+
+The logic begins with the data structure.
+
+---
+
+# Step 3 — Data Preparation
+
+Most analytical problems begin during data preparation.
+
+An SAP should explain:
+
+- missing data handling
+- recoding procedures
+- filtering rules
+- outlier assessment
+- transformations
+- derived variables
+- category aggregation
+
+A professional SAP anticipates problems *before* analysis.
+
+---
+
+# Data Preparation is Part of Analysis
+
+Many students treat cleaning as separate from statistics.
+
+In reality:
+
+- cleaning decisions affect conclusions
+- filtering changes distributions
+- transformations alter interpretation
+- recoding affects assumptions
+
+Therefore:
+
+Data preparation must be transparent and justified.
+
+---
+
+# Common Data Preparation Questions
+
+Before analysis, analysts should ask:
+
+- Are values missing?
+- Are there impossible values?
+- Are categories inconsistent?
+- Are there duplicated observations?
+- Are variables heavily skewed?
+- Are some categories extremely sparse?
+- Are units consistent?
+- Are there influential outliers?
+
+This is statistical reasoning.
+
+---
+
+# Step 4 — Choosing the Method
+
+A good SAP does not merely state the method.
+
+It explains:
+
+- why the method matches the research aim
+- why the variable structure supports the method
+- why assumptions are plausible
+- what the model estimates
+
+Weak:
+
+> “A regression model will be used.”
+
+Better:
+
+> “A regression framework is appropriate because the outcome is continuous and the objective is to quantify how variation in the response changes with explanatory variables.”
+
+---
+
+# Methods Must Match the Aim
+
+Different analytical aims require different frameworks.
+
+## Comparison
+Do groups differ?
+
+## Association
+Are variables related?
+
+## Prediction
+Can one variable estimate another?
+
+## Explanation
+Does a predictor explain systematic variation after accounting for others?
+
+Choosing a method without understanding the analytical aim is one of the most common weaknesses in student work.
+
+---
+
+# Step 5 — Assumptions
+
+Every statistical method has assumptions.
+
+An SAP should explicitly state:
+
+- what assumptions exist
+- why they matter
+- how they will be assessed
+
+A method is not automatically valid because software produced a p-value.
+
+---
+
+# Common Statistical Assumptions
+
+## Independence
+Observations should not influence one another.
+
+## Normality
+Residuals or group distributions may need to approximate normality.
+
+## Homoscedasticity
+Variance should be relatively stable.
+
+## Linearity
+Relationships should follow the assumed functional form.
+
+## Absence of multicollinearity
+Predictors should not be excessively correlated.
+
+Different methods require different assumptions.
+
+---
+
+# Important Insight: Assumptions Often Apply to Residuals
+
+Students commonly misunderstand regression assumptions.
+
+For many models:
+
+- assumptions do not apply directly to raw variables
+- assumptions apply to residual behaviour
+
+Therefore diagnostics focus on:
+
+- residual distributions
+- residual variance
+- residual structure
+
+This distinction is fundamental.
+
+---
+
+# Step 6 — Diagnostics and Model Checks
+
+The paper strongly emphasises predefined diagnostics.
+
+A SAP should explain:
+
+- which plots will be inspected
+- which tests may be used
+- what evidence would indicate problems
+- how model adequacy will be evaluated
+
+Diagnostics are not optional extras.
+
+They are part of the analysis itself.
+
+---
+
+# Common Diagnostic Tools
+
+## Histograms
+Assess skewness and distribution shape.
+
+## Boxplots
+Assess spread and potential outliers.
+
+## QQ Plots
+Assess approximate normality.
+
+## Residual vs Fitted Plots
+Assess heteroscedasticity and nonlinearity.
+
+## Leverage and Cook’s Distance
+Identify influential observations.
+
+## Variance Inflation Factors (VIF)
+Assess multicollinearity.
+
+---
+
+# Why Diagnostics Matter
+
+Without diagnostics:
+
+- assumptions remain unknown
+- inference may be invalid
+- confidence intervals may be misleading
+- p-values may be unreliable
+
+Professional analysis requires evidence that the model is appropriate.
+
+---
+
+# Step 7 — Fallback Strategies
+
+One of the strongest features of a good SAP is that it anticipates failure.
+
+An analyst should ask:
+
+> “What if my assumptions do not hold?”
+
+Fallback strategies may include:
+
+- transformations
+- robust methods
+- non-parametric approaches
+- alternative covariance structures
+- category aggregation
+- sensitivity analyses
+
+---
+
+# Why Fallback Strategies Matter
+
+Weak analysis:
+
+> “Assumptions failed, so we tried something else.”
+
+Strong analysis:
+
+> “If diagnostics indicate substantial deviation from assumptions, the following predefined alternative approach will be used.”
+
+This reduces analytical subjectivity.
+
+---
+
+# Sensitivity Analysis
+
+The paper places major emphasis on sensitivity analysis.
+
+Sensitivity analysis asks:
+
+> “Would the conclusion change if different reasonable assumptions were used?”
+
+Examples:
+
+- alternative missing data handling
+- robust regression instead of ordinary least squares
+- transformed vs untransformed response
+- inclusion/exclusion of influential observations
+
+Sensitivity analysis increases analytical credibility.
+
+---
+
+# Missing Data is a Statistical Problem
+
+A good SAP must explain:
+
+- how missing data will be identified
+- whether missingness is likely systematic
+- whether imputation will occur
+- what assumptions the imputation relies upon
+
+Ignoring missing data is itself a modelling decision.
+
+---
+
+# Interpretation is Part of the SAP
+
+A SAP should explain:
+
+- how effect sizes will be interpreted
+- how uncertainty will be presented
+- how findings will be contextualised
+- what limitations may affect interpretation
+
+Interpretation is not:
+
+> “p < 0.05 therefore significant.”
+
+Professional interpretation focuses on:
+
+- magnitude
+- uncertainty
+- practical meaning
+- robustness
+
+---
+
+# Statistical Significance vs Scientific Importance
+
+A statistically significant effect may be:
+
+- trivial
+- practically irrelevant
+- driven by large sample size
+
+A non-significant effect may still contain:
+
+- meaningful effect sizes
+- important uncertainty
+- informative trends
+
+Good SAPs avoid over-reliance on p-values.
+
+---
+
+# Reproducibility and Transparency
+
+The paper repeatedly emphasises reproducibility.
+
+This means:
+
+- analytical steps should be explicit
+- decisions should be documented
+- procedures should be repeatable
+- alternative analysts should reach similar conclusions
+
+Reproducibility is a cornerstone of modern science.
+
+---
+
+# Why SAPs Improve Scientific Quality
+
+According to the paper, SAPs help:
+
+- identify design flaws early
+- improve protocols
+- reduce bias
+- reduce p-hacking
+- improve peer review
+- improve funding confidence
+- strengthen scientific credibility
+
+SAPs are not administrative paperwork.
+
+They are methodological safeguards.
+
+---
+
+# Common Weaknesses in Student SAPs
+
+## Naming tests without justification
+
+## Ignoring assumptions
+
+## No diagnostics
+
+## No fallback strategy
+
+## No rationale for transformations
+
+## Confusing correlation with causation
+
+## Treating software output as interpretation
+
+## Overemphasis on p-values
+
+---
+
+# Characteristics of Strong SAPs
+
+Strong SAPs:
+
+- are logically structured
+- justify analytical choices
+- explicitly discuss assumptions
+- define diagnostics prospectively
+- anticipate analytical complications
+- explain fallback procedures
+- focus on reasoning rather than jargon
+
+---
+
+# Analytical Maturity
+
+Analytical maturity means understanding that:
+
+- data are imperfect
+- models are approximations
+- assumptions matter
+- diagnostics are essential
+- interpretation requires caution
+- statistical significance is not the same as truth
+
+A strong SAP demonstrates analytical maturity.
+
+---
+
+# Practical Workflow for Building a SAP
+
+## Step 1
+Define the scientific question.
+
+## Step 2
+Identify outcome and explanatory variables.
+
+## Step 3
+Classify variable types.
+
+## Step 4
+Plan preparation and cleaning.
+
+## Step 5
+Choose analytical framework logically.
+
+## Step 6
+Define assumptions.
+
+## Step 7
+Define diagnostics.
+
+## Step 8
+Define fallback procedures.
+
+## Step 9
+Plan interpretation and reporting.
+
+---
+
+# A Useful Mental Model
+
+A weak analyst asks:
+
+> “Which test should I run?”
+
+A strong analyst asks:
+
+> “What structure does the data have, what assumptions are required, and how can I defend the conclusions?”
+
+That is the philosophy behind professional statistical analysis.
+
+---

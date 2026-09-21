@@ -1,0 +1,585 @@
+---
+title: "Research Skills for a Credible Literature Review"
+subtitle: "Week 1 lecture: from an initial idea to a defensible evidence synthesis"
+author: "Dr Kanthu Joseph Mhango"
+format:
+  revealjs:
+    css: scroll.css
+    theme: simple
+    slide-number: true
+    progress: true
+    toc: true
+    incremental: false
+    chalkboard: true
+    preview-links: true
+    width: 1280
+    height: 720
+execute:
+  echo: false
+---
+
+# Section 1: Why a literature review matters
+
+## The journey for today
+
+```{mermaid}
+flowchart LR
+  A[Question] --> B[Search]
+  B --> C[Screen]
+  C --> D[Appraise]
+  D --> E[Extract]
+  E --> F[Synthesise]
+  F --> G[Write]
+```
+
+By the end of the lecture, you should be able to explain how every stage contributes to a review that is **credible, transparent, and useful**.
+
+::: {.notes}
+Welcome to Week 1. We will use this diagram as the organising spine for the whole lecture because a literature review is a connected sequence of decisions as well as a piece of writing. We will return to this sequence in every section and add practical detail as we progress. The quality of your final prose depends on the quality of your earlier decisions, since an unfocused question, a narrow search, or uncritical source selection will weaken even a beautifully written account. As we work through the lecture, keep one possible research topic in mind so that you can attach each concept to a subject that matters to you.
+:::
+
+## Two foundational definitions
+
+**Information literacy** is the ability to recognise when information is needed and to find, evaluate, organise, use, and communicate that information effectively, ethically, and transparently.
+
+**A literature review** is a structured and critical synthesis of existing research that explains what is known, where evidence agrees or differs, what remains uncertain, and how those findings shape a research question or decision.
+
+::: {.callout-note}
+Information literacy provides the skills used throughout the process; the literature review is the evidence-based account produced through those skills.
+:::
+
+::: {.notes}
+Before we develop these ideas, we need two shared definitions. Information literacy describes your ability to recognise an information need and then find, evaluate, organise, use, and communicate suitable information responsibly. A literature review is one important product of that capability. It brings existing research together through a structured and critical synthesis, showing what is established, where findings differ, what remains uncertain, and why those conclusions matter for the question we want to answer. Keep the relationship between the terms in mind: information literacy describes the skills and judgements we apply, while the literature review presents the resulting account of the evidence.
+:::
+
+## A review is a map of knowledge
+
+A useful literature review tells the reader:
+
+| Evidence state | Question answered |
+|---|---|
+| Established | What is supported consistently? |
+| Contested | Where and why do studies disagree? |
+| Uncertain | Which conclusions remain fragile? |
+| Missing | What has not yet been examined adequately? |
+
+The review therefore maps both **knowledge** and **uncertainty**.
+
+::: {.notes}
+A map selects and organises features for a purpose rather than reproducing every physical detail of a landscape, and your literature review performs a similar function. You should represent the evidence fairly while giving the greatest attention to evidence that directly serves your research question. In the example on this slide, soil-carbon effects may be established under some management systems, contested across climates, uncertain over long timescales, and missing for a particular region. Uncertainty is a legitimate research finding, so you should represent it clearly rather than forcing the literature towards a firmer conclusion than the evidence supports.
+:::
+
+## Why researchers review literature
+
+- Prevent accidental duplication and identify valuable replication.
+- Locate a proposed study within existing knowledge.
+- Justify the research question, design, measurements, and analysis.
+- Identify established methods and recurring methodological weaknesses.
+- Demonstrate that conclusions arise from evidence rather than preference.
+
+::: {.callout-important}
+A gap becomes persuasive when it is **specific**, **supported**, and **researchable**.
+:::
+
+::: {.notes}
+Duplication and replication describe different scholarly situations. Replication deliberately tests whether a result holds again, while accidental duplication repeats work without a clear reason. Previous studies can strengthen your research design by revealing useful instruments, realistic sample sizes, common confounders, analytical strategies, and ethical concerns. When you identify a gap, aim for a precise statement. “Short-term trials dominate the evidence, while multi-year UK field comparisons remain scarce” is more useful than “there is little research” because it identifies the existing evidence, the missing dimension, and the opportunity for a feasible study.
+:::
+
+## From topic to contribution
+
+```{mermaid}
+%%| fig-height: 3.2
+flowchart LR
+  T[Broad topic] --> K[Known evidence]
+  K --> D[Disagreement]
+  D --> L[Remaining limit]
+  L --> Q[Focused question]
+  Q --> C[Contribution]
+```
+
+Ask of every proposed project: **What becomes clearer because this study exists?**
+
+::: {.notes}
+Let us complete this first concept by following the sequence with reduced tillage as our broad topic. Existing evidence may show variable effects on yield, disagreement may relate to soil type and study duration, and a remaining limitation may be the absence of multi-year comparisons in a defined region. A focused question can then address that limitation. Your contribution can involve testing transferability, improving measurement, resolving inconsistent evidence, examining an underrepresented population, or synthesising fragmented findings. We will now examine how search behaviour affects our ability to discover this evidence landscape reliably.
+:::
+
+# Section 2: Information literacy and discoverability
+
+## How searching commonly begins
+
+![](Google-logo.png){fig-align="center" width="280"}
+
+1. Type a few familiar keywords.
+2. Inspect the first page of results.
+3. Download papers with promising titles.
+4. Begin writing from the available PDFs.
+
+This approach is useful for **reconnaissance**, yet it leaves ranking, vocabulary, coverage, and selection decisions largely uncontrolled.
+
+::: {.notes}
+This workflow is a natural starting point because rapid web searching produces results immediately. The order of those results is shaped by ranking systems that may use popularity, citations, recency, accessibility, and personalisation. We can therefore use an early search for reconnaissance, gathering vocabulary, authors, journals, and landmark studies before constructing a structured search. Consider whether another person could reproduce a method described only as “I looked on Google Scholar.” The difficulty shows why we need a transparent record of where, when, and how we searched.
+:::
+
+## The hidden vocabulary problem
+
+One idea may have many labels:
+
+```text
+precision agriculture
+OR precision farming
+OR site-specific management
+OR digital agriculture
+OR smart farming
+```
+
+One label may also have several meanings. Search quality therefore depends on understanding the **language of the field**.
+
+::: {.notes}
+Researchers, practitioners, policymakers, and different academic disciplines may describe the same idea with different vocabulary. Your search can miss relevant evidence when an author uses an unexpected synonym, while a broad term such as resilience may retrieve psychological, engineering, ecological, and economic research. The first ten or twenty useful records can supply vocabulary for improving your query, which means that keywords are discovered as well as proposed. During reconnaissance, collect subject headings, abbreviations, older terminology, scientific names, spelling variants, and related phrases.
+:::
+
+## Libraries and databases use structured records
+
+![](libcard.jpg){fig-align="center" width="430"}
+
+Modern databases extend the logic of the catalogue card. Records contain searchable fields such as:
+
+- title and abstract;
+- author and affiliation;
+- keywords and controlled subject terms;
+- publication year and document type;
+- references and citation links.
+
+::: {.notes}
+The catalogue cards in this image made books discoverable through consistent descriptions, classification, and cross-references. Academic databases apply the same principle digitally and at a much larger scale, so your query interacts with structured fields rather than an undifferentiated pile of PDFs. Scopus, Web of Science, CAB Abstracts, PubMed, IEEE Xplore, ProQuest, institutional repositories, and government databases serve different disciplinary needs. Their coverage differs, which is why one database rarely provides a complete picture of an evidence base.
+:::
+
+## Information literacy is a chain of judgements
+
+```{mermaid}
+flowchart LR
+  N[Recognise a need] --> F[Find evidence]
+  F --> J[Judge credibility]
+  J --> C[Connect findings]
+  C --> U[Use responsibly]
+  U --> R[Reference transparently]
+```
+
+Information literacy includes asking who created the evidence, why it was produced, how it was measured, and whether its claims are proportionate to its data.
+
+::: {.notes}
+Information literacy extends beyond operating a database because finding a source is only one link in the chain. You must recognise what you need, search appropriate places, judge each source, connect it with other evidence, use it ethically, and provide a traceable citation. For empirical work, you should also examine data provenance, measurement quality, missing observations, representativeness, and reproducibility. Professional presentation and peer review are useful signals, while your own inspection of methods and evidence remains essential. Effective searching begins with knowing precisely what information you require, so we will now focus the research question.
+:::
+
+# Section 3: Scope and research questions
+
+## Broad topics produce broad searches
+
+| Dimension | Clarifying question |
+|---|---|
+| System and context | Which population, place, or environment? |
+| Intervention or exposure | Which practice, condition, or change? |
+| Comparison | What provides a meaningful contrast? |
+| Outcome and time | Which result, measured over what period? |
+
+::: {.notes}
+A broad topic is useful for initial orientation, and a formal search requires greater precision. We can narrow sustainable agriculture to UK winter wheat systems, reduced tillage, conventional ploughing as the comparison, grain yield and soil organic carbon as outcomes, and a minimum study period of three years. As you narrow your own topic, treat each boundary as an intellectual decision about relevance rather than merely a way of obtaining fewer search results.
+:::
+
+## PICO and PECO organise the question
+
+| Element | Meaning | Example |
+|---|---|---|
+| P | Population or system | UK winter wheat fields |
+| I/E | Intervention or exposure | No-till management |
+| C | Comparison | Conventional ploughing |
+| O | Outcome | Yield and soil organic carbon |
+
+**Question template:** In *P*, how does *I/E*, compared with *C*, affect *O* within a defined setting and timeframe?
+
+::: {.notes}
+PICO is a thinking framework that helps you introduce useful specificity, and PECO may suit a question in which researchers observe an exposure instead of assigning an intervention. Some questions omit a comparison, while qualitative questions may use a different framework. As we assemble the example row by row, listen for remaining ambiguity. We still need to decide how no-till will be defined, which measure of soil carbon will be accepted, and what will count as a sufficiently long study.
+:::
+
+## Scope defines inclusion and exclusion
+
+```{mermaid}
+flowchart LR
+  Q[Focused question] --> I[Directly relevant evidence]
+  Q --> B[Useful background evidence]
+  Q --> X[Out-of-scope evidence]
+```
+
+For a UK winter-wheat question:
+
+- a multi-year UK field trial may be directly relevant;
+- a European maize study may provide background;
+- a laboratory study of an unrelated crop may be out of scope.
+
+::: {.notes}
+Relevance exists on several levels. Direct evidence should carry the main argumentative burden in your review, while background evidence may explain mechanisms or wider context. You may find out-of-scope evidence interesting, although interest alone cannot justify inclusion. The scope decisions you make here will later become inclusion and exclusion criteria, reducing drift and protecting your review from selecting papers simply because their conclusions appear attractive.
+:::
+
+## A good question is answerable and consequential
+
+Check that the question is:
+
+- **clear** enough to interpret consistently;
+- **bounded** by population, setting, and time;
+- **searchable** through recognisable concepts;
+- **measurable** through defined outcomes;
+- **feasible** within available evidence and resources;
+- **worth answering** for scholarship or practice.
+
+::: {.notes}
+Use this checklist to diagnose your question. A question may be precise yet unimportant, or important yet impossible to answer with the available evidence. Your preliminary search may reveal a need for revision: many irrelevant results can indicate ambiguity, while very few results can indicate an overly narrow formulation or unfamiliar vocabulary. Revising your question demonstrates learning as your understanding improves. The components of the refined question now become the building blocks of the search.
+:::
+
+# Section 4: Constructing a search strategy
+
+## Build a concept map before writing syntax
+
+| Concept | Synonyms and variants |
+|---|---|
+| Winter wheat | "winter wheat", wheat, cereal* |
+| Reduced tillage | "no-till", "zero tillage", "reduced till*", "conservation tillage" |
+| Yield | yield, "grain yield", productivity |
+| Soil carbon | "soil organic carbon", "soil carbon", SOC |
+
+The concept map preserves the reasoning independently of any particular database.
+
+::: {.notes}
+A concept map is the portable version of your search strategy, so create it before worrying about database field codes. Each row represents a distinct idea from the research question, while the terms within a row represent acceptable ways of expressing that idea. A broader term such as cereal may improve coverage and may also introduce irrelevant records, so test its contribution. Include spelling variants, plural forms, abbreviations, scientific names, and controlled subject headings where the literature uses them.
+:::
+
+## Boolean logic connects the blocks
+
+```text
+("winter wheat" OR wheat OR cereal*)
+AND
+("no-till" OR "zero tillage" OR "reduced till*" OR "conservation tillage")
+AND
+(yield OR "grain yield" OR productivity)
+```
+
+- **OR** broadens within one concept.
+- **AND** requires different concepts to meet.
+- **Parentheses** preserve the intended grouping.
+
+::: {.notes}
+Read this string aloud as logic. A record may use any population term, must also use at least one tillage term, and must also use at least one yield term. Adding AND usually reduces the result set, while adding OR usually increases it. Parentheses work like brackets in arithmetic by controlling the order of interpretation. Use NOT cautiously because an exclusion can remove relevant records unexpectedly, and change one part of your search at a time so that you can explain why the result count changes.
+:::
+
+## Phrase searching, truncation, and proximity
+
+| Tool | Purpose | Example |
+|---|---|---|
+| Quotation marks | Keep words together | `"soil organic carbon"` |
+| Truncation | Capture word endings | `predict*` |
+| Wildcard | Replace character variants | database-specific |
+| Proximity | Keep concepts near each other | `artificial NEAR/3 intelligence` |
+
+Symbols vary across platforms, so always check the database help page.
+
+::: {.notes}
+Let us consider each search tool carefully. Phrase searching prevents words from drifting apart. Truncation captures grammatical variants and can create noise when the stem is too short. Wildcards help with spelling variations, although their symbols differ between platforms. Proximity searching captures flexible phrasing that quotation marks would miss, such as soil appearing within three words of carbon. The underlying search logic transfers between databases, while the exact syntax must be adapted to each platform.
+:::
+
+## Test, inspect, and refine
+
+```{mermaid}
+flowchart LR
+  D[Draft string] --> R[Run search]
+  R --> I[Inspect 10-20 records]
+  I --> V[Harvest vocabulary]
+  V --> A[Adjust one block]
+  A --> R
+```
+
+Stop refining when the search retrieves known relevant papers and produces an acceptable balance between coverage and noise.
+
+::: {.notes}
+Search development is iterative, much like experimental calibration. Inspect the titles, abstracts, and keywords of both promising and irrelevant records. Relevant papers reveal missing synonyms, while irrelevant papers reveal ambiguity that may require an additional concept or field restriction. A known-item check gives you a practical diagnostic: if your search cannot retrieve a clearly relevant landmark paper, investigate which part of the strategy prevented its discovery. Perfect precision and perfect recall are rarely achievable, so document and justify your stopping decision.
+:::
+
+## Live Scopus walkthrough
+
+<iframe src="https://www.scopus.com/pages/home" title="Scopus home page for a live search walkthrough" width="100%" height="500" style="border: 1px solid #b8b8b8; background: white;" loading="lazy" allowfullscreen></iframe>
+
+[Open Scopus in a separate browser tab](https://www.scopus.com/pages/home){target="_blank"}
+
+::: {.notes}
+We will now put the ideas from this section into practice in Scopus. As you watch the live page, follow how we move from the home search to the document search, choose appropriate fields, enter one concept block at a time, and compare the number and relevance of the retrieved records. We will inspect titles, abstracts, author keywords, and indexed terms so that you can see where additional vocabulary comes from. We will then combine the concept blocks, apply only defensible filters, save the exact query, and record the date and result count. If your browser or institutional access prevents the embedded page from loading, use the link beneath the frame to open Scopus directly; the same walkthrough sequence still applies.
+:::
+
+# Section 5: From search plan to reproducible protocol
+
+## Use more than one suitable information source
+
+| Source type | Typical contribution |
+|---|---|
+| Multidisciplinary database | Broad journal and citation coverage |
+| Subject database | Specialist vocabulary and disciplinary coverage |
+| Citation searching | Earlier foundations and later developments |
+| Repositories and grey literature | Theses, policy, technical, and organisational evidence |
+
+Different sources reveal different parts of the evidence landscape.
+
+::: {.notes}
+Your database choices should follow your question and discipline. Searching several poorly matched databases adds work without improving coverage, while complementary sources reduce blind spots. You can extend database searching through backward citation searching in reference lists and forward citation searching among papers that later cited a key study. Grey literature includes material produced outside conventional academic publishing, such as government reports and technical documents, and you should apply the same careful appraisal to these sources as you apply to journal literature.
+:::
+
+## The search log is the memory of the review
+
+| Field | Example |
+|---|---|
+| Source | Scopus |
+| Date | 10 August 2026 |
+| Exact query | Saved without alteration |
+| Fields | Title, abstract, keywords |
+| Filters | 2015-2026; articles; English |
+| Results | 286 records |
+| Revision note | Added “conservation tillage” |
+
+::: {.notes}
+Search results change over time because databases add records and interfaces evolve, which makes a precise date and exact query essential. Your log prevents repeated mistakes and allows a supervisor or collaborator to review the strategy. Screenshots can support the record, while saved query text remains easier to copy, inspect, and adapt. Save your queries in plain text and export database search histories where the platform provides that option.
+:::
+
+## A mini-protocol fixes decisions before results
+
+A practical protocol records:
+
+1. the question and scope;
+2. information sources and search strings;
+3. date, language, and document-type limits;
+4. inclusion and exclusion criteria;
+5. screening stages and decision rules;
+6. extraction fields and quality checks;
+7. planned synthesis approach.
+
+::: {.notes}
+Your protocol protects the review from decisions that shift in response to attractive findings. For a taught review, the protocol may fit on one or two pages because prospective clarity matters more than length. A pilot search may reveal that a planned criterion is impossible or ambiguous, and you can amend the protocol when you record both the change and its reason. This creates an honest audit trail showing how the method developed.
+:::
+
+## Reproducibility strengthens credibility
+
+```{mermaid}
+flowchart TD
+  T[Transparent search] --> S[Repeatable screening]
+  S --> E[Consistent extraction]
+  E --> A[Auditable synthesis]
+  A --> C[Credible conclusions]
+```
+
+Reproducibility allows another person to understand, challenge, and improve the review.
+
+::: {.notes}
+Documentation strengthens scientific credibility. Because databases change, reproducibility does not guarantee that another person will obtain an identical set of records forever, yet your documentation should enable them to repeat your logic and understand your decisions. Transparency will also help you months later, when details would otherwise be forgotten. Your completed search creates a set of candidates, and we will now decide consistently which candidates belong in the review.
+:::
+
+# Section 6: Screening and selecting studies
+
+## Search results are candidates
+
+```{mermaid}
+flowchart LR
+  A[All records] --> D[Remove duplicates]
+  D --> T[Title and abstract screen]
+  T --> F[Full-text screen]
+  F --> I[Included studies]
+```
+
+Every exclusion should follow a predefined criterion rather than an impression of whether the result is convenient.
+
+::: {.notes}
+The screening funnel narrows search results into the studies that address your question. Searches across several databases produce duplicate records, which you should remove before reporting screening counts. Title and abstract screening remains deliberately inclusive because unclear records should progress to full-text assessment. Full-text screening then applies your criteria with greater confidence. Aim for consistent relevance across decisions, remembering that a high-quality study may still be excluded when it answers a different question.
+:::
+
+## Inclusion and exclusion criteria must be operational
+
+| Vague criterion | Operational criterion |
+|---|---|
+| Recent studies | Published from 2015 to the final search date |
+| Good evidence | Empirical study reporting design, sample, and outcome data |
+| Relevant long-term studies | Wheat or barley field studies lasting at least three years |
+
+Operational criteria can be applied consistently by different reviewers.
+
+::: {.notes}
+Adjectives such as recent, relevant, robust, and long term require definitions before they can guide a reproducible decision. Imagine two reviewers applying each vague criterion on this slide and consider why they might reach different decisions. Your operational criteria should connect directly to the research question and planned synthesis. Apply them regardless of whether a study reports a convenient, inconvenient, statistically significant, or non-significant finding.
+:::
+
+## Record full-text exclusion reasons
+
+Common reasons include:
+
+- wrong population or setting;
+- wrong intervention or exposure;
+- outcome not reported;
+- unsuitable study design;
+- duplicate or secondary report;
+- insufficient methodological information;
+- inaccessible full text after reasonable attempts.
+
+::: {.notes}
+One primary reason for each excluded full text usually produces the clearest audit trail. Your reasons should be mutually understandable and connected to the eligibility criteria. If access is the problem, record it honestly rather than treating the paper as irrelevant. A systematic review may display selection through a flow diagram, while a smaller assignment may use a concise table. In either case, every study in the final evidence set should be traceable to the original search results.
+:::
+
+## Pilot the screening rules
+
+Before screening hundreds of records:
+
+1. select a varied sample of 10-20 records;
+2. apply the criteria independently or twice at different times;
+3. identify ambiguous wording;
+4. revise the decision rules;
+5. document the revision and begin formal screening.
+
+::: {.notes}
+Piloting provides quality control because ambiguities are easier to resolve before full screening. If you are working with another reviewer, compare decisions and discuss the rule behind each disagreement. If you are working independently, repeat a small sample after a short interval and check your consistency. Your criteria should stabilise before formal screening, although genuinely unforeseen issues may require documented amendments. Inclusion establishes relevance, and our next task is to examine credibility through critical appraisal.
+:::
+
+# Section 7: Reading and critical appraisal
+
+## Read with a declared purpose
+
+Before opening a paper, complete this sentence:
+
+> “We are reading this paper to determine whether ...”
+
+Then follow a rapid first-pass route:
+
+**Title → Abstract → Figures and tables → Headings → Conclusion → Methods**
+
+Promising papers then receive a complete, careful reading.
+
+::: {.notes}
+Purpose-led reading helps you avoid highlighting everything and remembering very little. Your purpose may involve checking a method, population, effect estimate, measurement approach, or explanation for disagreement. The first-pass route provides triage before complete reading. Figures and tables often reveal sample size, variability, and practical magnitude more clearly than the abstract. You should then inspect the methods before accepting the conclusion because the design determines which claims the evidence can support.
+:::
+
+## Separate claim, evidence, and warrant
+
+```{mermaid}
+flowchart LR
+  E[Evidence] --> W[Reasoning or warrant]
+  W --> C[Claim]
+```
+
+Ask:
+
+- What do the authors want us to believe?
+- Which observations and analyses support that belief?
+- Why should those results justify that conclusion?
+- Which alternative explanations remain possible?
+
+::: {.notes}
+The warrant is the reasoning that connects evidence to a claim. A study may report an association and then imply causation, creating a weak warrant even when the numerical analysis is correct. For example, farms adopting a practice may differ systematically from farms that do not, so an observed outcome difference may reflect selection as well as the practice itself. Paraphrase the claim and the evidence separately before judging whether the warrant connects them convincingly.
+:::
+
+## Appraise the design, data, and analysis
+
+| Domain | Questions |
+|---|---|
+| Design | Can the design answer the stated question? |
+| Sampling | Who or what is represented? |
+| Measurement | Are variables valid, reliable, and clearly defined? |
+| Analysis | Do methods match the design and data? |
+| Uncertainty | Are effect sizes, intervals, and limitations reported? |
+| Transparency | Are methods, data, or code sufficiently documented? |
+
+::: {.notes}
+Your detailed appraisal questions should match the study type. Randomised trials, observational studies, qualitative interviews, surveys, and modelling studies require different checks, although these broad domains remain useful across designs. Journal prestige and citation count provide contextual signals rather than direct measures of quality. Keep balanced notes by recording at least one specific strength and one specific limitation for each important study.
+:::
+
+## Credibility determines evidential weight
+
+```text
+High relevance + strong methods      → central evidence
+High relevance + serious limitations → cautious evidence
+Lower relevance + strong methods     → contextual evidence
+Lower relevance + weak methods       → limited influence
+```
+
+Critical appraisal guides how strongly a study influences the synthesis; it should never become a ritual checklist detached from interpretation.
+
+::: {.notes}
+Studies should contribute different amounts of weight to your argument. Counting how many papers support each conclusion treats every design and dataset as equal, which is rarely defensible. A small weak study should not cancel a large rigorous study simply because their conclusions differ, and one prestigious study should not silence a consistent body of evidence. Your synthesis should explain both quality and consistency. We will now organise these appraisal judgements across studies.
+:::
+
+# Section 8: Extraction, synthesis, and writing
+
+## Extract evidence into a common structure
+
+| Field | What to capture |
+|---|---|
+| Citation | Author, year, venue |
+| Context | Population, place, and timeframe |
+| Design | Sampling, comparison, and sample size |
+| Method | Measurements and analysis |
+| Findings | Effect, direction, and uncertainty |
+| Appraisal | Strengths, limitations, and bias risks |
+| Relevance | Direct, contextual, or peripheral |
+
+::: {.notes}
+A common extraction structure converts individual papers into comparable evidence. Copying abstracts provides too little methodological detail because abstracts emphasise headline findings. Use concise paraphrases and include page references for important details that you may need to verify. Your extraction table should contain enough information to support synthesis without becoming a second full copy of every paper.
+:::
+
+## Move from summaries to themes
+
+```{mermaid}
+flowchart LR
+  P[Paper-level notes] --> G[Group by theme]
+  G --> C[Compare findings]
+  C --> X[Explain disagreement]
+  X --> J[Judge confidence]
+  J --> N[Identify next question]
+```
+
+Themes may be organised by method, population, intervention, outcome, mechanism, geography, or theoretical position.
+
+::: {.notes}
+An author-by-author sequence leaves the reader to discover relationships between papers, while thematic synthesis makes those relationships explicit. A thematic paragraph begins with a claim about the evidence, compares supporting and conflicting studies, explains methodological differences, and ends with a reasoned conclusion. Disagreement may arise from different populations, durations, measurements, analytical assumptions, or study quality. Explaining these differences gives your reader more insight than simply reporting that the results were mixed.
+:::
+
+## Write comparative paragraphs
+
+**A useful paragraph sequence**
+
+1. State the thematic claim.
+2. Present the strongest supporting evidence.
+3. Introduce contrasting or qualifying evidence.
+4. Explain likely reasons for the difference.
+5. Judge the present level of confidence.
+6. Connect the theme to the research question.
+
+::: {.notes}
+Let us model this sequence with a short example. Evidence that reduced tillage increases total soil carbon remains mixed; long-duration studies tend to report gains; shorter studies often report little change; and sampling depth and soil type explain part of the disagreement. Confidence is therefore stronger for surface carbon than total-profile carbon, while a long-term regional study could address the remaining uncertainty. This structure performs synthesis because it compares, explains, judges, and connects the evidence to a justified next question.
+:::
+
+## The complete review remains auditable
+
+```{mermaid}
+%%| fig-height: 2.6
+flowchart LR
+  Q[Question] --> S[Search log]
+  S --> R[Screening record]
+  R --> A[Appraisal notes]
+  A --> E[Extraction table]
+  E --> T[Thematic synthesis]
+  T --> W[Written argument]
+```
+
+::: {.columns}
+::: {.column width="50%"}
+- What is known with reasonable confidence?
+- What remains contested, and why?
+:::
+::: {.column width="50%"}
+- What is still unknown?
+- Which next study is justified?
+:::
+:::
+
+::: {.notes}
+This final diagram reconnects every part of our lecture. Each arrow represents traceability, allowing your reader to see how the written argument arose from included studies and how those studies arose from explicit search and screening decisions. Apply the four final questions to the topic you have kept in mind throughout the session. The paired practical guide turns each lecture section into an activity that moves your own work from topic selection through to a synthesis plan. A credible review grows from transparent decisions, careful judgement, and a fair representation of uncertainty.
+:::

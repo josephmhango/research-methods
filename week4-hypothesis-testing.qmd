@@ -1,0 +1,500 @@
+---
+title: "Data and the scientific process"
+subtitle: "Null/Alternative Hypotheses, p-values, degrees of freedom and reporting results"
+author: "K.J. Mhango"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    scrollable: true
+    css: [scroll.css]
+    incremental: false
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+theme_set(theme_minimal(base_size = 14))
+```
+
+
+## Aims for this session
+
+In this session we will:
+
+- Revisit the **null (H₀)** and **alternative (H₁)** hypotheses.
+- Explain what a **p-value** is (and is not).
+- Understand the role of **sample size (N)**.
+- Make sense of **degrees of freedom (d.f.)** across different tests.
+- Learn how to **report results** clearly (in a way that works for R and other software).
+
+---
+
+## What does a statistical test give you?
+
+Most basic statistical tests return three key things:
+
+1. A **test statistic**  
+   - Correlation: **r** (strength + direction of linear relationship).  
+   - t-test: **t** (how many standard errors apart the means are).  
+   - Chi-square test: **χ²** (how far observed counts are from expected counts).
+
+2. A **p-value**  
+   - A number between 0 and 1; we compare it to a chosen cut-off, often **0.05**.
+
+3. **Degrees of freedom (d.f.)** and **sample size (N)**  
+   - These tell you **how much information** went into the test.
+
+
+
+---
+
+## Some guy behind the p-value
+
+- Every statistic was defined by some single-lettered guy ($t$, $F$, $r$, etc.) who repeatedly calculated it under 'normal', 'mundane' conditions that we call $H_0$, and figured out that it forms a **distribution**.
+
+**P-values** just find where your value falls in the range of that distribution.
+
+- If it falls way out at the edges, then it is a **rare value**.
+- It deviates from the mundane and begs us to consider the alternative $H_1$.
+
+**2-tailed vs 1-tailed**
+
+- **2-tailed**: We care if the value is extreme in *either* direction (too high or too low).
+- **1-tailed**: We only care if it's extreme in *one* specific direction.
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+
+df <- 28  # example degrees of freedom (e.g. n = 30, so df = 28)
+alpha <- 0.05
+
+t_crit <- qt(1 - alpha/2, df)
+x <- seq(-4, 4, length.out = 400)
+y <- dt(x, df = df)
+
+plot_data <- data.frame(x, y)
+
+p <- ggplot(plot_data, aes(x, y)) +
+  geom_line(size=1) +
+  geom_area(data = subset(plot_data, x <= -t_crit), aes(x=x, y=y), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(plot_data, x >= t_crit), aes(x=x, y=y), fill = "red", alpha = 0.3) +
+  geom_vline(xintercept = -t_crit, linetype="dashed", color="red") +
+  geom_vline(xintercept = t_crit, linetype="dashed", color="red") +
+  annotate("text", x = -t_crit-0.2, y = max(y)*0.3, label = paste0("Critical value\n= ", round(-t_crit,2)), hjust=1, color="red") +
+  annotate("text", x = t_crit+0.2, y = max(y)*0.3, label = paste0("Critical value\n= ", round(t_crit,2)), hjust=0, color="red") +
+  labs(title = "t Distribution (d.f. = 28) with 5% Shaded Tails (Two-tailed)",
+       x = "t statistic",
+       y = "Density")
+print(p)
+```
+
+**Testing Normality**
+
+Every statistical test follows this pattern, but see, the assumption is that you have otherwise normal mundane conditions, not a twisted situation, hence the focus on **testing normality**.
+
+---
+
+## Example question: does fertiliser affect yield?
+
+We might ask:
+
+> **Is there a relationship between yield and fertiliser application rate?**
+
+We collect data on **fertiliser (kg/ha)** and **yield (t/ha)** for a number of plots and create a scatterplot.
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+set.seed(123)
+n <- 30
+df <- data.frame(
+  fertiliser = runif(n, 0, 100),
+  yield = 0
+)
+df$yield <- 2 + 0.05 * df$fertiliser + rnorm(n, 0, 1)
+
+ggplot(df, aes(x = fertiliser, y = yield)) +
+  geom_point(size = 3) +
+  labs(x = "Fertiliser (kg/ha)", y = "Yield (t/ha)", title = "Fertiliser vs Yield")
+```
+
+- Each dot is a **plot**.
+- The question: _as fertiliser increases, does yield tend to increase, decrease, or stay the same?_
+
+---
+
+## Null and alternative hypotheses (correlation example)
+
+For this example:
+
+- **Null hypothesis (H₀):**  
+  There is **no linear relationship** between yield and fertiliser rate in the population.
+
+- **Alternative hypothesis (H₁):**  
+  There **is** a linear relationship between yield and fertiliser rate.
+
+Graphically, H₀ says: if we looked at all possible plots in the population, the cloud of points would **show no systematic trend** – just randomness around a flat line.
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+set.seed(456)
+n <- 50
+df_null <- data.frame(
+  fertiliser = runif(n, 0, 100),
+  yield = rnorm(n, 5, 1)
+)
+
+ggplot(df_null, aes(x = fertiliser, y = yield)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "grey", linetype = "dashed") +
+  labs(x = "Fertiliser", y = "Yield", title = "H0: No Relationship")
+```
+
+H₁ says: in the population, as fertiliser changes, yield tends to move **up or down consistently** (positive or negative slope).
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+set.seed(789)
+n <- 50
+df_alt <- data.frame(
+  fertiliser = runif(n, 0, 100),
+  yield = 0
+)
+df_alt$yield <- 2 + 0.08 * df_alt$fertiliser + rnorm(n, 0, 1)
+
+ggplot(df_alt, aes(x = fertiliser, y = yield)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(x = "Fertiliser", y = "Yield", title = "H1: Systematic Relationship")
+```
+
+---
+
+## Interpreting the p-value (big picture)
+
+The **p-value** answers the question:
+
+> **If the null hypothesis were true**, how likely is it that we would see a result **this extreme (or more extreme)** just by chance in our sample?
+
+For correlation:
+
+- If **H₀ is true** (no relationship), then the **correlation in the population is 0**.
+- You could still get a non-zero sample correlation just by **random variation**.
+- The p-value tells you **how surprising** your observed r would be under H₀.
+
+Typical rule of thumb:
+
+- If **p ≤ 0.05**, we say the result is **statistically significant** and we **reject H₀**.
+- If **p > 0.05**, the result is **not statistically significant**; we **do not have enough evidence** to reject H₀.
+
+---
+
+## Example output: strong correlation
+
+Suppose our analysis gives:
+
+- **r = 0.86**
+- **p < 0.001**
+- **N = 16**
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4
+set.seed(101)
+n <- 16
+x <- runif(n, 10, 50)
+y <- 0.8 * x + rnorm(n, 0, 5) 
+r_val <- cor(x, y) 
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_point(size = 3) +
+  annotate("text", x = min(x), y = max(y), label = paste0("r = ", round(r_val, 2)), hjust = 0, size = 6) +
+  labs(x = "Fertiliser", y = "Yield", title = "Strong Correlation Example")
+```
+
+Interpretation:
+
+- **Strength & direction:** r = 0.86 is a **strong positive** correlation.
+- **p < 0.001**: if there were truly no relationship in the population, seeing a correlation this strong (or stronger) in a sample of 16 by chance is **extremely unlikely**.
+- We **reject H₀** and conclude there is **evidence of a real positive relationship** between fertiliser rate and yield.
+
+In R, you’d see:
+
+- `Pearson Correlation = .860`
+- `Sig. (2-tailed) = .000`
+- `N = 16`
+
+---
+
+## Why sample size matters for p-values
+
+Imagine a very large population of insects where body size and number of eggs are **not related at all** (H₀ true). Now we take **random samples** from that population.
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+set.seed(202)
+# Population
+pop_x <- runif(200, 0, 100)
+pop_y <- rnorm(200, 50, 10)
+pop_df <- data.frame(x = pop_x, y = pop_y, type = "Population (H0)")
+
+# Sample 1
+samp1_idx <- sample(1:200, 12)
+samp1_df <- pop_df[samp1_idx, ]
+samp1_df$type <- "Sample 1 (N=12)"
+
+# Sample 2
+samp2_idx <- sample(1:200, 12)
+samp2_df <- pop_df[samp2_idx, ]
+samp2_df$type <- "Sample 2 (N=12)"
+
+all_data <- rbind(pop_df, samp1_df, samp2_df)
+all_data$type <- factor(all_data$type, levels = c("Population (H0)", "Sample 1 (N=12)", "Sample 2 (N=12)"))
+
+ggplot(all_data, aes(x, y)) +
+  geom_point(alpha = 0.6) +
+  facet_wrap(~type, scales = "free") +
+  labs(title = "Population vs Random Samples")
+```
+
+- The left panel shows the **null population**: a cloud of points with no trend.
+- The right panels show **two possible random samples** (each with **N = 12**) from this population.
+
+Even if the **true** relationship is zero, some samples will **look slightly positive**, some **slightly negative**, just by chance.
+
+---
+
+## Degrees of Freedom: The Core Idea
+
+When we estimate the **sample mean**, we impose the rule that the deviations from that mean must sum to zero:
+
+$$ 
+\sum (x_i - \bar{x}) = 0 
+$$
+
+This constraint removes **one independent direction** in which the data could have varied.  
+
+The sample no longer behaves like \(N\) independent draws from a random process. It behaves like **\(N-1\)**.
+
+Because variance measures *how much free randomness is in the system*, it must divide by \(N-1\), not \(N\), to reflect the correct amount of independent information.
+
+---
+
+## Emphasis!
+
+Look at this formula for sample variance:
+
+$$
+s^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2
+$$
+
+Remember, **\(N-1\)** just means; 
+
+  - Once $\bar{x}$ is fixed, the deviations $(x_i - \bar{x})$ must sum to zero for $\bar{x}$ to be the sample mean.
+
+  - So if you give me N−1 random deviations, the last one is fixed because it has to make the sum zero so the mean comes out right.
+
+  - That means the data only have N−1 truly independent directions to vary in.
+
+  - Because variance is supposed to measure how much independent variability there is, the formula must also use N−1 in its denominator to match the actual **degrees of freedom** in the data
+---
+
+## Example
+
+Suppose I tell you: "I have 5 numbers, and their mean is 5.6".
+
+  - You can pick the first number to be anything (e.g., **1**). It is free to vary.
+
+  - You can pick the second (e.g., **3**).
+
+  - You can pick the third (e.g., **5**).
+
+  - You can pick the fourth (e.g., **9**).
+
+
+But for the **fifth number**, you have no choice.
+
+  - If the mean is 5.6, the sum *must* be 28.
+
+  - The sum of the first four is $1+3+5+9 = 18$.
+
+  - The last number **must** be 10 ($28 - 18$).
+
+Because we calculated the mean from the data, we used up **one degree of freedom**. We have $N-1$ (i.e., 4) independent choices left.
+
+The more parameters you fix, the more degrees of freedom you use up
+
+---
+
+## Why This Affects the t-Distribution (and others)
+
+- The t-distribution adjusts its shape based on the degrees of freedom. 
+
+- With **fewer degrees of freedom**, there is more sampling uncertainty, so the distribution develops **heavier tails**.
+
+- This means a t-value must be **more extreme** to be considered rare and reach a conventional threshold like \(p < 0.05\).
+
+- As degrees of freedom grow, the uncertainty shrinks, and the t-distribution collapses toward the normal, making evidence easier to detect.
+
+---
+
+## Why Care?
+
+- Degrees of freedom tell us **how much independent information** was truly available after estimating parameters.
+
+- They directly determine how strong your test statistic must be before you can claim evidence against a null hypothesis.
+
+- Fewer degrees of freedom → more doubt → stricter thresholds. 
+
+- More degrees of freedom → less doubt → tighter inference.
+
+---
+
+
+## Chi-square test of association: example table
+
+Consider a questionnaire completed by **95 students** about their **mode of transport to university**:
+
+|           | Car | Bus | Foot | Row total |
+|-----------|----:|----:|-----:|----------:|
+| Male      |  17 |  18 |   21 |        56 |
+| Female    |  24 |   8 |    7 |        39 |
+| Column total | 41 | 26 | 28 | 95 |
+
+Question:
+
+> Is there an **association** between gender and mode of transport?
+
+- H₀: Gender and mode of transport are **independent** (no association).
+- H₁: They **are associated** (e.g. males and females favour different modes).
+
+
+---
+
+## Chi-square test: degrees of freedom
+
+For a chi-square test of association in an **r × c** table:
+
+\[
+\text{d.f.} = (r - 1)(c - 1)
+\]
+
+In our example:
+
+- Rows: Male, Female → r = 2
+- Columns: Car, Bus, Foot → c = 3
+
+So:
+
+\[
+\text{d.f.} = (2 - 1)(3 - 1) = 1 \times 2 = 2.
+\]
+
+Interpretation:
+
+- Once you know the **row totals**, **column totals**, and **(r − 1)(c − 1)** of the cells, the remaining cells are **determined** (they’re not free to vary independently).
+- The degrees of freedom count **how many cells can vary freely** while keeping row and column totals fixed.
+
+---
+
+## Chi-square, d.f. and p-values
+
+Chi-square test statistics are compared to a **chi-square distribution** that depends on d.f.:
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+df <- 2
+crit_val <- qchisq(0.95, df)
+x <- seq(0, 15, length.out=300)
+y <- dchisq(x, df)
+plot_data <- data.frame(x, y)
+
+ggplot(plot_data, aes(x, y)) +
+  geom_line(linewidth=1) +
+  geom_area(data=subset(plot_data, x >= crit_val), aes(x=x, y=y), fill="red", alpha=0.3) +
+  geom_vline(xintercept = crit_val, linetype="dashed", color="red") +
+  annotate("text", x = crit_val + 0.5, y = 0.2, label = paste("Critical Value\n(p=0.05) =", round(crit_val, 2)), hjust=0, color="red") +
+  labs(title = "Chi-Square Distribution (d.f. = 2)", x = "Chi-Square Statistic", y = "Density")
+```
+
+- If your test has **d.f. = 2**, the critical value at p = 0.05 is about **5.99**.
+- If your observed χ² is **larger** than this, p < 0.05 and you **reject H₀**.
+
+R does this comparison for you and reports:
+
+- The **χ² statistic**.
+- The **d.f.**.
+- The **p-value** (`Asymp. Sig. (2-sided)`).
+
+---
+
+## Reporting a Chi-square test
+
+A clear reporting sentence includes:
+
+- The **test statistic** (χ²).
+- The **degrees of freedom**.
+- The **p-value**.
+- The **sample size**.
+
+Example:
+
+> There was a **significant association** between gender and mode of transport  
+> (χ² = 8.34, d.f. = 2, *p* < 0.02, *N* = 95).
+
+If p had been ≥ 0.05, we would conclude:
+
+> There was **no evidence of an association** between gender and mode of transport  
+> (χ² = …, d.f. = 2, *p* = …, *N* = 95).
+
+
+
+---
+
+## Putting it together: what to look for in output
+
+For almost any test you run (correlation, t-test, ANOVA, chi-square), R output will always give you:
+
+1. A **test statistic** (r, t, F, χ², etc.).
+2. **Degrees of freedom** (df).
+3. A **p-value** (`Sig.`).
+4. The **sample size** (N), either in the same table or elsewhere.
+
+When reading output:
+
+1. **Check p first**:
+   - If **p < 0.05**, you have evidence against H₀ → “statistically significant”.
+   - If **p ≥ 0.05**, you do **not** have enough evidence to reject H₀.
+
+2. **Then interpret the effect**:  
+   - For mean differences (t-tests): which group has the higher mean and by how much.
+  
+3. **Report everything clearly** in a sentence or two, including test statistic, d.f., p and N.
+
+---
+
+## Summary
+
+- A statistical test always returns:
+  - A **test statistic** (r, t, F, χ², …)
+  - A **p-value**
+  - **Degrees of freedom** and/or **sample size N**
+
+- **P-values** tell us how surprising our data are **if the null hypothesis is true**.
+
+- **Degrees of freedom** measure how many pieces of information are **free to vary**:
+  - Often **N − 1** (variance, one-sample t-tests).
+ 

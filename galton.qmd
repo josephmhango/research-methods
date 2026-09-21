@@ -38,12 +38,11 @@ Here is where the story becomes important for you today. Pearson’s brilliance 
 
 This is why modern statistical practice is so full of caveats, assumptions, and diagnostic checks. When your software warns you that your sample is skewed, or that variances are unequal, it is pointing back to this history. Galton and Pearson built tools that assume a certain kind of order in the data. But the real world is often lopsided, messy, and resistant to those tidy shapes.
 
-So what's the point?
-- Those warnings from your stats software aren’t just nagging. They are echoes of Galton and Pearson, whose tools only worked cleanly under the bell curve.
+So what's the point? - Those warnings from your stats software aren’t just nagging. They are echoes of Galton and Pearson, whose tools only worked cleanly under the bell curve.
 
-- When you check for normality, you’re not blindly following rules — you’re asking whether your data is playing by the rules that Galton’s Quincunx and Pearson’s formulas assumed.
+-   When you check for normality, you’re not blindly following rules — you’re asking whether your data is playing by the rules that Galton’s Quincunx and Pearson’s formulas assumed.
 
-- And when the rules break, you’re stepping into the same dilemma they faced: how far can we trust conclusions built on a geometry of symmetry, when real life so often bends and skews away from the centre?
+-   And when the rules break, you’re stepping into the same dilemma they faced: how far can we trust conclusions built on a geometry of symmetry, when real life so often bends and skews away from the centre?
 
 The story of Galton and Pearson is a story about genius — but also about limitation. The bell curve is elegant, powerful, and deeply useful. Yet it is not reality itself. It is an approximation. And to be a good statistician is not only to use the tools they gave us, but to know when their assumptions begin to crack.
 
@@ -51,7 +50,7 @@ The story of Galton and Pearson is a story about genius — but also about limit
 
 ## Galton's Board (Quincunx) — *placeholder image*
 
-::: {.galtonboard}
+::: galtonboard
 ```{=html}
 <!DOCTYPE html>
 <html lang="en">
@@ -545,7 +544,6 @@ The story of Galton and Pearson is a story about genius — but also about limit
 </script>
 </body>
 </html>
-
 ```
 :::
 

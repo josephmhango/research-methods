@@ -1,7 +1,49 @@
-/* Allow vertical scrolling within slides when content overflows */
-.reveal .slides section {
+/*
+ * Keep every RevealJS teaching slide usable when its content is taller than
+ * the presentation canvas. Quarto gives navigable slides the `.slide` class,
+ * including slides nested inside level-one section stacks.
+ */
+.reveal .slides section.slide,
+.reveal .slides section#TOC {
+  box-sizing: border-box;
   height: 100%;
-  overflow-y: auto;
+  max-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+}
+
+/* Leave breathing room below the final item when a slide must scroll. */
+.reveal .slides section.slide > :last-child,
+.reveal .slides section#TOC > :last-child {
+  margin-bottom: 1rem;
+}
+
+/* Use a visible, unobtrusive scrollbar rather than hiding inaccessible text. */
+.reveal .slides section.slide,
+.reveal .slides section#TOC {
+  scrollbar-color: rgba(70, 90, 110, 0.65) transparent;
+  scrollbar-width: thin;
+}
+
+.reveal .slides section.slide::-webkit-scrollbar,
+.reveal .slides section#TOC::-webkit-scrollbar {
+  width: 10px;
+}
+
+.reveal .slides section.slide::-webkit-scrollbar-thumb,
+.reveal .slides section#TOC::-webkit-scrollbar-thumb {
+  background: rgba(70, 90, 110, 0.65);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+.reveal .slides section.slide::-webkit-scrollbar-track,
+.reveal .slides section#TOC::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Make long code lines wrap to reduce horizontal overflow */

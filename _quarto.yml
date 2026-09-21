@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: docs
 
+filters:
+  - reflection-pauses.lua
+
 website:
   favicon: "img/rmgis.png"
   title: "C5025HF Research methods and Geographical Information Systems"
@@ -9,28 +12,52 @@ website:
     logo: "img/rmgis.png"
     style: "docked"
     search: true
-    contents: 
-      - section: "Sessions"
+    contents:
+      - section: "Week 1: Introduction"
         contents:
+          - week1-literature-review.qmd
+          - week1-literature-review-guide.qmd
+      - section: "Week 3: Research and Statistics"
+        contents:
+          - week3-scientific-method.qmd
+          - week3-descriptive-statistics.qmd
+      - section: "Week 4: Introduction to R"
+        contents:
+          - week5-data-foundations.qmd
+          - week5-data-structures.qmd
+          - week5-data-manipulation.qmd
           - syntax-basics.qmd
-          - data-structures.qmd
           - indexing.qmd
           - tidy-data.qmd
+      - section: "Week 5: Statistical Tests"
+        contents:
           - eda.qmd
-          - galton.qmd
-          - chisquare.qmd
-          - gosset.qmd
           - t-test.qmd
+          - chisquare.qmd
+          - correlation.qmd
+      - section: "Week 7: ANOVA and Kruskal-Wallis"
+        contents:
           - fisher.qmd
           - anova.qmd
           - 1-way-anova.qmd
+      - section: "Week 8: Non-parametric Tests"
+        contents:
           - nonparam.qmd
-          - sampling.qmd
-          - samplingtut.qmd
-          - regression.qmd
+      - section: "Week 11: Sampling"
+        contents:
+          - week11-sampling-theory.qmd
+          - week11-spatial-sampling.qmd
+      - section: "Week 12: Regression"
+        contents:
+          - week12-regression.qmd
           - regression_tutorial.qmd
+      - section: "Week 13: Communicating Research"
+        contents:
           - reporting.qmd
           - vistut.qmd
+          - week13-analysis-plan.qmd
+          - week13-effective-graphics.qmd
+          - week13-data-visualisation.qmd
 format:
   html:
     highlight-style: a11y

@@ -1,0 +1,136 @@
+/*-- scss:defaults --*/
+
+.presentation-font-size-root {
+  font-size:40px; 
+}
+
+.dark-bg-code-color {
+  color: white;
+}
+.light-bg-code-color {
+  color: #012169;
+}
+
+/*$backgroundColor: #2e282a;
+$linkColor: #008080;
+$linkColorHover: #9593D9;
+$headingTextShadow: none;
+$headingLetterSpacing: -0.03em;
+$headingTextTransform: none;
+$selectionBackgroundColor: #9fa0c3;
+$code-color: #008080;*/
+
+/* Headings */
+
+$presentation-h1-font-size: 2.5em;
+$presentation-h2-font-size: 1.6em;
+$presentation-h3-font-size: 1.3em;
+$presentation-h4-font-size: 1em;
+
+/* Code blocks */
+/*$code-block-font-size: 0.4em;*/
+
+
+
+/*-- scss:rules --*/
+/* Allow vertical scrolling within slides when content overflows */
+/*.reveal .slides section {
+  height: 100%;
+  overflow-y: auto;
+}*/
+
+/* Make long code lines wrap to reduce horizontal overflow */
+/*.reveal pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.reveal section img,
+.reveal section figure {
+  display: block !important;
+  max-width: 100%;
+  height: auto !important;
+}*/
+
+
+
+
+.callout-cont-tip {
+  margin: 1em 0;
+  border: 2px solid gray;
+  border-left: 10px solid #012169; 
+  border-radius: 10px;
+}
+
+
+.callout-tip-header {
+  margin-left: 0em;
+  padding-left:  10px;
+  padding-top:  5px;
+  padding-bottom: 0.1em;
+  color: white;
+  background-color: rgba(1,33, 105,0.8);
+  font-size: 35px;
+  font-weight: bold;
+  
+}
+
+.tip-message {
+  padding: 20px 15px 20px 10px;
+  color: black;
+  background-color: rgba(255,255,255,0.8);
+  font-size: 25px;
+  border-bottom-right-radius: 5px;
+}
+
+
+.cust-table-sm {
+  font-size: 0.6em;
+}
+
+.cust-table-sm table td {
+  border-bottom: 0px;
+}
+
+.cust-table-lg {
+  font-size: 0.9em;
+}
+
+.cust-table-lg table td {
+  border-bottom: 0px;
+}
+
+.cust-table-lg table th {
+  border-bottom: 0px;
+}
+
+
+.fig-label {
+  text-align: center;
+  align-self: start;
+}
+
+
+
+.left-quote {
+  text-align: left;
+  border-left: 5px solid #012169;
+  border-right: none;
+  padding-left: 1em;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: auto;
+  line-height: 1.4;
+}
+
+
+.right-quote {
+  text-align: right;
+  border-right: 5px solid #012169;
+  border-left: none;
+  padding-right: 1em;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: auto;
+  line-height: 1.4;
+}

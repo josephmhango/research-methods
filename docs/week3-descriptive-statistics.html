@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="K.J. Mhango">
+  <title>C5025HF Research methods and Geographical Information Systems – Measures of Central Tendency and Dispersion</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-534cd8e3a96973385dffff3f4709048d.css">
+  <link rel="stylesheet" href="scroll.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Measures of Central Tendency and Dispersion</h1>
+  <p class="subtitle">Deep foundations for statistical analysis and inference</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+K.J. Mhango 
+</div>
+</div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/why-do-we-summarise-data" id="/toc-why-do-we-summarise-data">Why do we summarise data?</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-danger-of-summary-numbers" id="/toc-the-danger-of-summary-numbers">The danger of summary numbers</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-two-foundational-questions" id="/toc-the-two-foundational-questions">The two foundational questions</a>
+<ul>
+<li><a href="#/question-1-where-is-the-centre" id="/toc-question-1-where-is-the-centre">Question 1: Where is the centre?</a></li>
+<li><a href="#/question-2-how-much-do-values-vary-around-that-centre" id="/toc-question-2-how-much-do-values-vary-around-that-centre">Question 2: How much do values vary around that centre?</a></li>
+
+</ul></li>
+<li><a href="#/why-this-matters-in-statistical-analysis-and-inference" id="/toc-why-this-matters-in-statistical-analysis-and-inference">Why this matters in statistical analysis and inference</a>
+<ul>
+
+</ul></li>
+<li><a href="#/part-1" id="/toc-part-1">Part 1</a></li>
+<li><a href="#/central-tendency" id="/toc-central-tendency">Central tendency</a>
+<ul>
+
+</ul></li>
+<li><a href="#/r-setup-for-examples" id="/toc-r-setup-for-examples">R setup for examples</a>
+<ul>
+
+</ul></li>
+<li><a href="#/what-is-central-tendency" id="/toc-what-is-central-tendency">What is central tendency?</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-arithmetic-mean-idea-first" id="/toc-the-arithmetic-mean-idea-first">The arithmetic mean: idea first</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-arithmetic-mean-formula" id="/toc-the-arithmetic-mean-formula">The arithmetic mean: formula</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-additive-data-gives-rise-to-the-arithmetic-mean" id="/toc-why-additive-data-gives-rise-to-the-arithmetic-mean">Why “additive” data gives rise to the arithmetic mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/worked-example-arithmetic-mean" id="/toc-worked-example-arithmetic-mean">Worked example: arithmetic mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/important-properties-of-the-arithmetic-mean" id="/toc-important-properties-of-the-arithmetic-mean">Important properties of the arithmetic mean</a>
+<ul>
+<li><a href="#/it-uses-every-observation" id="/toc-it-uses-every-observation">1. It uses every observation</a></li>
+<li><a href="#/the-deviations-from-the-mean-sum-to-zero" id="/toc-the-deviations-from-the-mean-sum-to-zero">2. The deviations from the mean sum to zero</a></li>
+<li><a href="#/it-minimises-the-sum-of-squared-distances" id="/toc-it-minimises-the-sum-of-squared-distances">3. It minimises the sum of squared distances</a></li>
+
+</ul></li>
+<li><a href="#/weakness-of-the-arithmetic-mean" id="/toc-weakness-of-the-arithmetic-mean">Weakness of the arithmetic mean</a>
+<ul>
+<li>Reflection pause 1</li>
+</ul></li>
+<li><a href="#/different-kinds-of-means-exist-for-a-reason" id="/toc-different-kinds-of-means-exist-for-a-reason">Different kinds of means exist for a reason</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-geometric-mean-intuition" id="/toc-the-geometric-mean-intuition">The geometric mean: intuition</a>
+<ul>
+
+</ul></li>
+<li><a href="#/linear-vs-multiplicative-change" id="/toc-linear-vs-multiplicative-change">Linear vs multiplicative change</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-geometric-mean-formula" id="/toc-the-geometric-mean-formula">The geometric mean: formula</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-it-is-called-geometric" id="/toc-why-it-is-called-geometric">Why it is called “geometric”</a>
+<ul>
+
+</ul></li>
+<li><a href="#/worked-example-geometric-mean" id="/toc-worked-example-geometric-mean">Worked example: geometric mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-the-arithmetic-mean-can-fail-for-growth-rates" id="/toc-why-the-arithmetic-mean-can-fail-for-growth-rates">Why the arithmetic mean can fail for growth rates</a>
+<ul>
+
+</ul></li>
+<li><a href="#/geometric-mean-and-logs" id="/toc-geometric-mean-and-logs">Geometric mean and logs</a>
+<ul>
+
+</ul></li>
+<li><a href="#/conditions-and-cautions-for-the-geometric-mean" id="/toc-conditions-and-cautions-for-the-geometric-mean">Conditions and cautions for the geometric mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-harmonic-mean-idea-first" id="/toc-the-harmonic-mean-idea-first">The harmonic mean: idea first</a>
+<ul>
+
+</ul></li>
+<li><a href="#/harmonic-mean-and-why-rates-are-different" id="/toc-harmonic-mean-and-why-rates-are-different">Harmonic mean and why rates are different</a>
+<ul>
+
+</ul></li>
+<li><a href="#/harmonic-mean-formula" id="/toc-harmonic-mean-formula">Harmonic mean: formula</a>
+<ul>
+
+</ul></li>
+<li><a href="#/worked-example-harmonic-mean" id="/toc-worked-example-harmonic-mean">Worked example: harmonic mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/when-the-harmonic-mean-matters" id="/toc-when-the-harmonic-mean-matters">When the harmonic mean matters</a>
+<ul>
+
+</ul></li>
+<li><a href="#/comparing-arithmetic-geometric-and-harmonic-means" id="/toc-comparing-arithmetic-geometric-and-harmonic-means">Comparing arithmetic, geometric, and harmonic means</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-median-idea-first" id="/toc-the-median-idea-first">The median: idea first</a>
+<ul>
+
+</ul></li>
+<li><a href="#/how-to-calculate-the-median" id="/toc-how-to-calculate-the-median">How to calculate the median</a>
+<ul>
+<li><a href="#/case-1-odd-number-of-observations" id="/toc-case-1-odd-number-of-observations">Case 1: odd number of observations</a></li>
+<li><a href="#/case-2-even-number-of-observations" id="/toc-case-2-even-number-of-observations">Case 2: even number of observations</a></li>
+
+</ul></li>
+<li><a href="#/why-the-median-makes-sense" id="/toc-why-the-median-makes-sense">Why the median makes sense</a>
+<ul>
+
+</ul></li>
+<li><a href="#/important-properties-of-the-median" id="/toc-important-properties-of-the-median">Important properties of the median</a>
+<ul>
+<li><a href="#/it-is-resistant-to-outliers" id="/toc-it-is-resistant-to-outliers">1. It is resistant to outliers</a></li>
+<li><a href="#/it-works-well-for-skewed-distributions" id="/toc-it-works-well-for-skewed-distributions">2. It works well for skewed distributions</a></li>
+<li><a href="#/it-is-appropriate-for-ordinal-data" id="/toc-it-is-appropriate-for-ordinal-data">3. It is appropriate for ordinal data</a></li>
+<li><a href="#/it-minimises-absolute-deviations" id="/toc-it-minimises-absolute-deviations">4. It minimises absolute deviations</a></li>
+
+</ul></li>
+<li><a href="#/mean-versus-median" id="/toc-mean-versus-median">Mean versus median</a>
+<ul>
+<li><a href="#/the-mean" id="/toc-the-mean">The mean</a></li>
+<li><a href="#/the-median" id="/toc-the-median">The median</a></li>
+
+</ul></li>
+<li><a href="#/worked-comparison-mean-versus-median" id="/toc-worked-comparison-mean-versus-median">Worked comparison: mean versus median</a>
+<ul>
+
+</ul></li>
+<li><a href="#/the-mode-idea-first" id="/toc-the-mode-idea-first">The mode: idea first</a>
+<ul>
+
+</ul></li>
+<li><a href="#/how-to-calculate-the-mode" id="/toc-how-to-calculate-the-mode">How to calculate the mode</a>
+<ul>
+
+</ul></li>
+<li><a href="#/properties-of-the-mode" id="/toc-properties-of-the-mode">Properties of the mode</a>
+<ul>
+<li><a href="#/it-can-be-used-for-categorical-data" id="/toc-it-can-be-used-for-categorical-data">1. It can be used for categorical data</a></li>
+<li><a href="#/a-dataset-can-have-more-than-one-mode" id="/toc-a-dataset-can-have-more-than-one-mode">2. A dataset can have more than one mode</a></li>
+<li><a href="#/it-can-be-unstable-in-small-samples" id="/toc-it-can-be-unstable-in-small-samples">3. It can be unstable in small samples</a></li>
+<li><a href="#/it-may-not-be-unique" id="/toc-it-may-not-be-unique">4. It may not be unique</a></li>
+
+</ul></li>
+<li><a href="#/why-multimodality-matters" id="/toc-why-multimodality-matters">Why multimodality matters</a>
+<ul>
+
+</ul></li>
+<li><a href="#/which-measure-of-centre-should-be-used" id="/toc-which-measure-of-centre-should-be-used">Which measure of centre should be used?</a>
+<ul>
+<li><a href="#/use-the-mean-when" id="/toc-use-the-mean-when">Use the mean when:</a></li>
+<li><a href="#/use-the-median-when" id="/toc-use-the-median-when">Use the median when:</a></li>
+<li><a href="#/use-the-mode-when" id="/toc-use-the-mode-when">Use the mode when:</a></li>
+<li>Reflection pause 2</li>
+</ul></li>
+<li><a href="#/part-2" id="/toc-part-2">Part 2</a></li>
+<li><a href="#/dispersion" id="/toc-dispersion">Dispersion</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-centre-is-not-enough" id="/toc-why-centre-is-not-enough">Why centre is not enough</a>
+<ul>
+
+</ul></li>
+<li><a href="#/what-is-dispersion" id="/toc-what-is-dispersion">What is dispersion?</a>
+<ul>
+
+</ul></li>
+<li><a href="#/range" id="/toc-range">Range</a>
+<ul>
+
+</ul></li>
+<li><a href="#/strengths-and-weaknesses-of-range" id="/toc-strengths-and-weaknesses-of-range">Strengths and weaknesses of range</a>
+<ul>
+<li><a href="#/strength" id="/toc-strength">Strength</a></li>
+<li><a href="#/weakness" id="/toc-weakness">Weakness</a></li>
+
+</ul></li>
+<li><a href="#/variance-the-big-idea" id="/toc-variance-the-big-idea">Variance: the big idea</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-we-square-deviations" id="/toc-why-we-square-deviations">Why we square deviations</a>
+<ul>
+<li><a href="#/makes-all-contributions-non-negative" id="/toc-makes-all-contributions-non-negative">1. Makes all contributions non-negative</a></li>
+<li><a href="#/gives-larger-deviations-more-weight" id="/toc-gives-larger-deviations-more-weight">2. Gives larger deviations more weight</a></li>
+<li><a href="#/produces-a-mathematically-tractable-quantity" id="/toc-produces-a-mathematically-tractable-quantity">3. Produces a mathematically tractable quantity</a></li>
+
+</ul></li>
+<li><a href="#/population-variance" id="/toc-population-variance">Population variance</a>
+<ul>
+
+</ul></li>
+<li><a href="#/sample-variance" id="/toc-sample-variance">Sample variance</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-not-divide-sample-variance-by-n" id="/toc-why-not-divide-sample-variance-by-n">Why not divide sample variance by n?</a>
+<ul>
+
+</ul></li>
+<li><a href="#/qa-why-not-apply-an-n-1-correction-to-the-mean" id="/toc-qa-why-not-apply-an-n-1-correction-to-the-mean">Q&amp;A — why not apply an (n-1) correction to the mean?</a>
+<ul>
+
+</ul></li>
+<li><a href="#/bessels-correction" id="/toc-bessels-correction">Bessel’s correction</a>
+<ul>
+
+</ul></li>
+<li><a href="#/worked-example-sample-variance" id="/toc-worked-example-sample-variance">Worked example: sample variance</a>
+<ul>
+<li><a href="#/step-1-compute-the-mean" id="/toc-step-1-compute-the-mean">Step 1: compute the mean</a></li>
+<li><a href="#/step-2-compute-deviations-from-the-mean" id="/toc-step-2-compute-deviations-from-the-mean">Step 2: compute deviations from the mean</a></li>
+<li><a href="#/step-3-square-the-deviations" id="/toc-step-3-square-the-deviations">Step 3: square the deviations</a></li>
+<li><a href="#/step-4-sum-the-squared-deviations" id="/toc-step-4-sum-the-squared-deviations">Step 4: sum the squared deviations</a></li>
+
+</ul></li>
+<li><a href="#/interpreting-variance" id="/toc-interpreting-variance">Interpreting variance</a>
+<ul>
+
+</ul></li>
+<li><a href="#/standard-deviation" id="/toc-standard-deviation">Standard deviation</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-standard-deviation-matters" id="/toc-why-standard-deviation-matters">Why standard deviation matters</a>
+<ul>
+
+</ul></li>
+<li><a href="#/a-careful-interpretation-of-standard-deviation" id="/toc-a-careful-interpretation-of-standard-deviation">A careful interpretation of standard deviation</a>
+<ul>
+
+</ul></li>
+<li><a href="#/coefficient-of-variation" id="/toc-coefficient-of-variation">Coefficient of variation</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-coefficient-of-variation-matters" id="/toc-why-coefficient-of-variation-matters">Why coefficient of variation matters</a>
+<ul>
+
+</ul></li>
+<li><a href="#/cautions-for-coefficient-of-variation" id="/toc-cautions-for-coefficient-of-variation">Cautions for coefficient of variation</a>
+<ul>
+<li>Reflection pause 3</li>
+</ul></li>
+<li><a href="#/standard-error-a-different-concept" id="/toc-standard-error-a-different-concept">Standard error: a different concept</a>
+<ul>
+<li><a href="#/standard-deviation-1" id="/toc-standard-deviation-1">Standard deviation</a></li>
+<li><a href="#/standard-error" id="/toc-standard-error">Standard error</a></li>
+
+</ul></li>
+<li><a href="#/standard-error-of-the-mean" id="/toc-standard-error-of-the-mean">Standard error of the mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/interpreting-standard-error" id="/toc-interpreting-standard-error">Interpreting standard error</a>
+<ul>
+
+</ul></li>
+<li><a href="#/confidence-intervals" id="/toc-confidence-intervals">Confidence intervals</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-confidence-intervals-matter" id="/toc-why-confidence-intervals-matter">Why confidence intervals matter</a>
+<ul>
+
+</ul></li>
+<li><a href="#/worked-ci-example" id="/toc-worked-ci-example">Worked CI example</a>
+<ul>
+
+</ul></li>
+<li><a href="#/ci-for-a-difference-in-means-brief-note" id="/toc-ci-for-a-difference-in-means-brief-note">CI for a difference in means (brief note)</a>
+<ul>
+
+</ul></li>
+<li><a href="#/why-standard-error-and-ci-matter-for-inference" id="/toc-why-standard-error-and-ci-matter-for-inference">Why standard error and CI matter for inference</a>
+<ul>
+
+</ul></li>
+<li><a href="#/linking-centre-spread-and-inference" id="/toc-linking-centre-spread-and-inference">Linking centre, spread, and inference</a>
+<ul>
+<li><a href="#/measures-of-centre" id="/toc-measures-of-centre">Measures of centre</a></li>
+<li><a href="#/measures-of-dispersion" id="/toc-measures-of-dispersion">Measures of dispersion</a></li>
+<li><a href="#/standard-errors-and-confidence-intervals" id="/toc-standard-errors-and-confidence-intervals">Standard errors and confidence intervals</a></li>
+
+</ul></li>
+<li><a href="#/why-these-ideas-are-foundational-in-quantitative-research" id="/toc-why-these-ideas-are-foundational-in-quantitative-research">Why these ideas are foundational in quantitative research</a>
+<ul>
+
+</ul></li>
+<li><a href="#/common-mistakes-to-avoid" id="/toc-common-mistakes-to-avoid">Common mistakes to avoid</a>
+<ul>
+<li><a href="#/treating-average-as-if-it-always-means-arithmetic-mean" id="/toc-treating-average-as-if-it-always-means-arithmetic-mean">1. Treating “average” as if it always means arithmetic mean</a></li>
+<li><a href="#/using-the-mean-for-heavily-skewed-data-without-reflection" id="/toc-using-the-mean-for-heavily-skewed-data-without-reflection">2. Using the mean for heavily skewed data without reflection</a></li>
+<li><a href="#/confusing-sd-with-se" id="/toc-confusing-sd-with-se">3. Confusing SD with SE</a></li>
+<li><a href="#/thinking-variance-is-just-a-formula-rather-than-a-response-to-the-cancellation-problem" id="/toc-thinking-variance-is-just-a-formula-rather-than-a-response-to-the-cancellation-problem">4. Thinking variance is “just a formula” rather than a response to the cancellation problem</a></li>
+<li><a href="#/using-cv-when-the-mean-is-near-zero" id="/toc-using-cv-when-the-mean-is-near-zero">5. Using CV when the mean is near zero</a></li>
+
+</ul></li>
+<li><a href="#/summary-table" id="/toc-summary-table">Summary table</a>
+<ul>
+
+</ul></li>
+<li><a href="#/reflection-questions" id="/toc-reflection-questions">Reflection questions</a>
+<ul>
+
+</ul></li>
+<li><a href="#/practice-task-1-central-tendency" id="/toc-practice-task-1-central-tendency">Practice task 1: central tendency</a>
+<ul>
+
+</ul></li>
+<li><a href="#/practice-task-2-choosing-the-right-mean" id="/toc-practice-task-2-choosing-the-right-mean">Practice task 2: choosing the right mean</a>
+<ul>
+
+</ul></li>
+<li><a href="#/practice-task-3-variance-and-standard-deviation" id="/toc-practice-task-3-variance-and-standard-deviation">Practice task 3: variance and standard deviation</a>
+<ul>
+
+</ul></li>
+<li><a href="#/final-message" id="/toc-final-message">Final message</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="why-do-we-summarise-data" class="title-slide slide level1 center">
+<h1>Why do we summarise data?</h1>
+<p>A dataset can contain hundreds, thousands, or millions of values.</p>
+<p>That creates a practical problem.</p>
+<p>Even if all values are available, the human mind cannot easily grasp the overall pattern from a long list of raw numbers.</p>
+<p>So statistics begins with compression.</p>
+<p>We ask:</p>
+<blockquote>
+<p>Can we replace many numbers with a few meaningful summaries without destroying the truth in the data?</p>
+</blockquote>
+<p>This is where measures of <strong>central tendency</strong> and <strong>dispersion</strong> come from.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-danger-of-summary-numbers" class="title-slide slide level1 center">
+<h1>The danger of summary numbers</h1>
+<p>Suppose two groups both have a mean of 50.</p>
+<p>That sounds like they are similar.</p>
+<p>But one group might be tightly clustered around 50, while the other ranges from 10 to 90.</p>
+<p>So a summary of the centre, by itself, is incomplete.</p>
+<p>A single number can be useful.</p>
+<p>A single number can also be deeply misleading.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-two-foundational-questions" class="title-slide slide level1 center">
+<h1>The two foundational questions</h1>
+<p>Most introductory descriptive statistics can be organised around two questions.</p>
+</section>
+<section id="question-1-where-is-the-centre" class="slide level2">
+<h2>Question 1: Where is the centre?</h2>
+<p>This leads to measures of <strong>central tendency</strong>.</p>
+</section>
+<section id="question-2-how-much-do-values-vary-around-that-centre" class="slide level2">
+<h2>Question 2: How much do values vary around that centre?</h2>
+<p>This leads to measures of <strong>dispersion</strong>.</p>
+<p>Together, these form the basic language of data description.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-this-matters-in-statistical-analysis-and-inference" class="title-slide slide level1 center">
+<h1>Why this matters in statistical analysis and inference</h1>
+<p>These ideas are not just classroom definitions.</p>
+<p>They sit underneath:</p>
+<ul>
+<li>regression models</li>
+<li>machine learning loss functions</li>
+<li>confidence intervals</li>
+<li>hypothesis tests</li>
+<li>experimental comparisons</li>
+<li>error analysis</li>
+<li>model evaluation</li>
+</ul>
+<p>If you do not understand what centre and spread really mean, it becomes difficult to judge whether a result is stable, interpretable, or trustworthy.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section id="part-1" class="title-slide slide level1 center">
+<h1>Part 1</h1>
+
+</section>
+
+<section>
+<section id="central-tendency" class="title-slide slide level1 center">
+<h1>Central tendency</h1>
+
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="r-setup-for-examples" class="title-slide slide level1 center">
+<h1>R setup for examples</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Shared vectors and helper functions used in code examples</span></span>
+<span id="cb1-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)</span>
+<span id="cb1-3"><a></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">23</span>, <span class="dv">120</span>)</span>
+<span id="cb1-4"><a></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.10</span>, <span class="fl">1.20</span>, <span class="fl">0.90</span>)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>get_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb1-7"><a></a>  uniq <span class="ot">&lt;-</span> <span class="fu">unique</span>(v)</span>
+<span id="cb1-8"><a></a>  uniq[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(v, uniq)))]</span>
+<span id="cb1-9"><a></a>}</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>harmonic_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb1-12"><a></a>  <span class="cf">if</span> (<span class="fu">any</span>(v <span class="sc">==</span> <span class="dv">0</span>)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb1-13"><a></a>  <span class="fu">length</span>(v) <span class="sc">/</span> <span class="fu">sum</span>(<span class="dv">1</span> <span class="sc">/</span> v)</span>
+<span id="cb1-14"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="what-is-central-tendency" class="title-slide slide level1 center">
+<h1>What is central tendency?</h1>
+<p>A measure of central tendency is a statistic intended to represent the <strong>typical location</strong> of the data.</p>
+<p>But that phrase hides an important fact.</p>
+<p>There is more than one sensible definition of “typical”.</p>
+<p>For example:</p>
+<ul>
+<li>the balancing point of all values</li>
+<li>the middle-ranked observation</li>
+<li>the most common observation</li>
+</ul>
+<p>These correspond to:</p>
+<ul>
+<li>mean</li>
+<li>median</li>
+<li>mode</li>
+</ul>
+<p>Each one is answering a slightly different question.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-arithmetic-mean-idea-first" class="title-slide slide level1 center">
+<h1>The arithmetic mean: idea first</h1>
+<p>The <strong>arithmetic mean</strong> is the quantity most people simply call “the average”.</p>
+<p>Its deep idea is this:</p>
+<blockquote>
+<p>The mean is the balance point of the dataset.</p>
+</blockquote>
+<p>Imagine all observations laid out on a number line, each with equal weight.</p>
+<p>The mean is the point at which the dataset would balance if placed on a pivot.</p>
+<p>This is why the mean is so central to mathematics and statistics: it behaves like a true centre of mass.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-arithmetic-mean-formula" class="title-slide slide level1 center">
+<h1>The arithmetic mean: formula</h1>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+\]</span></p>
+<p>Let us unpack every part carefully.</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> means the <span class="math inline">\(i\)</span>-th observation in the dataset.</li>
+<li><span class="math inline">\(\sum_{i=1}^{n} x_i\)</span> means add up all observations from the first to the last.</li>
+<li><span class="math inline">\(n\)</span> is the number of observations.</li>
+<li>dividing by <span class="math inline">\(n\)</span> shares the total equally across all observations.</li>
+</ul>
+<p>So the arithmetic mean is literally:</p>
+<blockquote>
+<p>total amount divided equally among all cases.</p>
+</blockquote>
+<p>That is why it makes sense for quantities that combine by <strong>addition</strong>.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-additive-data-gives-rise-to-the-arithmetic-mean" class="title-slide slide level1 center">
+<h1>Why “additive” data gives rise to the arithmetic mean</h1>
+<p>Suppose five fields yield:</p>
+<p>2, 4, 6, 8, 10 t/ha</p>
+<p>The total yield across the five observations is found by adding.</p>
+<p><span class="math display">\[
+2 + 4 + 6 + 8 + 10 = 30
+\]</span></p>
+<p>If we want the equal-share value per field, we divide by 5.</p>
+<p><span class="math display">\[
+30/5 = 6
+\]</span></p>
+<p>This is why the arithmetic mean is natural for quantities such as:</p>
+<ul>
+<li>weight</li>
+<li>height</li>
+<li>yield</li>
+<li>temperature measured on an appropriate scale</li>
+<li>test score</li>
+<li>residual error under squared-loss frameworks</li>
+</ul>
+<p>The data combine by accumulation.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-example-arithmetic-mean" class="title-slide slide level1 center">
+<h1>Worked example: arithmetic mean</h1>
+<p>Dataset:</p>
+<p>2, 4, 6, 8</p>
+<p>Step 1: add the values</p>
+<p><span class="math display">\[
+2+4+6+8 = 20
+\]</span></p>
+<p>Step 2: count the values</p>
+<p><span class="math display">\[
+n=4
+\]</span></p>
+<p>Step 3: divide total by count</p>
+<p><span class="math display">\[
+\bar{x}=20/4=5
+\]</span></p>
+<p>Notice that 5 is not one of the observed values.</p>
+<p>The mean does not need to be an actual observation.</p>
+<p>It is a mathematical centre, not necessarily a value someone recorded.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">mean</span>(x)</span>
+<span id="cb2-2"><a></a><span class="fu">sum</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="important-properties-of-the-arithmetic-mean" class="title-slide slide level1 center">
+<h1>Important properties of the arithmetic mean</h1>
+<p>The arithmetic mean has several important mathematical properties.</p>
+</section>
+<section id="it-uses-every-observation" class="slide level2">
+<h2>1. It uses every observation</h2>
+<p>Every value contributes.</p>
+</section>
+<section id="the-deviations-from-the-mean-sum-to-zero" class="slide level2">
+<h2>2. The deviations from the mean sum to zero</h2>
+<p><span class="math display">\[
+\sum (x_i - \bar{x}) = 0
+\]</span></p>
+<p>This means the mean perfectly balances positive and negative deviations.</p>
+</section>
+<section id="it-minimises-the-sum-of-squared-distances" class="slide level2">
+<h2>3. It minimises the sum of squared distances</h2>
+<p>Among all possible choices of centre, the mean is the value that makes</p>
+<p><span class="math display">\[
+\sum (x_i - c)^2
+\]</span></p>
+<p>as small as possible.</p>
+<p>This is one reason why the mean appears in regression and machine learning.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="weakness-of-the-arithmetic-mean" class="title-slide slide level1 center">
+<h1>Weakness of the arithmetic mean</h1>
+<p>Because the mean uses every observation, it is sensitive to extreme values.</p>
+<p>That can be a strength if extremes are real and meaningful.</p>
+<p>It can also be a weakness if a few unusual values distort the story.</p>
+<p>Example:</p>
+<p>25, 27, 28, 30, 500</p>
+<p>The mean is pulled upward strongly by 500.</p>
+<p>So the mean is informative, but not always robust.</p>
+</section>
+<section class="slide level2">
+<h2>Reflection pause 1</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section></section>
+<section>
+<section id="different-kinds-of-means-exist-for-a-reason" class="title-slide slide level1 center">
+<h1>Different kinds of means exist for a reason</h1>
+<p>A common question:</p>
+<blockquote>
+<p>Why are there several means? Why not just use one formula?</p>
+</blockquote>
+<p>Because different quantities combine in different ways.</p>
+<p>Three important cases are:</p>
+<ul>
+<li>additive processes → arithmetic mean</li>
+<li>multiplicative processes → geometric mean</li>
+<li>rates over equal quantities → harmonic mean</li>
+</ul>
+<p>So the “right average” depends on the <strong>structure of the process generating the data</strong>.</p>
+<blockquote>
+<p>Why are there several means? Why not just use one formula?</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-geometric-mean-intuition" class="title-slide slide level1 center">
+<h1>The geometric mean: intuition</h1>
+<p>The <strong>geometric mean</strong> is used when values combine <strong>multiplicatively</strong> rather than additively.</p>
+<p>What does that mean?</p>
+<p>It means the process evolves by repeated multiplication.</p>
+<p>Examples:</p>
+<ul>
+<li>population multiplies by a growth factor each year</li>
+<li>investment multiplies by return factors over time</li>
+<li>bacterial growth multiplies</li>
+<li>fold-change measurements multiply relative to a baseline</li>
+</ul>
+<p>If something changes by 1.10 one year and 0.90 the next, the total effect is not found by adding 1.10 and 0.90. It is found by multiplying them.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="linear-vs-multiplicative-change" class="title-slide slide level1 center">
+<h1>Linear vs multiplicative change</h1>
+<p>A common confusion is thinking that <strong>any quantity could be treated multiplicatively</strong>. In principle that is true — but the key question is <strong>how the process actually evolves</strong>.</p>
+<p>Some processes grow by <strong>adding a constant amount each step</strong>. Others grow by <strong>multiplying by a factor each step</strong>.</p>
+<p>These two mechanisms produce very different trajectories.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Linear (additive) growth</th>
+<th>Multiplicative growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Start</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Step 1</td>
+<td>100 + 20 = 120</td>
+<td>100 × 1.20 = 120</td>
+</tr>
+<tr class="odd">
+<td>Step 2</td>
+<td>120 + 20 = 140</td>
+<td>120 × 1.20 = 144</td>
+</tr>
+<tr class="even">
+<td>Step 3</td>
+<td>140 + 20 = 160</td>
+<td>144 × 1.20 = 172.8</td>
+</tr>
+</tbody>
+</table>
+<p>In the <strong>linear case</strong>, the increase is always the same absolute amount.</p>
+<p>In the <strong>multiplicative case</strong>, the increase depends on the current size of the quantity.</p>
+<p>This difference explains why different averages are needed.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Correct average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant additive change</td>
+<td>Arithmetic mean</td>
+</tr>
+<tr class="even">
+<td>Constant multiplicative factor</td>
+<td>Geometric mean</td>
+</tr>
+</tbody>
+</table>
+<p>The geometric mean answers a specific question:</p>
+<blockquote>
+<p>If the quantity changed by a different multiplicative factor each step, what single constant factor would produce the same overall result?</p>
+</blockquote>
+<p>For example, if a population evolves like this:</p>
+<p>Start = 100</p>
+<p>Year 1 factor = 1.20</p>
+<p>Year 2 factor = 0.90</p>
+<p>The total effect is</p>
+<p><span class="math display">\[
+100 \times 1.20 \times 0.90 = 108
+\]</span></p>
+<p>The geometric mean finds the <strong>single growth factor that would reproduce this overall change if applied repeatedly</strong>.</p>
+<p>That is why the geometric mean is the natural summary when processes evolve through proportional change rather than constant addition.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-geometric-mean-formula" class="title-slide slide level1 center">
+<h1>The geometric mean: formula</h1>
+<p>For positive values <span class="math inline">\((x_1, x_2, ..., x_n)\)</span>,</p>
+<p><span class="math display">\[
+GM = (x_1 x_2 \cdots x_n)^{1/n}
+\]</span></p>
+<p>Let us unpack this.</p>
+<ul>
+<li>Multiply all observations together.</li>
+<li>Then take the <span class="math inline">\(n\)</span>-th root.</li>
+</ul>
+<p>Why the <span class="math inline">\(n\)</span>-th root?</p>
+<p>Because multiplying all values together creates a total multiplicative product, and the <span class="math inline">\(n\)</span>-th root asks:</p>
+<blockquote>
+<p>What constant factor, repeated <span class="math inline">\(n\)</span> times, would give the same overall product?</p>
+</blockquote>
+<p>That is exactly the multiplicative analogue of the arithmetic mean.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-it-is-called-geometric" class="title-slide slide level1 center">
+<h1>Why it is called “geometric”</h1>
+<p>Historically, the name comes from geometry and proportional reasoning.</p>
+<p>The geometric mean appears naturally in problems involving ratios, proportions, and similar figures.</p>
+<p>For two positive numbers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, the geometric mean is:</p>
+<p><span class="math display">\[
+\sqrt{ab}
+\]</span></p>
+<p>This quantity arises in classical geometric constructions and proportional relationships.</p>
+<p>So the name is historical and mathematical: it comes from the role of this mean in geometry and multiplicative proportion.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-example-geometric-mean" class="title-slide slide level1 center">
+<h1>Worked example: geometric mean</h1>
+<p>Suppose the growth factors over three periods are:</p>
+<p>1.10, 1.20, 0.90</p>
+<p>Then</p>
+<p><span class="math display">\[
+GM = (1.10 \times 1.20 \times 0.90)^{1/3}
+\]</span></p>
+<p>First multiply:</p>
+<p><span class="math display">\[
+1.10 \times 1.20 \times 0.90 = 1.188
+\]</span></p>
+<p>Now take the cube root:</p>
+<p><span class="math display">\[
+GM \approx 1.059
+\]</span></p>
+<p>So the typical multiplicative factor is about 1.059, meaning about 5.9% growth per period.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="cf">if</span> (<span class="fu">any</span>(z <span class="sc">&lt;=</span> <span class="dv">0</span>)) <span class="fu">stop</span>(<span class="st">"geometric mean needs positive values"</span>)</span>
+<span id="cb3-2"><a></a>geom_mean <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(z)))</span>
+<span id="cb3-3"><a></a>geom_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-the-arithmetic-mean-can-fail-for-growth-rates" class="title-slide slide level1 center">
+<h1>Why the arithmetic mean can fail for growth rates</h1>
+<p>Suppose returns are +50% and −50%.</p>
+<p>The arithmetic mean of the percentages is 0%.</p>
+<p>That sounds like no net change.</p>
+<p>But starting from 100:</p>
+<p><span class="math display">\[
+100 \times 1.5 = 150
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+150 \times 0.5 = 75
+\]</span></p>
+<p>The final value is 75, not 100.</p>
+<p>So arithmetic averaging misleads here because the process is multiplicative.</p>
+<p>The geometric mean captures the compound effect correctly.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="geometric-mean-and-logs" class="title-slide slide level1 center">
+<h1>Geometric mean and logs</h1>
+<p>A very useful identity is:</p>
+<p><span class="math display">\[
+GM = \exp\left(\frac{1}{n}\sum \ln(x_i)\right)
+\]</span></p>
+<p>This means:</p>
+<ol type="1">
+<li>take logs of the values</li>
+<li>compute the arithmetic mean of the logs</li>
+<li>transform back using the exponential</li>
+</ol>
+<p>Why does this work?</p>
+<p>Because logarithms turn multiplication into addition.</p>
+<p>So the geometric mean is what you get when you move a multiplicative problem into an additive scale, average there, and then move back.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="conditions-and-cautions-for-the-geometric-mean" class="title-slide slide level1 center">
+<h1>Conditions and cautions for the geometric mean</h1>
+<p>The geometric mean requires positive values.</p>
+<p>Why?</p>
+<ul>
+<li>you cannot take logs of zero or negative numbers in the usual real-valued sense</li>
+<li>multiplicative growth factors must normally be positive</li>
+</ul>
+<p>So the geometric mean is not a universal replacement for the arithmetic mean.</p>
+<p>It is appropriate when the underlying process genuinely behaves multiplicatively.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-harmonic-mean-idea-first" class="title-slide slide level1 center">
+<h1>The harmonic mean: idea first</h1>
+<p>The <strong>harmonic mean</strong> is used when averaging <strong>rates</strong> where a fixed amount of work, distance, or other denominator is being completed.</p>
+<p>The classic example is speed.</p>
+<p>Suppose you travel the same distance twice, but at different speeds each time.</p>
+<p>The correct overall average speed is <strong>not</strong> the arithmetic mean of the two speeds.</p>
+<p>Why not?</p>
+<p>Because speed is a rate: distance per unit time.</p>
+<p>What accumulates is not speed itself, but time.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="harmonic-mean-and-why-rates-are-different" class="title-slide slide level1 center">
+<h1>Harmonic mean and why rates are different</h1>
+<p>Suppose you travel:</p>
+<ul>
+<li>60 miles at 30 mph</li>
+<li>60 miles at 60 mph</li>
+</ul>
+<p>Arithmetic mean of the speeds:</p>
+<p><span class="math display">\[
+(30+60)/2 = 45 \text{ mph}
+\]</span></p>
+<p>But check the actual times.</p>
+<p>Time for first leg:</p>
+<p><span class="math display">\[
+60/30 = 2 \text{ hours}
+\]</span></p>
+<p>Time for second leg:</p>
+<p><span class="math display">\[
+60/60 = 1 \text{ hour}
+\]</span></p>
+<p>Total distance = 120 miles</p>
+<p>Total time = 3 hours</p>
+<p>True average speed:</p>
+<p><span class="math display">\[
+120/3 = 40 \text{ mph}
+\]</span></p>
+<p>So 45 mph is wrong.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="harmonic-mean-formula" class="title-slide slide level1 center">
+<h1>Harmonic mean: formula</h1>
+<p><span class="math display">\[
+HM = \frac{n}{\sum_{i=1}^{n} 1/x_i}
+\]</span></p>
+<p>Let us unpack the logic.</p>
+<ul>
+<li>For a rate, the reciprocal (<span class="math inline">\(1/x_i\)</span>) often represents time per unit quantity.</li>
+<li>We add these reciprocals because times accumulate additively.</li>
+<li>Then we invert again to return to the rate scale.</li>
+</ul>
+<p>So the harmonic mean is the correct average when equal quantities are associated with different rates.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-example-harmonic-mean" class="title-slide slide level1 center">
+<h1>Worked example: harmonic mean</h1>
+<p>For speeds 30 and 60 over equal distances:</p>
+<p><span class="math display">\[
+HM = \frac{2}{1/30 + 1/60}
+\]</span></p>
+<p>Compute the denominator:</p>
+<p><span class="math display">\[
+1/30 + 1/60 = 2/60 + 1/60 = 3/60 = 1/20
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+HM = \frac{2}{1/20} = 40
+\]</span></p>
+<p>This matches the true average speed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">harmonic_mean</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">60</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="when-the-harmonic-mean-matters" class="title-slide slide level1 center">
+<h1>When the harmonic mean matters</h1>
+<p>The harmonic mean is useful for:</p>
+<ul>
+<li>average speed over equal distances</li>
+<li>average cost per unit under certain weighting structures</li>
+<li>ratios and rates in some scientific and computational settings</li>
+<li>combining precision-like quantities in some modelling contexts</li>
+</ul>
+<p>The key question is always:</p>
+<blockquote>
+<p>Are I averaging raw values, multiplicative factors, or rates over equal quantities?</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="comparing-arithmetic-geometric-and-harmonic-means" class="title-slide slide level1 center">
+<h1>Comparing arithmetic, geometric, and harmonic means</h1>
+<p>For positive data, these means are related by:</p>
+<p><span class="math display">\[
+AM \ge GM \ge HM
+\]</span></p>
+<p>Equality occurs when all observations are identical.</p>
+<p>This is not just a curiosity.</p>
+<p>It reflects how each mean responds differently to variation.</p>
+<ul>
+<li>the arithmetic mean is largest</li>
+<li>the harmonic mean is most pulled downward by small values</li>
+<li>the geometric mean lies in between</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 44%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Mean Type</strong></th>
+<th><strong>Use when…</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Arithmetic</strong></td>
+<td>The <strong>Denominator</strong> is constant (Equal Time).</td>
+<td>You run for 10 mins at 5mph, then 10 mins at 10mph.</td>
+</tr>
+<tr class="even">
+<td><strong>Harmonic</strong></td>
+<td>The <strong>Numerator</strong> is constant (Equal Distance/Work).</td>
+<td>You run 1 mile at 5mph, then 1 mile at 10mph.</td>
+</tr>
+<tr class="odd">
+<td><strong>Geometric</strong></td>
+<td>The <strong>Growth</strong> is compounding (Multiplicative).</td>
+<td>Your investment grows 10% Year 1, then 20% Year 2.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-median-idea-first" class="title-slide slide level1 center">
+<h1>The median: idea first</h1>
+<p>The <strong>median</strong> is the middle value once the data are ordered.</p>
+<p>This sounds simple, but it represents a profound change in perspective.</p>
+<p>The mean uses the actual magnitudes of all values.</p>
+<p>The median uses only their <strong>order</strong>.</p>
+<p>So the median is not a balance point.</p>
+<p>It is a <strong>positional centre</strong>.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="how-to-calculate-the-median" class="title-slide slide level1 center">
+<h1>How to calculate the median</h1>
+
+</section>
+<section id="case-1-odd-number-of-observations" class="slide level2">
+<h2>Case 1: odd number of observations</h2>
+<p>Order the values and take the middle one.</p>
+<p>Example:</p>
+<p>3, 5, 7, 10, 12</p>
+<p>There are 5 observations, so the middle position is the 3rd.</p>
+<p>Median = 7</p>
+</section>
+<section id="case-2-even-number-of-observations" class="slide level2">
+<h2>Case 2: even number of observations</h2>
+<p>Order the values and average the two middle values.</p>
+<p>Example:</p>
+<p>3, 5, 7, 10</p>
+<p>The two middle values are 5 and 7.</p>
+<p>Median = ((5+7)/2 = 6)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">median</span>(x)</span>
+<span id="cb5-2"><a></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-the-median-makes-sense" class="title-slide slide level1 center">
+<h1>Why the median makes sense</h1>
+<p>The median divides the ordered dataset into two equal halves.</p>
+<p>At least half the observations lie at or below it.</p>
+<p>At least half lie at or above it.</p>
+<p>So the median answers:</p>
+<blockquote>
+<p>What value sits in the middle of the ranked data?</p>
+</blockquote>
+<p>This is why it is often interpreted as a “typical” observation.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="important-properties-of-the-median" class="title-slide slide level1 center">
+<h1>Important properties of the median</h1>
+
+</section>
+<section id="it-is-resistant-to-outliers" class="slide level2">
+<h2>1. It is resistant to outliers</h2>
+<p>Extreme values can move far away without changing the middle-ranked position much.</p>
+</section>
+<section id="it-works-well-for-skewed-distributions" class="slide level2">
+<h2>2. It works well for skewed distributions</h2>
+<p>Especially income, waiting times, and count data with long tails.</p>
+</section>
+<section id="it-is-appropriate-for-ordinal-data" class="slide level2">
+<h2>3. It is appropriate for ordinal data</h2>
+<p>If categories have an order but not equal intervals, the median may still make sense, while the mean may not.</p>
+</section>
+<section id="it-minimises-absolute-deviations" class="slide level2">
+<h2>4. It minimises absolute deviations</h2>
+<p>The median is the value that minimises:</p>
+<p><span class="math display">\[
+\sum |x_i - c|
+\]</span></p>
+<p>This mirrors the mean’s role for squared deviations.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="mean-versus-median" class="title-slide slide level1 center">
+<h1>Mean versus median</h1>
+<p>This contrast is fundamental.</p>
+</section>
+<section id="the-mean" class="slide level2">
+<h2>The mean</h2>
+<ul>
+<li>uses all magnitudes</li>
+<li>is mathematically elegant</li>
+<li>is sensitive to outliers</li>
+<li>minimises squared distance</li>
+</ul>
+</section>
+<section id="the-median" class="slide level2">
+<h2>The median</h2>
+<ul>
+<li>uses ordering, not full magnitude information</li>
+<li>is robust to outliers</li>
+<li>is ideal for skewed data</li>
+<li>minimises absolute distance</li>
+</ul>
+<p>Neither is “always better”.</p>
+<p>They answer different questions.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-comparison-mean-versus-median" class="title-slide slide level1 center">
+<h1>Worked comparison: mean versus median</h1>
+<p>Dataset:</p>
+<p>20, 21, 22, 23, 120</p>
+<p>Mean:</p>
+<p><span class="math display">\[
+(20+21+22+23+120)/5 = 41.2
+\]</span></p>
+<p>Median:</p>
+<p>Ordered data already shown, middle value = 22</p>
+<p>The mean says the balance point is 41.2.</p>
+<p>The median says the middle-ranked observation is 22.</p>
+<p>If the goal is to describe a typical case, the median is often more faithful here.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="the-mode-idea-first" class="title-slide slide level1 center">
+<h1>The mode: idea first</h1>
+<p>The <strong>mode</strong> is the most frequently occurring value.</p>
+<p>This seems the simplest measure of centre, but it has a distinct interpretation.</p>
+<p>The mode tells us:</p>
+<blockquote>
+<p>What value or category appears most often?</p>
+</blockquote>
+<p>That makes it especially useful when frequency itself matters.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="how-to-calculate-the-mode" class="title-slide slide level1 center">
+<h1>How to calculate the mode</h1>
+<p>Count how often each value appears.</p>
+<p>Example:</p>
+<p>2, 4, 4, 5, 7, 7, 7, 9</p>
+<p>Frequencies:</p>
+<ul>
+<li>2 appears once</li>
+<li>4 appears twice</li>
+<li>5 appears once</li>
+<li>7 appears three times</li>
+<li>9 appears once</li>
+</ul>
+<p>Mode = 7</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">get_mode</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="properties-of-the-mode" class="title-slide slide level1 center">
+<h1>Properties of the mode</h1>
+
+</section>
+<section id="it-can-be-used-for-categorical-data" class="slide level2">
+<h2>1. It can be used for categorical data</h2>
+<p>This is very important.</p>
+<p>For categories such as:</p>
+<ul>
+<li>favourite crop</li>
+<li>transport mode</li>
+<li>yes/no response</li>
+<li>disease class</li>
+</ul>
+<p>there may be no meaningful mean or median, but the mode still makes sense.</p>
+</section>
+<section id="a-dataset-can-have-more-than-one-mode" class="slide level2">
+<h2>2. A dataset can have more than one mode</h2>
+<ul>
+<li>one mode → unimodal</li>
+<li>two modes → bimodal</li>
+<li>more than two → multimodal</li>
+</ul>
+</section>
+<section id="it-can-be-unstable-in-small-samples" class="slide level2">
+<h2>3. It can be unstable in small samples</h2>
+<p>A small change in frequencies can change the mode.</p>
+</section>
+<section id="it-may-not-be-unique" class="slide level2">
+<h2>4. It may not be unique</h2>
+<p>If several values tie for highest frequency, there may be several modes.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-multimodality-matters" class="title-slide slide level1 center">
+<h1>Why multimodality matters</h1>
+<p>If a dataset is bimodal or multimodal, this often suggests that the data may contain <strong>multiple underlying groups</strong>.</p>
+<p>For example:</p>
+<ul>
+<li>male and female body sizes mixed together</li>
+<li>two subpopulations in a biological experiment</li>
+<li>two customer segments in market data</li>
+</ul>
+<p>So the mode is not just a descriptive statistic. It can hint at hidden structure.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="which-measure-of-centre-should-be-used" class="title-slide slide level1 center">
+<h1>Which measure of centre should be used?</h1>
+<p>That depends on the data and the purpose.</p>
+</section>
+<section id="use-the-mean-when" class="slide level2">
+<h2>Use the mean when:</h2>
+<ul>
+<li>values combine additively</li>
+<li>outliers are not too influential</li>
+<li>mathematical modelling requires it</li>
+<li>interval/ratio interpretation is meaningful</li>
+</ul>
+</section>
+<section id="use-the-median-when" class="slide level2">
+<h2>Use the median when:</h2>
+<ul>
+<li>data are skewed</li>
+<li>outliers are strong</li>
+<li>robustness matters</li>
+<li>ordinal scale data are involved</li>
+</ul>
+</section>
+<section id="use-the-mode-when" class="slide level2">
+<h2>Use the mode when:</h2>
+<ul>
+<li>the question is about most common values or classes</li>
+<li>the data are categorical</li>
+<li>peaks in the distribution are substantively important</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Reflection pause 2</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section></section>
+<section id="part-2" class="title-slide slide level1 center">
+<h1>Part 2</h1>
+
+</section>
+
+<section>
+<section id="dispersion" class="title-slide slide level1 center">
+<h1>Dispersion</h1>
+
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-centre-is-not-enough" class="title-slide slide level1 center">
+<h1>Why centre is not enough</h1>
+<p>Suppose both datasets have mean 10.</p>
+<p>Dataset A:</p>
+<p>10, 10, 10, 10, 10</p>
+<p>Dataset B:</p>
+<p>2, 6, 10, 14, 18</p>
+<p>Same centre.</p>
+<p>Very different variability.</p>
+<p>So after asking “where is the centre?”, the next question is:</p>
+<blockquote>
+<p>How tightly or loosely are the data spread around that centre?</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="what-is-dispersion" class="title-slide slide level1 center">
+<h1>What is dispersion?</h1>
+<p>Dispersion refers to the spread, variability, or scatter in the data.</p>
+<p>A good measure of dispersion tells us how different observations are from one another, or from a chosen centre.</p>
+<p>We will consider:</p>
+<ul>
+<li>range</li>
+<li>variance</li>
+<li>standard deviation</li>
+<li>coefficient of variation</li>
+<li>standard error</li>
+<li>confidence intervals</li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="range" class="title-slide slide level1 center">
+<h1>Range</h1>
+<p>The <strong>range</strong> is the simplest measure of dispersion.</p>
+<p><span class="math display">\[
+Range = Max - Min
+\]</span></p>
+<p>Example:</p>
+<p>3, 5, 7, 12</p>
+<p><span class="math display">\[
+Range = 12 - 3 = 9
+\]</span></p>
+<p>This tells us the total span of the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">range</span>(x)</span>
+<span id="cb7-2"><a></a><span class="fu">diff</span>(<span class="fu">range</span>(x))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="strengths-and-weaknesses-of-range" class="title-slide slide level1 center">
+<h1>Strengths and weaknesses of range</h1>
+
+</section>
+<section id="strength" class="slide level2">
+<h2>Strength</h2>
+<p>It is quick and intuitive.</p>
+</section>
+<section id="weakness" class="slide level2">
+<h2>Weakness</h2>
+<p>It uses only two observations: the smallest and largest.</p>
+<p>So it ignores almost everything in the dataset.</p>
+<p>That means it is highly sensitive to outliers and unstable from sample to sample.</p>
+<p>Useful as a rough first look, but weak as a serious description of variability.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="variance-the-big-idea" class="title-slide slide level1 center">
+<h1>Variance: the big idea</h1>
+<p>Variance is one of the deepest ideas in statistics.</p>
+<p>It asks:</p>
+<blockquote>
+<p>On average, how far are observations from the mean?</p>
+</blockquote>
+<p>But there is a problem.</p>
+<p>If we simply average raw deviations from the mean,</p>
+<p><span class="math display">\[
+\sum (x_i - \bar{x})
+\]</span></p>
+<p>we always get zero.</p>
+<p>Positive and negative deviations cancel.</p>
+<p>So we need a way to measure deviations without cancellation.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-we-square-deviations" class="title-slide slide level1 center">
+<h1>Why we square deviations</h1>
+<p>Variance solves the cancellation problem by squaring the deviations.</p>
+<p><span class="math display">\[
+(x_i - \bar{x})^2
+\]</span></p>
+<p>Squaring does three things.</p>
+</section>
+<section id="makes-all-contributions-non-negative" class="slide level2">
+<h2>1. Makes all contributions non-negative</h2>
+<p>No cancellation.</p>
+</section>
+<section id="gives-larger-deviations-more-weight" class="slide level2">
+<h2>2. Gives larger deviations more weight</h2>
+<p>Large departures from the mean matter more.</p>
+</section>
+<section id="produces-a-mathematically-tractable-quantity" class="slide level2">
+<h2>3. Produces a mathematically tractable quantity</h2>
+<p>This is one reason variance works so well in algebra, calculus, regression, and probability theory.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="population-variance" class="title-slide slide level1 center">
+<h1>Population variance</h1>
+<p>If we have every value in the population, the population variance is:</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the population mean</li>
+<li><span class="math inline">\(N\)</span> is the population size</li>
+<li><span class="math inline">\(\sigma^2\)</span> is the population variance</li>
+</ul>
+<p>Interpretation:</p>
+<blockquote>
+<p>the average squared deviation of all population values from the true population mean.</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="sample-variance" class="title-slide slide level1 center">
+<h1>Sample variance</h1>
+<p>In practice, we usually do not observe the whole population.</p>
+<p>We observe a sample.</p>
+<p>Then the sample variance is:</p>
+<p><span class="math display">\[
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2
+\]</span></p>
+<p>This looks almost the same as population variance, but the denominator has changed.</p>
+<p>Not <span class="math inline">\(n\)</span>.</p>
+<p>Instead, <span class="math inline">\(n-1\)</span>.</p>
+<p>That change is extremely important.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">var</span>(x)  <span class="co"># sample variance (n-1 denominator)</span></span>
+<span id="cb8-2"><a></a>pop_var <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">length</span>(x)</span>
+<span id="cb8-3"><a></a>pop_var</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-not-divide-sample-variance-by-n" class="title-slide slide level1 center">
+<h1>Why not divide sample variance by n?</h1>
+<p>This is one of the most important questions in introductory statistics.</p>
+<p>At first glance, dividing by <span class="math inline">\(n\)</span> seems natural, because there are <span class="math inline">\(n\)</span> observations.</p>
+<p>But the sample mean (<span class="math inline">\(\bar{x}\)</span>) is estimated from the same data.</p>
+<p>That creates a subtle problem.</p>
+<p>The deviations from <span class="math inline">\(\bar{x}\)</span> are not fully free to vary.</p>
+<p>Once <span class="math inline">\(n-1\)</span> deviations are known, the last one is forced by the requirement that deviations sum to zero.</p>
+<p>So only <span class="math inline">\(n-1\)</span> independent pieces of information remain.</p>
+<p>That is the bridge to <strong>degrees of freedom</strong>.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="qa-why-not-apply-an-n-1-correction-to-the-mean" class="title-slide slide level1 center">
+<h1>Q&amp;A — why not apply an (n-1) correction to the mean?</h1>
+<p><strong>Q:</strong> If estimating the mean uses the sample, why don’t we “correct” the sample mean the way we correct variance (i.e., use an <span class="math inline">\(n-1\)</span> style adjustment)?</p>
+<p><strong>A:</strong> The sample mean <span class="math inline">\(\bar{x}\)</span> is an unbiased estimator of the population mean <span class="math inline">\(\mu\)</span> under random sampling: <span class="math inline">\(E(\bar{x}) = \mu\)</span>. There is no systematic downward or upward bias to correct. Bessel’s correction (<span class="math inline">\(n-1\)</span>) is needed for variance because using <span class="math inline">\(\bar{x}\)</span> reduces the apparent variability in the sample — the sample deviations around <span class="math inline">\(\bar{x}\)</span> are constrained and would systematically underestimate the population variance if divided by <span class="math inline">\(n\)</span>. That constraint does not create bias in the mean itself, so no analogous divisor is required for the mean.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="bessels-correction" class="title-slide slide level1 center">
+<h1>Bessel’s correction</h1>
+<p>Dividing by <span class="math inline">\((n-1)\)</span> instead of <span class="math inline">\((n)\)</span> is called <strong>Bessel’s correction</strong>.</p>
+<p>It corrects the downward bias in sample variance.</p>
+<p>That is why:</p>
+<p><span class="math display">\[
+s^2 = \frac{1}{n-1}\sum (x_i - \bar{x})^2
+\]</span></p>
+<p>is an <strong>unbiased estimator</strong> of the population variance under standard sampling assumptions.</p>
+<p>In plain language:</p>
+<blockquote>
+<p>if you repeatedly sampled and calculated this quantity, its average would equal the true population variance.</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-example-sample-variance" class="title-slide slide level1 center">
+<h1>Worked example: sample variance</h1>
+<p>Dataset:</p>
+<p>2, 4, 6, 8</p>
+</section>
+<section id="step-1-compute-the-mean" class="slide level2">
+<h2>Step 1: compute the mean</h2>
+<p><span class="math display">\[
+\bar{x} = (2+4+6+8)/4 = 5
+\]</span></p>
+</section>
+<section id="step-2-compute-deviations-from-the-mean" class="slide level2">
+<h2>Step 2: compute deviations from the mean</h2>
+<ul>
+<li>2 − 5 = −3</li>
+<li>4 − 5 = −1</li>
+<li>6 − 5 = 1</li>
+<li>8 − 5 = 3</li>
+</ul>
+</section>
+<section id="step-3-square-the-deviations" class="slide level2">
+<h2>Step 3: square the deviations</h2>
+<ul>
+<li>9</li>
+<li>1</li>
+<li>1</li>
+<li>9</li>
+</ul>
+</section>
+<section id="step-4-sum-the-squared-deviations" class="slide level2">
+<h2>Step 4: sum the squared deviations</h2>
+<p><span class="math display">\[
+9+1+1+9 = 20
+\]</span></p>
+<p><span class="math display">\[
+s^2 = 20/3 \approx 6.67
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)</span>
+<span id="cb9-2"><a></a><span class="fu">mean</span>(data2)</span>
+<span id="cb9-3"><a></a>devs <span class="ot">&lt;-</span> data2 <span class="sc">-</span> <span class="fu">mean</span>(data2)</span>
+<span id="cb9-4"><a></a><span class="fu">sum</span>(devs<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb9-5"><a></a><span class="fu">var</span>(data2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="interpreting-variance" class="title-slide slide level1 center">
+<h1>Interpreting variance</h1>
+<p>Variance is powerful, but its units are squared.</p>
+<p>If the original data are in centimetres, the variance is in square centimetres.</p>
+<p>If the data are in tonnes per hectare, variance is in squared tonnes per hectare.</p>
+<p>That makes variance mathematically useful, but not always intuitive for direct interpretation.</p>
+<p>This leads naturally to standard deviation.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="standard-deviation" class="title-slide slide level1 center">
+<h1>Standard deviation</h1>
+<p>The <strong>standard deviation</strong> is the square root of the variance.</p>
+<p><span class="math display">\[
+s = \sqrt{s^2}
+\]</span></p>
+<p>This returns the measure of spread to the original units of the data.</p>
+<p>Using the previous example:</p>
+<p><span class="math display">\[
+s = \sqrt{6.67} \approx 2.58
+\]</span></p>
+<p>So the typical spread from the mean is about 2.58 units.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">sd</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-standard-deviation-matters" class="title-slide slide level1 center">
+<h1>Why standard deviation matters</h1>
+<p>Standard deviation is often easier to interpret than variance because it is in the same units as the data.</p>
+<p>It is widely used because it connects to:</p>
+<ul>
+<li>normal distributions</li>
+<li>z-scores</li>
+<li>confidence intervals</li>
+<li>standard errors</li>
+<li>model residual analysis</li>
+<li>quality control</li>
+</ul>
+<p>It is one of the central descriptive statistics in science and data analysis.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="a-careful-interpretation-of-standard-deviation" class="title-slide slide level1 center">
+<h1>A careful interpretation of standard deviation</h1>
+<p>A common interpretation is:</p>
+<blockquote>
+<p>Standard deviation is the average distance from the mean.</p>
+</blockquote>
+<p>That is not exactly correct.</p>
+<p>It is more accurate to say:</p>
+<blockquote>
+<p>Standard deviation is the square root of the average squared deviation from the mean.</p>
+</blockquote>
+<p>That usually behaves somewhat like a typical distance, but it is not the same as the mean absolute deviation.</p>
+<p>The distinction matters conceptually.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="coefficient-of-variation" class="title-slide slide level1 center">
+<h1>Coefficient of variation</h1>
+<p>The <strong>coefficient of variation</strong> compares spread relative to the mean.</p>
+<p><span class="math display">\[
+CV = \frac{s}{\bar{x}}
+\]</span></p>
+<p>Often expressed as a percentage:</p>
+<p><span class="math display">\[
+CV\% = 100 \times \frac{s}{\bar{x}}
+\]</span></p>
+<p>This tells us how large the standard deviation is relative to the size of the mean.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>cv <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">mean</span>(x)</span>
+<span id="cb11-2"><a></a>cv_percent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> cv</span>
+<span id="cb11-3"><a></a>cv</span>
+<span id="cb11-4"><a></a>cv_percent</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-coefficient-of-variation-matters" class="title-slide slide level1 center">
+<h1>Why coefficient of variation matters</h1>
+<p>Suppose:</p>
+<p>Group A: mean = 100, SD = 10</p>
+<p>Group B: mean = 10, SD = 10</p>
+<p>The absolute SD is the same.</p>
+<p>But the variability relative to the scale of the data is very different.</p>
+<ul>
+<li>A has CV = 10%</li>
+<li>B has CV = 100%</li>
+</ul>
+<p>So CV is useful when comparing variability across datasets with different units or magnitudes, provided the scale makes ratio comparisons meaningful.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="cautions-for-coefficient-of-variation" class="title-slide slide level1 center">
+<h1>Cautions for coefficient of variation</h1>
+<p>CV is not always appropriate.</p>
+<p>It is most meaningful when:</p>
+<ul>
+<li>the data are on a ratio scale</li>
+<li>zero means an absence of the quantity</li>
+<li>the mean is positive and not close to zero</li>
+</ul>
+<p>If the mean is close to zero, CV can become unstable or misleading.</p>
+</section>
+<section class="slide level2">
+<h2>Reflection pause 3</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section></section>
+<section>
+<section id="standard-error-a-different-concept" class="title-slide slide level1 center">
+<h1>Standard error: a different concept</h1>
+<p>A common confusion is between <strong>standard deviation</strong> and <strong>standard error</strong>.</p>
+<p>They are not the same thing.</p>
+</section>
+<section id="standard-deviation-1" class="slide level2">
+<h2>Standard deviation</h2>
+<p>describes variability among observed values.</p>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard error</h2>
+<p>describes uncertainty in an estimated statistic, usually the sample mean.</p>
+<p>So standard deviation is about the <strong>data</strong>.</p>
+<p>Standard error is about the <strong>estimate</strong>.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="standard-error-of-the-mean" class="title-slide slide level1 center">
+<h1>Standard error of the mean</h1>
+<p>The standard error of the mean is:</p>
+<p><span class="math display">\[
+SE(\bar{x}) = \frac{s}{\sqrt{n}}
+\]</span></p>
+<p>Why this form?</p>
+<p>Because averaging reduces noise.</p>
+<p>As the sample size grows, the sample mean becomes more stable.</p>
+<p>The denominator (<span class="math inline">\(\sqrt{n}\)</span>) expresses that reduction in sampling variability.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>se <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))</span>
+<span id="cb12-2"><a></a>se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="interpreting-standard-error" class="title-slide slide level1 center">
+<h1>Interpreting standard error</h1>
+<p>A small SE means the sample mean is estimated precisely.</p>
+<p>A large SE means the sample mean is more uncertain.</p>
+<p>Important:</p>
+<p>A large sample can have:</p>
+<ul>
+<li>large SD</li>
+</ul>
+<p>but still</p>
+<ul>
+<li>small SE</li>
+</ul>
+<p>because even noisy data can estimate the mean precisely if enough observations are collected.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="confidence-intervals" class="title-slide slide level1 center">
+<h1>Confidence intervals</h1>
+<p>A <strong>confidence interval (CI)</strong> provides a range of plausible values for a population parameter (commonly the mean), given the observed data and a chosen confidence level (e.g., 95%).</p>
+<p>For the sample mean, a two-sided <span class="math inline">\((1-\alpha)100\%\)</span> CI is:</p>
+<p><span class="math display">\[
+\bar{x} \pm t_{n-1, 1-\alpha/2} \times \frac{s}{\sqrt{n}}
+\]</span></p>
+<p>where <span class="math inline">\(t_{n-1, 1-\alpha/2}\)</span> is the critical value from the Student’s <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-confidence-intervals-matter" class="title-slide slide level1 center">
+<h1>Why confidence intervals matter</h1>
+<ul>
+<li>They quantify uncertainty about parameters, not variability among observations.</li>
+<li>A 95% CI constructed by this method will, in repeated sampling, contain the true population mean approximately 95% of the time.</li>
+<li>The width of the CI depends on the sample variability (<span class="math inline">\(s\)</span>), the sample size (<span class="math inline">\(n\)</span>), and the chosen confidence level.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="worked-ci-example" class="title-slide slide level1 center">
+<h1>Worked CI example</h1>
+<p>Suppose <span class="math inline">\(\bar{x}=50\)</span>, <span class="math inline">\(s=10\)</span>, <span class="math inline">\(n=25\)</span>, and we want a 95% CI.</p>
+<p>Degrees of freedom = 24.</p>
+<p>The <span class="math inline">\(t\)</span> critical value (approx) <span class="math inline">\(t_{24, 0.975}\approx 2.063\)</span>.</p>
+<p>Standard error = <span class="math inline">\(10/\sqrt{25} = 2\)</span>.</p>
+<p>Margin of error = <span class="math inline">\(2.063 \times 2 \approx 4.126\)</span>.</p>
+<p>95% CI: <span class="math inline">\(50 \pm 4.126 \Rightarrow (45.874, 54.126)\)</span>.</p>
+<p>Interpretation: given the data and assumptions, this interval is a plausible range for the population mean.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">t.test</span>(x)<span class="sc">$</span>conf.int</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb13-4"><a></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb13-5"><a></a>se <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb13-6"><a></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb13-7"><a></a>me <span class="ot">&lt;-</span> t_crit <span class="sc">*</span> se</span>
+<span id="cb13-8"><a></a><span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> me</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="ci-for-a-difference-in-means-brief-note" class="title-slide slide level1 center">
+<h1>CI for a difference in means (brief note)</h1>
+<p>When comparing two independent group means, construct a CI for the difference:</p>
+<p><span class="math display">\[
+(\bar{x}_1 - \bar{x}_2) \pm t_{df,1-\alpha/2} \times \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
+\]</span></p>
+<p>The degrees of freedom can be calculated with Welch’s approximation when variances differ.</p>
+<p>This CI replaces a sole focus on a point estimate and provides a sense of both magnitude and uncertainty for the difference.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)</span>
+<span id="cb14-2"><a></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb14-3"><a></a><span class="fu">t.test</span>(x1, x2)<span class="sc">$</span>conf.int</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-standard-error-and-ci-matter-for-inference" class="title-slide slide level1 center">
+<h1>Why standard error and CI matter for inference</h1>
+<p>Standard error gives the building block (uncertainty of an estimate).</p>
+<p>Confidence intervals place that uncertainty into a range and allow direct interpretation of plausible parameter values.</p>
+<p>They are more informative than a single point estimate because they show both location and precision.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="linking-centre-spread-and-inference" class="title-slide slide level1 center">
+<h1>Linking centre, spread, and inference</h1>
+<p>At this point, the structure should be clear.</p>
+</section>
+<section id="measures-of-centre" class="slide level2">
+<h2>Measures of centre</h2>
+<p>summarise location.</p>
+</section>
+<section id="measures-of-dispersion" class="slide level2">
+<h2>Measures of dispersion</h2>
+<p>summarise variability.</p>
+</section>
+<section id="standard-errors-and-confidence-intervals" class="slide level2">
+<h2>Standard errors and confidence intervals</h2>
+<p>summarise uncertainty in estimated statistics.</p>
+<p>These are related, but not interchangeable.</p>
+<p>Confusing SD and SE often leads to misinterpretation of graphs, tables, and experimental results.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="why-these-ideas-are-foundational-in-quantitative-research" class="title-slide slide level1 center">
+<h1>Why these ideas are foundational in quantitative research</h1>
+<p>In quantitative research, these concepts appear constantly, even when hidden behind software.</p>
+<p>Examples:</p>
+<ul>
+<li>feature scaling often uses means and standard deviations</li>
+<li>squared-error losses are built on mean and variance logic</li>
+<li>outlier detection depends on deviation from central tendency</li>
+<li>probabilistic models depend on mean–variance structure</li>
+<li>model residual diagnostics often examine spread and skew</li>
+<li>uncertainty estimates often depend on confidence intervals</li>
+</ul>
+<p>Software can calculate these quantities instantly.</p>
+<p>Understanding what they mean is the real skill.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="common-mistakes-to-avoid" class="title-slide slide level1 center">
+<h1>Common mistakes to avoid</h1>
+
+</section>
+<section id="treating-average-as-if-it-always-means-arithmetic-mean" class="slide level2">
+<h2>1. Treating “average” as if it always means arithmetic mean</h2>
+<p>It does not.</p>
+</section>
+<section id="using-the-mean-for-heavily-skewed-data-without-reflection" class="slide level2">
+<h2>2. Using the mean for heavily skewed data without reflection</h2>
+</section>
+<section id="confusing-sd-with-se" class="slide level2">
+<h2>3. Confusing SD with SE</h2>
+</section>
+<section id="thinking-variance-is-just-a-formula-rather-than-a-response-to-the-cancellation-problem" class="slide level2">
+<h2>4. Thinking variance is “just a formula” rather than a response to the cancellation problem</h2>
+</section>
+<section id="using-cv-when-the-mean-is-near-zero" class="slide level2">
+<h2>5. Using CV when the mean is near zero</h2>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="summary-table" class="title-slide slide level1 center">
+<h1>Summary table</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 43%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Core idea</th>
+<th>Best thought of as</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arithmetic mean</td>
+<td>equal-share centre</td>
+<td>additive average</td>
+</tr>
+<tr class="even">
+<td>Geometric mean</td>
+<td>constant multiplicative factor</td>
+<td>compound average</td>
+</tr>
+<tr class="odd">
+<td>Harmonic mean</td>
+<td>average rate over equal quantities</td>
+<td>reciprocal average</td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td>middle-ranked value</td>
+<td>positional centre</td>
+</tr>
+<tr class="odd">
+<td>Mode</td>
+<td>most frequent value</td>
+<td>commonest value</td>
+</tr>
+<tr class="even">
+<td>Range</td>
+<td>max minus min</td>
+<td>total span</td>
+</tr>
+<tr class="odd">
+<td>Variance</td>
+<td>average squared deviation</td>
+<td>mathematical spread</td>
+</tr>
+<tr class="even">
+<td>Standard deviation</td>
+<td>square root of variance</td>
+<td>spread in original units</td>
+</tr>
+<tr class="odd">
+<td>CV</td>
+<td>SD relative to mean</td>
+<td>relative variability</td>
+</tr>
+<tr class="even">
+<td>SE</td>
+<td>SD of an estimate</td>
+<td>uncertainty of a statistic</td>
+</tr>
+<tr class="odd">
+<td>CI</td>
+<td>plausible range for a parameter</td>
+<td>interval estimate</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="reflection-questions" class="title-slide slide level1 center">
+<h1>Reflection questions</h1>
+<ol type="1">
+<li>Why is the arithmetic mean natural for additive quantities?</li>
+<li>Why is the geometric mean more suitable for growth factors?</li>
+<li>Why does the harmonic mean appear naturally for rates?</li>
+<li>Why can the median remain stable when the mean changes sharply?</li>
+<li>Why does squaring solve the cancellation problem in variance?</li>
+<li>Why does estimating the mean cost one degree of freedom?</li>
+<li>Why is standard error about estimation rather than raw spread?</li>
+</ol>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="practice-task-1-central-tendency" class="title-slide slide level1 center">
+<h1>Practice task 1: central tendency</h1>
+<p>For the dataset:</p>
+<p>2, 3, 3, 4, 8, 20</p>
+<p>Calculate and interpret:</p>
+<ul>
+<li>arithmetic mean</li>
+<li>median</li>
+<li>mode</li>
+</ul>
+<p>Then explain which one best represents the typical value and why.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>data1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">20</span>)</span>
+<span id="cb15-2"><a></a><span class="fu">mean</span>(data1)</span>
+<span id="cb15-3"><a></a><span class="fu">median</span>(data1)</span>
+<span id="cb15-4"><a></a><span class="fu">get_mode</span>(data1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="practice-task-2-choosing-the-right-mean" class="title-slide slide level1 center">
+<h1>Practice task 2: choosing the right mean</h1>
+<p>A crop’s annual multiplicative growth factors are:</p>
+<p>1.05, 1.10, 0.95, 1.08</p>
+<ol type="1">
+<li>calculate the arithmetic mean</li>
+<li>calculate the geometric mean</li>
+<li>explain which one is more appropriate and why</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>factors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.05</span>, <span class="fl">1.10</span>, <span class="fl">0.95</span>, <span class="fl">1.08</span>)</span>
+<span id="cb16-2"><a></a><span class="fu">mean</span>(factors)</span>
+<span id="cb16-3"><a></a><span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(factors)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="practice-task-3-variance-and-standard-deviation" class="title-slide slide level1 center">
+<h1>Practice task 3: variance and standard deviation</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>data3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb17-2"><a></a><span class="fu">mean</span>(data3)</span>
+<span id="cb17-3"><a></a>devs <span class="ot">&lt;-</span> data3 <span class="sc">-</span> <span class="fu">mean</span>(data3)</span>
+<span id="cb17-4"><a></a><span class="fu">sum</span>(devs<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb17-5"><a></a><span class="fu">var</span>(data3)</span>
+<span id="cb17-6"><a></a><span class="fu">sd</span>(data3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the dataset:</p>
+<p>4, 5, 7, 8, 9</p>
+<ol type="1">
+<li>compute the sample mean</li>
+<li>compute deviations from the mean</li>
+<li>square and sum them</li>
+<li>compute sample variance</li>
+<li>compute sample standard deviation</li>
+<li>interpret the result in words</li>
+</ol>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section id="final-message" class="title-slide slide level1 center">
+<h1>Final message</h1>
+<p>Descriptive statistics are not trivial preliminaries.</p>
+<p>They are the conceptual foundation of quantitative reasoning.</p>
+<p>If you understand what these measures are, how they are calculated, and why their formulas make sense, then later ideas in inference, modelling, and machine learning become far easier to understand.</p>
+<p>If you only memorise the formulas, the rest of statistics will feel arbitrary.</p>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

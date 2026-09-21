@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C5025HF | Research Methods and Geographical Information Systems</title>
+  <meta name="description" content="Weekly learning materials for C5025HF Research Methods and Geographical Information Systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b1020;--card:#131933;--muted:#96a0c8;--text:#e8ecff;--brand:#7aa2ff;--hover:#202a55}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0b1020 40%,#0f1630);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 64px}
+    header{display:block;margin-bottom:16px}
+    .brand{display:flex;align-items:flex-start;gap:12px}
+    .logo{height:48px;width:auto;flex:0 0 auto}
+    .badge{font-size:12px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);border:1px solid #243069;border-radius:999px;padding:6px 10px}
+    h1{font-size:clamp(22px,3vw,28px);margin:0;font-weight:700}
+    .tagline{margin:.35rem 0 0;color:var(--muted);font-size:14px}
+    .tagline a{color:var(--brand);text-decoration:underline}
+    .schedule-tabs{display:flex;gap:8px;margin:24px 0 12px}
+    .schedule-tab{font:inherit;font-weight:600;padding:12px 20px;border:1px solid #283268;border-radius:12px;background:var(--card);color:var(--text);cursor:pointer}
+    .schedule-tab[aria-selected="true"]{background:var(--brand);color:var(--bg)}
+    .schedule-tab:focus-visible{outline:3px solid #ff8c00;outline-offset:3px}
+    .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid #1a2247;border-radius:12px;padding:12px 12px;margin:12px 0 24px}
+    .input,.select{background:var(--card);border:1px solid #212954;color:var(--text);border-radius:12px;padding:12px 14px;outline:none}
+    .input{min-width:260px;flex:1 1 360px}
+    .select{min-width:160px;flex:0 0 200px}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border:1px solid #1a2247;border-radius:16px;padding:18px 16px;transition:transform .12s ease,border-color .12s ease,background .12s ease;cursor:pointer}
+    .card:hover{transform:translateY(-3px);border-color:#2a3875;background:var(--hover)}
+    .thumb{width:100%;aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,#1a2247,#2a3875 60%,#3a4a95);border:1px solid #1a2247;object-fit:contain;object-position:center;display:block;margin-bottom:10px}
+    .card h3{margin:4px 0 6px;font-size:18px}
+    .card-title{display:inline-block;padding:4px 10px;border-radius:999px;background:#0f1630;border:1px solid #283268;color:#b9c6ff;text-decoration:none;transition:color .12s ease,border-color .12s ease}
+    .card-title:hover{color:#ff8c00;border-color:#ff8c00}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;color:var(--muted);font-size:13px}
+    .tag{padding:2px 8px;border-radius:999px;background:#0f1630;border:1px solid #283268;color:#b9c6ff}
+    .lead-pill{padding:2px 8px;border-radius:999px;background:#0f1630;border:1px solid #283268;color:#b9c6ff}
+    .slide-list{margin:8px 0 0 0;padding:0 0 0 16px}
+    .slide-list li{margin:2px 0}
+    .slide-list .resource-heading{list-style:none;margin:16px 0 6px}
+    .resource-heading h4,.resource-heading h5{margin:0;font-size:14px;color:var(--text)}
+    .resource-heading h5{font-size:13px;color:var(--muted)}
+    .slide-list .watch-item{list-style:none;margin:14px 0 18px -16px}
+    .pre-session-watch{padding:16px;border:2px solid #ffbf69;border-left-width:6px;border-radius:12px;background:#352613;color:#fff1d6;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+    .pre-session-watch h4,.pre-session-watch h5{margin:0 0 12px;font-size:16px;font-weight:700;color:#ffce8a}
+    .pre-session-watch .slide-list{margin:0;padding-left:18px}
+    .pre-session-watch .slide-list li{margin:8px 0}
+    .pre-session-watch .slide-link{background:#49341b;border-color:#c58b40;color:#fff1d6}
+    .pre-session-watch .slide-link:hover{background:#604521;border-color:#ffce8a;color:#fff}
+    .pre-session-watch .slide-link:focus-visible{outline:3px solid #ffce8a;outline-offset:3px}
+    .pending-label{color:var(--muted);font-size:11px;white-space:nowrap}
+    .card:not([data-default-href]){cursor:default}
+    .slide-link{display:inline-block;padding:4px 10px;border-radius:999px;background:#0f1630;border:1px solid #283268;color:#b9c6ff;text-decoration:none;transition:color .12s ease,border-color .12s ease}
+    .slide-link:hover{color:#ff8c00;border-color:#ff8c00}
+    .footer{margin-top:36px;color:var(--muted);font-size:13px}
+    .empty{opacity:.8;border:1px dashed #2b356c;padding:28px;border-radius:16px;text-align:center}
+    /* Header three-column layout */
+    .site-header{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;margin-bottom:16px}
+    .header-center{text-align:center}
+    .assessment-box{border:2px solid #ff8c00;border-radius:16px;padding:16px;margin:16px 0;background:rgba(255,140,0,0.08)}
+    .assessment-box .card{ text-align:center }
+    .assessment-box .slide-list{ padding:0; list-style:none; text-align:center }
+    .assessment-box .slide-list li{ margin:6px 0 }
+    .assessment-box .meta{ justify-content:center }
+    .assessment-box .card:hover{ box-shadow:0 0 0 3px rgba(255,140,0,0.35), 0 10px 20px rgba(0,0,0,0.25); border-color:#ff8c00 }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <div class="header-left">
+        <img src="HAU-logo.svg" alt="Harper Adams University" class="logo" />
+      </div>
+      <div class="header-center">
+        <h1>Research Methods and Geographical Information Systems (<span id="module-code">C5025HF</span>)</h1>
+        <p class="tagline">Weekly lecture notes, tutorials and supporting resources for the module. VLE resources require a university login. The C5025HF tab is for the core cohort; apprentices should use the C5025HF-AP tab.</p>
+      </div>
+      <div class="header-right">
+        <img src="img/rmgis.png" alt="Research Methods and GIS" class="logo" />
+      </div>
+    </header>
+    <div class="schedule-tabs" role="tablist" aria-label="Module schedule">
+      <button class="schedule-tab" id="tab-standard" type="button" role="tab" aria-selected="true" aria-controls="schedule-panel" data-schedule="standard">C5025HF</button>
+      <button class="schedule-tab" id="tab-ap" type="button" role="tab" aria-selected="false" aria-controls="schedule-panel" tabindex="-1" data-schedule="ap">C5025HF-AP</button>
+    </div>
+    <section id="schedule-panel" role="tabpanel" aria-labelledby="tab-standard">
+    <nav class="controls" aria-label="Slide filters">
+      <input id="q" class="input" type="search" placeholder="Search title, topic, or week..." aria-label="Search" />
+      <select id="week" class="select" aria-label="Filter by week">
+        <option value="">All weeks</option>
+      </select>
+      <select id="topic" class="select" aria-label="Filter by topic">
+        <option value="">All topics</option>
+      </select>
+    </nav>
+
+    <div id="cards" class="grid" role="list"></div>
+    <div id="empty" class="empty" hidden>No resources match your filters.</div>
+    </section>
+
+    <!--<section class="assessment-box" aria-labelledby="assessment-title">
+      <h2 id="assessment-title">Assessment Center</h2>
+      <div class="grid">
+        <a class="card" href="https://vle.harper-adams.ac.uk/course/view.php?id=278" target="_blank" rel="noopener">
+          <h3>Module descriptor</h3>
+          <div class="meta"><span>Student-only access, takes you to the VLE</span></div>
+        </a>
+        <a class="card" href="https://vle.harper-adams.ac.uk/course/view.php?id=278" target="_blank" rel="noopener">
+          <h3>Assignment Brief</h3>
+          <div class="meta"><span>Student-only access, takes you to the VLE</span></div>
+        </a>
+        <div class="card">
+          <h3>Assignment support files</h3>
+          <ul class="slide-list">
+            <li><a class="slide-link" href="https://vle.harper-adams.ac.uk/course/view.php?id=278" target="_blank" rel="noopener">Support pack (VLE)</a></li>
+            <li><a class="slide-link" href="https://vle.harper-adams.ac.uk/course/view.php?id=278">Supporting files</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>-->
+
+    <section aria-labelledby="reading-title">
+      <h2 id="reading-title">Recommended reading</h2>
+      <ul>
+        <li>Santos, G. R. (2023). Data wrangling with R: Load, explore, transform and visualize data for modeling with tidyverse libraries. Packt Publishing. https://www.vitalsource.com/products/data-wrangling-with-r-gustavo-r-santos-v9781803237657</li>
+          <li>Dalgaard, P. (2008). Introductory statistics with R (2nd ed.). Springer.</li>
+
+      </ul>
+    </section>
+        <p class="footer"><code>Copyright 2026 Harper Adams University</code></p>
+
+  </div>
+
+  <script>
+    // Weekly topics follow the module Scheme of Work. Files point to the
+    // teaching materials currently available in this repository.
+    const slides = [
+      {"title":"Lecture slide deck released before session","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=23835"},
+      {"title":"Lecture slide deck released after session","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=23836"},
+      {"title":"Lecture recording 1","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=24525"},
+      {"title":"Lecture recording 2","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=24526"},
+      {"title":"Tutorial exercise 1","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=23837"},
+      {"title":"Tutorial exercise 2","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=23838"},
+      {"title":"Tutorial exercise 3","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=23839"},
+      {"title":"Additional resources","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-23841"},
+      {"title":"The purpose of a literature review","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=23840"},
+      {"title":"Writing the literature review","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=23845"},
+      {"title":"Seven steps to complete a literature review","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=23846"},
+      {"title":"A useful article on critical reading","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=23847"},
+      {"title":"Finding a research gap","week":1,"topics":["Module launch and literature literacy"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=23848"},
+      {"title":"Lecture 1 slide deck","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=24913"},
+      {"title":"Lecture 2 slide deck","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25654"},
+      {"title":"Lecture 1 recording","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=25784"},
+      {"title":"Lecture 2 part 1 recording","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=25785"},
+      {"title":"Lecture 2 part 2 recording","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=25786"},
+      {"title":"Tutorial exercise 1","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25626"},
+      {"title":"Tutorial exercise 1 questionnaire","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25629"},
+      {"title":"Tutorial exercise 1 answers","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25628"},
+      {"title":"Tutorial exercise 2","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25663"},
+      {"title":"Vickery et al paper","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25661"},
+      {"title":"Petrescu-Mag et al., 2023","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=25662"},
+      {"title":"Additional resources","week":2,"topics":["Social science design"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-24911"},
+      {"title":"Tips for qualitative research - interviews","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=24910"},
+      {"title":"A practical guide to focus groups","week":2,"topics":["Social science design"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=24912"},
+      {"title":"Lecture 1 slide deck","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26387"},
+      {"title":"Lecture 2 slide deck","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26389"},
+      {"title":"Stats decision flow chart","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26430"},
+      {"title":"Lecture 1 part 1 recording","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26785"},
+      {"title":"Lecture 1 part 2 recording","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26786"},
+      {"title":"Lecture 2 part 1 recording","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26787"},
+      {"title":"Lecture 2 part 2 recording","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=27205"},
+      {"title":"Tutorial exercise 1 questions","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26418"},
+      {"title":"Tutorial exercise 1 datasets","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26420"},
+      {"title":"Tutorial exercise 1 answers","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26421"},
+      {"title":"Tutorial 2 exercise questions","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26491"},
+      {"title":"Tutorial 2 data sets","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26493"},
+      {"title":"Tutorial 2 exercise answers","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26520"},
+      {"title":"Tutorial 2 exercise answers data","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26495"},
+      {"title":"Tutorial 3 exercise correlation questions","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26485"},
+      {"title":"Tutorial 3 exercise data sets","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26487"},
+      {"title":"Tutorial 3 exercise answers","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26489"},
+      {"title":"Tutorial 3 exercise answers data","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26488"},
+      {"title":"Additional resources","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-26416"},
+      {"title":"How to write a research methodology: a guide","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26415"},
+      {"title":"Beginner's guide to excel graphs","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26424"},
+      {"title":"Chi-square goodness of fit example","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26484"},
+      {"title":"Chi-square test of association example","week":3,"topics":["Descriptive statistics, correlations and chi-square"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=26483"},
+      {"title":"Lecture slide deck","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=26656"},
+      {"title":"Lecture recording part 1","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=27493"},
+      {"title":"Lecture recording part 2","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=27495"},
+      {"title":"Lecture recording part 3","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=27496"},
+      {"title":"Tutorial exercise 1 questions","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27225"},
+      {"title":"Tutorial 1 excerise data","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27227"},
+      {"title":"Tutorial 1 exercise answers","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27226"},
+      {"title":"Tutorial 1 exercise answers","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27228"},
+      {"title":"Tutorial 2 exercise questions","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27229"},
+      {"title":"Tutorial 2 exercise data","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27231"},
+      {"title":"Tutorial 2 exercise answers","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27230"},
+      {"title":"Tutorial 2 exercise data answers","week":4,"topics":["T-tests"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=27232"},
+      {"title":"R Stats Bootcamp (GitHub website)","file":"https://rstats-bootcamp.github.io/website/","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"R Stats Bootcamp","file":"https://rstatsbootcamp.com/","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Introductory R video 1","file":"https://www.youtube.com/watch?v=CaktME4w32I","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Introductory R video 2","file":"https://www.youtube.com/watch?v=6SpFONtDhyE","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Introductory R video 3","file":"https://www.youtube.com/watch?v=jwyCLgcO0wY","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Introductory R video 4","file":"https://www.youtube.com/watch?v=BHXI8hNgLWw","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"R stats tutorial 1","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=28161","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Independent study","week":6,"topics":["Reading week"],"image":"img/rmgis.png"},
+      {"title":"Exploratory data analysis and hypothesis framing","file":"docs/eda.html","week":7,"topics":["EDA","Hypothesis testing"],"image":"thumbnails/R_logo.svg"},
+      {"title":"The t-test","file":"docs/t-test.html","week":7,"topics":["Hypothesis testing","T-test"],"image":"thumbnails/R_logo.svg"},
+      {"title":"The chi-square test","file":"docs/chisquare.html","week":7,"topics":["Hypothesis testing","Chi-square"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Correlation analysis","file":"docs/correlation.html","week":7,"topics":["Correlation","Statistics"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Fisher's F and the foundations of ANOVA","file":"docs/fisher.html","week":8,"topics":["ANOVA"],"image":"thumbnails/R_logo.svg"},
+      {"title":"ANOVA and its Kruskal-Wallis counterpart","file":"docs/anova.html","week":8,"topics":["ANOVA","Kruskal-Wallis"],"image":"thumbnails/R_logo.svg"},
+      {"title":"One-way ANOVA tutorial","file":"docs/1-way-anova.html","week":8,"topics":["ANOVA","R tutorial"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Rank-based and exact tests","file":"docs/nonparam.html","week":8,"topics":["Non-parametric statistics","R tutorial"],"image":"thumbnails/R_logo.svg"},
+      {"title":"General information on ArcGIS Pro Installation Requirements","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30914"},
+      {"title":"Installation information","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30915"},
+      {"title":"Instructions on how to register for an ESRI account and how to download ArcGIS Pro","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30916"},
+      {"title":"Useful Textbooks","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30917"},
+      {"title":"List of ArcGIS Pro Textbooks","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30918"},
+      {"title":"Session 1","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30922"},
+      {"title":"Presentations","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":5,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-31628"},
+      {"title":"Thematic Maps Presentation","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30919"},
+      {"title":"Clip Tool Presentation","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30923"},
+      {"title":"Practical Exercises","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":5,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-31629"},
+      {"title":"ArcGIS Pro Practical 1","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30920"},
+      {"title":"Shropshire Land Class Capability","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30926"},
+      {"title":"Shropshire County","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30927"},
+      {"title":"Shropshire NNR","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30928"},
+      {"title":"Bittern Observations","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30929"},
+      {"title":"ArcGIS Pro Practical 2","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30921"},
+      {"title":"ArcGIS Pro Practical 2 Data","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30930"},
+      {"title":"Presentations","week":10,"topics":["Session 2"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-31630"},
+      {"title":"Introduction to Spatial Statistics in ArcGIS Pro","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31624"},
+      {"title":"More Spatial Statistics","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31626"},
+      {"title":"Video: Spatial Statistics","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=31625"},
+      {"title":"Practical Exercises","week":10,"topics":["Session 2"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-31631"},
+      {"title":"ArcGIS Pro Practical 3","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31635"},
+      {"title":"Practical 3 Data","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31702"},
+      {"title":"Snipe 2019 Data","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31636"},
+      {"title":"Shropshire Land Cover","week":10,"topics":["Session 2"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=31637"},
+      {"title":"Slides","file":"https://vle.harper-adams.ac.uk/mod/page/view.php?id=32285","week":11,"topics":["Sampling"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Tutorial","file":"https://vle.harper-adams.ac.uk/mod/page/view.php?id=32286","week":11,"topics":["Sampling"],"image":"thumbnails/R_logo.svg"},
+      {"title":"starter geojson","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=32317","week":11,"topics":["Sampling"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Slides","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=33519","week":12,"topics":["Regression"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Tutorial","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=33522","week":12,"topics":["Regression"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Slides","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=34260","week":13,"topics":["Scientific reporting"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Tutorial","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=34261","week":13,"topics":["Scientific reporting"],"image":"thumbnails/R_logo.svg"}
+    ];
+
+    const weekTitles = {
+      1: "Module launch and literature literacy",
+      2: "Social science design",
+      3: "Descriptive statistics, correlations and chi-square",
+      4: "T-tests",
+      5: "Introductory R",
+      6: "Independent Study",
+      7: "Statistical Tests",
+      8: "ANOVA, Kruskal-Wallis and Non-parametric Tests",
+      9: "Using GIS to analyse and visualise spatial data 1",
+      10: "Session 2",
+      11: "Sampling",
+      12: "Regression",
+      13: "Communicating Research"
+    };
+
+    const apWeekMap = {1: [1, 5], 3: [2], 6: [3, 4], 9: [7, 8, 12]};
+    const apSlides = Object.entries(apWeekMap).flatMap(([week, sourceWeeks]) =>
+      sourceWeeks.flatMap(sourceWeek => [
+        {title: weekTitles[sourceWeek], week: Number(week), heading: 4, topics: [], topicStart: true},
+        ...slides.filter(s => s.week === sourceWeek).map(s => ({
+          ...s, week: Number(week), ...(s.heading ? {heading: 5} : {})
+        }))
+      ])
+    );
+    apSlides.push(...[16, 19, 22, 23].map(week => ({
+      title: 'GIS sessions', week, topics: ['GIS'], image: 'img/rmgis.png'
+    })));
+    const schedules = {
+      standard: {code: 'C5025HF', slides, weekTitles},
+      ap: {code: 'C5025HF-AP', slides: apSlides, weekTitles: {
+        1: 'Module launch, literature literacy and Introductory R',
+        3: 'Social science design',
+        6: 'Descriptive statistics, correlations, chi-square and T-tests',
+        9: 'Statistical tests, ANOVA and regression',
+        16: 'GIS sessions',
+        19: 'GIS sessions',
+        22: 'GIS sessions',
+        23: 'GIS sessions'
+      }}
+    };
+    let activeSchedule = 'standard';
+
+    // --- Utility helpers ---
+    const unique = (arr) => [...new Set(arr)];
+    const toHref = (f) => f ? encodeURI(f) : '#';
+
+    function groupByWeek(slidesArr){
+      const map = new Map();
+      for(const s of slidesArr){
+        const key = String(s.week ?? '');
+        if(!map.has(key)) map.set(key, []);
+        map.get(key).push(s);
+      }
+      const groups = Array.from(map.entries()).map(([week, items])=>{
+        const sorted = activeSchedule === 'ap' || [1, 2, 3, 4, 5, 9, 10, 11, 12, 13].includes(Number(week)) ? items.slice() : items.slice().sort((a,b)=>a.title.localeCompare(b.title, undefined, {numeric:true,sensitivity:'base'}));
+        const topics = unique(sorted.flatMap(s=>s.topics||[])).sort((a,b)=>a.localeCompare(b));
+        const first = sorted.find(s => s.file) || sorted[0];
+        const lead = sorted.map(s => (s.topics||[]).find(t => /^lead/i.test(t))).find(Boolean) || '';
+        return { week, title: schedules[activeSchedule].weekTitles[week] || '', slides: sorted, topics, image: first?.image, defaultFile: first?.file, lead };
+      });
+      return groups.sort((a,b)=>Number(a.week)-Number(b.week));
+    }
+
+    function populateFilters() {
+      const {slides, weekTitles} = schedules[activeSchedule];
+      const weekSel = document.getElementById('week');
+      const topicSel = document.getElementById('topic');
+      weekSel.innerHTML = '<option value="">All weeks</option>';
+      topicSel.innerHTML = '<option value="">All topics</option>';
+      const weeks = unique(slides.map(s => String(s.week))).sort((a,b)=>Number(a)-Number(b));
+      for (const w of weeks) {
+        const opt = document.createElement('option');
+        opt.value = w; opt.textContent = `Week ${w}: ${weekTitles[w] || ''}`;
+        weekSel.appendChild(opt);
+      }
+      const allTopics = unique(slides.flatMap(s => (s.topics||[]))).sort((a,b)=>a.localeCompare(b));
+      for (const t of allTopics) {
+        const opt = document.createElement('option');
+        opt.value = t; opt.textContent = t;
+        topicSel.appendChild(opt);
+      }
+    }
+
+    const isVideo = s => !s.heading && (/\b(video|recording)\b/i.test(s.title) || /(?:youtube\.com|youtu\.be)\//i.test(s.file || ''));
+
+    function preSessionItems(items){
+      const sections = [];
+      let section = [];
+      for (const item of items){
+        if (item.topicStart && section.length){
+          sections.push(section);
+          section = [];
+        }
+        section.push(item);
+      }
+      if (section.length) sections.push(section);
+      return sections.flatMap(items => {
+        const topic = items[0]?.topicStart ? items[0] : null;
+        const resources = topic ? items.slice(1) : items;
+        const videos = resources.filter(isVideo);
+        if (!videos.length) return items;
+        return [
+          ...(topic ? [topic] : []),
+          {title: 'Pre-session watch', heading: topic ? 5 : 4, videos},
+          ...resources.filter(s => !isVideo(s))
+        ];
+      });
+    }
+
+    function groupCardTemplate(g){
+      const weekHref = {9: 'https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30746', 10: 'https://vle.harper-adams.ac.uk/course/view.php?id=254#module-31623'};
+      const defHref = (activeSchedule === 'standard' && weekHref[g.week]) || (g.defaultFile ? toHref(g.defaultFile) : '#');
+      const thumb = g.image ? `<img class="thumb" src="${g.image}" alt="Week ${g.week} slides" />` : `<div class="thumb" aria-hidden="true"></div>`;
+      const list = preSessionItems(g.slides).map(s=>{
+        if (s.videos) return `<li class="watch-item"><div class="pre-session-watch"><h${s.heading}><span aria-hidden="true">▶</span> ${s.title}</h${s.heading}><ul class="slide-list">${s.videos.map(video => `<li><a class="slide-link" href="${toHref(video.file)}">${video.title}</a></li>`).join('')}</ul></div></li>`;
+        if (s.heading) return `<li class="resource-heading"><h${s.heading}>${s.file ? `<a href="${toHref(s.file)}">${s.title}</a>` : s.title}</h${s.heading}></li>`;
+        if (s.pending) return `<li><span class="pending-resource">${s.title}</span> <small class="pending-label">Link pending</small></li>`;
+        if (!s.file) return `<li>${s.title}</li>`;
+        const href = toHref(s.file);
+        return `<li><a class="slide-link" href="${href}">${s.title}</a></li>`;
+      }).join('');
+      const count = g.slides.filter(s => !s.heading).length;
+      const lead = g.lead ? `<span class="lead-pill">${g.lead}</span>` : '';
+      return `
+        <div class="card" role="listitem" ${g.defaultFile ? `tabindex="0" data-default-href="${defHref}"` : ''}>
+          ${thumb}
+          <h3>${g.defaultFile ? `<a class="card-title" href="${defHref}">Week ${g.week}: ${g.title}</a>` : `<span class="card-title">Week ${g.week}: ${g.title}</span>`}</h3>
+          <div class="meta">
+            <span>${count} ${count===1?'topic':'topics'}</span> ${lead}
+          </div>
+          <ul class="slide-list">${list}</ul>
+        </div>
+      `;
+    }
+
+    function bindCardNavigation(){
+      document.querySelectorAll('.card').forEach(card=>{
+        const href = card.getAttribute('data-default-href');
+        card.addEventListener('click',(e)=>{
+          if(e.target.closest('a')) return; // let inner links work
+          if(href && href !== '#') window.location.href = href;
+        });
+        card.addEventListener('keydown',(e)=>{
+          if(e.target === card && (e.key==='Enter' || e.key===' ') && href && href !== '#'){
+            e.preventDefault();
+            window.location.href = href;
+          }
+        });
+      });
+    }
+
+    function render(){
+      const q = document.getElementById('q').value.toLowerCase().trim();
+      const week = document.getElementById('week').value;
+      const topic = document.getElementById('topic').value;
+      const groups = groupByWeek(schedules[activeSchedule].slides).filter(g=>{
+        const inWeek = !week || String(g.week)===week;
+        const inTopic = !topic || g.slides.some(s => (s.topics||[]).includes(topic));
+        const hay = [g.week, g.title, ...g.slides.map(s=>s.title), ...g.slides.flatMap(s=>s.topics||[])].join(' ').toLowerCase();
+        const inSearch = !q || hay.includes(q);
+        return inWeek && inTopic && inSearch;
+      });
+      document.getElementById('cards').innerHTML = groups.map(groupCardTemplate).join('');
+      document.getElementById('empty').hidden = groups.length>0;
+      bindCardNavigation();
+    }
+
+    function selectSchedule(key){
+      activeSchedule = key;
+      document.querySelectorAll('.schedule-tab').forEach(tab => {
+        const selected = tab.dataset.schedule === key;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      document.getElementById('schedule-panel').setAttribute('aria-labelledby', key === 'ap' ? 'tab-ap' : 'tab-standard');
+      document.getElementById('module-code').textContent = schedules[key].code;
+      document.title = `${schedules[key].code} | Research Methods and Geographical Information Systems`;
+      document.getElementById('q').value = '';
+      populateFilters();
+      render();
+    }
+
+    const scheduleTabs = Array.from(document.querySelectorAll('.schedule-tab'));
+    scheduleTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectSchedule(tab.dataset.schedule));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? scheduleTabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + scheduleTabs.length) % scheduleTabs.length;
+        scheduleTabs[next].focus();
+        selectSchedule(scheduleTabs[next].dataset.schedule);
+      });
+    });
+
+    populateFilters();
+    render();
+
+    document.getElementById('q').addEventListener('input', render);
+    document.getElementById('week').addEventListener('change', render);
+    document.getElementById('topic').addEventListener('change', render);
+  </script>
+</body>
+</html>

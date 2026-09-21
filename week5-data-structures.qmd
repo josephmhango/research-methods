@@ -1,0 +1,937 @@
+---
+title: "R Data Structures and Indexing"
+subtitle: "R primitives, data structures, and indexing"
+author: "Joseph Mhango"
+css: scroll.css
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    toc: true
+    toc-depth: 3
+    incremental: false
+    code-fold: true
+    code-tools: true
+    code-line-numbers: false
+    chalkboard: true
+    controls: true
+    hash: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Learning objectives
+
+By the end of this session you should be able to:
+
+- Understand primitive data types in R
+- Recognise and work with special values (`NA`, `NaN`, `Inf`, `NULL`)
+- Convert between data types safely
+- Work confidently with:
+  - Vectors
+  - Matrices
+  - Arrays
+  - Lists
+  - Data frames
+  - Tibbles
+- Index any data structure correctly
+- Work with factors and dates
+- Apply tidy data concepts
+
+---
+
+# Part 1 — Primitive data types
+
+## What is a data object?
+
+- Everything in R is an **object**
+- Objects live in the **Global Environment**
+- Every object has:
+  - A **type** (what it stores)
+  - A **class** (how R treats it)
+
+Example:
+
+```r
+x <- 5
+class(x)
+```
+
+---
+
+## Basic primitive types
+
+```r
+a <- 1
+mode(a)
+
+a <- "1"
+mode(a)
+
+a <- TRUE
+mode(a)
+
+a <- 1i
+mode(a)
+```
+
+Core primitive types:
+
+- numeric (double): real numbers with decimal values, used for most mathematical calculations
+- integer: whole numbers without decimals, often used for counting or indexing
+- character: text data, including letters, words, or symbols
+- logical: boolean values, either TRUE or FALSE
+- complex: numbers with real and imaginary parts, used in advanced mathematical computations
+
+---
+
+## Checking type and class
+
+```r
+x <- 5
+
+class(x)
+typeof(x)
+mode(x)
+```
+
+| Function   | Purpose                 |
+| ---------- | ----------------------- |
+| `class()`  | How R treats the object |
+| `typeof()` | Internal storage type   |
+| `mode()`   | Legacy type description |
+
+---
+
+## Special values
+
+### NULL
+
+- Absence of a value
+- Not even a vector
+
+```r
+x <- NULL
+is.null(x)
+```
+
+---
+
+### NA (missing value)
+
+```r
+x <- c(1, 2, NA, 4)
+is.na(x)
+```
+
+- Means **value exists but is missing**
+
+---
+
+### Inf and NaN
+
+```r
+1/0      # Inf
+-1/0     # -Inf
+0/0      # NaN
+```
+
+| Value  | Meaning           |
+| ------ | ----------------- |
+| `Inf`  | Infinity          |
+| `-Inf` | Negative infinity |
+| `NaN`  | Not a number      |
+
+Check:
+
+```r
+is.infinite(x)
+is.nan(x)
+```
+
+---
+
+## Behaviour of special values
+
+
+When you perform arithmetic with NA, such as 5 + NA, the result is NA because the value is unknown and R cannot determine the outcome. 
+
+Calculating the mean of a vector that contains NA, like mean(c(1,2,NA)), returns NA because the missing value prevents the computation. 
+
+If you use the argument na.rm = TRUE, as in mean(c(1,2,NA), na.rm = TRUE), R removes the missing values before performing the calculation, and the result becomes 1.5.
+
+
+---
+
+## Naming rules
+
+Valid names:
+
+```r
+x1 <- 5
+5 -> x1   # reversing the arrow also assigns the value to x1
+plant_height <- 10
+yield_2024 <- 8
+```
+
+In R, the assignment arrow can point either left (`<-`) or right (`->`). 
+
+Both forms assign a value to a variable, but the left arrow is the standard and most commonly used style. 
+
+The right arrow is sometimes useful in pipelines or when you want to place the result at the end of a sequence of operations.
+
+You can also use `=` for assignment:
+
+```r
+x1 = 5
+```
+
+Use `<-` for most assignments in scripts and functions, as it is the conventional R style and avoids confusion with `=` used inside function arguments. 
+
+Use `=` mainly when specifying arguments inside functions, such as:
+
+```r
+mean(x = c(1, 2, 3))
+```
+
+Avoid:
+
+- spaces
+- starting with numbers
+- special characters like `@`, `#`, `%`
+
+---
+
+# Part 2 — Type conversion
+
+## Coercion
+
+R will often convert types automatically.
+
+```r
+c(1, 2, "3")
+```
+
+Result: character vector
+
+Because R applies type coercion rules when combining different data types. In a vector, all elements must be of the same type, so R converts them to the most flexible type that can represent all values.
+
+The coercion hierarchy is: logical → integer → numeric → complex → character. 
+
+Since character is the most flexible type, any mixture that includes a character value will be converted to character.
+
+---
+
+## Manual conversion
+
+```r
+as.numeric("5")
+as.character(5)
+as.logical(1)
+```
+
+---
+
+## Checking and converting class
+
+ ```class()``` describes how R treats the object at a higher level
+
+ ```typeof()``` shows the internal storage type used by R
+
+```r
+x <- "10"
+
+class(x)      # "character"
+typeof(x)     # "character"
+```
+- For character data, class and typeof are the same because
+
+- there is no special higher-level structure applied.
+
+```r
+x <- as.numeric(x)
+
+class(x)      # "numeric"
+typeof(x)     # "double"
+
+```
+- For numeric data, class is "numeric" (a general category),
+
+- but typeof is "double" because R stores most numbers as double-precision floating-point values internally.
+---
+
+## Factors (categorical data)
+
+### Unordered factor
+
+```r
+cows <- factor(c("Martha", "Ruth", "Edith"))
+```
+
+---
+
+### Ordered factor
+
+- Levels define the possible categories a factor can take
+
+- They represent the distinct values that the variable is allowed to have
+
+- In this example, the levels are "Control", "Half", and "Full"
+
+- The order of levels matters when the factor is ordered
+
+- "Control" is treated as the lowest level, followed by "Half", then "Full"
+
+- Ordered levels allow comparisons such as less than or greater than
+
+- For example, "Half" is considered greater than "Control" but less than "Full"
+
+- Levels help R understand the structure of categorical data
+
+- They are especially useful in statistical models and plots
+
+```r
+dose <- factor(
+  c("Control", "Half", "Full"),
+  levels = c("Control", "Half", "Full"),
+  ordered = TRUE
+)
+```
+
+---
+
+## Dates in R
+
+Dates are special numeric types.
+
+```r
+d <- as.Date("2025-03-01")
+class(d)
+```
+
+---
+
+### Working with dates
+
+```r
+d1 <- as.Date("2025-01-01")
+d2 <- as.Date("2025-03-01")
+
+d2 - d1
+```
+
+- The result is of type **difftime**.
+- R stores dates internally as the number of days since **1970-01-01**.
+- When you subtract two `Date` objects, R calculates the difference between their internal numeric representations.
+- Instead of returning a plain number, R returns a **difftime object** to preserve the time unit (in this case, days).
+- This makes the result easier to interpret and prevents confusion about the unit of measurement.
+
+---
+
+# Part 3 — Core data structures
+
+## The hierarchy
+
+| Structure  | Dimensions | Homogeneous?        |
+| ---------- | ---------- | ------------------- |
+| Vector     | 1D         | Yes                 |
+| Matrix     | 2D         | Yes                 |
+| Array      | nD         | Yes                 |
+| List       | Any        | No                  |
+| Data frame | 2D         | Columns homogeneous |
+| Tibble     | 2D         | Modern data frame   |
+
+---
+
+# Vectors
+
+## Creating vectors
+
+```r
+v1 <- c(1,2,3,4,5)
+v2 <- 1:10
+```
+
+---
+
+## Vector indexing
+
+```r
+v <- c(10,20,30,40,50)
+
+v[1]
+v[2:4]
+v[c(1,5)]
+```
+
+---
+
+## Logical indexing
+
+```r
+v <- c(5,8,2,9,1)
+
+v[v > 5]
+```
+
+---
+
+## Using `which()`
+
+```r
+which(v > 5)
+which.max(v)
+which.min(v)
+```
+
+---
+
+# Matrices
+
+## Creating a matrix
+
+- The sequence 1:12 creates the numbers from 1 to 12.
+
+- The matrix() function then fills these values into a matrix
+
+- with 3 rows and 4 columns. By default, R fills matrices
+
+- column by column (not row by row).
+
+```r
+
+
+ m <- matrix(1:12, nrow = 3, ncol = 4)  
+m
+```
+
+---
+
+## Matrix indexing
+
+```r
+m[1,1]     # row 1, col 1
+m[2,3]     # row 2, col 3
+m[ ,2]     # entire column
+m[1, ]     # entire row
+```
+
+---
+
+# Arrays
+
+## Creating an array
+
+```r
+a <- array(1:24, dim = c(2,3,4))
+```
+
+This creates a three-dimensional array using the numbers from 1 to 24. The `dim = c(2,3,4)` argument tells R how to shape the data.
+
+The dimensions mean:
+
+- 2 rows
+- 3 columns
+- 4 layers (or “slices”)
+
+So the array is structured as 4 separate 2×3 matrices stacked along a third dimension.
+
+R fills arrays column-wise, just like matrices. That means it fills down the rows first, then moves across columns, and then moves to the next layer.
+
+Layer 1 (a[ , ,1]):
+
+```
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+```
+
+Layer 2 (a[ , ,2]):
+
+```
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
+```
+
+Layer 3 (a[ , ,3]):
+
+```
+     [,1] [,2] [,3]
+[1,]   13   15   17
+[2,]   14   16   18
+```
+
+Layer 4 (a[ , ,4]):
+
+```
+     [,1] [,2] [,3]
+[1,]   19   21   23
+[2,]   20   22   24
+```
+
+Indexing follows the order:
+
+```
+a[row, column, layer]
+```
+
+Examples:
+
+```
+a[1,1,1]  # first row, first column, first layer → 1
+a[2,3,1]  # second row, third column, first layer → 6
+a[1,2,3]  # first row, second column, third layer → 15
+a[2,1,4]  # second row, first column, fourth layer → 20
+```
+
+So the dimensions `c(2,3,4)` describe the size of the array along each axis: rows, columns, and layers.
+
+---
+
+## Array indexing
+
+```r
+a[1,1,1]
+a[2,3,4]
+```
+
+---
+
+# Lists
+
+## What is a list and what can it contain?
+
+A list is a flexible data structure in R that can store multiple elements of different types in a single object. Unlike vectors, matrices, and arrays, which must contain elements of the same type, a list can hold a mixture of data types and even other data structures.
+
+A list can contain:
+
+- Numeric values
+- Character strings
+- Logical values
+- Vectors
+- Matrices
+- Data frames
+- Other lists (nested lists)
+- Functions
+
+This makes lists very useful for storing complex or hierarchical data, such as the results of statistical models, grouped observations, or structured information about an experiment.
+
+```r
+my_list <- list(
+  name = "John",
+  age = 25,
+  scores = c(90,85,88)
+)
+```
+
+---
+
+## List indexing
+
+```r
+my_list$name
+my_list[1]
+my_list[[1]]
+```
+
+### Key difference
+
+In R, lists can be indexed in two main ways: using single brackets `[ ]` or double brackets `[[ ]]`. These two methods behave differently and return different types of results.
+
+When you use single brackets `[ ]`, R returns a **sub-list**. This means it keeps the structure of a list, even if you select only one element. In other words, `[ ]` filters or selects elements from the list, but the result is still a list.
+
+Example:
+
+```r
+my_list <- list(name = "John", age = 25, scores = c(90,85,88))
+
+my_list[1]
+```
+
+This returns:
+
+```
+$name
+[1] "John"
+```
+
+Even though only one element was selected, the result is still a list containing that element.
+
+In contrast, when you use double brackets `[[ ]]`, R extracts the **actual element** stored at that position. It removes the list structure and returns the object itself, in its original class.
+
+Example:
+
+```r
+my_list[[1]]
+```
+
+This returns:
+
+```
+[1] "John"
+```
+
+Now the result is a character vector, not a list.
+
+So the key idea is:
+
+- `[ ]` filters the list and returns a **list**
+- `[[ ]]` extracts the element and returns its **original class**
+
+For example:
+
+```r
+class(my_list[1])    # "list"
+class(my_list[[1]])  # "character"
+```
+
+This distinction is very important when working with lists, especially when you need to access the actual data inside them.
+
+| Syntax  | Returns        |
+| ------- | -------------- |
+| `[ ]`   | Sub-list       |
+| `[[ ]]` | Element itself |
+| `$`     | Named element  |
+
+---
+
+## Nested lists
+
+```r
+nested <- list(
+  person = list(
+    name = "Anna",
+    age = 30
+  )
+)
+
+nested$person$name
+nested[[1]][[1]]
+```
+
+---
+
+# Data frames
+
+## Creating a data frame
+
+```r
+df <- data.frame(
+  name = c("John","Jane","Jim"),
+  age = c(25,30,35),
+  score = c(90,85,88)
+)
+```
+
+---
+
+## Data frame indexing
+
+```r
+df[1,2]      # row 1, column 2
+df$age
+df[ , "score"]
+df[1:2, ]
+```
+
+---
+
+## Logical selection
+
+```r
+df[df$age > 25, ]
+```
+
+---
+
+## Using `aggregate()`
+
+```r
+data(OrchardSprays)
+
+aggregate(
+  x = OrchardSprays$decrease,
+  by = list(treatment = OrchardSprays$treatment),
+  FUN = mean
+)
+```
+
+The `aggregate()` function is used to compute summary statistics for subsets of data. In this example, it calculates the mean of the `decrease` variable for each level of the `treatment` variable.
+
+How it works:
+
+- `x = OrchardSprays$decrease` specifies the numeric variable to be summarised.
+- `by = list(treatment = OrchardSprays$treatment)` defines the grouping variable.
+- `FUN = mean` tells R to compute the mean for each group.
+
+The result is a new data frame where each row represents a treatment group and the corresponding mean decrease.
+
+Why use a list in `by` instead of a vector:
+
+The `by` argument expects a list because it is designed to handle one or more grouping variables. Each element of the list represents a grouping factor. Even if there is only one grouping variable, it must still be wrapped in a list.
+
+For example:
+
+```r
+by = list(OrchardSprays$treatment)
+```
+
+If you had two grouping variables, you could write:
+
+```r
+by = list(
+  treatment = OrchardSprays$treatment,
+  block = OrchardSprays$rowpos
+)
+```
+
+Using a list allows `aggregate()` to create combinations of grouping variables and compute summaries for each combination. A single vector would not support multiple grouping factors in this way.
+
+---
+
+# Apply functions
+
+- `apply()` — used with matrices or arrays to apply a function across rows or columns
+
+```r
+m <- matrix(1:9, nrow = 3)
+
+# Mean of each column
+apply(m, 2, mean)
+
+# Mean of each row
+apply(m, 1, mean)
+```
+
+- `lapply()` — applies a function to each element of a list and returns a list
+
+```r
+my_list <- list(a = 1:5, b = 6:10, c = 11:15)
+
+# Mean of each list element
+lapply(my_list, mean)
+```
+
+- `sapply()` — similar to `lapply()` but simplifies the result to a vector or matrix when possible
+
+```r
+my_list <- list(a = 1:5, b = 6:10, c = 11:15)
+
+# Simplified output (numeric vector)
+sapply(my_list, mean)
+```
+
+- `tapply()` — applies a function to subsets of a vector defined by a factor or grouping variable
+
+```r
+yield <- c(3, 5, 2, 8, 6, 7)
+treatment <- factor(c("A", "A", "B", "B", "A", "B"))
+
+# Mean yield per treatment
+tapply(yield, treatment, mean)
+```
+
+- `mapply()` — applies a function to multiple vectors simultaneously
+
+```r
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+
+# Add corresponding elements
+mapply(sum, x, y)
+```
+
+- `purrr::map()` — applies a function to each element of a list (tidyverse alternative)
+
+```r
+library(purrr)
+
+my_list <- list(1:5, 6:10, 11:15)
+
+# Returns a list
+map(my_list, mean)
+```
+
+- `purrr::map_dbl()` — applies a function and returns a numeric vector
+
+```r
+library(purrr)
+
+my_list <- list(1:5, 6:10, 11:15)
+
+# Returns numeric vector
+map_dbl(my_list, mean)
+```
+
+- `purrr::map_chr()` — applies a function and returns a character vector
+
+```r
+library(purrr)
+
+words <- list("apple", "banana", "cherry")
+
+# Get first letter of each word
+map_chr(words, ~ substr(.x, 1, 1))
+```
+
+## What is a tibble?
+
+A **modern version of data frames** from the tidyverse.
+
+```r
+library(tibble)
+
+tb <- tibble(
+  name = c("John","Jane","Jim"),
+  age = c(25,30,35)
+)
+```
+
+---
+
+## Differences: tibble vs data frame
+
+| Feature                     | Data frame | Tibble |
+| --------------------------- | ---------- | ------ |
+| Prints full object          | Yes        | No     |
+| Converts strings to factors | Sometimes  | Never  |
+| Partial matching            | Yes        | No     |
+| Safer defaults              | No         | Yes    |
+
+---
+
+# Tidy data concept
+
+Tidy data rules:
+
+1. Each variable = one column
+2. Each observation = one row
+3. Each value = one cell
+
+---
+
+# Importing data
+
+Common file types:
+
+- CSV
+- Excel
+
+Example:
+
+```r
+read.csv("data.csv")
+readxl::read_excel("data.xlsx")
+```
+
+---
+
+# Inspecting a data frame
+
+```r
+class(df)
+names(df)
+str(df)
+```
+
+---
+
+# Practice exercises
+
+## Level 1
+
+1. Create a vector from 1 to 10
+2. Extract the 3rd element
+3. Extract elements greater than 5
+
+---
+
+## Level 2
+
+1. Create a 3×4 matrix
+2. Extract column 2
+3. Extract rows where column 1 > 5
+
+---
+
+## Level 3
+
+1. Create a list with:
+   - a numeric vector
+   - a character vector
+   - a matrix
+2. Extract the matrix
+3. Extract the second element of the matrix
+
+---
+
+## Level 4
+
+1. Create a data frame with:
+
+   - id
+   - treatment (A/B)
+   - yield
+
+2. Convert treatment to a factor
+
+3. Select rows where:
+
+   - treatment == "A"
+   - yield > mean(yield)
+
+4. Convert the data frame to a tibble
+
+---
+
+## Level 4+ challenge
+
+Given:
+
+```r
+x <- list(
+  farm = "North",
+  data = data.frame(
+    id = 1:5,
+    yield = c(3,5,2,8,6)
+  )
+)
+```
+
+Tasks:
+
+1. Extract the yield column
+2. Find the index of the maximum yield
+3. Return the full row containing the maximum yield
+
+---
+## Level 5 challenge
+
+Using the iris dataset;
+
+- find the average petal width of every flower type
+
+- find the average value of every numberic column
+
+- find the sum of all the numeric elements in every row
+
+- for each numeric value, find the the average of the first 5 rows and multiply them with the same calculation but of the next 5 rows.
+
+```
+
+---
+## Key takeaways
+
+- Everything in R is an object
+- Primitive types define the foundation
+- Data structures differ by:
+  - dimension
+  - homogeneity
+- Indexing rules change across structures
+- Tibbles are modern data frames
+- Understanding types prevents many errors
+

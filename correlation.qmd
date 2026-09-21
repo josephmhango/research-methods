@@ -1,0 +1,180 @@
+---
+title: "Correlation Analysis"
+subtitle: "Direction, strength, assumptions, and interpretation"
+author: "Harper Adams University"
+format:
+  revealjs:
+    css: scroll.css
+    theme: simple
+    slide-number: true
+    toc: true
+    incremental: false
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Section 1: What correlation measures
+
+## The question
+
+Correlation describes the **direction** and **strength** of association between two variables.
+
+- Positive association: larger values of one variable tend to accompany larger values of the other.
+- Negative association: larger values of one variable tend to accompany smaller values of the other.
+- Weak association: knowing one variable gives little information about the other.
+- Strong association: observations follow a clear increasing or decreasing pattern.
+
+## Start with a graph
+
+```{r}
+plot(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  pch = 19,
+  col = "steelblue",
+  xlab = "Sepal length",
+  ylab = "Petal length",
+  main = "Sepal and petal length"
+)
+```
+
+A correlation coefficient should always be interpreted alongside a graph because unusual shapes, clusters, and outliers can be hidden by a single number.
+
+## Correlation and causation
+
+An association does not by itself establish that one variable causes the other.
+
+Possible explanations include:
+
+- a direct causal effect;
+- reverse causation;
+- a third variable influencing both measurements;
+- selection or measurement processes;
+- coincidence within a small sample.
+
+# Section 2: Pearson correlation
+
+## Pearson's product-moment correlation
+
+Pearson's correlation coefficient, usually written as $r$, measures the strength of a **linear** association.
+
+- $r = 1$ represents a perfect positive linear relationship.
+- $r = 0$ represents no linear relationship.
+- $r = -1$ represents a perfect negative linear relationship.
+
+```{r}
+cor(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  method = "pearson"
+)
+```
+
+## Testing the association
+
+```{r}
+pearson_result <- cor.test(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  method = "pearson"
+)
+
+pearson_result
+```
+
+The test evaluates the null hypothesis that the population correlation is zero. Report the coefficient, confidence interval, p-value, sample size, and scientific context.
+
+## Interpreting magnitude
+
+Descriptions such as weak, moderate, and strong depend on the subject area, measurement quality, and practical consequences. A modest correlation may matter greatly in one setting and have little practical relevance in another.
+
+# Section 3: Assumptions and diagnostics
+
+## Conditions for Pearson correlation
+
+Pearson correlation is most informative when:
+
+1. both variables are quantitative;
+2. observations are independent;
+3. the relationship is approximately linear;
+4. influential outliers are absent or scientifically justified;
+5. uncertainty is estimated under a suitable distributional model.
+
+## Examine the shape
+
+```{r}
+plot(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  pch = 19,
+  col = rgb(0.1, 0.3, 0.7, 0.5),
+  xlab = "Sepal length",
+  ylab = "Petal length"
+)
+abline(lm(Petal.Length ~ Sepal.Length, data = iris), col = "firebrick", lwd = 2)
+```
+
+## Groups can change the story
+
+```{r}
+cols <- c("setosa" = "#1b9e77", "versicolor" = "#d95f02", "virginica" = "#7570b3")
+plot(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  pch = 19,
+  col = cols[iris$Species],
+  xlab = "Sepal length",
+  ylab = "Petal length"
+)
+legend("topleft", legend = names(cols), col = cols, pch = 19, bty = "n")
+```
+
+The overall relationship may partly reflect differences between species, which illustrates why context and potential confounders belong in the interpretation.
+
+# Section 4: Rank correlations and reporting
+
+## Spearman's rank correlation
+
+Spearman's coefficient measures a **monotonic** relationship using ranks. It is useful for ordinal variables, skewed measurements, or relationships that increase consistently without forming a straight line.
+
+```{r}
+spearman_result <- cor.test(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  method = "spearman",
+  exact = FALSE
+)
+
+spearman_result
+```
+
+## Kendall's tau
+
+Kendall's tau is based on concordant and discordant pairs and is often useful with smaller samples or many tied ranks.
+
+```{r}
+kendall_result <- cor.test(
+  iris$Sepal.Length,
+  iris$Petal.Length,
+  method = "kendall",
+  exact = FALSE
+)
+
+kendall_result
+```
+
+## Choosing and reporting
+
+Choose Pearson when the scientific question concerns a linear relationship and its assumptions are reasonable. Choose Spearman or Kendall when ranks and monotonic association better represent the variables and question.
+
+A concise report should include:
+
+- the variables and sample size;
+- the selected coefficient and reason for choosing it;
+- the estimated coefficient;
+- uncertainty and p-value where appropriate;
+- a graph and a contextual interpretation;
+- a clear statement that association alone does not establish causation.

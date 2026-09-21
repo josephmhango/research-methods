@@ -1,0 +1,247 @@
+WEEK 1 LECTURE SCRIPT
+Research Skills for a Credible Literature Review
+Approximate delivery time: 50 minutes
+
+[00:00-03:00 - Welcome and purpose]
+
+Good morning, everyone, and welcome to the first session on research skills and information literacy, in which we want to show you how to move from having a broad interest in a topic to finding, judging, organising, and combining credible research about it.
+
+We want to begin by removing one possible source of anxiety, because you can participate fully without any previous experience of academic databases, Boolean logic, search strings, or systematic search protocols. We will introduce each of those ideas gradually, explain it in plain language, and demonstrate why it matters within a credible research process.
+
+By the end of this lecture, we want you to be able to perform five connected tasks: turning a broad topic into a focused and answerable question, building a deliberate search with transparent logic, skimming a paper efficiently to decide whether it deserves closer attention, making a fair judgement about the credibility and limitations of a source, and taking notes in a form that supports comparison and genuine literature-review writing.
+
+Please pay particular attention to the word compare, because a credible literature review develops an argument about the state of knowledge by connecting articles and evaluating their relationships. It tells the reader what is known, what is contested, what remains uncertain, and why a new study is justified, while an author-by-author list would leave those important connections unexplained.
+
+We also want you to understand that these are transferable skills. The buttons and field codes in Scopus are different from those in Web of Science or PubMed, but the underlying reasoning is the same. Once you understand the reasoning, you can adapt to whichever information source you need to use.
+
+[03:00-07:00 - Why literature reviews matter]
+
+Let us start with the most basic question: why do researchers conduct literature reviews at all?
+
+The first reason is to prevent duplication of effort, so imagine spending months designing an experiment, gathering data, and analysing the results before discovering that several researchers have already answered almost exactly the same question. Deliberate replication can be extremely valuable because it tests whether a result can be reproduced, whereas accidental repetition consumes effort without a clear scholarly purpose. A literature review helps you distinguish purposeful replication from the unnecessary reinvention of work that already exists.
+
+The second reason is to understand the shape of current knowledge. A field rarely consists of facts on which everyone agrees. There may be strong evidence in one setting but weak evidence in another. Several studies may reach similar conclusions using different methods. Other studies may disagree because they use different populations, measurements, time periods, or analytical assumptions. We want a literature review to reveal that structure. We want it to show where evidence converges and where it does not.
+
+The third reason is to justify your own research question and methods, which means that any claim about the need for a new study should demonstrate the gap with evidence and describe it precisely. You may find that research is extensive in North America and scarce under UK farming systems, that cross-sectional evidence is abundant while longitudinal evidence remains limited, or that predictive models report impressive accuracy without external validation; each of these patterns represents a specific and defensible gap.
+
+The fourth reason concerns credibility, because readers are more likely to trust work that demonstrates careful searching, critical evaluation, and fair representation of disagreement. That trust grows through transparency about how evidence was found and judged, while the mere length of a reference list reveals very little about the quality of the underlying reasoning.
+
+We want you to use a mental model in which every literature review answers three connected questions: what the field knows with reasonable confidence, what the field continues to debate, and what the field has yet to establish. A review that answers those questions clearly is already creating value because it gives the reader an organised account of certainty, disagreement, and opportunity.
+
+Pause for a moment and think about a topic that interests you, which might be soil health, livestock welfare, renewable energy, biodiversity, rural policy, remote sensing, or machine learning. Ask yourself what you currently believe about that topic and where that belief originated, whether through research evidence, a lecture, professional experience, social media, or a general impression. We are asking you to become conscious of the evidence behind your current understanding so that you can examine it carefully and strengthen it where necessary.
+
+[07:00-11:00 - The weakness of naive searching]
+
+Let us describe a very common search process in which a student opens Google or Google Scholar, types three or four keywords, looks at the first page of results, opens a few PDFs with promising titles, and begins writing. The immediate appearance of information creates a strong feeling of productivity, although the resulting review can easily become incomplete, biased, and impossible for another person to reproduce.
+
+This approach creates several problems because search engines rank results according to relevance, citations, popularity, recency, personalisation, accessibility, and other factors that may remain invisible to you. A result appearing first therefore tells you about the system's ranking decision and gives you no automatic assurance that the result provides the strongest available evidence.
+
+A second problem arises from vocabulary because researchers often describe the same idea using different terms, such as precision agriculture, precision farming, site-specific crop management, and digital agriculture. A search containing only one of those phrases may miss substantial areas of relevant research.
+
+A third problem arises from confirmation bias, which may lead you to select papers that support an expected conclusion while overlooking papers that complicate it. A structured search makes those selection decisions more visible and easier to challenge, thereby reducing the influence of bias even though no human process can eliminate it completely.
+
+A fourth problem concerns reproducibility because another person cannot repeat a process described only as searching online and selecting papers that looked useful. Reproduction requires the exact query, information source, search date, filters, and reasons for retaining or rejecting individual studies.
+
+We encourage you to use Google Scholar for appropriate purposes such as scoping a topic, following citations, locating accessible versions of papers, and discovering terminology, while recognising that a complete search strategy requires additional structure, documentation, and source coverage.
+
+We often describe an initial Google search as reconnaissance because it helps us see the landscape and gather the vocabulary required for a more complete survey. During this reconnaissance, we look for common phrases, major authors, important journals, seminal papers, and synonyms, after which we use that information to construct a more deliberate search.
+
+If your current method involves typing a few words and choosing the first attractive results, you are beginning from the same informal habit used by many new researchers, and the important next step is to develop that habit into a transparent and structured method.
+
+[11:00-15:00 - From library indexes to academic databases]
+
+To understand databases, we want to go briefly backwards in time. Before digital databases, libraries made collections discoverable through indexing systems. A physical catalogue card might record an author's name, the title of a book, its subject, publication details, and a shelf location. Books were placed within classification systems, and cross-references directed a reader from one subject term to related terms.
+
+The important point is that information becomes discoverable when someone describes it using structured fields, and modern academic databases apply this longstanding principle at a much larger scale. An article record therefore contains fields such as title, abstract, authors, affiliations, keywords, publication year, journal, document type, and references.
+
+When we use a database such as Scopus, Web of Science, PubMed, ProQuest, IEEE Xplore, or CAB Abstracts, we are searching those structured records. Our query tells the database which concepts we want and, sometimes, which fields it should inspect.
+
+Let us now define three terms clearly so that we can use them consistently throughout the rest of the lecture.
+
+An information source is any place where we look for evidence, including Scopus, Web of Science, Google Scholar, a university library catalogue, a government repository, a standards database, or an organisational website.
+
+A search string is the complete query entered into an information source. It includes the topic words, synonyms, phrases, and connectors such as AND and OR. A search string should be saved exactly, not reconstructed from memory later.
+
+An evidence map is the picture that gradually emerges as we organise the studies we have found. It shows what kinds of studies exist, which claims they support, what methods and data they use, and where their strengths and weaknesses lie. The map may be a literal diagram, but it is often a structured table or thematic set of notes.
+
+This explanation brings us to information literacy, which encompasses recognising what information you need, finding appropriate sources, questioning claims, judging credibility and bias, connecting evidence across sources, and crediting ideas correctly. Finding a PDF represents only one small practical step within that broader intellectual process.
+
+For data-based research, we add another layer by asking who produced the data, why the data were collected, how variables were measured, what is missing, what population is represented, and whether another researcher could reproduce the analysis. These questions matter because polished presentation can sometimes obscure weaknesses or limitations in the underlying data.
+
+[15:00-20:00 - Turning a topic into a focused question]
+
+Now we want to move from a broad interest to a focused research question. This is one of the most valuable steps because a vague question creates a vague search.
+
+Suppose we begin with the broad topic of sustainable farming, which immediately requires us to clarify whether sustainability is environmental, economic, or social and to specify the farming system, location, time period, intervention or exposure, and outcome that concern us.
+
+We can narrow a question by place, population, time, intervention, outcome, or method, so we might move from sustainable farming to the effect of reduced tillage on winter wheat yield in the United Kingdom. This narrower formulation is already more searchable because it identifies a system, practice, outcome, and geographical context.
+
+One useful framework is PICO, whose letters stand for Population, Intervention, Comparison, and Outcome, while the related PECO framework uses Exposure in place of Intervention when the question concerns an observational condition.
+
+The population is the group, organism, system, or context being studied. In an agricultural example, that could be UK winter wheat fields. In an animal-health example, it could be dairy cattle in housed systems. In an environmental study, it could be lowland rivers in England.
+
+The intervention or exposure is the change, treatment, condition, or risk factor of interest. It might be no-till management, drought exposure, a dietary supplement, a habitat-restoration measure, or use of a particular analytical model.
+
+The comparison identifies the alternative against which the intervention will be evaluated, such as comparing no-till with conventional ploughing, a new diagnostic method with an established laboratory test, or a predictive model with a suitable baseline model.
+
+The outcome identifies what will be measured, which might include crop yield, greenhouse-gas emissions, disease incidence, species richness, predictive error, or farmer adoption.
+
+We can turn these components into a template: in a specified population, how does an intervention or exposure, compared with a stated alternative, affect a defined outcome within a particular setting or timeframe?
+
+For example: In UK winter wheat systems, how does no-till management compared with conventional ploughing affect grain yield and soil organic carbon over periods of at least three years?
+
+That question performs several useful functions because it identifies the evidence that belongs directly within the review and distinguishes it from evidence that may serve only as background. A study of maize in tropical conditions might provide useful context while offering only an indirect match, and a six-week study of soil moisture may contribute little to a question about multi-year changes in soil carbon.
+
+We want you to take about thirty seconds now, choose a broad topic, and try to give it a population, an intervention or exposure, a comparison, and an outcome. You may omit a component when it genuinely does not apply because the framework should guide clear thinking while remaining flexible enough to accommodate different kinds of research questions.
+
+[Pause for approximately 30 seconds.]
+
+As you refine the question, check whether the population is defined by place, species, sector, or timeframe; whether the intervention or exposure can be observed or quantified; whether the comparison is explicit; and whether the outcomes have been prioritised. A research question containing ten equally important outcomes may still be too broad to guide a coherent search and review.
+
+[20:00-26:00 - Building a structured search]
+
+Once we have a focused question, we translate it into search concepts by breaking it into blocks of related terms, because entering the complete research question as an ordinary sentence usually gives us less control over how the database interprets each idea.
+
+Let us use the winter wheat example, beginning with a population block containing "winter wheat" OR wheat OR cereal, followed by an intervention block containing "no-till" OR "zero tillage" OR "reduced tillage", and an outcome block containing yield OR "grain yield" OR productivity. If soil carbon is essential to the question, we may add another outcome block containing "soil organic carbon" OR "soil carbon".
+
+Within each concept block, we use OR to tell the database that any of the listed alternatives is acceptable, while between different concept blocks we use AND to require a record to contain the separate areas of meaning.
+
+The resulting search might look like this: open parenthesis, "winter wheat" OR wheat, close parenthesis, AND, open parenthesis, "no-till" OR "zero tillage" OR "reduced tillage", close parenthesis, AND, open parenthesis, yield OR "grain yield", close parenthesis.
+
+Parentheses matter because they control the logic in much the same way that grouping controls the interpretation of an arithmetic expression such as two plus three multiplied by four. Search logic faces the same structural issue, so parentheses keep synonyms together and preserve the intended relationship between concept blocks.
+
+Quotation marks tell the database to search for a phrase. Without quotation marks, greenhouse gas might be treated as two separate words that can appear far apart. With quotation marks, we are asking for the phrase "greenhouse gas".
+
+Truncation allows one stem to match several word endings, so predict followed by an asterisk may find predict, predicts, predicted, prediction, and predictive, while comput followed by an asterisk may find computer, computers, computing, and computational. We use truncation carefully because a stem that is too short may retrieve a large number of unrelated words.
+
+Wildcards replace one or more characters inside a word and are especially useful when British and American spellings differ or when a word has closely related variants. The exact wildcard symbol varies between databases, so we always check the relevant help page and apply the syntax specified for that particular platform.
+
+The NOT operator excludes terms and therefore requires especially careful use because it can remove useful papers unexpectedly. If we search for jaguar as an animal and exclude car, for example, we might also remove a relevant ecology paper that discusses road mortality involving cars, which demonstrates why exclusion should always be applied deliberately.
+
+Proximity operators let us request words that occur near one another without requiring an exact phrase. For example, artificial intelligence within three words of ethics could capture artificial intelligence and research ethics, ethics of artificial intelligence, or ethical issues surrounding artificial intelligence. Scopus and Web of Science may use NEAR followed by a distance, while Ovid commonly uses an adjacency operator. Again, we preserve the underlying concept and translate the syntax for each database.
+
+An important distinction separates transferable principles from database-specific syntax: Boolean logic, concept mapping, phrase searching, and truncation transfer across platforms, whereas field codes vary between them. Scopus may use TITLE-ABS-KEY to search titles, abstracts, and keywords, Web of Science may use TS for a topic search, and PubMed may use a title-and-abstract tag, so a complex Scopus string requires translation before it can work correctly in PubMed.
+
+Our process is therefore conceptual first and technical second. We build a plain-language map of our concepts and synonyms. Then we open the help documentation for each database and translate that logic into its field codes and operators.
+
+We also begin with a scoping search in which we inspect perhaps ten to twenty promising results and examine the language authors use in titles, abstracts, and keywords. We may discover that researchers use conservation tillage more often than reduced tillage, or Earth observation more often than satellite monitoring, after which we add the useful synonyms to the relevant block and test their effect.
+
+Searching is an iterative process in which the first string provides a testable starting point that we refine as we learn more about the field's vocabulary. We record each meaningful iteration in a search log containing the information source, date, exact string, filters, and number of results, because that record later supports the review's methods section and prevents us from repeating unsuccessful searches.
+
+[26:00-30:00 - Multiple sources and a mini-protocol]
+
+We search more than one database because each source covers a different combination of journals, conference proceedings, disciplines, and publication types. Scopus and Web of Science provide broad multidisciplinary coverage, PubMed is particularly important for biomedical research, IEEE Xplore and the ACM Digital Library are valuable for computing and engineering, CAB Abstracts is highly relevant to agriculture and applied life sciences, ProQuest can help us locate theses and dissertations, and Google Scholar casts a wide net with comparatively limited control and transparency.
+
+Every source has boundaries, so using at least two appropriate databases reduces blind spots and gives us a more defensible view of the field, even though absolute completeness can rarely be guaranteed.
+
+Before formal screening, we write a small protocol whose length matches the scale of the project, and a clear one-page plan will often provide enough structure for a taught assignment without requiring the extensive detail expected from a full systematic-review protocol.
+
+Our mini-protocol states the research question, the databases we will search, the search concepts and strings, the date or year limits, the types of documents we will include, the inclusion and exclusion criteria, the information we will extract from each paper, and the broad approach to synthesis.
+
+For example, we might include peer-reviewed field studies published from 2015 onwards, conducted in temperate cereal systems, and reporting at least one yield or soil outcome, while excluding laboratory-only studies, commentaries, and studies without a relevant comparison. The exact criteria depend on the question, and their credibility depends on our deciding them before we become attached to individual papers.
+
+We then screen in stages, beginning with titles and abstracts and retaining any record that might meet the criteria for full-text screening. At the full-text stage, we decide whether each paper genuinely qualifies and record a concise reason for every rejection, such as the wrong population, wrong outcome, unsuitable study type, or insufficient information.
+
+This documented process protects us from changing the rules to suit results that we happen to prefer and therefore gives the final selection a clearer and more defensible basis.
+
+[30:00-36:00 - Reading rapidly and purposefully]
+
+Finding papers begins the process, after which we face the equally important challenge of reading efficiently and choosing an appropriate depth of attention for each source. Academic reading can therefore begin with structured inspection before progressing to a complete and careful reading of the most relevant papers.
+
+Before we open a paper, we give ourselves a purpose by stating, for example, that we need evidence about whether a method was tested on multi-year satellite data in UK conditions or that we need a measure of effect size for yield under reduced tillage. This purpose helps us identify useful information and prevents our reading from becoming aimless.
+
+Our first pass follows a deliberate route through the title, abstract, figures and tables, section headings, conclusion, and methods whenever the paper continues to appear relevant. This sequence functions as a triage process that helps us decide where a complete and careful reading will be most valuable.
+
+The title tells us the advertised topic, while the abstract presents the question, broad method, and headline conclusion; figures and tables show what was actually measured and how large or variable the results may be; headings reveal the structure of the argument; the conclusion shows how the authors interpret the findings; and the methods allow us to judge whether the design can support that interpretation.
+
+As we read, we repeatedly ask three questions: what is the claim, what is the evidence, and what are the limitations?
+
+The claim is what the authors want us to believe. The evidence is the data and analysis used to support that claim. The limitations are the reasons the claim might be narrower, less certain, or less generalisable than it first appears.
+
+Suppose a paper claims that a machine-learning model accurately predicts crop yield, in which case we examine the meaning and basis of the reported accuracy by asking what data were used, how the training and test sets were separated, whether observations from the same farms appeared in both sets, whether the model was compared with a reasonable baseline, whether hyperparameters were tuned using test information, and whether the evaluation resembles real deployment.
+
+A high accuracy value may be misleading if information leaked from the test set into training. A complex model may appear impressive but offer little advantage over a simple baseline. A model validated randomly within one dataset may not generalise to a different year, region, or farming system.
+
+For an intervention study, we ask a different but related set of questions concerning whether the comparison group was appropriate, treatments were allocated fairly, the sample was sufficiently large, important confounders were measured, the outcome was defined before analysis, and missing data were handled transparently.
+
+We also perform quick credibility checks by considering the publication venue and peer-review status while relying on a direct reading of the study for our substantive judgement. We check author affiliations and potential conflicts of interest, consider recency while remembering that older studies may be foundational, look for accessible data, code, protocols, and clearly described methods, and ask whether the conclusions match the reported evidence.
+
+One of the best tests of our understanding is paraphrasing. After reading, we try to explain the main claim and evidence in two or three sentences without copying the abstract. If we cannot do that, we probably do not yet understand the paper.
+
+Let us consider a simple reading exercise based on an abstract claiming that "Our deep-learning approach achieved 94 per cent accuracy and substantially outperformed conventional methods," and let us identify the questions that should immediately occur to a critical reader.
+
+We would ask which outcome the accuracy describes, how balanced the classes were, which conventional methods served as baselines, whether performance was measured on unseen data, how large and representative the sample was, whether confidence intervals were reported, whether the improvement was practically important, and whether the model could be reproduced.
+
+That questioning attitude is central to information literacy because our goal is to understand exactly how much weight each study deserves through careful examination of its evidence, scope, and limitations.
+
+[36:00-41:00 - Recording and appraising evidence]
+
+If we read ten papers and keep only informal notes, we will quickly forget which study did what and may remember the most dramatic conclusion more readily than the most reliable evidence, so a structured extraction table helps us preserve an accurate and comparable record.
+
+For each source, we record the full citation, research question, population or setting, data source and sample size, study design, intervention or exposure, comparison, outcomes, analytical method, main findings, limitations, quality concerns, reproducibility information, and relevance to our own question.
+
+We often include separate fields for the claim and the evidence because the distinction helps us evaluate how strongly one supports the other. A paper might claim that regenerative practices improve resilience while presenting evidence from a three-year observational comparison on twelve farms, and describing both elements separately helps us express an appropriate level of confidence in the conclusion.
+
+We also record one clear strength and one clear limitation so that appraisal remains balanced and avoids both uncritical praise and automatic fault-finding. Every study operates within boundaries: a small, carefully controlled experiment may offer strong internal validity with limited generalisability, while a large observational dataset may represent real-world diversity alongside uncontrolled confounding.
+
+Data provenance deserves special attention because we need to understand where the data came from, why they were originally collected, how measurements were made, what cleaning occurred, and whether the dataset represents the target population. Convenience data can be valuable when their limitations are described accurately and their selection process is distinguished clearly from random sampling.
+
+Transparency also matters because the availability of code and data gives another researcher a better opportunity to check the work, while ethical or commercial restrictions on data sharing increase the importance of clear documentation, protocols, analysis code, simulated data, or another reasonable route to verification.
+
+We recommend a compact note template that records the citation, claim, data and setting, method and checks, main findings, limitations, code or data link, and relevance to our question. The template remains deliberately simple because recording every paper through the same fields creates consistency and makes comparison much easier.
+
+[41:00-46:00 - Moving from summary to synthesis]
+
+Now we want to address the stage that students often find most difficult: synthesis.
+
+Summary tells us what one paper says, while synthesis explains how multiple papers relate to one another, and a strong literature review uses both processes to turn a collection of notes into an evidence-based argument.
+
+We begin by grouping papers in a way that serves the research question. We might group them by intervention, method, population, data source, outcome, geographical setting, or theoretical position. We do not automatically organise the review one author at a time.
+
+Suppose we have twelve studies of reduced tillage, of which five report improved soil carbon, four report no clear difference, and three report mixed effects that depend on soil depth or duration. A descriptive review might simply list all twelve findings, whereas an analytical review investigates why those findings differ and what the differences mean for the overall conclusion.
+
+Several explanations may account for the variation: the positive studies may have lasted longer, some researchers may have sampled only the surface layer while others measured deeper soil profiles, climate and soil type may have altered the effect, definitions of reduced tillage may have differed, and publication bias may have made positive findings more visible.
+
+We therefore look for agreements, disagreements, and plausible explanations. We also examine the strength of the evidence within each group. Ten weak studies do not automatically outweigh two rigorous studies. Evidence should not be counted as if every paper contributes an identical vote.
+
+A useful paragraph structure begins with a thematic claim, such as "Evidence that reduced tillage increases total soil carbon remains mixed and appears sensitive to sampling depth and study duration." We then compare studies that support or qualify that statement, explain methodological differences, acknowledge uncertainty, and end by connecting the theme to the broader research question.
+
+This thematic structure provides more analysis than an author-by-author sequence in which Smith reports one result, Jones reports another, and Patel reports something else, because the sequential pattern forces the reader to perform the synthesis that the writer should provide.
+
+We usually structure a literature review with an introduction that defines the scope and question, a themed body that compares evidence, a section acknowledging limitations in the evidence base and in the review process, and a conclusion explaining what is known, what is contested, what is unknown, and why the proposed project is justified.
+
+When we identify a gap, we make it precise because broad claims that research does not exist are often inaccurate. We might write that "Existing studies demonstrate short-term predictive performance within individual datasets, while evidence of transfer across seasons and regions remains limited," thereby identifying both the evidence that exists and the specific uncertainty that remains.
+
+Remember also that referencing is part of information literacy because giving credit allows readers to trace claims to their sources and demonstrates the evidential basis of our argument. Each citation should support the sentence to which it is attached, and every group of references should have a clear relationship to the claims presented in the paragraph.
+
+[46:00-49:00 - Applied Scopus task]
+
+We want to finish the practical part of this lecture by explaining the Week 1 discovery task.
+
+The aim is to use Scopus to investigate research associated with Harper Adams University in three broad areas: crops and agronomy, animal science, and digital methods or statistical modelling. Through this process, we will practise affiliation searching, topic searching, rapid appraisal, and identification of local expertise while using influential papers as starting points for exploration.
+
+We begin with an affiliation filter for Harper Adams University. We then combine that affiliation with topic terms in the title, abstract, and keyword fields.
+
+For crops, we might use terms including crop, cereal, wheat, barley, potato, oilseed rape, and canola. For animal science, we might use livestock, dairy, cattle, sheep, poultry, swine, animal nutrition, and animal health. For machine learning, we might use machine learning, deep learning, neural networks, self-supervised learning, representation learning, and time series.
+
+For each area, we inspect the results and sort by citation count as one discovery strategy, while remembering that citation counts measure influence and visibility more directly than methodological quality. Older papers have had more time to accumulate citations, and highly cited work can still contain weaknesses, so we use the count to identify promising starting points and then make our final judgement through critical reading.
+
+We want you to select three papers per area and record the title, year, venue, citation count, and a one-sentence explanation of the contribution or finding. We also want you to identify one or two Harper Adams authors who appear repeatedly and confirm that they are current staff before suggesting them as contacts.
+
+Use the database's analysis tools to inspect authors and affiliations. Open author profiles carefully because researchers can share similar names, and affiliations change. If Scopus is unavailable, use Google Scholar as a fallback with the exact phrase "Harper Adams University" and a sensible OR block of topic terms. Treat the fallback as a different search method and document it honestly.
+
+Your final note should contain three short sections covering crops, animal science, and machine learning, with each section listing three selected papers, a one-sentence finding for each paper, and the suggested contacts. The value of the exercise lies in the quality of your reasoning and documentation, which should turn the resulting list into a transparent account of how you identified relevant research and expertise.
+
+[49:00-50:00 - Final recap]
+
+Let us close by bringing the entire process together in one connected sequence that you can apply to your own research topic.
+
+We begin by transforming an undefined topic into a focused question, breaking that question into concepts and synonyms, combining synonyms with OR and distinct concepts with AND, searching more than one suitable information source, translating our strategy into each database's syntax, and recording exactly what we did.
+
+We screen using criteria decided in advance and read with a purpose by asking what each paper claims, what evidence supports the claim, and what limits the conclusion. We record studies consistently in a structured table before comparing them by theme, explaining agreements and disagreements, assessing the strength of the evidence, and identifying a specific gap.
+
+The central message is that a credible literature review emerges from a transparent chain of decisions connecting the research question, search, screening, appraisal, synthesis, and writing, with every stage contributing to the quality and defensibility of the final argument.
+
+If you remember only three questions from today, remember to ask what is known with reasonable confidence, what remains contested within the field, and what researchers have yet to establish. When your searching and reading allow you to answer those questions fairly, you are beginning to think like a researcher.
+
+Thank you for your attention throughout this session, and in the next activity we want you to take your own broad topic, turn it into a focused question, and draft the first version of your concept blocks. We are looking for a clear and defensible starting point that you can test, evaluate, and improve progressively as your understanding of the topic develops.

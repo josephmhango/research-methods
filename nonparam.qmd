@@ -1,6 +1,6 @@
 ---
-title: "Non-Parametric Statistics"
-subtitle: "C5025HF"
+title: "Rank-Based and Exact Tests"
+subtitle: "Non-parametric methods for pairs, association, and correlation"
 author: "Dr K.J. Mhango"
 css: scroll.css
 format:
@@ -24,7 +24,9 @@ editor: visual
 ## What You Will Learn Today
 - Parametric vs non-parametric intuition
 - Ranking logic and distribution-free ideas
-- Mann–Whitney, Wilcoxon, Kruskal–Wallis
+- Mann–Whitney and Wilcoxon signed-rank tests
+- Fisher's exact test
+- Spearman's rank correlation and Kendall's tau
 - Correlations: Spearman & Kendall
 - Exact tests (Fisher)
 
@@ -74,7 +76,6 @@ Imagine the **same runner** running twice (Race 1 vs Race 2).
 - **Mann–Whitney (2 groups):** If I pick one random value from Group A and one from Group B, is A likely to be higher than B?
 - **Wilcoxon (Paired):** It looks at the *change* in each pair. Do the **big changes** tend to be increases or decreases?
   - (It ranks the size of the changes, then checks if the positive ranks outweigh the negative ranks).
-- **Kruskal–Wallis (>2 groups):** Do some groups systematically rank higher than others?
 
 ### What to report
 - **Descriptive stats:** Medians and Interquartile Ranges (IQR) for each group.
@@ -90,7 +91,6 @@ Imagine the **same runner** running twice (Race 1 vs Race 2).
 |--------|------------|----------------|
 | 2 independent groups | t-test | Mann–Whitney |
 | 2 paired measures | paired t | Wilcoxon signed-rank |
-| >2 independent groups | ANOVA | Kruskal–Wallis |
 | Correlation | Pearson | Spearman, Kendall |
 | 2×2 association | χ² test | Fisher exact |
 
@@ -302,79 +302,6 @@ chisq_expected
 
 - Check expected counts; if any are < 5, prefer Fisher’s result.
 - Interpretation: “Species and width class show evidence of association.”
-
-# ANOVA Using *iris*
-
-## Goal
-Compare **Petal.Length** across all three species.
-```{r}
-iris$Species <- factor(iris$Species)
-```
-
-### Visualise
-```{r}
-#| fig-height: 3.5
-ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
-  geom_boxplot(alpha = 0.6,width=0.2) +
-  geom_jitter(width = 0.1, alpha = 0.5) +
-  theme_minimal() +
-  ggtitle("Petal Length by Species (3 Groups)")
-```
-
-## ANOVA Assumptions
-1. **Independence** → ✔ by design.
-2. **Normality within each group**
-```{r}
-by(iris$Petal.Length, iris$Species, shapiro.test)
-```
- - If some species have p < 0.05, normality is doubtful for those groups.
-3. **Homogeneity of variances** (Levene)
-```{r}
-leveneTest(Petal.Length ~ Species, data = iris)
-```
- - If p < 0.05, variances differ across species.
-
-If either normality or variance equality fails → cannot trust ANOVA F-test.
-
-## Parametric ANOVA
-```{r}
-summary(aov(Petal.Length ~ Species, data = iris))
-```
- - In the ANOVA table, check the row for Species: Pr(>F) is the p-value for group differences.
-
-## Non-parametric alternative
-### Kruskal–Wallis Test
-```{r}
-kruskal.test(Petal.Length ~ Species, data = iris)
-```
- - Kruskal–Wallis p-value tests whether at least one group tends to have higher ranks than the others.
-
-If significant → perform post-hoc Dunn tests.
-```{r}
-if (!requireNamespace("FSA", quietly = TRUE)) {
-  cat("Package 'FSA' not installed; skipping Dunn post-hoc tests. Install with install.packages('FSA').\n")
-} else {
-  library(FSA)
-  dunnTest(Petal.Length ~ Species, data = iris, method = "bonferroni")
-}
-```
- - Post-hoc Dunn tests (when available) show which pairs differ; use adjusted p-values to report significant pairs. If skipped, you can still report the Kruskal–Wallis result and show group medians/IQRs.
-
-### Example output and interpretation (R)
-```{r}
-aov_res <- aov(Petal.Length ~ Species, data = iris)
-kw_res  <- kruskal.test(Petal.Length ~ Species, data = iris)
-
-summary(aov_res)
-kw_res
-
-# Extract and print concise p-values for the slide
-s <- summary(aov_res)[[1]]
-aov_p <- s[["Pr(>F)"]][1]
-
-```
-
-- Interpretation: With skew/outliers or non-normality, rely on Kruskal–Wallis. If significant, follow with pairwise comparisons (e.g., Dunn tests) and report which species differ.
 
 # Correlation Using *iris*
 

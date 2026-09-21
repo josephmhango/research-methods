@@ -521,5 +521,73 @@ Interpretation and assumptions:
 
 2. Modify the dataset so one group has a much larger variance. What happens to the diagnostics and post‑hoc results? 
 
-3. Build a two‑way dataset with a small block effect. Compare `aov(yield ~ group)` vs `aov(yield ~ group + block)`. How does adding blocks change the residual variation and the p‑value for `group`?
+3. Build a two‑way dataset with a small block effect. Compare `aov(yield ~ group)` vs `aov(yield ~ group + block)`. How does adding blocks change the residual variation and the p‑value for `group`? 
+
+# Kruskal-Wallis: the rank-based counterpart
+
+## When the ANOVA assumptions are unsuitable
+
+The Kruskal-Wallis test provides a rank-based comparison for three or more independent groups. It is especially useful when the outcome is ordinal, severe skew or influential outliers make a mean-based analysis difficult to defend, or the available data do not support the distributional assumptions used for the ANOVA model.
+
+The hypotheses are:
+
+- $H_0$: the groups have the same distribution of ranks;
+- $H_A$: at least one group tends to produce different ranks.
+
+When group distributions have similar shapes, the result is often interpreted as evidence about differences in location or medians.
+
+## ANOVA and Kruskal-Wallis on the same example
+
+```{r}
+iris$Species <- factor(iris$Species)
+
+anova_result <- aov(Petal.Length ~ Species, data = iris)
+kruskal_result <- kruskal.test(Petal.Length ~ Species, data = iris)
+
+summary(anova_result)
+kruskal_result
+```
+
+The ANOVA F-test compares variation between group means with variation within groups, while Kruskal-Wallis converts observations to ranks and compares the rank patterns across groups.
+
+## Visualise before choosing
+
+```{r}
+boxplot(
+  Petal.Length ~ Species,
+  data = iris,
+  col = c("#1b9e77", "#d95f02", "#7570b3"),
+  xlab = "Species",
+  ylab = "Petal length",
+  main = "Petal length across three species"
+)
+stripchart(
+  Petal.Length ~ Species,
+  data = iris,
+  vertical = TRUE,
+  method = "jitter",
+  pch = 19,
+  col = rgb(0, 0, 0, 0.4),
+  add = TRUE
+)
+```
+
+## Follow-up comparisons
+
+A significant Kruskal-Wallis test shows that a difference exists somewhere among the groups and does not identify the differing pairs. Pairwise Wilcoxon rank-sum tests with an adjustment for multiple comparisons provide one accessible follow-up approach.
+
+```{r}
+pairwise.wilcox.test(
+  x = iris$Petal.Length,
+  g = iris$Species,
+  p.adjust.method = "holm",
+  exact = FALSE
+)
+```
+
+## Reporting the rank-based analysis
+
+Report the Kruskal-Wallis statistic, degrees of freedom, p-value, group sample sizes, medians, and interquartile ranges. When follow-up tests are used, report the adjustment method and the adjusted pairwise p-values.
+
+An example structure is: "Petal length differed among species, Kruskal-Wallis $H(2) = ...$, $p < ...$. Holm-adjusted pairwise comparisons indicated that ... . Group medians and interquartile ranges were ... ."
 

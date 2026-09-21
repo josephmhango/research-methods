@@ -1,11 +1,21 @@
 ---
 title: "Hypothesis testing"
 subtitle: "Exploring Data and setting up for an analysis"
-format: html
+format:
+  revealjs:
+    css: scroll.css
+    theme: simple
+    slide-number: true
+    toc: true
+    incremental: false
+    chalkboard: true
 author: Joseph Mhango
 date: 2024-09-13
 date-format: iso
-center: true
+execute:
+  echo: true
+  warning: false
+  message: false
 ---
 
 

@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Kanthu Joseph Mhango">
+<meta name="dcterms.date" content="2026-08-10">
+
+<title>Building a Credible Literature Review – C5025HF Research methods and Geographical Information Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1982d92fcc5dfdfe237df2a1a876723.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week1-literature-review.html">Week 1: Introduction</a></li><li class="breadcrumb-item"><a href="./week1-literature-review-guide.html">Building a Credible Literature Review</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Skills for a Credible Literature Review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review-guide.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Building a Credible Literature Review</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3: Research and Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-scientific-method.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research and the Scientific Method: Study Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Central Tendency and Dispersion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4: Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Foundations (R)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Data Structures and Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation with dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syntax-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introductory R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indexing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data frames and tidy data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5: Statistical Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">T-test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chisquare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Chi-Square story</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7: ANOVA and Kruskal-Wallis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fisher’s F and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">F-Test and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA - 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8: Non-parametric Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rank-Based and Exact Tests</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 11: Sampling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-sampling-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-spatial-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Sampling in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 12: Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week12-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 13: Communicating Research</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scientific Reporting (IMRaD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vistut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualisation Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing a Statistical Analysis Plan (SAP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-effective-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Communication with Graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-data-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-guide" id="toc-how-to-use-this-guide" class="nav-link active" data-scroll-target="#how-to-use-this-guide">How to use this guide</a></li>
+  <li><a href="#section-1-audit-the-topic-and-define-the-review-purpose" id="toc-section-1-audit-the-topic-and-define-the-review-purpose" class="nav-link" data-scroll-target="#section-1-audit-the-topic-and-define-the-review-purpose">Section 1: Audit the topic and define the review purpose</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim" id="toc-practical-aim" class="nav-link" data-scroll-target="#practical-aim">Practical aim</a></li>
+  <li><a href="#task-1.1-write-the-starting-topic-without-polishing-it" id="toc-task-1.1-write-the-starting-topic-without-polishing-it" class="nav-link" data-scroll-target="#task-1.1-write-the-starting-topic-without-polishing-it">Task 1.1: Write the starting topic without polishing it</a></li>
+  <li><a href="#task-1.2-produce-a-provisional-knowledge-map" id="toc-task-1.2-produce-a-provisional-knowledge-map" class="nav-link" data-scroll-target="#task-1.2-produce-a-provisional-knowledge-map">Task 1.2: Produce a provisional knowledge map</a></li>
+  <li><a href="#task-1.3-draft-the-review-purpose" id="toc-task-1.3-draft-the-review-purpose" class="nav-link" data-scroll-target="#task-1.3-draft-the-review-purpose">Task 1.3: Draft the review purpose</a></li>
+  <li>Reflection pause 1</li>
+  </ul></li>
+  <li><a href="#section-2-map-information-sources-and-harvest-vocabulary" id="toc-section-2-map-information-sources-and-harvest-vocabulary" class="nav-link" data-scroll-target="#section-2-map-information-sources-and-harvest-vocabulary">Section 2: Map information sources and harvest vocabulary</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-1" id="toc-practical-aim-1" class="nav-link" data-scroll-target="#practical-aim-1">Practical aim</a></li>
+  <li><a href="#task-2.1-map-the-source-landscape" id="toc-task-2.1-map-the-source-landscape" class="nav-link" data-scroll-target="#task-2.1-map-the-source-landscape">Task 2.1: Map the source landscape</a></li>
+  <li><a href="#task-2.2-run-a-reconnaissance-search" id="toc-task-2.2-run-a-reconnaissance-search" class="nav-link" data-scroll-target="#task-2.2-run-a-reconnaissance-search">Task 2.2: Run a reconnaissance search</a></li>
+  <li><a href="#task-2.3-build-a-vocabulary-bank" id="toc-task-2.3-build-a-vocabulary-bank" class="nav-link" data-scroll-target="#task-2.3-build-a-vocabulary-bank">Task 2.3: Build a vocabulary bank</a></li>
+  <li><a href="#task-2.4-test-one-known-item-check" id="toc-task-2.4-test-one-known-item-check" class="nav-link" data-scroll-target="#task-2.4-test-one-known-item-check">Task 2.4: Test one known-item check</a></li>
+  <li>Reflection pause 2</li>
+  </ul></li>
+  <li><a href="#section-3-focus-the-question-and-define-eligibility" id="toc-section-3-focus-the-question-and-define-eligibility" class="nav-link" data-scroll-target="#section-3-focus-the-question-and-define-eligibility">Section 3: Focus the question and define eligibility</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-2" id="toc-practical-aim-2" class="nav-link" data-scroll-target="#practical-aim-2">Practical aim</a></li>
+  <li><a href="#task-3.1-narrow-the-scope-deliberately" id="toc-task-3.1-narrow-the-scope-deliberately" class="nav-link" data-scroll-target="#task-3.1-narrow-the-scope-deliberately">Task 3.1: Narrow the scope deliberately</a></li>
+  <li><a href="#task-3.2-use-pico-or-peco-as-a-thinking-tool" id="toc-task-3.2-use-pico-or-peco-as-a-thinking-tool" class="nav-link" data-scroll-target="#task-3.2-use-pico-or-peco-as-a-thinking-tool">Task 3.2: Use PICO or PECO as a thinking tool</a></li>
+  <li><a href="#task-3.3-turn-scope-into-operational-criteria" id="toc-task-3.3-turn-scope-into-operational-criteria" class="nav-link" data-scroll-target="#task-3.3-turn-scope-into-operational-criteria">Task 3.3: Turn scope into operational criteria</a></li>
+  <li><a href="#task-3.4-stress-test-the-question" id="toc-task-3.4-stress-test-the-question" class="nav-link" data-scroll-target="#task-3.4-stress-test-the-question">Task 3.4: Stress-test the question</a></li>
+  <li>Reflection pause 3</li>
+  </ul></li>
+  <li><a href="#section-4-construct-and-test-the-search-strategy" id="toc-section-4-construct-and-test-the-search-strategy" class="nav-link" data-scroll-target="#section-4-construct-and-test-the-search-strategy">Section 4: Construct and test the search strategy</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-3" id="toc-practical-aim-3" class="nav-link" data-scroll-target="#practical-aim-3">Practical aim</a></li>
+  <li><a href="#task-4.1-build-the-concept-table" id="toc-task-4.1-build-the-concept-table" class="nav-link" data-scroll-target="#task-4.1-build-the-concept-table">Task 4.1: Build the concept table</a></li>
+  <li><a href="#task-4.2-assemble-a-boolean-query" id="toc-task-4.2-assemble-a-boolean-query" class="nav-link" data-scroll-target="#task-4.2-assemble-a-boolean-query">Task 4.2: Assemble a Boolean query</a></li>
+  <li><a href="#task-4.3-run-three-diagnostic-tests" id="toc-task-4.3-run-three-diagnostic-tests" class="nav-link" data-scroll-target="#task-4.3-run-three-diagnostic-tests">Task 4.3: Run three diagnostic tests</a></li>
+  <li><a href="#task-4.4-translate-syntax-carefully" id="toc-task-4.4-translate-syntax-carefully" class="nav-link" data-scroll-target="#task-4.4-translate-syntax-carefully">Task 4.4: Translate syntax carefully</a></li>
+  <li><a href="#task-4.5-follow-the-scopus-walkthrough" id="toc-task-4.5-follow-the-scopus-walkthrough" class="nav-link" data-scroll-target="#task-4.5-follow-the-scopus-walkthrough">Task 4.5: Follow the Scopus walkthrough</a></li>
+  <li>Reflection pause 4</li>
+  </ul></li>
+  <li><a href="#section-5-convert-the-search-into-a-reproducible-protocol" id="toc-section-5-convert-the-search-into-a-reproducible-protocol" class="nav-link" data-scroll-target="#section-5-convert-the-search-into-a-reproducible-protocol">Section 5: Convert the search into a reproducible protocol</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-4" id="toc-practical-aim-4" class="nav-link" data-scroll-target="#practical-aim-4">Practical aim</a></li>
+  <li><a href="#task-5.1-complete-a-search-log" id="toc-task-5.1-complete-a-search-log" class="nav-link" data-scroll-target="#task-5.1-complete-a-search-log">Task 5.1: Complete a search log</a></li>
+  <li><a href="#task-5.2-draft-the-mini-protocol" id="toc-task-5.2-draft-the-mini-protocol" class="nav-link" data-scroll-target="#task-5.2-draft-the-mini-protocol">Task 5.2: Draft the mini-protocol</a></li>
+  <li><a href="#task-5.3-create-a-defensible-file-trail" id="toc-task-5.3-create-a-defensible-file-trail" class="nav-link" data-scroll-target="#task-5.3-create-a-defensible-file-trail">Task 5.3: Create a defensible file trail</a></li>
+  <li><a href="#task-5.4-perform-a-reproducibility-check" id="toc-task-5.4-perform-a-reproducibility-check" class="nav-link" data-scroll-target="#task-5.4-perform-a-reproducibility-check">Task 5.4: Perform a reproducibility check</a></li>
+  <li>Reflection pause 5</li>
+  </ul></li>
+  <li><a href="#section-6-screen-records-and-justify-selection" id="toc-section-6-screen-records-and-justify-selection" class="nav-link" data-scroll-target="#section-6-screen-records-and-justify-selection">Section 6: Screen records and justify selection</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-5" id="toc-practical-aim-5" class="nav-link" data-scroll-target="#practical-aim-5">Practical aim</a></li>
+  <li><a href="#task-6.1-prepare-the-screening-sheet" id="toc-task-6.1-prepare-the-screening-sheet" class="nav-link" data-scroll-target="#task-6.1-prepare-the-screening-sheet">Task 6.1: Prepare the screening sheet</a></li>
+  <li><a href="#task-6.2-pilot-ten-records" id="toc-task-6.2-pilot-ten-records" class="nav-link" data-scroll-target="#task-6.2-pilot-ten-records">Task 6.2: Pilot ten records</a></li>
+  <li><a href="#task-6.3-use-one-primary-full-text-exclusion-reason" id="toc-task-6.3-use-one-primary-full-text-exclusion-reason" class="nav-link" data-scroll-target="#task-6.3-use-one-primary-full-text-exclusion-reason">Task 6.3: Use one primary full-text exclusion reason</a></li>
+  <li><a href="#task-6.4-draw-the-selection-funnel" id="toc-task-6.4-draw-the-selection-funnel" class="nav-link" data-scroll-target="#task-6.4-draw-the-selection-funnel">Task 6.4: Draw the selection funnel</a></li>
+  <li>Reflection pause 6</li>
+  </ul></li>
+  <li><a href="#section-7-read-purposefully-and-appraise-credibility" id="toc-section-7-read-purposefully-and-appraise-credibility" class="nav-link" data-scroll-target="#section-7-read-purposefully-and-appraise-credibility">Section 7: Read purposefully and appraise credibility</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-6" id="toc-practical-aim-6" class="nav-link" data-scroll-target="#practical-aim-6">Practical aim</a></li>
+  <li><a href="#task-7.1-declare-the-reading-purpose" id="toc-task-7.1-declare-the-reading-purpose" class="nav-link" data-scroll-target="#task-7.1-declare-the-reading-purpose">Task 7.1: Declare the reading purpose</a></li>
+  <li><a href="#task-7.2-separate-claim-evidence-and-warrant" id="toc-task-7.2-separate-claim-evidence-and-warrant" class="nav-link" data-scroll-target="#task-7.2-separate-claim-evidence-and-warrant">Task 7.2: Separate claim, evidence, and warrant</a></li>
+  <li><a href="#task-7.3-complete-a-domain-based-appraisal" id="toc-task-7.3-complete-a-domain-based-appraisal" class="nav-link" data-scroll-target="#task-7.3-complete-a-domain-based-appraisal">Task 7.3: Complete a domain-based appraisal</a></li>
+  <li><a href="#task-7.4-assign-evidential-weight" id="toc-task-7.4-assign-evidential-weight" class="nav-link" data-scroll-target="#task-7.4-assign-evidential-weight">Task 7.4: Assign evidential weight</a></li>
+  <li>Reflection pause 7</li>
+  </ul></li>
+  <li><a href="#section-8-extract-synthesise-and-plan-the-written-argument" id="toc-section-8-extract-synthesise-and-plan-the-written-argument" class="nav-link" data-scroll-target="#section-8-extract-synthesise-and-plan-the-written-argument">Section 8: Extract, synthesise, and plan the written argument</a>
+  <ul class="collapse">
+  <li><a href="#practical-aim-7" id="toc-practical-aim-7" class="nav-link" data-scroll-target="#practical-aim-7">Practical aim</a></li>
+  <li><a href="#task-8.1-build-a-common-extraction-matrix" id="toc-task-8.1-build-a-common-extraction-matrix" class="nav-link" data-scroll-target="#task-8.1-build-a-common-extraction-matrix">Task 8.1: Build a common extraction matrix</a></li>
+  <li><a href="#task-8.2-group-evidence-into-themes" id="toc-task-8.2-group-evidence-into-themes" class="nav-link" data-scroll-target="#task-8.2-group-evidence-into-themes">Task 8.2: Group evidence into themes</a></li>
+  <li><a href="#task-8.3-draft-one-synthesis-paragraph-plan" id="toc-task-8.3-draft-one-synthesis-paragraph-plan" class="nav-link" data-scroll-target="#task-8.3-draft-one-synthesis-paragraph-plan">Task 8.3: Draft one synthesis paragraph plan</a></li>
+  <li><a href="#task-8.4-audit-the-complete-workflow" id="toc-task-8.4-audit-the-complete-workflow" class="nav-link" data-scroll-target="#task-8.4-audit-the-complete-workflow">Task 8.4: Audit the complete workflow</a></li>
+  <li><a href="#week-1-practical-portfolio" id="toc-week-1-practical-portfolio" class="nav-link" data-scroll-target="#week-1-practical-portfolio">Week 1 practical portfolio</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week1-literature-review.html">Week 1: Introduction</a></li><li class="breadcrumb-item"><a href="./week1-literature-review-guide.html">Building a Credible Literature Review</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Building a Credible Literature Review</h1>
+<p class="subtitle lead">Week 1 practical guide: eight activities paired with the lecture</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Kanthu Joseph Mhango </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 10, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="how-to-use-this-guide" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-guide">How to use this guide</h2>
+<p>This practical guide follows the Week 1 lecture in the same order. Each section turns one lecture concept into a tangible piece of a literature-review workflow. Work with one research topic throughout so that your outputs accumulate into a small, usable review protocol rather than eight disconnected exercises.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lecture section</th>
+<th>Practical section</th>
+<th>Output you will keep</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Why a review matters</td>
+<td>Audit the topic and its purpose</td>
+<td>A provisional review purpose and gap statement</td>
+</tr>
+<tr class="even">
+<td>2. Information literacy</td>
+<td>Map sources and vocabulary</td>
+<td>A source map and vocabulary bank</td>
+</tr>
+<tr class="odd">
+<td>3. Scope and questions</td>
+<td>Focus the question</td>
+<td>A structured question and eligibility rules</td>
+</tr>
+<tr class="even">
+<td>4. Search strategy</td>
+<td>Build and test a query</td>
+<td>A concept table and tested search string</td>
+</tr>
+<tr class="odd">
+<td>5. Reproducible protocol</td>
+<td>Record the search plan</td>
+<td>A search log and mini-protocol</td>
+</tr>
+<tr class="even">
+<td>6. Screening</td>
+<td>Apply selection rules</td>
+<td>A screening record with reasons</td>
+</tr>
+<tr class="odd">
+<td>7. Critical appraisal</td>
+<td>Judge evidential weight</td>
+<td>A completed appraisal sheet</td>
+</tr>
+<tr class="even">
+<td>8. Synthesis and writing</td>
+<td>Build an argument</td>
+<td>An extraction matrix and paragraph plan</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled" title="Working rhythm">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Working rhythm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For each section, first read the task, then complete the worked step using your own topic, and finally save the stated output. The examples use a general research question about flexible working and employee wellbeing, so the method remains transferable across disciplines.</p>
+</div>
+</div>
+</section>
+<section id="section-1-audit-the-topic-and-define-the-review-purpose" class="level1">
+<h1>Section 1: Audit the topic and define the review purpose</h1>
+<section id="practical-aim" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim">Practical aim</h2>
+<p>The lecture presented a literature review as a map of what is established, contested, uncertain, and missing. In this activity, we translate a broad interest into a reason for reviewing the literature. A useful purpose gives direction to every later decision, including where we search, which studies we retain, and how we organise the final argument.</p>
+</section>
+<section id="task-1.1-write-the-starting-topic-without-polishing-it" class="level2">
+<h2 class="anchored" data-anchor-id="task-1.1-write-the-starting-topic-without-polishing-it">Task 1.1: Write the starting topic without polishing it</h2>
+<p>Write one sentence describing the subject that currently interests you. Use ordinary language and resist the urge to make it sound academic.</p>
+<blockquote class="blockquote">
+<p><strong>Worked example:</strong> We are interested in whether flexible working arrangements affect employee wellbeing.</p>
+</blockquote>
+<p>Now record three things that you currently believe and mark each statement as an <strong>assumption</strong>, a <strong>personal observation</strong>, or an <strong>evidence-informed belief</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Current belief</th>
+<th>Basis for the belief</th>
+<th>Evidence still needed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Flexible working may improve autonomy</td>
+<td>Personal observation</td>
+<td>Studies measuring autonomy and wellbeing</td>
+</tr>
+<tr class="even">
+<td>Effects may differ by job type</td>
+<td>Assumption</td>
+<td>Comparisons across occupations</td>
+</tr>
+<tr class="odd">
+<td>Isolation may reduce some benefits</td>
+<td>Evidence-informed belief</td>
+<td>Recent studies and reviews on isolation</td>
+</tr>
+</tbody>
+</table>
+<p>This small inventory matters because prior beliefs influence the words we search, the papers we notice, and the explanations we find convincing. Naming those beliefs makes them easier to test fairly.</p>
+</section>
+<section id="task-1.2-produce-a-provisional-knowledge-map" class="level2">
+<h2 class="anchored" data-anchor-id="task-1.2-produce-a-provisional-knowledge-map">Task 1.2: Produce a provisional knowledge map</h2>
+<p>Create four boxes and add at least one tentative statement to each. These statements are starting hypotheses about the literature rather than final conclusions.</p>
+<pre class="text"><code>ESTABLISHED: What appears consistently supported?
+CONTESTED:   Where might credible studies disagree?
+UNCERTAIN:   Where might evidence be weak or context-dependent?
+MISSING:     Which population, setting, comparison, or outcome may be overlooked?</code></pre>
+</section>
+<section id="task-1.3-draft-the-review-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="task-1.3-draft-the-review-purpose">Task 1.3: Draft the review purpose</h2>
+<p>Complete this sentence:</p>
+<blockquote class="blockquote">
+<p>This review will examine <strong>[phenomenon or relationship]</strong> in <strong>[population or setting]</strong> so that we can clarify <strong>[what is known, contested, or missing]</strong> and determine <strong>[why that knowledge matters]</strong>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save one topic statement, your belief inventory, the four-part knowledge map, and a two-sentence review purpose. These are provisional and will become more precise after the reconnaissance search.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your reasoning">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your reasoning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Distinguish your topic from your contribution. Your topic names an area, while your contribution explains which uncertainty the review will clarify and why that clarification is useful. If you already feel certain about the final answer, identify the evidence that would be capable of changing your view.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 1</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-2-map-information-sources-and-harvest-vocabulary" class="level1">
+<h1>Section 2: Map information sources and harvest vocabulary</h1>
+<section id="practical-aim-1" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-1">Practical aim</h2>
+<p>The lecture explained that discoverability depends on vocabulary, indexing, and source coverage. This activity builds a map of suitable information sources and a vocabulary bank before we attempt a precise search.</p>
+</section>
+<section id="task-2.1-map-the-source-landscape" class="level2">
+<h2 class="anchored" data-anchor-id="task-2.1-map-the-source-landscape">Task 2.1: Map the source landscape</h2>
+<p>List places where relevant evidence might be found and state what each contributes. Select sources because they fit the question, rather than because they are familiar.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source type</th>
+<th>What it can contribute</th>
+<th>Limitation to remember</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Broad bibliographic database</td>
+<td>Structured records across many disciplines</td>
+<td>Coverage varies by database</td>
+</tr>
+<tr class="even">
+<td>Subject database</td>
+<td>Specialist vocabulary and focused journals</td>
+<td>May omit interdisciplinary work</td>
+</tr>
+<tr class="odd">
+<td>Citation search engine</td>
+<td>Wide discovery and cited-by links</td>
+<td>Records and filters may be inconsistent</td>
+</tr>
+<tr class="even">
+<td>Institutional repository</td>
+<td>Theses, reports, and local research</td>
+<td>Quality and metadata vary</td>
+</tr>
+<tr class="odd">
+<td>Reference lists</td>
+<td>Earlier foundational studies</td>
+<td>Follows the choices made by another author</td>
+</tr>
+<tr class="even">
+<td>Forward citation searching</td>
+<td>Later studies that used or challenged a paper</td>
+<td>Newer work has had less time to be cited</td>
+</tr>
+</tbody>
+</table>
+<p>Choose at least two complementary searchable sources and explain your choice in one sentence each.</p>
+</section>
+<section id="task-2.2-run-a-reconnaissance-search" class="level2">
+<h2 class="anchored" data-anchor-id="task-2.2-run-a-reconnaissance-search">Task 2.2: Run a reconnaissance search</h2>
+<p>Use a deliberately simple query containing two main concepts. For the worked example, we might begin with:</p>
+<pre class="text"><code>"flexible working" AND wellbeing</code></pre>
+<p>Scan the titles, abstracts, keywords, and subject headings of approximately 10 to 15 promising records. At this stage, we are learning how the literature describes the topic. We are not yet trying to retrieve every eligible study.</p>
+</section>
+<section id="task-2.3-build-a-vocabulary-bank" class="level2">
+<h2 class="anchored" data-anchor-id="task-2.3-build-a-vocabulary-bank">Task 2.3: Build a vocabulary bank</h2>
+<p>Record terms under the concept they represent. Include spelling variants, abbreviations, broader terms, narrower terms, and controlled subject headings when a database displays them.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept A: working arrangement</th>
+<th>Concept B: wellbeing</th>
+<th>Context terms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>flexible work</td>
+<td>well-being</td>
+<td>employee</td>
+</tr>
+<tr class="even">
+<td>remote work</td>
+<td>mental health</td>
+<td>workplace</td>
+</tr>
+<tr class="odd">
+<td>telework</td>
+<td>job satisfaction</td>
+<td>organisation</td>
+</tr>
+<tr class="even">
+<td>hybrid work</td>
+<td>stress</td>
+<td>occupation</td>
+</tr>
+<tr class="odd">
+<td>homeworking</td>
+<td>quality of working life</td>
+<td>sector</td>
+</tr>
+</tbody>
+</table>
+<p>For every harvested term, note where it came from. A term found repeatedly in relevant papers is more defensible than a synonym invented without checking the literature.</p>
+</section>
+<section id="task-2.4-test-one-known-item-check" class="level2">
+<h2 class="anchored" data-anchor-id="task-2.4-test-one-known-item-check">Task 2.4: Test one known-item check</h2>
+<p>Select one clearly relevant paper from the reconnaissance results and search for its exact title. If the selected database cannot retrieve it, investigate whether the record is outside the database’s coverage or whether your access route is incomplete. This simple test makes source limitations visible.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep a short source map, the results of one reconnaissance search, and a vocabulary bank containing at least five terms for each major concept.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your vocabulary">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your vocabulary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explain why each new word belongs in its concept block. Similar-looking words may represent distinct ideas, while different-looking words may be used interchangeably in a field. Your goal is a reasoned vocabulary bank that improves recall without introducing large amounts of irrelevant material.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 2</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-3-focus-the-question-and-define-eligibility" class="level1">
+<h1>Section 3: Focus the question and define eligibility</h1>
+<section id="practical-aim-2" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-2">Practical aim</h2>
+<p>The lecture used question frameworks and scope dimensions to make a broad topic answerable. Here we convert the initial topic into a structured question and operational inclusion and exclusion criteria.</p>
+</section>
+<section id="task-3.1-narrow-the-scope-deliberately" class="level2">
+<h2 class="anchored" data-anchor-id="task-3.1-narrow-the-scope-deliberately">Task 3.1: Narrow the scope deliberately</h2>
+<p>Complete the following scope table. Where a dimension does not apply, explain why.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Scope dimension</th>
+<th>Your decision</th>
+<th>Reason for the decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Population or unit</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Phenomenon, intervention, or exposure</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Comparison</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Outcome</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Setting or geography</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Time period</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Study design</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Publication type or language</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="task-3.2-use-pico-or-peco-as-a-thinking-tool" class="level2">
+<h2 class="anchored" data-anchor-id="task-3.2-use-pico-or-peco-as-a-thinking-tool">Task 3.2: Use PICO or PECO as a thinking tool</h2>
+<p>Choose <strong>PICO</strong> when an intervention is being compared and <strong>PECO</strong> when an exposure or condition is central.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Prompt</th>
+<th>Worked example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>P: Population</td>
+<td>Who or what is studied?</td>
+<td>Employees in established organisations</td>
+</tr>
+<tr class="even">
+<td>I/E: Intervention or exposure</td>
+<td>What arrangement or condition occurs?</td>
+<td>Regular remote or hybrid working</td>
+</tr>
+<tr class="odd">
+<td>C: Comparison</td>
+<td>Compared with what?</td>
+<td>Mainly office-based working</td>
+</tr>
+<tr class="even">
+<td>O: Outcome</td>
+<td>What is measured?</td>
+<td>Wellbeing, stress, or job satisfaction</td>
+</tr>
+</tbody>
+</table>
+<p>Convert the table into a question:</p>
+<blockquote class="blockquote">
+<p>Among employees in established organisations, how does regular remote or hybrid working, compared with mainly office-based working, affect reported wellbeing?</p>
+</blockquote>
+</section>
+<section id="task-3.3-turn-scope-into-operational-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="task-3.3-turn-scope-into-operational-criteria">Task 3.3: Turn scope into operational criteria</h2>
+<p>Write criteria that two readers could apply in the same way.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Include when…</th>
+<th>Exclude when…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Participants are employed adults</td>
+<td>Participants are full-time students</td>
+</tr>
+<tr class="even">
+<td>Flexible location is measured or described</td>
+<td>Flexibility concerns hours only</td>
+</tr>
+<tr class="odd">
+<td>At least one wellbeing outcome is reported</td>
+<td>Only productivity is reported</td>
+</tr>
+<tr class="even">
+<td>The study contains empirical evidence</td>
+<td>The item is commentary without data</td>
+</tr>
+</tbody>
+</table>
+<p>Replace vague words such as <em>relevant</em>, <em>recent</em>, or <em>high quality</em> with observable rules. If “recent” means publications from 2020 onward, write that date. If an empirical study is required, state which designs qualify.</p>
+</section>
+<section id="task-3.4-stress-test-the-question" class="level2">
+<h2 class="anchored" data-anchor-id="task-3.4-stress-test-the-question">Task 3.4: Stress-test the question</h2>
+<p>Use these checks:</p>
+<ul>
+<li>Can each key concept be recognised in a title or abstract?</li>
+<li>Is the population sufficiently specific for the intended conclusion?</li>
+<li>Can the outcome be measured or described consistently?</li>
+<li>Is the comparison meaningful?</li>
+<li>Is the scope achievable with the available time and access?</li>
+<li>Would answering the question resolve an identifiable uncertainty?</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save one structured review question and a table of operational inclusion and exclusion criteria. Add a short explanation of the most important scope decision.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your criteria">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your criteria
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use borderline examples to test your criteria. If you cannot decide whether a hypothetical paper qualifies, clarify the rule before screening begins. Your scope creates a reasoned boundary around the review, and every boundary should serve the purpose you stated in Section 1.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 3</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-4-construct-and-test-the-search-strategy" class="level1">
+<h1>Section 4: Construct and test the search strategy</h1>
+<section id="practical-aim-3" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-3">Practical aim</h2>
+<p>The lecture separated conceptual structure from database syntax. In this section, we build concept blocks, combine them with Boolean logic, and test whether the search retrieves useful evidence.</p>
+</section>
+<section id="task-4.1-build-the-concept-table" class="level2">
+<h2 class="anchored" data-anchor-id="task-4.1-build-the-concept-table">Task 4.1: Build the concept table</h2>
+<p>Use one row per concept. Combine synonyms within a row using <strong>OR</strong>. Later, combine the rows using <strong>AND</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Preferred term</th>
+<th>Synonyms and variants</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Working arrangement</td>
+<td>flexible working</td>
+<td>“remote work”, telework<em>, hybrid work</em>, homework*</td>
+</tr>
+<tr class="even">
+<td>Wellbeing</td>
+<td>wellbeing</td>
+<td>well-being, “mental health”, stress, “job satisfaction”</td>
+</tr>
+<tr class="odd">
+<td>Population</td>
+<td>employee</td>
+<td>worker*, staff, personnel</td>
+</tr>
+</tbody>
+</table>
+<p>Decide whether the population block is necessary. Some concepts are better handled during screening because adding them to the query can hide relevant records whose abstracts use unexpected words.</p>
+</section>
+<section id="task-4.2-assemble-a-boolean-query" class="level2">
+<h2 class="anchored" data-anchor-id="task-4.2-assemble-a-boolean-query">Task 4.2: Assemble a Boolean query</h2>
+<pre class="text"><code>("flexible working" OR "remote work" OR telework* OR "hybrid work*" OR homework*)
+AND
+(wellbeing OR well-being OR "mental health" OR stress OR "job satisfaction")</code></pre>
+<p>Read the query aloud in ordinary language: the record must contain at least one term describing the working arrangement and at least one term describing wellbeing. Parentheses preserve that logic.</p>
+</section>
+<section id="task-4.3-run-three-diagnostic-tests" class="level2">
+<h2 class="anchored" data-anchor-id="task-4.3-run-three-diagnostic-tests">Task 4.3: Run three diagnostic tests</h2>
+<ol type="1">
+<li><strong>Known-item test:</strong> Does the query retrieve a paper already judged relevant?</li>
+<li><strong>First-page precision test:</strong> Among the first 20 records, how many appear relevant?</li>
+<li><strong>Vocabulary test:</strong> Do relevant results reveal terms missing from the current concept table?</li>
+</ol>
+<p>Record each change and its effect.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>Change made</th>
+<th style="text-align: right;">Results returned</th>
+<th style="text-align: right;">Relevant in first 20</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Two phrase terms only</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Added vocabulary variants</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Added or removed context block</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="task-4.4-translate-syntax-carefully" class="level2">
+<h2 class="anchored" data-anchor-id="task-4.4-translate-syntax-carefully">Task 4.4: Translate syntax carefully</h2>
+<p>Database platforms differ in field codes, truncation, wildcards, phrase handling, and proximity operators. Preserve the conceptual blocks when moving between platforms, then adapt the syntax using that platform’s help page. Save the exact final query for every source.</p>
+</section>
+<section id="task-4.5-follow-the-scopus-walkthrough" class="level2">
+<h2 class="anchored" data-anchor-id="task-4.5-follow-the-scopus-walkthrough">Task 4.5: Follow the Scopus walkthrough</h2>
+<p><a href="https://www.scopus.com/pages/home" target="_blank">Open the Scopus home page</a> and use the search strategy you have developed in this section. Your institutional sign-in may be required before you can see the complete search interface.</p>
+<ol type="1">
+<li>Open the document search and select the fields that search titles, abstracts, and keywords.</li>
+<li>Enter your first concept block and record the number of results.</li>
+<li>Inspect several relevant and irrelevant records, adding useful indexed terms to your vocabulary bank.</li>
+<li>Add the second concept block with <strong>AND</strong> and compare the new result count with the first count.</li>
+<li>Add any remaining concept block only when it represents an essential part of your question.</li>
+<li>Open one clearly relevant record and check whether its title, abstract, author keywords, and indexed keywords suggest further search terms.</li>
+<li>Use the search history to compare versions of your query and identify which change improved the result set.</li>
+<li>Copy the exact final query, the search date, the selected fields, any filters, and the final result count into your search log.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="What to notice during the walkthrough">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What to notice during the walkthrough
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Watch how every action in Scopus corresponds to a decision you have already made: the field choice determines where the database looks, <strong>OR</strong> controls vocabulary within a concept, <strong>AND</strong> connects different concepts, and filters impose eligibility boundaries. Record the reason for each action so that your final search remains understandable and reproducible.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep a concept table, a readable Boolean search, a three-version test record explaining why the final version was selected, and a completed Scopus search-log entry.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your search">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your search
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When your search retrieves too much, diagnose which concept is producing noise before adding exclusions. When it retrieves too little, test each concept block separately. Use the records you retrieve as evidence for each refinement.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 4</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-5-convert-the-search-into-a-reproducible-protocol" class="level1">
+<h1>Section 5: Convert the search into a reproducible protocol</h1>
+<section id="practical-aim-4" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-4">Practical aim</h2>
+<p>The lecture described the search log as the memory of the review and the protocol as a record of decisions made before findings are known. This section creates both records.</p>
+</section>
+<section id="task-5.1-complete-a-search-log" class="level2">
+<h2 class="anchored" data-anchor-id="task-5.1-complete-a-search-log">Task 5.1: Complete a search log</h2>
+<p>Create one row immediately after every search session.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>Source and platform</th>
+<th>Exact query</th>
+<th>Fields and filters</th>
+<th style="text-align: right;">Results</th>
+<th>Export file</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: right;"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Record the source and platform separately because the same database may be available through different interfaces with different syntax. Include date limits, language limits, document types, and the number of results before and after filters.</p>
+</section>
+<section id="task-5.2-draft-the-mini-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="task-5.2-draft-the-mini-protocol">Task 5.2: Draft the mini-protocol</h2>
+<p>Use the following headings and write one or two precise sentences under each:</p>
+<pre class="text"><code>1. Review purpose and question
+2. Eligibility criteria
+3. Information sources
+4. Search strategy and planned update date
+5. Export, storage, and duplicate removal
+6. Title and abstract screening
+7. Full-text screening and exclusion reasons
+8. Data extraction fields
+9. Critical appraisal approach
+10. Planned method of synthesis</code></pre>
+</section>
+<section id="task-5.3-create-a-defensible-file-trail" class="level2">
+<h2 class="anchored" data-anchor-id="task-5.3-create-a-defensible-file-trail">Task 5.3: Create a defensible file trail</h2>
+<p>Use clear filenames that preserve sequence and provenance.</p>
+<pre class="text"><code>01_search-log.xlsx
+02_databaseA_2026-08-10.ris
+03_databaseB_2026-08-10.ris
+04_deduplicated-library.ris
+05_title-abstract-screening.xlsx
+06_full-text-screening.xlsx
+07_extraction-matrix.xlsx</code></pre>
+<p>Store a clean original export before editing records. A transparent file trail allows later corrections and prevents uncertainty about which version produced the review.</p>
+</section>
+<section id="task-5.4-perform-a-reproducibility-check" class="level2">
+<h2 class="anchored" data-anchor-id="task-5.4-perform-a-reproducibility-check">Task 5.4: Perform a reproducibility check</h2>
+<p>Exchange the protocol with a peer. Ask them to identify:</p>
+<ul>
+<li>the exact population, phenomenon, comparison, and outcomes;</li>
+<li>the sources and date limits;</li>
+<li>the exact search to run;</li>
+<li>the rules for retaining a record;</li>
+<li>the information to extract from an included paper.</li>
+</ul>
+<p>Revise every instruction that requires the peer to guess.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save a populated search-log row, a one-page mini-protocol, and a clear folder or filename plan. Another student should be able to repeat the search from these records.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your records">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your records
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Separate your planned decisions from your observed outcomes. Your protocol says what you will do and why, while your search log records what you actually did and what occurred. Record any differences transparently as amendments.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 5</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-6-screen-records-and-justify-selection" class="level1">
+<h1>Section 6: Screen records and justify selection</h1>
+<section id="practical-aim-5" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-5">Practical aim</h2>
+<p>The lecture treated search results as candidates. Screening determines which candidates answer the question, using the operational criteria from Section 3.</p>
+</section>
+<section id="task-6.1-prepare-the-screening-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="task-6.1-prepare-the-screening-sheet">Task 6.1: Prepare the screening sheet</h2>
+<p>Include enough information to understand and audit each decision.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Title</th>
+<th style="text-align: right;">Year</th>
+<th>Title/abstract decision</th>
+<th>Full-text decision</th>
+<th>Exclusion reason</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>001</td>
+<td></td>
+<td style="text-align: right;"></td>
+<td>Include / Exclude / Unclear</td>
+<td>Include / Exclude</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>Unclear</strong> when the title and abstract do not provide enough information. Uncertainty at the first stage is a reason to inspect the full text rather than make an unsupported exclusion.</p>
+</section>
+<section id="task-6.2-pilot-ten-records" class="level2">
+<h2 class="anchored" data-anchor-id="task-6.2-pilot-ten-records">Task 6.2: Pilot ten records</h2>
+<p>Screen the same ten titles and abstracts independently with a peer when possible. Compare decisions and discuss every disagreement.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Record</th>
+<th>Your decision</th>
+<th>Peer decision</th>
+<th>Source of disagreement</th>
+<th>Rule clarified</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Typical disagreements reveal an undefined population, an outcome with several meanings, or an ambiguous boundary between empirical research and commentary. Revise the criteria before screening the full set.</p>
+</section>
+<section id="task-6.3-use-one-primary-full-text-exclusion-reason" class="level2">
+<h2 class="anchored" data-anchor-id="task-6.3-use-one-primary-full-text-exclusion-reason">Task 6.3: Use one primary full-text exclusion reason</h2>
+<p>Choose the earliest decisive reason in a consistent hierarchy, such as:</p>
+<ol type="1">
+<li>Wrong population</li>
+<li>Wrong intervention or exposure</li>
+<li>Wrong comparison</li>
+<li>Wrong outcome</li>
+<li>Ineligible design or publication type</li>
+<li>Outside date, language, or setting rule</li>
+<li>Full text unavailable after documented attempts</li>
+</ol>
+<p>This practice creates interpretable counts and prevents a single paper from being counted several times.</p>
+</section>
+<section id="task-6.4-draw-the-selection-funnel" class="level2">
+<h2 class="anchored" data-anchor-id="task-6.4-draw-the-selection-funnel">Task 6.4: Draw the selection funnel</h2>
+<pre class="text"><code>Records retrieved                 ______
+Duplicates removed               ______
+Titles/abstracts screened        ______
+Full texts assessed              ______
+Full texts excluded              ______
+Studies included                 ______</code></pre>
+<p>Check that the numbers reconcile. Every retrieved record should have a traceable destination.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep a pilot screening sheet for at least ten records, clarified eligibility rules, a controlled list of exclusion reasons, and a completed or provisional selection funnel.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your screening decisions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your screening decisions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>During the pilot, focus on the rule that produced each disagreement. If you are working with a peer, agree how the operational criterion should be interpreted. If you are working independently, repeat a small sample later and check whether you reach the same decisions.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 6</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-7-read-purposefully-and-appraise-credibility" class="level1">
+<h1>Section 7: Read purposefully and appraise credibility</h1>
+<section id="practical-aim-6" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-6">Practical aim</h2>
+<p>The lecture separated claim, evidence, and warrant and showed how study quality influences evidential weight. This activity uses one included paper to practise purposeful reading and structured appraisal.</p>
+</section>
+<section id="task-7.1-declare-the-reading-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="task-7.1-declare-the-reading-purpose">Task 7.1: Declare the reading purpose</h2>
+<p>Before opening the paper, complete this sentence:</p>
+<blockquote class="blockquote">
+<p>We are reading this paper to determine <strong>[which part of the review question it informs]</strong>, and we therefore need evidence about <strong>[population, method, outcome, or explanation]</strong>.</p>
+</blockquote>
+<p>Begin with the title, abstract, headings, tables, figures, and conclusion. Then read the methods and results closely enough to verify how the headline claim was produced.</p>
+</section>
+<section id="task-7.2-separate-claim-evidence-and-warrant" class="level2">
+<h2 class="anchored" data-anchor-id="task-7.2-separate-claim-evidence-and-warrant">Task 7.2: Separate claim, evidence, and warrant</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Question</th>
+<th>Notes from the paper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Claim</td>
+<td>What conclusion do the authors ask us to accept?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Evidence</td>
+<td>Which observations, measurements, or analyses support it?</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Warrant</td>
+<td>Why should that evidence justify this conclusion?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Boundary</td>
+<td>In which settings or populations might the claim fail?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Write in your own words and add page numbers for details you may need to verify later.</p>
+</section>
+<section id="task-7.3-complete-a-domain-based-appraisal" class="level2">
+<h2 class="anchored" data-anchor-id="task-7.3-complete-a-domain-based-appraisal">Task 7.3: Complete a domain-based appraisal</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Prompt</th>
+<th>Judgement and reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Design fit</td>
+<td>Can this design answer the stated question?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sampling</td>
+<td>Does the sample represent the intended population?</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Measurement</td>
+<td>Are important variables measured credibly?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Confounding or bias</td>
+<td>Which alternative explanations remain?</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Analysis</td>
+<td>Do the analyses match the design and data?</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Transparency</td>
+<td>Are procedures and decisions reported clearly?</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Applicability</td>
+<td>How directly does the setting match our question?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Avoid reducing appraisal to a journal name or a single numerical score. Explain the specific strength or limitation and how it affects interpretation.</p>
+</section>
+<section id="task-7.4-assign-evidential-weight" class="level2">
+<h2 class="anchored" data-anchor-id="task-7.4-assign-evidential-weight">Task 7.4: Assign evidential weight</h2>
+<p>Complete one of these judgements and justify it:</p>
+<ul>
+<li><strong>High weight:</strong> directly relevant evidence with few important credibility concerns.</li>
+<li><strong>Moderate weight:</strong> useful evidence with limitations that narrow the conclusion.</li>
+<li><strong>Low weight:</strong> evidence informs context or hypotheses but cannot carry a strong conclusion.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Save a purpose statement, a claim–evidence–warrant table, a domain-based appraisal, and a reasoned judgement of evidential weight for one paper.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your appraisal">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your appraisal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explain how each stated limitation changes the conclusion you are willing to draw. Your appraisal becomes useful when it affects evidential weight, comparison, or wording in the review.</p>
+</div>
+</div>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 7</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+</section>
+<section id="section-8-extract-synthesise-and-plan-the-written-argument" class="level1">
+<h1>Section 8: Extract, synthesise, and plan the written argument</h1>
+<section id="practical-aim-7" class="level2">
+<h2 class="anchored" data-anchor-id="practical-aim-7">Practical aim</h2>
+<p>The lecture concluded by moving from comparable extraction to thematic synthesis and comparative writing. This activity combines several papers into an argument that answers the review question.</p>
+</section>
+<section id="task-8.1-build-a-common-extraction-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="task-8.1-build-a-common-extraction-matrix">Task 8.1: Build a common extraction matrix</h2>
+<p>Use one row per study and one column per item required for comparison.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study</th>
+<th>Design and sample</th>
+<th>Context</th>
+<th>Exposure/intervention</th>
+<th>Comparison</th>
+<th>Outcome measure</th>
+<th>Main finding</th>
+<th>Key limitation</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Add page references where a detail may need checking. Keep quotations rare and clearly marked. Most entries should be concise paraphrases that preserve the authors’ meaning.</p>
+</section>
+<section id="task-8.2-group-evidence-into-themes" class="level2">
+<h2 class="anchored" data-anchor-id="task-8.2-group-evidence-into-themes">Task 8.2: Group evidence into themes</h2>
+<p>Use sticky notes, a table, or a simple diagram to group findings by a meaningful organising principle. Useful options include mechanism, population, method, outcome, setting, or theoretical position.</p>
+<p>For each candidate theme, answer:</p>
+<ol type="1">
+<li>Which studies contribute evidence?</li>
+<li>Where do the findings agree?</li>
+<li>Where do they differ?</li>
+<li>Can design, sample, measurement, context, or evidential weight explain the difference?</li>
+<li>What conclusion is currently justified?</li>
+</ol>
+</section>
+<section id="task-8.3-draft-one-synthesis-paragraph-plan" class="level2">
+<h2 class="anchored" data-anchor-id="task-8.3-draft-one-synthesis-paragraph-plan">Task 8.3: Draft one synthesis paragraph plan</h2>
+<pre class="text"><code>Thematic claim:
+
+Strongest supporting evidence:
+
+Contrasting or qualifying evidence:
+
+Likely explanation for the difference:
+
+Current judgement and level of confidence:
+
+Connection to the review question:</code></pre>
+<blockquote class="blockquote">
+<p><strong>Worked miniature example:</strong> Evidence suggests that flexible working can improve autonomy and job satisfaction when employees have genuine control over location and scheduling. Several longitudinal studies support this relationship, while some cross-sectional studies report weak or mixed effects. Differences in voluntary participation, job type, and measures of isolation may explain part of the variation. Confidence is therefore moderate and appears strongest for roles with suitable digital support and meaningful employee choice.</p>
+</blockquote>
+</section>
+<section id="task-8.4-audit-the-complete-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="task-8.4-audit-the-complete-workflow">Task 8.4: Audit the complete workflow</h2>
+<p>Confirm that every conclusion can be traced backwards:</p>
+<pre class="text"><code>Written claim
+  ← thematic comparison
+  ← extraction records
+  ← appraised included studies
+  ← screening decisions
+  ← recorded searches
+  ← focused review question</code></pre>
+<p>Finish by answering four questions in no more than two sentences each:</p>
+<ul>
+<li>What is known with reasonable confidence?</li>
+<li>What remains contested, and what may explain the disagreement?</li>
+<li>What remains genuinely unknown?</li>
+<li>Which research question or practical decision follows from that uncertainty?</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Expected output from Section 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expected output from Section 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Submit an extraction matrix containing at least three studies, a thematic grouping, one comparative paragraph plan, and a short statement of the justified research gap.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Check your synthesis">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check your synthesis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Compare studies rather than writing consecutive paper summaries. Point to the extraction cells supporting every sentence in your paragraph plan. Your final gap should arise from the synthesised evidence and remain appropriately bounded by the scope and quality of the included studies.</p>
+</div>
+</div>
+</section>
+<section id="week-1-practical-portfolio" class="level2">
+<h2 class="anchored" data-anchor-id="week-1-practical-portfolio">Week 1 practical portfolio</h2>
+<p>By the end of the eight sections, your portfolio should contain:</p>
+<ol type="1">
+<li>a review purpose and provisional knowledge map;</li>
+<li>a source map and vocabulary bank;</li>
+<li>a structured question and eligibility criteria;</li>
+<li>a tested concept table and search string;</li>
+<li>a search log and mini-protocol;</li>
+<li>a pilot screening record and selection funnel;</li>
+<li>a critical appraisal with evidential weight; and</li>
+<li>an extraction matrix, thematic grouping, and paragraph plan.</li>
+</ol>
+<p>Together, these outputs form the working foundation of a credible literature review. They also preserve the reasoning behind the review, allowing us to explain how the final written argument developed from a focused question and a transparent chain of evidence.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

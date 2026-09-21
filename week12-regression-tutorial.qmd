@@ -1,0 +1,557 @@
+---
+title: "Regression tutorial"
+subtitle: "Step-by-step practical guide"
+author: "Harper Adams University"
+format:
+  html:
+    theme: cosmo
+    css: scroll.css
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    df-print: kable
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Setup
+
+We'll keep this simple. Just three essential packages:
+
+```{r}
+library(ggplot2)      # for pretty plots
+library(dplyr)        # for data wrangling
+library(palmerpenguins)  # our dataset
+
+# Load the data and remove rows with missing values
+data(penguins)
+penguins <- penguins %>%
+  filter(!is.na(bill_length_mm), 
+         !is.na(body_mass_g), 
+         !is.na(species),
+         !is.na(flipper_length_mm))
+
+# Take a quick look
+head(penguins)
+```
+
+**What we're looking at:** Data on 333 penguins from three species. We'll use their physical measurements to understand regression.
+
+------------------------------------------------------------------------
+
+# Part 1: Simple Linear Regression
+
+## The Question: Does bill length predict body mass?
+
+Let's start with the most basic regression: one predictor, one outcome.
+
+### Step 1: Always plot your data first
+
+Never fit a model before looking at your data. Seriously, never.
+
+```{r}
+# Create a scatter plot
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.6, size = 2) +
+  labs(
+    x = "Bill length (mm)",
+    y = "Body mass (g)",
+    title = "Do penguins with longer bills weigh more?"
+  ) +
+  theme_minimal()
+```
+
+**What do we see?** There's definitely a positive relationship—longer bills tend to go with heavier penguins. But there's a lot of scatter. Let's quantify this relationship with regression.
+
+### Step 2: Fit the model
+
+The `lm()` function fits a **l**inear **m**odel. The formula `y ~ x` means "y is predicted by x".
+
+```{r}
+# Fit the regression: body mass predicted by bill length
+model1 <- lm(body_mass_g ~ bill_length_mm, data = penguins)
+
+# The model object is now stored in model1
+# Let's see what's inside
+class(model1)
+names(model1)
+```
+
+**What just happened?** We created a model object called `model1`. It's a list containing everything R calculated: coefficients, residuals, fitted values, and more.
+
+### Step 3: Look at the output
+
+```{r}
+# The summary() function shows us the key results
+summary(model1)
+```
+
+**Let's break this down:**
+
+-   **Coefficients table**: Shows our intercept and slope
+-   **Residual standard error**: How far off our predictions typically are (`r round(summary(model1)$sigma, 2)`g)
+-   **R-squared**: Proportion of variance explained (`r round(summary(model1)$r.squared, 2)` = `r round(summary(model1)$r.squared * 100, 0)`%)
+-   **F-statistic**: Tests if the model is better than just using the mean (it is!)
+
+### Step 4: Extract and interpret the coefficients
+
+Instead of just reading the summary, let's pull out the numbers we need:
+
+```{r}
+# Get the coefficients
+coefficients(model1)
+
+# Or access them directly from the model object
+model1$coefficients
+```
+
+**What do these mean?**
+
+-   **Intercept = `r round(coefficients(model1)[1], 2)`**: A penguin with 0mm bill length would weigh `r round(coefficients(model1)[1], 2)`g. (Obviously impossible—this is just where the line crosses the y-axis)
+-   **Slope = `r round(coefficients(model1)[2], 2)`**: For every 1mm increase in bill length, body mass increases by **`r round(coefficients(model1)[2], 2)` grams** on average
+
+Let's get confidence intervals too:
+
+```{r}
+# 95% confidence intervals for our coefficients
+ci1 <- confint(model1)
+ci1
+```
+
+We're 95% confident the true slope is between `r round(ci1[2, 1], 2)` and `r round(ci1[2, 2], 2)` grams per mm.
+
+### Step 5: Get R-squared
+
+How much of the variation in body mass does bill length explain?
+
+```{r}
+# Extract R-squared from the summary
+r2_model1 <- summary(model1)$r.squared
+r2_model1
+
+# For adjusted R-squared
+summary(model1)$adj.r.squared
+```
+
+**`r round(r2_model1 * 100, 0)`% explained.** That means bill length accounts for about a third of why some penguins are heavier than others. Not bad, but there's clearly more to the story.
+
+### Step 6: Add the regression line to our plot
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.6, size = 2) +
+  geom_smooth(method = "lm", se = TRUE, color = "steelblue") +
+  labs(
+    x = "Bill length (mm)",
+    y = "Body mass (g)",
+    title = "Bill length vs body mass with regression line"
+  ) +
+  theme_minimal()
+```
+
+The shaded area shows our uncertainty about where the true line is.
+
+### Step 7: Understand predictions and residuals
+
+Let's manually see what the model predicts:
+
+```{r}
+# Get fitted (predicted) values for each penguin
+fitted_values <- fitted(model1)
+
+# Get residuals (observed - predicted)
+residuals_values <- residuals(model1)
+
+# Look at first 10 penguins
+data.frame(
+  observed = penguins$body_mass_g[1:10],
+  predicted = fitted_values[1:10],
+  residual = residuals_values[1:10]
+)
+```
+
+**What's a residual?** It's how wrong we were. If a penguin weighs 3750g but we predicted 3600g, the residual is +150g. Positive residuals mean we underestimated; negative means we overestimated.
+
+------------------------------------------------------------------------
+
+# Part 2: Multiple Regression
+
+## The Question: Does adding flipper length improve our predictions?
+
+We saw that bill length explains `r round(r2_model1 * 100, 0)`% of body mass variation. Can we do better by adding another predictor?
+
+### Step 1: Visualize both predictors
+
+```{r}
+# Create two plots side by side
+library(gridExtra)
+
+p1 <- ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "Bill length (mm)", y = "Body mass (g)") +
+  theme_minimal()
+
+p2 <- ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.6) +
+  labs(x = "Flipper length (mm)", y = "Body mass (g)") +
+  theme_minimal()
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+Both show positive relationships. Now let's include both in one model.
+
+### Step 2: Fit the multiple regression
+
+The `+` sign means "include both predictors":
+
+```{r}
+# Fit model with two predictors
+model2 <- lm(body_mass_g ~ bill_length_mm + flipper_length_mm, data = penguins)
+
+summary(model2)
+```
+
+### Step 3: Interpret the coefficients carefully
+
+This is where multiple regression gets interesting:
+
+```{r}
+coefficients(model2)
+ci2 <- confint(model2)
+ci2
+```
+
+**What do these mean?**
+
+-   **bill_length_mm = `r round(coefficients(model2)[2], 2)`**: Holding flipper length constant, a 1mm increase in bill length increases body mass by `r round(coefficients(model2)[2], 2)`g
+-   **flipper_length_mm = `r round(coefficients(model2)[3], 2)`**: Holding bill length constant, a 1mm increase in flipper length increases body mass by `r round(coefficients(model2)[3], 2)`g
+
+**Wait, what happened?** The bill length effect dropped from `r round(coefficients(model1)[2], 2)`g to `r round(coefficients(model2)[2], 2)`g! Why? Because bill length and flipper length are correlated—they both measure "penguin size". Once we account for flipper length, bill length doesn't add as much.
+
+### Step 4: Compare model fit
+
+Did adding flipper length help?
+
+```{r}
+# Model 1 R-squared
+r2_model1
+
+# Model 2 R-squared  
+r2_model2 <- summary(model2)$r.squared
+r2_model2
+```
+
+**Huge improvement!** We went from `r round(r2_model1 * 100, 0)`% to `r round(r2_model2 * 100, 0)`% variance explained. Flipper length is clearly an important predictor.
+
+### Step 5: Formal model comparison
+
+We can test if model2 is significantly better than model1:
+
+```{r}
+# ANOVA compares nested models
+anova(model1, model2)
+```
+
+**Reading the output:** The p-value is tiny (\< 0.001), confirming that adding flipper length significantly improves the model.
+
+------------------------------------------------------------------------
+
+# Part 3: Interactions
+
+## The Question: Does the bill-length effect differ by species?
+
+Maybe the relationship between bill length and body mass isn't the same for all three species.
+
+### Step 1: Plot by species
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Bill length (mm)",
+    y = "Body mass (g)",
+    title = "Does the relationship differ by species?",
+    color = "Species"
+  ) +
+  theme_minimal()
+```
+
+**What do we see?** Three different regression lines with different slopes. Adelie (pink) has a gentler slope than Gentoo (green). This suggests an **interaction**.
+
+### Step 2: Fit the interaction model
+
+The `*` symbol means "include both main effects AND their interaction":
+
+```{r}
+# Main effects + interaction
+model3 <- lm(body_mass_g ~ bill_length_mm * species, data = penguins)
+
+summary(model3)
+```
+
+### Step 3: Interpret interaction coefficients
+
+This is the trickiest part of regression. Let's go slowly:
+
+```{r}
+coefficients(model3)
+```
+
+**How to read this:**
+
+1.  **Intercept** and **bill_length_mm**: These apply to the *reference species* (Adelie, alphabetically first)
+2.  **speciesChinstrap** and **speciesGentoo**: These are *adjustments* to the intercept for those species
+3.  **bill_length_mm:speciesChinstrap** and **bill_length_mm:speciesGentoo**: These are *adjustments* to the slope for those species
+
+**Species-specific slopes:**
+
+```{r}
+# Extract coefficients
+coef3 <- coefficients(model3)
+
+# Calculate species-specific slopes
+slope_adelie <- coef3["bill_length_mm"]
+slope_chinstrap <- coef3["bill_length_mm"] + coef3["bill_length_mm:speciesChinstrap"]
+slope_gentoo <- coef3["bill_length_mm"] + coef3["bill_length_mm:speciesGentoo"]
+
+# Display them
+data.frame(
+  Species = c("Adelie", "Chinstrap", "Gentoo"),
+  Slope = round(c(slope_adelie, slope_chinstrap, slope_gentoo), 2)
+)
+```
+
+-   Adelie: `r round(slope_adelie, 2)` g/mm
+-   Chinstrap: `r round(slope_chinstrap, 2)` g/mm\
+-   Gentoo: `r round(slope_gentoo, 2)` g/mm
+
+### Step 4: Do we need the interaction?
+
+Test if the interaction terms improve the model:
+
+```{r}
+# Model without interaction
+model3_simple <- lm(body_mass_g ~ bill_length_mm + species, data = penguins)
+
+# Compare
+anova_comparison <- anova(model3_simple, model3)
+anova_comparison
+```
+
+The p-value is `r round(anova_comparison$"Pr(>F)"[2], 3)`. Since this is less than 0.05, the interaction **is** statistically significant. The slopes really do differ across species. We should keep the interaction in the model!
+
+------------------------------------------------------------------------
+
+# Part 4: ANOVA is Just Regression
+
+## The Big Reveal: ANOVA = Regression with categorical predictors
+
+This blows people's minds every time. Let's prove it.
+
+### Traditional ANOVA approach
+
+Do the three species have different average body masses?
+
+```{r}
+# Fit ANOVA
+aov_model <- aov(body_mass_g ~ species, data = penguins)
+aov_summary <- summary(aov_model)
+aov_summary
+```
+
+**ANOVA says:** F = `r round(aov_summary[[1]]["species", "F value"], 2)`, p \< 0.001. Species significantly affect body mass.
+
+### Regression approach
+
+Now let's use `lm()` with a categorical predictor:
+
+```{r}
+# Fit regression with species as predictor
+lm_model <- lm(body_mass_g ~ species, data = penguins)
+lm_summary <- summary(lm_model)
+lm_summary
+```
+
+Notice the bottom line: **F-statistic: `r round(lm_summary$fstatistic[1], 2)`, p \< 0.001**
+
+### They're identical!
+
+```{r}
+# Get ANOVA table from the lm model
+anova(lm_model)
+```
+
+**Same F-statistic, same p-value, same conclusion.** ANOVA is just regression where the predictor is categorical instead of continuous.
+
+### What do the regression coefficients mean?
+
+```{r}
+coef_lm <- coefficients(lm_model)
+coef_lm
+```
+
+-   **Intercept (`r round(coef_lm[1], 2)`)**: Mean body mass for Adelie (the reference group)
+-   **speciesChinstrap (`r round(coef_lm[2], 2)`)**: Chinstrap penguins weigh `r round(coef_lm[2], 2)`g less than Adelie, on average
+-   **speciesGentoo (`r round(coef_lm[3], 2)`)**: Gentoo penguins weigh `r round(coef_lm[3], 2)`g more than Adelie, on average
+
+Let's verify this by calculating group means directly:
+
+```{r}
+# Calculate means by species
+species_means <- penguins %>%
+  group_by(species) %>%
+  summarise(mean_mass = mean(body_mass_g))
+species_means
+```
+
+-   Adelie: `r round(species_means$mean_mass[1], 2)`g (= intercept)
+-   Chinstrap: `r round(species_means$mean_mass[1] + coef_lm[2], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[2], 2)` ✓
+-   Gentoo: `r round(species_means$mean_mass[1] + coef_lm[3], 2)`g = `r round(species_means$mean_mass[1], 2)` + `r round(coef_lm[3], 2)` ✓
+
+**The regression coefficients directly tell us group differences!**
+
+------------------------------------------------------------------------
+
+# Part 5: Checking Your Model (Diagnostics)
+
+## Why diagnostics matter
+
+Regression makes assumptions. If those assumptions are violated, your p-values and confidence intervals are unreliable. We need to check:
+
+1.  **Linearity**: Is the relationship actually linear?
+2.  **Homoscedasticity**: Is the variance constant?
+3.  **Normality**: Are residuals roughly normal?
+4.  **Independence**: Are observations independent? (Check by study design)
+
+### The four diagnostic plots
+
+R gives us four helpful plots. Let's use model2 (body mass \~ bill length + flipper length):
+
+```{r}
+# Create all four diagnostic plots
+par(mfrow = c(2, 2))  # 2x2 grid of plots
+plot(model2)
+par(mfrow = c(1, 1))  # reset to single plot
+```
+
+### How to read each plot
+
+**Plot 1: Residuals vs Fitted**
+
+-   **What to look for**: Random scatter around the horizontal line at zero
+-   **Red flag**: A pattern (curve, U-shape) means the relationship isn't linear
+-   **Red flag**: A funnel shape (wider on one side) means variance isn't constant
+
+**Plot 2: Normal Q-Q**
+
+-   **What to look for**: Points following the diagonal line
+-   **Red flag**: Points curving away from the line means residuals aren't normal
+-   **Note**: Small deviations at the ends are usually okay
+
+**Plot 3: Scale-Location**
+
+-   **What to look for**: Random scatter, roughly flat red line
+-   **Red flag**: Red line sloping up means variance increases with fitted values
+-   **This checks**: Homoscedasticity (constant variance)
+
+**Plot 4: Residuals vs Leverage**
+
+-   **What to look for**: All points inside the dashed lines (Cook's distance)
+-   **Red flag**: Points outside the dashed lines have high influence
+-   **What it means**: These observations strongly affect the regression line
+
+### What does model2 look like?
+
+Looking at our four plots:
+
+-   [x] **Residuals vs Fitted**: Pretty random, no strong pattern
+-   [x] **Q-Q plot**: Points mostly follow the line; residuals are roughly normal
+-   [x] **Scale-Location**: Fairly flat; variance looks constant
+-   [x] **Residuals vs Leverage**: No points way outside; no highly influential observations
+
+**Verdict:** This model looks good! Assumptions are reasonably met.
+
+### When things go wrong: An example
+
+Let's see what bad diagnostics look like. We'll fit a model that doesn't account for species:
+
+```{r}
+# Deliberately ignoring species
+bad_model <- lm(body_mass_g ~ bill_length_mm, data = penguins)
+
+par(mfrow = c(2, 2))
+plot(bad_model)
+par(mfrow = c(1, 1))
+```
+
+**What's wrong here?**
+
+-   **Residuals vs Fitted**: You can see some pattern/grouping—we're missing an important predictor (species)
+-   **Q-Q plot**: Tails deviate more from the line
+-   This shows why model2 (which includes flipper length) is better
+
+------------------------------------------------------------------------
+
+# Summary: The Essential R Commands
+
+Here's everything you need to know:
+
+```{r, eval=FALSE}
+# Fit a model
+model <- lm(y ~ x, data = mydata)                    # simple regression
+model <- lm(y ~ x1 + x2, data = mydata)              # multiple regression
+model <- lm(y ~ x1 * x2, data = mydata)              # with interaction
+
+# Look at results
+summary(model)                # full output
+coefficients(model)           # just the coefficients
+confint(model)               # confidence intervals
+anova(model)                 # ANOVA table
+
+# Extract components
+model$coefficients           # coefficients
+fitted(model)               # predicted values
+residuals(model)            # residuals
+summary(model)$r.squared    # R-squared
+
+# Compare models
+anova(model1, model2)       # test if model2 is better
+
+# Diagnostics
+plot(model)                 # creates 4 diagnostic plots
+```
+
+------------------------------------------------------------------------
+
+# Practice Exercises
+
+**Try these yourself:**
+
+1.  Fit a simple regression predicting `body_mass_g` from `flipper_length_mm`. What's the slope? Interpret it in plain English.
+
+2.  Add `bill_length_mm` to create a multiple regression. How did the flipper length coefficient change?
+
+3.  Fit separate regressions for each species (use `filter()`). Do Adelie, Chinstrap, and Gentoo have different slopes?
+
+4.  Use `lm()` to test if body mass differs between male and female penguins. Then verify your answer using `t.test()`.
+
+5.  Check the diagnostics for your models. Do any assumptions look violated?
+
+------------------------------------------------------------------------
+
+# What You've Learned
+
+-   How to fit linear models with `lm()`
+-   How to extract and interpret coefficients
+-   The difference between simple and multiple regression
+-   What interactions mean and how to test them
+-   That ANOVA is secretly just regression
+-   How to check if your model assumptions are met
+
+**Most importantly:** You learned to interrogate model objects directly using base R, not relying on fancy packages. This is how you really understand what's going on under the hood.
+
+Now go practice with your own data!

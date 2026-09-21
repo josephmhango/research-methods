@@ -1,4 +1,4 @@
----
+﻿---
 title: "Data Structures"
 subtitle: "Data structures"
 format: html
@@ -22,9 +22,9 @@ By the end of this section, you should be able to:
 
 ## Basic data types in R
 
-R works with different kinds of **data objects**, and each object has an associated **type**. These types determine what operations are possible and how the data is treated during analysis. All the data you create lives in the **Global Environment**, and it’s important to know what kind of data you’re working with.
+R works with different kinds of **data objects**, and each object has an associated **type**. These types determine what operations are possible and how the data is treated during analysis. All the data you create lives in the **Global Environment**, and itâ€™s important to know what kind of data youâ€™re working with.
 
-R is pretty good at guessing what type your data should be — but this can sometimes backfire. Think of R as a *passive-aggressive butler*: it tries to help, but doesn’t always tell you when it’s done something “helpful.” So, you should learn to check and control data types explicitly.
+R is pretty good at guessing what type your data should be â€” but this can sometimes backfire. Think of R as a *passive-aggressive butler*: it tries to help, but doesnâ€™t always tell you when itâ€™s done something â€œhelpful.â€ So, you should learn to check and control data types explicitly.
 
 ---
 
@@ -55,7 +55,7 @@ These types include:
 
 ## Special values in R
 
-There are a few special types of values that you’ll come across often:
+There are a few special types of values that youâ€™ll come across often:
 
 - `NULL` means an undefined or empty object (a missing vector). Use `is.null()` to test it.
 - `NA` stands for *Not Available* and represents missing data. Check with `is.na()`.
@@ -79,7 +79,7 @@ There are some general rules and conventions for naming objects in R:
 - Names must start with a letter.
 - Names can include letters, numbers, underscores (`_`), and dots (`.`).
 - Avoid special characters like `@`, `%`, `#`, etc.
-- Avoid spaces — use underscores or camelCase instead.
+- Avoid spaces â€” use underscores or camelCase instead.
 - Use names that are short, descriptive, and consistent.
 
 ```{r}
@@ -100,12 +100,12 @@ Factors are how R represents **categorical data**. This is useful when you have 
 ::: columns
 ::: {.column width="50%"}
 
-Let’s say you want to analyse categorical data. Sometimes this is called a *factor*.
+Letâ€™s say you want to analyse categorical data. Sometimes this is called a *factor*.
 :::
 
 ::: {.column width="50%"}
 
-![](pics/mean_mark_boxplot_ggplot2.webp)
+![](pics/mean_mark_boxplot_ggplot2.png)
 :::
 :::
 
@@ -196,4 +196,5 @@ Each element can itself be a vector, matrix, another list, or a data frame.
 
 ## Practice Exercises
 
-![](pics/Laptop_duck.webp)
+![](pics/Laptop_duck.png)
+

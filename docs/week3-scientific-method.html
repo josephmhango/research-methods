@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Kanthu Joseph Mhango">
+<meta name="dcterms.date" content="2025-08-17">
+
+<title>Research and the Scientific Method: Study Notes – C5025HF Research methods and Geographical Information Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1982d92fcc5dfdfe237df2a1a876723.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week3-scientific-method.html">Week 3: Research and Statistics</a></li><li class="breadcrumb-item"><a href="./week3-scientific-method.html">Research and the Scientific Method: Study Notes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Skills for a Credible Literature Review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building a Credible Literature Review</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3: Research and Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-scientific-method.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Research and the Scientific Method: Study Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Central Tendency and Dispersion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4: Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Foundations (R)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Data Structures and Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation with dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syntax-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introductory R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indexing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data frames and tidy data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5: Statistical Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./t-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">T-test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chisquare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Chi-Square story</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7: ANOVA and Kruskal-Wallis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fisher’s F and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">F-Test and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA - 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8: Non-parametric Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rank-Based and Exact Tests</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 11: Sampling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-sampling-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-spatial-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Sampling in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 12: Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week12-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 13: Communicating Research</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scientific Reporting (IMRaD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vistut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualisation Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing a Statistical Analysis Plan (SAP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-effective-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Communication with Graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-data-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#the-scientific-method-at-a-glance" id="toc-the-scientific-method-at-a-glance" class="nav-link" data-scroll-target="#the-scientific-method-at-a-glance">The scientific method at a glance</a></li>
+  <li><a href="#observation-and-question" id="toc-observation-and-question" class="nav-link" data-scroll-target="#observation-and-question">Observation and question</a></li>
+  <li><a href="#background-research" id="toc-background-research" class="nav-link" data-scroll-target="#background-research">Background research</a></li>
+  <li>Reflection pause 1</li>
+  <li><a href="#hypothesis-a-testable-prediction" id="toc-hypothesis-a-testable-prediction" class="nav-link" data-scroll-target="#hypothesis-a-testable-prediction">Hypothesis (a testable prediction)</a></li>
+  <li><a href="#experimentation-testing-fairly" id="toc-experimentation-testing-fairly" class="nav-link" data-scroll-target="#experimentation-testing-fairly">Experimentation (testing fairly)</a></li>
+  <li>Reflection pause 2</li>
+  <li><a href="#analysis-and-conclusions" id="toc-analysis-and-conclusions" class="nav-link" data-scroll-target="#analysis-and-conclusions">Analysis and conclusions</a>
+  <ul class="collapse">
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data types</a></li>
+  <li><a href="#collecting-data" id="toc-collecting-data" class="nav-link" data-scroll-target="#collecting-data">Collecting data</a></li>
+  <li><a href="#processing-and-cleaning-before-analysis" id="toc-processing-and-cleaning-before-analysis" class="nav-link" data-scroll-target="#processing-and-cleaning-before-analysis">Processing and cleaning (before analysis)</a></li>
+  <li><a href="#statistical-techniques-two-families" id="toc-statistical-techniques-two-families" class="nav-link" data-scroll-target="#statistical-techniques-two-families">Statistical techniques (two families)</a></li>
+  </ul></li>
+  <li><a href="#communicate-so-others-can-check-and-use-it" id="toc-communicate-so-others-can-check-and-use-it" class="nav-link" data-scroll-target="#communicate-so-others-can-check-and-use-it">Communicate (so others can check and use it)</a>
+  <ul class="collapse">
+  <li><a href="#writing-imrad-a-paper-that-mirrors-the-method" id="toc-writing-imrad-a-paper-that-mirrors-the-method" class="nav-link" data-scroll-target="#writing-imrad-a-paper-that-mirrors-the-method">Writing (IMRaD = a paper that mirrors the method)</a></li>
+  <li><a href="#oral-talks" id="toc-oral-talks" class="nav-link" data-scroll-target="#oral-talks">Oral talks</a></li>
+  </ul></li>
+  <li>Reflection pause 3</li>
+  <li><a href="#principles-of-scientific-reporting" id="toc-principles-of-scientific-reporting" class="nav-link" data-scroll-target="#principles-of-scientific-reporting">Principles of scientific reporting</a>
+  <ul class="collapse">
+  <li><a href="#transparency-and-openness" id="toc-transparency-and-openness" class="nav-link" data-scroll-target="#transparency-and-openness">Transparency and openness</a></li>
+  <li><a href="#reproducibility-and-replicability" id="toc-reproducibility-and-replicability" class="nav-link" data-scroll-target="#reproducibility-and-replicability">Reproducibility and replicability</a></li>
+  <li><a href="#proper-citation-and-acknowledgment" id="toc-proper-citation-and-acknowledgment" class="nav-link" data-scroll-target="#proper-citation-and-acknowledgment">Proper citation and acknowledgment</a></li>
+  <li><a href="#ethics-and-integrity" id="toc-ethics-and-integrity" class="nav-link" data-scroll-target="#ethics-and-integrity">Ethics and integrity</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#workshop-reverseengineering-a-research-plan-2-hours" id="toc-workshop-reverseengineering-a-research-plan-2-hours" class="nav-link" data-scroll-target="#workshop-reverseengineering-a-research-plan-2-hours">Workshop: Reverse‑engineering a research plan (2 hours)</a>
+  <ul class="collapse">
+  <li><a href="#what-you-need" id="toc-what-you-need" class="nav-link" data-scroll-target="#what-you-need">What you need</a></li>
+  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
+  <li><a href="#onepage-handout" id="toc-onepage-handout" class="nav-link" data-scroll-target="#onepage-handout">One‑page handout</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week3-scientific-method.html">Week 3: Research and Statistics</a></li><li class="breadcrumb-item"><a href="./week3-scientific-method.html">Research and the Scientific Method: Study Notes</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Research and the Scientific Method: Study Notes</h1>
+<p class="subtitle lead">Data Analysis, Communicating Research, and Reporting Principles</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr Kanthu Joseph Mhango </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 17, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Research is a careful way of asking and answering questions about the world. The scientific method gives us a simple loop:<br>
+- observe → ask → guess (hypothesis) → test with data → analyse → conclude → share.</p>
+<p>If a guess isn’t supported, we refine it and try again. These notes explain each step with everyday and scientific examples, then show how data analysis, communication, and reporting principles make research trustworthy and useful.</p>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>You will learn to
+- Form a focused, testable question
+- Write a clear hypothesis
+- Design a fair test (control vs experiment)
+- Analyse data (describe, test, conclude)
+- Communicate clearly (write, talk, visualise)
+- Report with transparency, reproducibility, and ethics</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="the-scientific-method-at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="the-scientific-method-at-a-glance">The scientific method at a glance</h2>
+<ol type="1">
+<li>Observation → Question</li>
+<li>Background research</li>
+<li>Hypothesis (testable prediction)</li>
+<li>Experiment or observation (collect data)</li>
+<li>Analysis → Conclusion (support/not support)</li>
+<li>Communicate → Others can check and build on it</li>
+</ol>
+<p><img src="scimeth.png" class="img-fluid"></p>
+<p>This is a cycle. “Not supported conclusions” show progress: it tells us to improve the question, method, or hypothesis and try again.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep a simple research log (date, question, guess, key settings, result). It makes write‑up and troubleshooting much faster.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="observation-and-question" class="level2">
+<h2 class="anchored" data-anchor-id="observation-and-question">Observation and question</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Good questions come from noticing something and asking “why/how?”. Make the question specific and testable.</p>
+<p>Everyday examples<br>
+- Warm classroom → “Why is this classroom so warm?”<br>
+- Toaster won’t work → “What’s wrong with this toaster?”</p>
+<p>Scientific example<br>
+- Algae in a lake increased → “Does fertiliser runoff increase algae growth?”</p>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Checklist
+- Specific (who/what/where/when)
+- Testable with data
+- Grounded in what is known (do a quick read)</code></pre>
+<p><img src="sponge.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the question feels vague, shrink the scope (time window, location, subset) until you can imagine measuring an answer.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="background-research" class="level2">
+<h2 class="anchored" data-anchor-id="background-research">Background research</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Read just enough to make a smart, testable guess. Look up key terms, past findings, methods, and common pitfalls. This prevents re‑inventing the wheel and keeps your guess realistic.</p>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Sources to scan
+- Intro texts / review articles
+- Reputable websites / handbooks
+- Prior datasets, lab notes, or manuals</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Capture 3–5 keywords and 2 likely pitfalls you see repeatedly. These will shape your hypothesis and controls.</p>
+</div>
+</div>
+<hr>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 1</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+<section id="hypothesis-a-testable-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-a-testable-prediction">Hypothesis (a testable prediction)</h2>
+<p>A supposition or proposed explanation made on the basis of limited evidence as a starting point for further investigation</p>
+<p>A hypothesis links a cause (independent variable) to an effect (dependent variable). Write it as a clear “If … then …” prediction you can check with data.</p>
+<p>In science, words matter. They are not casual clothing we can swap for comfort; they are uniforms that carry rank, history, and weight. Yet some words, stripped of their rigor, wander into everyday speech like escaped lab mice. Theory is one of the most abused.</p>
+<p>When a physicist says, I have a theory, it is shorthand for something extraordinary: a framework built from observation, tested against data, and sharpened by attempts to prove it wrong. A theory in science is not a guess; it is a cathedral of evidence. Gravity is a theory. Evolution is a theory. Both have survived every experiment designed to topple them.</p>
+<p>But in the supermarket, on talk shows, and across social media, theory has been demoted to mean idea or hunch. Someone who says, “I have a theory that cats can sense bad vibes” is not presenting a theory. They are offering an untested speculation. The word has been stretched until it snaps.</p>
+<p>The same fate befalls significant. In statistics, significance is a cold, precise measure of probability. A result is significant because it is unlikely to be due to chance, given the chosen threshold. Outside science, however, significant is used to mean important. A “statistically significant but clinically trivial” effect becomes, in the public ear, a discovery of great consequence.</p>
+<p>Then there is hypothesis. For researchers, it is a carefully framed question: does factor A influence outcome B under condition C? For others, it is just another synonym for guesswork.</p>
+<p>And so the abuse continues. Words that once held scientific precision are diluted, spread thin, repurposed. This is not merely a semantic quibble. When the public hears “theory” as “guess,” they may dismiss climate science as if it were astrology. When they hear “significant” as “important,” they may overestimate minor results.</p>
+<p>Science depends on clarity. Each word is a tool, and when blunted by misuse, it can no longer cut through confusion.</p>
+<p>So next time someone says, I have a theory, it is worth asking: do you mean a cathedral of evidence, or just a hunch scribbled on a napkin?</p>
+<p>Hypothesis Examples<br>
+- Classroom: If the air conditioner is off (cause), then the room will be warm (effect).<br>
+- Toaster: If the outlet has no power, then other devices won’t work in that outlet.<br>
+- Plants: If plants receive fertiliser, then average height increases.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write two rival hypotheses that explain the same effect. Design your test so at least one would be contradicted by the data.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="experimentation-testing-fairly" class="level2">
+<h2 class="anchored" data-anchor-id="experimentation-testing-fairly">Experimentation (testing fairly)</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>A fair test changes the cause and observes the effect while keeping other factors steady. Use a control (baseline) and an experimental condition (with the change). Repeat enough times to reduce chance effects.</p>
+<p>Types of studies</p>
+<ul>
+<li>Controlled experiment: you manipulate the cause (e.g., add fertiliser to some tanks, not others).<br>
+</li>
+<li>Observational study: you measure what already varies (e.g., algae in lakes near vs far from farms). This is great when manipulation is impractical or unethical.</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Design tips
+- Define variables and units upfront
+- Use a control and replicate
+- Keep records (dates, settings, instruments)</code></pre>
+<p><img src="rct.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Confounders creep in silently (e.g., light, temperature, prior treatment). List the top 3 and how you’ll control or measure them.</p>
+</div>
+</div>
+<p>Everyday test (toaster) - Plug a coffee maker into the same outlet → Works?<br>
+If no: outlet likely faulty (supports hypothesis).<br>
+If yes: hypothesis not supported; try a new hypothesis (toaster’s fuse/heating element).</p>
+<hr>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 2</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+<section id="analysis-and-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-and-conclusions">Analysis and conclusions</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Organise, visualise, and summarise your data. For numbers, compute averages and spreads; for categories, count themes. Use statistical tests when comparing groups or testing relationships.</p>
+<p>Interpret carefully<br>
+- Data support or do not support the hypothesis; they don’t “prove” it.<br>
+- Don’t confuse correlation with causation.<br>
+- Discuss both statistical and practical importance.<br>
+- Be transparent about uncertainty and limits.</p>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Quick workflow
+1) Clean and plot (tables/graphs)
+2) Describe (mean/median, SD/range)
+3) Test (t‑test/chi‑square/ANOVA/regression)
+4) Conclude (supported? next steps?)</code></pre>
+<p><img src="analysis.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A tiny p‑value can hide a tiny effect. Always pair significance with an effect size and, when possible, a confidence interval.</p>
+</div>
+</div>
+<section id="data-types" class="level3">
+<h3 class="anchored" data-anchor-id="data-types">Data types</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li>Quantitative (numbers): counts or measurements
+<ul>
+<li>Discrete: counts (e.g., colonies, cars per home)<br>
+</li>
+<li>Continuous: measurements (e.g., height, temperature)<br>
+</li>
+</ul></li>
+<li>Qualitative (descriptions): notes, transcripts, categories</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Match method to type
+- Counts → bar charts, chi‑square
+- Measurements → histograms, t‑tests, ANOVA
+- Text → coding themes, frequency tallies</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pick the plot that answers your question in one glance. If readers must “decode”, redesign the figure.</p>
+</div>
+</div>
+</section>
+<section id="collecting-data" class="level3">
+<h3 class="anchored" data-anchor-id="collecting-data">Collecting data</h3>
+<p>Experiments, observations, surveys, instruments/sensors, and existing datasets. Plan for quality: sampling, calibration, piloting questions, clear protocols.</p>
+<p>Aim for high accuracy (closeness to truth) and precision (reproducibility of result/observation). There is often a trade-off between the two.</p>
+<p><img src="accuracy.png" class="img-fluid"></p>
+</section>
+<section id="processing-and-cleaning-before-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="processing-and-cleaning-before-analysis">Processing and cleaning (before analysis)</h3>
+<p>Standardise entries, handle missing values, detect outliers, compute needed variables, and document every step. “Garbage in, garbage out.”</p>
+</section>
+<section id="statistical-techniques-two-families" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-techniques-two-families">Statistical techniques (two families)</h3>
+<ul>
+<li>Descriptive: means/medians, spread, tables/graphs → show what the data look like.</li>
+<li>Inferential: hypothesis tests and intervals → decide if patterns likely reflect real effects rather than chance.</li>
+</ul>
+</section>
+</section>
+<section id="communicate-so-others-can-check-and-use-it" class="level2">
+<h2 class="anchored" data-anchor-id="communicate-so-others-can-check-and-use-it">Communicate (so others can check and use it)</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Share your methods, data (when ethical), and results clearly. Communication closes the loop and turns personal discovery into shared knowledge others can evaluate and build on.</p>
+</div><div class="column" style="width:45%;">
+<pre class="text"><code>Formats
+- Lab/report (IMRaD structure)
+- Talk/poster (story + key visuals)
+- Datasets/code (with docs)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use an IMRaD “skeleton slide” (one-liners for Intro, Methods, Results, Discussion) to plan both papers and talks before you draft.</p>
+</div>
+</div>
+<section id="writing-imrad-a-paper-that-mirrors-the-method" class="level3">
+<h3 class="anchored" data-anchor-id="writing-imrad-a-paper-that-mirrors-the-method">Writing (IMRaD = a paper that mirrors the method)</h3>
+<ul>
+<li>Introduction: question, background, hypothesis</li>
+<li>Methods: what you did (enough detail to repeat it)</li>
+<li>Results: what you found (figures/tables)</li>
+<li>Discussion: what it means, limits, how it fits the field</li>
+</ul>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4473858/">Article: Understanding IMRaD</a></p>
+</section>
+<section id="oral-talks" class="level3">
+<h3 class="anchored" data-anchor-id="oral-talks">Oral talks</h3>
+<p>Think about a time when you ran a small experiment in your personal life. This could be anything—from testing a new study routine, trying a fitness app, comparing two cooking methods, or seeing if a change in your schedule improved your productivity.</p>
+<p>Prepare a short slide deck (3–5 slides) to tell the story of your experiment.</p>
+<p>Your slides should cover:</p>
+<ul>
+<li><p>Why it matters</p></li>
+<li><p>What motivated you?</p></li>
+<li><p>Why was this experiment important or interesting to you?</p></li>
+<li><p>What you did</p></li>
+<li><p>Briefly describe your setup: what did you change or test, and how?</p></li>
+<li><p>One or two key results</p></li>
+<li><p>Share the main finding(s). Use simple, readable visuals (chart, photo, diagram) to make it clear.</p></li>
+<li><p>What did you learn?</p></li>
+<li><p>Would you change anything, keep doing it, or test something new</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section class="level2">
+<h2 class="anchored" data-anchor-id="">Reflection pause 3</h2>
+<p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
+<ul>
+<li>What is the most important idea from the completed section?</li>
+<li>How would you explain that idea in your own words?</li>
+<li>What question would you like to resolve before continuing?</li>
+</ul>
+</section>
+<section id="principles-of-scientific-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="principles-of-scientific-reporting">Principles of scientific reporting</h2>
+<section id="transparency-and-openness" class="level3">
+<h3 class="anchored" data-anchor-id="transparency-and-openness">Transparency and openness</h3>
+<ul>
+<li>Explain methods</li>
+<li>Show data (when ethical)</li>
+<li>Share code/settings</li>
+<li>Report unexpected/negative results.</li>
+</ul>
+<p>Make it possible for others to understand and check your work.</p>
+</section>
+<section id="reproducibility-and-replicability" class="level3">
+<h3 class="anchored" data-anchor-id="reproducibility-and-replicability">Reproducibility and replicability</h3>
+<ul>
+<li><p>Reproducible: same data + same analysis → same results.</p></li>
+<li><p>Replicable: new data + same question → consistent results.</p></li>
+</ul>
+<p>Provide data/code or detailed methods so others can verify.</p>
+</section>
+<section id="proper-citation-and-acknowledgment" class="level3">
+<h3 class="anchored" data-anchor-id="proper-citation-and-acknowledgment">Proper citation and acknowledgment</h3>
+<ul>
+<li>Give credit for ideas, data, and methods.</li>
+<li>Cite consistently so readers can find sources.</li>
+<li>Avoid plagiarism; add acknowledgments and funding/conflict disclosures.</li>
+</ul>
+</section>
+<section id="ethics-and-integrity" class="level3">
+<h3 class="anchored" data-anchor-id="ethics-and-integrity">Ethics and integrity</h3>
+<ul>
+<li>Report honestly; do not fabricate/falsify.</li>
+<li>Follow human/animal ethics approvals.</li>
+<li>Disclose conflicts.</li>
+<li>Correct the record when needed. Science is built on trust.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The scientific method is a simple loop that builds reliable knowledge: ask, guess, test, analyse, and share. Data analysis turns raw observations into evidence; communication turns evidence into shared understanding; and good reporting principles maintain trust. Practice the cycle, be curious and cautious, and write so others can repeat your path. That’s how research moves from personal insight to progress for everyone.</p>
+</section>
+<section id="workshop-reverseengineering-a-research-plan-2-hours" class="level2">
+<h2 class="anchored" data-anchor-id="workshop-reverseengineering-a-research-plan-2-hours">Workshop: Reverse‑engineering a research plan (2 hours)</h2>
+<p>By the end, you will be able to: - find a paper’s research question, variables, and study design - outline the authors’ analysis plan in plain words - read a figure and say what the error bars represent - spot one possible weakness and suggest an improvement</p>
+<section id="what-you-need" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-need">What you need</h3>
+<ul>
+<li>One peer‑reviewed research paper (any science) with:
+<ul>
+<li>a clear Methods section</li>
+<li>at least one inferential result (e.g., t, χ², F, or a regression)</li>
+<li>one figure with error bars</li>
+</ul></li>
+<li>If choosing is hard, use a paper from the shortlist provided in class.</li>
+</ul>
+</section>
+<section id="plan" class="level3">
+<h3 class="anchored" data-anchor-id="plan">Plan</h3>
+<section id="warmup" class="level4">
+<h4 class="anchored" data-anchor-id="warmup">Warm‑up</h4>
+<ul>
+<li>Goal: “Read like a scientist by reverse‑engineering the plan the authors likely had.”<br>
+</li>
+<li>Skim your paper from title to the first results figure.</li>
+</ul>
+</section>
+<section id="paper-snapshot-and-pico" class="level4">
+<h4 class="anchored" data-anchor-id="paper-snapshot-and-pico">Paper snapshot and PICO</h4>
+<p>Start by capturing the “who/what, what changed, compared to what, and what was measured.” This is called PICO. Use the paper’s own words when you can.</p>
+<p>Paper snapshot (2–3 lines)<br>
+- Citation; field; study type: experimental or observational (not a review)<br>
+- One line that says what the study tried to find out</p>
+<p>What PICO means<br>
+- P — Population/Problem: who or what was studied, and in what context<br>
+- I/E — Intervention/Exposure (or key predictor): what was changed, tested, or focused on<br>
+- C — Comparison/Control: what it was compared to (baseline group or condition)<br>
+- O — Outcome(s): what was measured; if several, note which seems primary</p>
+<p>Where to find it fast<br>
+- Title and abstract: the question and main comparison<br>
+- Methods/Participants: the P (who/what) and sometimes the C (control)<br>
+- Procedure/Measures: details for I/E and O<br>
+- Results and figure captions: wording for outcomes and groups</p>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p>Tips - Copy/Quote short phrases from the paper for key terms in your PICO; paraphrase only if needed. - If a PICO item isn’t stated, write “not stated”, don’t guess. - Keep your question and hypothesis simple: - Question: “Does X compared with Y change outcome O?” - Hypothesis: “X will lead to higher/lower/different O than Y.”</p>
+</div><div class="column" style="width:48%;">
+<pre class="text"><code>Worked example
+Title: Caffeine improves reaction time in adults
+Study type: Experimental
+
+P: Healthy adults
+I/E: 200 mg caffeine capsule
+C: Decaf placebo capsule
+O: Mean reaction time on computerized test (ms)
+
+Research question:
+Does 200 mg caffeine reduce reaction time compared with placebo?
+
+Simple hypothesis:
+Adults given caffeine will have faster (lower) reaction times than placebo.</code></pre>
+</div>
+</div>
+</section>
+<section id="reverseengineer-the-plan" class="level4">
+<h4 class="anchored" data-anchor-id="reverseengineer-the-plan">Reverse‑engineer the plan</h4>
+<p>Build a plain‑language plan from what’s reported:<br>
+- Variables: name the main variables and how they were measured (units or scales)<br>
+- Design: how were units selected/assigned? any groups? timing? about how many participants/samples?<br>
+- Primary analysis: what comparison or model answers the main question? (name the test if stated; if not, say “compare group A vs B” or “relate X to Y”)<br>
+- Figure plan: one figure that would answer the main question. State:<br>
+- type (bar/line/scatter/box/other)<br>
+- axes (x and y)<br>
+- summary (mean/median/other)<br>
+- error bars (SD/SE/95% CI) — write what the paper says; if unclear, write “not stated”<br>
+- Outcome rule: complete the sentence “We would conclude … if …”.</p>
+</section>
+<section id="methods-check-figure-and-uncertainty" class="level4">
+<h4 class="anchored" data-anchor-id="methods-check-figure-and-uncertainty">Methods check: figure and uncertainty</h4>
+<ul>
+<li>Read the main figure carefully:
+<ul>
+<li>What do the axes and units show?<br>
+</li>
+<li>How many observations (n) per group/condition?<br>
+</li>
+<li>What do the bars/points summarize (mean or median)?<br>
+</li>
+<li>What do the error bars represent (SD, SE, or 95% CI)? If not stated, note that.<br>
+</li>
+</ul></li>
+<li>Name one possible weakness (e.g., small sample, missing comparison, unclear measure) and one thing done well.</li>
+</ul>
+</section>
+<section id="openness-check-simple" class="level4">
+<h4 class="anchored" data-anchor-id="openness-check-simple">Openness check (simple)</h4>
+<p>Make a brief checklist from the paper and its links:<br>
+- Data shared? where?<br>
+- Code or analysis shared? which tool?<br>
+- Materials shared (e.g., survey, stimuli, protocol)?<br>
+- Any preregistration or protocol mentioned?<br>
+Write one sentence on how openness could be improved.</p>
+</section>
+<section id="second-micropresentation" class="level4">
+<h4 class="anchored" data-anchor-id="second-micropresentation">90‑second micro‑presentation</h4>
+<p>Present to a nearby group:<br>
+- paper snapshot (question + design)<br>
+- reconstructed plan (primary analysis + your figure plan + outcome rule)<br>
+- one takeaway about uncertainty (what the error bars mean) + one limitation<br>
+- one concrete improvement you would make</p>
+</section>
+<section id="class-debrief" class="level4">
+<h4 class="anchored" data-anchor-id="class-debrief">Class debrief</h4>
+<ul>
+<li>What was easy to reconstruct? What was usually missing?<br>
+</li>
+<li>Quick show of hands: who found a paper that clearly stated what its error bars mean?<br>
+</li>
+<li>Exit ticket: “If I preregistered this study from scratch, I would change … because …”.</li>
+</ul>
+</section>
+</section>
+<section id="onepage-handout" class="level3">
+<h3 class="anchored" data-anchor-id="onepage-handout">One‑page handout</h3>
+<section id="paper-snapshot-pico" class="level4">
+<h4 class="anchored" data-anchor-id="paper-snapshot-pico">Paper Snapshot (PICO)</h4>
+<pre class="text"><code>Paper Snapshot (PICO)
+Citation:
+Field:
+Study type:  Experimental  /  Observational
+
+P: Who/what was studied?
+I/E: What was changed/tested or the key predictor?
+C: What was it compared to?
+O: What outcomes were measured?
+
+Research question (one sentence):
+Simple hypothesis:</code></pre>
+</section>
+<section id="reverseengineered-plan-plain-language" class="level4">
+<h4 class="anchored" data-anchor-id="reverseengineered-plan-plain-language">Reverse‑Engineered Plan (plain language)</h4>
+<pre class="text"><code>Reverse‑Engineered Plan
+Variables
+Main variables: ______________________________________________
+How measured (units/scales): __________________________________
+
+Design
+Selection/assignment: _________________________________________
+Groups/conditions: ____________________________________________
+Timing: _________________________   Approx. N: ________________
+
+Primary analysis (plain words)
+Test named in paper (if any): _________________________________
+If no test named: compare/relate ______________________________
+
+Figure plan
+Type: bar / line / scatter / box / other: __________
+Axes (x/y): _______________________________________
+Summary: mean / median / other _____________________
+Error bars: SD / SE / 95% CI / not stated
+
+Outcome rule
+“We would conclude … if …” _________________________</code></pre>
+</section>
+<section id="openness-checklist-brief" class="level4">
+<h4 class="anchored" data-anchor-id="openness-checklist-brief">Openness Checklist (brief)</h4>
+<pre class="text"><code>Openness Checklist
+Data shared?     Yes / No    Where: __________________________
+Code shared?     Yes / No    Tool: ___________________________
+Materials shared? Yes / No   What: ___________________________
+Prereg/protocol? Yes / No    Link or note: ___________________
+
+One improvement to openness: _________________________________</code></pre>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

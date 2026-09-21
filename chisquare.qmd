@@ -1,9 +1,13 @@
 ---
 title: "The Chi-Square story"
 format:
-  html:
+  revealjs:
+    css: scroll.css
+    slide-number: true
     toc: true
-    theme: cosmo
+    theme: simple
+    incremental: false
+    chalkboard: true
     code-fold: true
     code-tools: true
 execute:

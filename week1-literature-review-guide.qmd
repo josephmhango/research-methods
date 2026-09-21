@@ -1,0 +1,549 @@
+---
+title: "Building a Credible Literature Review"
+subtitle: "Week 1 practical guide: eight activities paired with the lecture"
+author: "Dr Kanthu Joseph Mhango"
+date: "2026-08-10"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    smooth-scroll: true
+---
+
+## How to use this guide
+
+This practical guide follows the Week 1 lecture in the same order. Each section turns one lecture concept into a tangible piece of a literature-review workflow. Work with one research topic throughout so that your outputs accumulate into a small, usable review protocol rather than eight disconnected exercises.
+
+| Lecture section | Practical section | Output you will keep |
+|---|---|---|
+| 1. Why a review matters | Audit the topic and its purpose | A provisional review purpose and gap statement |
+| 2. Information literacy | Map sources and vocabulary | A source map and vocabulary bank |
+| 3. Scope and questions | Focus the question | A structured question and eligibility rules |
+| 4. Search strategy | Build and test a query | A concept table and tested search string |
+| 5. Reproducible protocol | Record the search plan | A search log and mini-protocol |
+| 6. Screening | Apply selection rules | A screening record with reasons |
+| 7. Critical appraisal | Judge evidential weight | A completed appraisal sheet |
+| 8. Synthesis and writing | Build an argument | An extraction matrix and paragraph plan |
+
+::: {.callout-tip title="Working rhythm"}
+For each section, first read the task, then complete the worked step using your own topic, and finally save the stated output. The examples use a general research question about flexible working and employee wellbeing, so the method remains transferable across disciplines.
+:::
+
+# Section 1: Audit the topic and define the review purpose
+
+## Practical aim
+
+The lecture presented a literature review as a map of what is established, contested, uncertain, and missing. In this activity, we translate a broad interest into a reason for reviewing the literature. A useful purpose gives direction to every later decision, including where we search, which studies we retain, and how we organise the final argument.
+
+## Task 1.1: Write the starting topic without polishing it
+
+Write one sentence describing the subject that currently interests you. Use ordinary language and resist the urge to make it sound academic.
+
+> **Worked example:** We are interested in whether flexible working arrangements affect employee wellbeing.
+
+Now record three things that you currently believe and mark each statement as an **assumption**, a **personal observation**, or an **evidence-informed belief**.
+
+| Current belief | Basis for the belief | Evidence still needed |
+|---|---|---|
+| Flexible working may improve autonomy | Personal observation | Studies measuring autonomy and wellbeing |
+| Effects may differ by job type | Assumption | Comparisons across occupations |
+| Isolation may reduce some benefits | Evidence-informed belief | Recent studies and reviews on isolation |
+
+This small inventory matters because prior beliefs influence the words we search, the papers we notice, and the explanations we find convincing. Naming those beliefs makes them easier to test fairly.
+
+## Task 1.2: Produce a provisional knowledge map
+
+Create four boxes and add at least one tentative statement to each. These statements are starting hypotheses about the literature rather than final conclusions.
+
+```text
+ESTABLISHED: What appears consistently supported?
+CONTESTED:   Where might credible studies disagree?
+UNCERTAIN:   Where might evidence be weak or context-dependent?
+MISSING:     Which population, setting, comparison, or outcome may be overlooked?
+```
+
+## Task 1.3: Draft the review purpose
+
+Complete this sentence:
+
+> This review will examine **[phenomenon or relationship]** in **[population or setting]** so that we can clarify **[what is known, contested, or missing]** and determine **[why that knowledge matters]**.
+
+::: {.callout-note title="Expected output from Section 1"}
+Save one topic statement, your belief inventory, the four-part knowledge map, and a two-sentence review purpose. These are provisional and will become more precise after the reconnaissance search.
+:::
+
+::: {.callout-important title="Check your reasoning"}
+Distinguish your topic from your contribution. Your topic names an area, while your contribution explains which uncertainty the review will clarify and why that clarification is useful. If you already feel certain about the final answer, identify the evidence that would be capable of changing your view.
+:::
+
+# Section 2: Map information sources and harvest vocabulary
+
+## Practical aim
+
+The lecture explained that discoverability depends on vocabulary, indexing, and source coverage. This activity builds a map of suitable information sources and a vocabulary bank before we attempt a precise search.
+
+## Task 2.1: Map the source landscape
+
+List places where relevant evidence might be found and state what each contributes. Select sources because they fit the question, rather than because they are familiar.
+
+| Source type | What it can contribute | Limitation to remember |
+|---|---|---|
+| Broad bibliographic database | Structured records across many disciplines | Coverage varies by database |
+| Subject database | Specialist vocabulary and focused journals | May omit interdisciplinary work |
+| Citation search engine | Wide discovery and cited-by links | Records and filters may be inconsistent |
+| Institutional repository | Theses, reports, and local research | Quality and metadata vary |
+| Reference lists | Earlier foundational studies | Follows the choices made by another author |
+| Forward citation searching | Later studies that used or challenged a paper | Newer work has had less time to be cited |
+
+Choose at least two complementary searchable sources and explain your choice in one sentence each.
+
+## Task 2.2: Run a reconnaissance search
+
+Use a deliberately simple query containing two main concepts. For the worked example, we might begin with:
+
+```text
+"flexible working" AND wellbeing
+```
+
+Scan the titles, abstracts, keywords, and subject headings of approximately 10 to 15 promising records. At this stage, we are learning how the literature describes the topic. We are not yet trying to retrieve every eligible study.
+
+## Task 2.3: Build a vocabulary bank
+
+Record terms under the concept they represent. Include spelling variants, abbreviations, broader terms, narrower terms, and controlled subject headings when a database displays them.
+
+| Concept A: working arrangement | Concept B: wellbeing | Context terms |
+|---|---|---|
+| flexible work | well-being | employee |
+| remote work | mental health | workplace |
+| telework | job satisfaction | organisation |
+| hybrid work | stress | occupation |
+| homeworking | quality of working life | sector |
+
+For every harvested term, note where it came from. A term found repeatedly in relevant papers is more defensible than a synonym invented without checking the literature.
+
+## Task 2.4: Test one known-item check
+
+Select one clearly relevant paper from the reconnaissance results and search for its exact title. If the selected database cannot retrieve it, investigate whether the record is outside the database’s coverage or whether your access route is incomplete. This simple test makes source limitations visible.
+
+::: {.callout-note title="Expected output from Section 2"}
+Keep a short source map, the results of one reconnaissance search, and a vocabulary bank containing at least five terms for each major concept.
+:::
+
+::: {.callout-important title="Check your vocabulary"}
+Explain why each new word belongs in its concept block. Similar-looking words may represent distinct ideas, while different-looking words may be used interchangeably in a field. Your goal is a reasoned vocabulary bank that improves recall without introducing large amounts of irrelevant material.
+:::
+
+# Section 3: Focus the question and define eligibility
+
+## Practical aim
+
+The lecture used question frameworks and scope dimensions to make a broad topic answerable. Here we convert the initial topic into a structured question and operational inclusion and exclusion criteria.
+
+## Task 3.1: Narrow the scope deliberately
+
+Complete the following scope table. Where a dimension does not apply, explain why.
+
+| Scope dimension | Your decision | Reason for the decision |
+|---|---|---|
+| Population or unit |  |  |
+| Phenomenon, intervention, or exposure |  |  |
+| Comparison |  |  |
+| Outcome |  |  |
+| Setting or geography |  |  |
+| Time period |  |  |
+| Study design |  |  |
+| Publication type or language |  |  |
+
+## Task 3.2: Use PICO or PECO as a thinking tool
+
+Choose **PICO** when an intervention is being compared and **PECO** when an exposure or condition is central.
+
+| Element | Prompt | Worked example |
+|---|---|---|
+| P: Population | Who or what is studied? | Employees in established organisations |
+| I/E: Intervention or exposure | What arrangement or condition occurs? | Regular remote or hybrid working |
+| C: Comparison | Compared with what? | Mainly office-based working |
+| O: Outcome | What is measured? | Wellbeing, stress, or job satisfaction |
+
+Convert the table into a question:
+
+> Among employees in established organisations, how does regular remote or hybrid working, compared with mainly office-based working, affect reported wellbeing?
+
+## Task 3.3: Turn scope into operational criteria
+
+Write criteria that two readers could apply in the same way.
+
+| Include when… | Exclude when… |
+|---|---|
+| Participants are employed adults | Participants are full-time students |
+| Flexible location is measured or described | Flexibility concerns hours only |
+| At least one wellbeing outcome is reported | Only productivity is reported |
+| The study contains empirical evidence | The item is commentary without data |
+
+Replace vague words such as *relevant*, *recent*, or *high quality* with observable rules. If “recent” means publications from 2020 onward, write that date. If an empirical study is required, state which designs qualify.
+
+## Task 3.4: Stress-test the question
+
+Use these checks:
+
+- Can each key concept be recognised in a title or abstract?
+- Is the population sufficiently specific for the intended conclusion?
+- Can the outcome be measured or described consistently?
+- Is the comparison meaningful?
+- Is the scope achievable with the available time and access?
+- Would answering the question resolve an identifiable uncertainty?
+
+::: {.callout-note title="Expected output from Section 3"}
+Save one structured review question and a table of operational inclusion and exclusion criteria. Add a short explanation of the most important scope decision.
+:::
+
+::: {.callout-important title="Check your criteria"}
+Use borderline examples to test your criteria. If you cannot decide whether a hypothetical paper qualifies, clarify the rule before screening begins. Your scope creates a reasoned boundary around the review, and every boundary should serve the purpose you stated in Section 1.
+:::
+
+# Section 4: Construct and test the search strategy
+
+## Practical aim
+
+The lecture separated conceptual structure from database syntax. In this section, we build concept blocks, combine them with Boolean logic, and test whether the search retrieves useful evidence.
+
+## Task 4.1: Build the concept table
+
+Use one row per concept. Combine synonyms within a row using **OR**. Later, combine the rows using **AND**.
+
+| Concept | Preferred term | Synonyms and variants |
+|---|---|---|
+| Working arrangement | flexible working | "remote work", telework*, hybrid work*, homework* |
+| Wellbeing | wellbeing | well-being, "mental health", stress, "job satisfaction" |
+| Population | employee | worker*, staff, personnel |
+
+Decide whether the population block is necessary. Some concepts are better handled during screening because adding them to the query can hide relevant records whose abstracts use unexpected words.
+
+## Task 4.2: Assemble a Boolean query
+
+```text
+("flexible working" OR "remote work" OR telework* OR "hybrid work*" OR homework*)
+AND
+(wellbeing OR well-being OR "mental health" OR stress OR "job satisfaction")
+```
+
+Read the query aloud in ordinary language: the record must contain at least one term describing the working arrangement and at least one term describing wellbeing. Parentheses preserve that logic.
+
+## Task 4.3: Run three diagnostic tests
+
+1. **Known-item test:** Does the query retrieve a paper already judged relevant?
+2. **First-page precision test:** Among the first 20 records, how many appear relevant?
+3. **Vocabulary test:** Do relevant results reveal terms missing from the current concept table?
+
+Record each change and its effect.
+
+| Version | Change made | Results returned | Relevant in first 20 | Decision |
+|---|---|---:|---:|---|
+| 1 | Two phrase terms only |  |  |  |
+| 2 | Added vocabulary variants |  |  |  |
+| 3 | Added or removed context block |  |  |  |
+
+## Task 4.4: Translate syntax carefully
+
+Database platforms differ in field codes, truncation, wildcards, phrase handling, and proximity operators. Preserve the conceptual blocks when moving between platforms, then adapt the syntax using that platform’s help page. Save the exact final query for every source.
+
+## Task 4.5: Follow the Scopus walkthrough
+
+[Open the Scopus home page](https://www.scopus.com/pages/home){target="_blank"} and use the search strategy you have developed in this section. Your institutional sign-in may be required before you can see the complete search interface.
+
+1. Open the document search and select the fields that search titles, abstracts, and keywords.
+2. Enter your first concept block and record the number of results.
+3. Inspect several relevant and irrelevant records, adding useful indexed terms to your vocabulary bank.
+4. Add the second concept block with **AND** and compare the new result count with the first count.
+5. Add any remaining concept block only when it represents an essential part of your question.
+6. Open one clearly relevant record and check whether its title, abstract, author keywords, and indexed keywords suggest further search terms.
+7. Use the search history to compare versions of your query and identify which change improved the result set.
+8. Copy the exact final query, the search date, the selected fields, any filters, and the final result count into your search log.
+
+::: {.callout-tip title="What to notice during the walkthrough"}
+Watch how every action in Scopus corresponds to a decision you have already made: the field choice determines where the database looks, **OR** controls vocabulary within a concept, **AND** connects different concepts, and filters impose eligibility boundaries. Record the reason for each action so that your final search remains understandable and reproducible.
+:::
+
+::: {.callout-note title="Expected output from Section 4"}
+Keep a concept table, a readable Boolean search, a three-version test record explaining why the final version was selected, and a completed Scopus search-log entry.
+:::
+
+::: {.callout-important title="Check your search"}
+When your search retrieves too much, diagnose which concept is producing noise before adding exclusions. When it retrieves too little, test each concept block separately. Use the records you retrieve as evidence for each refinement.
+:::
+
+# Section 5: Convert the search into a reproducible protocol
+
+## Practical aim
+
+The lecture described the search log as the memory of the review and the protocol as a record of decisions made before findings are known. This section creates both records.
+
+## Task 5.1: Complete a search log
+
+Create one row immediately after every search session.
+
+| Date | Source and platform | Exact query | Fields and filters | Results | Export file | Notes |
+|---|---|---|---|---:|---|---|
+|  |  |  |  |  |  |  |
+
+Record the source and platform separately because the same database may be available through different interfaces with different syntax. Include date limits, language limits, document types, and the number of results before and after filters.
+
+## Task 5.2: Draft the mini-protocol
+
+Use the following headings and write one or two precise sentences under each:
+
+```text
+1. Review purpose and question
+2. Eligibility criteria
+3. Information sources
+4. Search strategy and planned update date
+5. Export, storage, and duplicate removal
+6. Title and abstract screening
+7. Full-text screening and exclusion reasons
+8. Data extraction fields
+9. Critical appraisal approach
+10. Planned method of synthesis
+```
+
+## Task 5.3: Create a defensible file trail
+
+Use clear filenames that preserve sequence and provenance.
+
+```text
+01_search-log.xlsx
+02_databaseA_2026-08-10.ris
+03_databaseB_2026-08-10.ris
+04_deduplicated-library.ris
+05_title-abstract-screening.xlsx
+06_full-text-screening.xlsx
+07_extraction-matrix.xlsx
+```
+
+Store a clean original export before editing records. A transparent file trail allows later corrections and prevents uncertainty about which version produced the review.
+
+## Task 5.4: Perform a reproducibility check
+
+Exchange the protocol with a peer. Ask them to identify:
+
+- the exact population, phenomenon, comparison, and outcomes;
+- the sources and date limits;
+- the exact search to run;
+- the rules for retaining a record;
+- the information to extract from an included paper.
+
+Revise every instruction that requires the peer to guess.
+
+::: {.callout-note title="Expected output from Section 5"}
+Save a populated search-log row, a one-page mini-protocol, and a clear folder or filename plan. Another student should be able to repeat the search from these records.
+:::
+
+::: {.callout-important title="Check your records"}
+Separate your planned decisions from your observed outcomes. Your protocol says what you will do and why, while your search log records what you actually did and what occurred. Record any differences transparently as amendments.
+:::
+
+# Section 6: Screen records and justify selection
+
+## Practical aim
+
+The lecture treated search results as candidates. Screening determines which candidates answer the question, using the operational criteria from Section 3.
+
+## Task 6.1: Prepare the screening sheet
+
+Include enough information to understand and audit each decision.
+
+| ID | Title | Year | Title/abstract decision | Full-text decision | Exclusion reason | Notes |
+|---|---|---:|---|---|---|---|
+| 001 |  |  | Include / Exclude / Unclear | Include / Exclude |  |  |
+
+Use **Unclear** when the title and abstract do not provide enough information. Uncertainty at the first stage is a reason to inspect the full text rather than make an unsupported exclusion.
+
+## Task 6.2: Pilot ten records
+
+Screen the same ten titles and abstracts independently with a peer when possible. Compare decisions and discuss every disagreement.
+
+| Record | Your decision | Peer decision | Source of disagreement | Rule clarified |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+Typical disagreements reveal an undefined population, an outcome with several meanings, or an ambiguous boundary between empirical research and commentary. Revise the criteria before screening the full set.
+
+## Task 6.3: Use one primary full-text exclusion reason
+
+Choose the earliest decisive reason in a consistent hierarchy, such as:
+
+1. Wrong population
+2. Wrong intervention or exposure
+3. Wrong comparison
+4. Wrong outcome
+5. Ineligible design or publication type
+6. Outside date, language, or setting rule
+7. Full text unavailable after documented attempts
+
+This practice creates interpretable counts and prevents a single paper from being counted several times.
+
+## Task 6.4: Draw the selection funnel
+
+```text
+Records retrieved                 ______
+Duplicates removed               ______
+Titles/abstracts screened        ______
+Full texts assessed              ______
+Full texts excluded              ______
+Studies included                 ______
+```
+
+Check that the numbers reconcile. Every retrieved record should have a traceable destination.
+
+::: {.callout-note title="Expected output from Section 6"}
+Keep a pilot screening sheet for at least ten records, clarified eligibility rules, a controlled list of exclusion reasons, and a completed or provisional selection funnel.
+:::
+
+::: {.callout-important title="Check your screening decisions"}
+During the pilot, focus on the rule that produced each disagreement. If you are working with a peer, agree how the operational criterion should be interpreted. If you are working independently, repeat a small sample later and check whether you reach the same decisions.
+:::
+
+# Section 7: Read purposefully and appraise credibility
+
+## Practical aim
+
+The lecture separated claim, evidence, and warrant and showed how study quality influences evidential weight. This activity uses one included paper to practise purposeful reading and structured appraisal.
+
+## Task 7.1: Declare the reading purpose
+
+Before opening the paper, complete this sentence:
+
+> We are reading this paper to determine **[which part of the review question it informs]**, and we therefore need evidence about **[population, method, outcome, or explanation]**.
+
+Begin with the title, abstract, headings, tables, figures, and conclusion. Then read the methods and results closely enough to verify how the headline claim was produced.
+
+## Task 7.2: Separate claim, evidence, and warrant
+
+| Element | Question | Notes from the paper |
+|---|---|---|
+| Claim | What conclusion do the authors ask us to accept? |  |
+| Evidence | Which observations, measurements, or analyses support it? |  |
+| Warrant | Why should that evidence justify this conclusion? |  |
+| Boundary | In which settings or populations might the claim fail? |  |
+
+Write in your own words and add page numbers for details you may need to verify later.
+
+## Task 7.3: Complete a domain-based appraisal
+
+| Domain | Prompt | Judgement and reason |
+|---|---|---|
+| Design fit | Can this design answer the stated question? |  |
+| Sampling | Does the sample represent the intended population? |  |
+| Measurement | Are important variables measured credibly? |  |
+| Confounding or bias | Which alternative explanations remain? |  |
+| Analysis | Do the analyses match the design and data? |  |
+| Transparency | Are procedures and decisions reported clearly? |  |
+| Applicability | How directly does the setting match our question? |  |
+
+Avoid reducing appraisal to a journal name or a single numerical score. Explain the specific strength or limitation and how it affects interpretation.
+
+## Task 7.4: Assign evidential weight
+
+Complete one of these judgements and justify it:
+
+- **High weight:** directly relevant evidence with few important credibility concerns.
+- **Moderate weight:** useful evidence with limitations that narrow the conclusion.
+- **Low weight:** evidence informs context or hypotheses but cannot carry a strong conclusion.
+
+::: {.callout-note title="Expected output from Section 7"}
+Save a purpose statement, a claim–evidence–warrant table, a domain-based appraisal, and a reasoned judgement of evidential weight for one paper.
+:::
+
+::: {.callout-important title="Check your appraisal"}
+Explain how each stated limitation changes the conclusion you are willing to draw. Your appraisal becomes useful when it affects evidential weight, comparison, or wording in the review.
+:::
+
+# Section 8: Extract, synthesise, and plan the written argument
+
+## Practical aim
+
+The lecture concluded by moving from comparable extraction to thematic synthesis and comparative writing. This activity combines several papers into an argument that answers the review question.
+
+## Task 8.1: Build a common extraction matrix
+
+Use one row per study and one column per item required for comparison.
+
+| Study | Design and sample | Context | Exposure/intervention | Comparison | Outcome measure | Main finding | Key limitation | Weight |
+|---|---|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |  |  |
+
+Add page references where a detail may need checking. Keep quotations rare and clearly marked. Most entries should be concise paraphrases that preserve the authors’ meaning.
+
+## Task 8.2: Group evidence into themes
+
+Use sticky notes, a table, or a simple diagram to group findings by a meaningful organising principle. Useful options include mechanism, population, method, outcome, setting, or theoretical position.
+
+For each candidate theme, answer:
+
+1. Which studies contribute evidence?
+2. Where do the findings agree?
+3. Where do they differ?
+4. Can design, sample, measurement, context, or evidential weight explain the difference?
+5. What conclusion is currently justified?
+
+## Task 8.3: Draft one synthesis paragraph plan
+
+```text
+Thematic claim:
+
+Strongest supporting evidence:
+
+Contrasting or qualifying evidence:
+
+Likely explanation for the difference:
+
+Current judgement and level of confidence:
+
+Connection to the review question:
+```
+
+> **Worked miniature example:** Evidence suggests that flexible working can improve autonomy and job satisfaction when employees have genuine control over location and scheduling. Several longitudinal studies support this relationship, while some cross-sectional studies report weak or mixed effects. Differences in voluntary participation, job type, and measures of isolation may explain part of the variation. Confidence is therefore moderate and appears strongest for roles with suitable digital support and meaningful employee choice.
+
+## Task 8.4: Audit the complete workflow
+
+Confirm that every conclusion can be traced backwards:
+
+```text
+Written claim
+  ← thematic comparison
+  ← extraction records
+  ← appraised included studies
+  ← screening decisions
+  ← recorded searches
+  ← focused review question
+```
+
+Finish by answering four questions in no more than two sentences each:
+
+- What is known with reasonable confidence?
+- What remains contested, and what may explain the disagreement?
+- What remains genuinely unknown?
+- Which research question or practical decision follows from that uncertainty?
+
+::: {.callout-note title="Expected output from Section 8"}
+Submit an extraction matrix containing at least three studies, a thematic grouping, one comparative paragraph plan, and a short statement of the justified research gap.
+:::
+
+::: {.callout-important title="Check your synthesis"}
+Compare studies rather than writing consecutive paper summaries. Point to the extraction cells supporting every sentence in your paragraph plan. Your final gap should arise from the synthesised evidence and remain appropriately bounded by the scope and quality of the included studies.
+:::
+
+## Week 1 practical portfolio
+
+By the end of the eight sections, your portfolio should contain:
+
+1. a review purpose and provisional knowledge map;
+2. a source map and vocabulary bank;
+3. a structured question and eligibility criteria;
+4. a tested concept table and search string;
+5. a search log and mini-protocol;
+6. a pilot screening record and selection funnel;
+7. a critical appraisal with evidential weight; and
+8. an extraction matrix, thematic grouping, and paragraph plan.
+
+Together, these outputs form the working foundation of a credible literature review. They also preserve the reasoning behind the review, allowing us to explain how the final written argument developed from a focused question and a transparent chain of evidence.
