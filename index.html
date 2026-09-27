@@ -43,11 +43,11 @@
     .slide-list{margin:8px 0 0 0;padding:0 0 0 16px}
     .slide-list li{margin:2px 0}
     .slide-list .resource-heading{list-style:none;margin:16px 0 6px}
-    .resource-heading h4,.resource-heading h5{margin:0;font-size:14px;color:var(--text)}
-    .resource-heading h5{font-size:13px;color:var(--muted)}
+    .resource-heading h4,.resource-heading h5,.resource-heading h6{margin:0;font-size:14px;color:var(--text)}
+    .resource-heading h5,.resource-heading h6{font-size:13px;color:var(--muted)}
     .slide-list .watch-item{list-style:none;margin:14px 0 18px -16px}
     .pre-session-watch{padding:16px;border:2px solid #ffbf69;border-left-width:6px;border-radius:12px;background:#352613;color:#fff1d6;box-shadow:0 4px 16px rgba(0,0,0,.2)}
-    .pre-session-watch h4,.pre-session-watch h5{margin:0 0 12px;font-size:16px;font-weight:700;color:#ffce8a}
+    .pre-session-watch h4,.pre-session-watch h5,.pre-session-watch h6{margin:0 0 12px;font-size:16px;font-weight:700;color:#ffce8a}
     .pre-session-watch .slide-list{margin:0;padding-left:18px}
     .pre-session-watch .slide-list li{margin:8px 0}
     .pre-session-watch .slide-link{background:#49341b;border-color:#c58b40;color:#fff1d6}
@@ -265,12 +265,21 @@
       13: "Communicating Research"
     };
 
-    const apWeekMap = {1: [1, 5], 3: [2], 6: [3, 4], 9: [7, 8, 12]};
+    // Keep the original Week 1 resources together beneath the main materials.
+    slides.filter(s => s.week === 1 && s.heading).forEach(s => { s.heading = 5; });
+    slides.unshift(
+      {title: 'Main lecture', file: 'https://josephmhango.github.io/research-methods/docs/week1-literature-review.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
+      {title: 'Main practical', file: 'https://josephmhango.github.io/research-methods/docs/week1-literature-review-guide.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
+      {title: 'Video series to watch', file: 'https://vle.harper-adams.ac.uk/course/section.php?id=9751', week: 1, topics: ['Literature review'], image: 'img/rmgis.png'},
+      {title: 'Supporting content', week: 1, topics: [], heading: 4, sectionStart: true}
+    );
+
+    const apWeekMap = {1: [1], 3: [2, 5], 6: [3, 4], 9: [7, 8, 12]};
     const apSlides = Object.entries(apWeekMap).flatMap(([week, sourceWeeks]) =>
       sourceWeeks.flatMap(sourceWeek => [
         {title: weekTitles[sourceWeek], week: Number(week), heading: 4, topics: [], topicStart: true},
         ...slides.filter(s => s.week === sourceWeek).map(s => ({
-          ...s, week: Number(week), ...(s.heading ? {heading: 5} : {})
+          ...s, week: Number(week), ...(s.heading ? {heading: Math.min(s.heading + 1, 6)} : {})
         }))
       ])
     );
@@ -280,8 +289,8 @@
     const schedules = {
       standard: {code: 'C5025HF', slides, weekTitles},
       ap: {code: 'C5025HF-AP', slides: apSlides, weekTitles: {
-        1: 'Module launch, literature literacy and Introductory R',
-        3: 'Social science design',
+        1: 'Module launch and literature literacy',
+        3: 'Social science design and Introductory R',
         6: 'Descriptive statistics, correlations, chi-square and T-tests',
         9: 'Statistical tests, ANOVA and regression',
         16: 'GIS sessions',
@@ -352,7 +361,7 @@
       const sections = [];
       let section = [];
       for (const item of items){
-        if (item.topicStart && section.length){
+        if ((item.topicStart || item.sectionStart) && section.length){
           sections.push(section);
           section = [];
         }
@@ -360,14 +369,15 @@
       }
       if (section.length) sections.push(section);
       return sections.flatMap(items => {
-        const topic = items[0]?.topicStart ? items[0] : null;
+        const topic = items[0]?.topicStart || items[0]?.sectionStart ? items[0] : null;
         const resources = topic ? items.slice(1) : items;
         const videos = resources.filter(isVideo);
         if (!videos.length) return items;
         return [
           ...(topic ? [topic] : []),
-          {title: 'Pre-session watch', heading: topic ? 5 : 4, videos},
-          ...resources.filter(s => !isVideo(s))
+          ...resources.filter(s => s.primary && !isVideo(s)),
+          {title: 'Pre-session watch', heading: topic ? Math.min(topic.heading + 1, 6) : 4, videos},
+          ...resources.filter(s => !isVideo(s) && !s.primary)
         ];
       });
     }
