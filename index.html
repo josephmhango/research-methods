@@ -283,6 +283,12 @@
         }))
       ])
     );
+    const apPracticalIndex = apSlides.findIndex(s => s.week === 1 && s.title === 'Main practical');
+    const apPractical = apSlides[apPracticalIndex];
+    apSlides.splice(apPracticalIndex, 1,
+      {...apPractical, title: 'Main practical 1', file: 'https://vle.harper-adams.ac.uk/mod/resource/view.php?id=49342'},
+      {...apPractical, title: 'Main practical 2', file: 'https://vle.harper-adams.ac.uk/mod/resource/view.php?id=49340'}
+    );
     apSlides.push(...[16, 19, 22, 23].map(week => ({
       title: 'GIS sessions', week, topics: ['GIS'], image: 'img/rmgis.png'
     })));
