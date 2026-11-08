@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="K.J. Mhango">
+
+<title>Week 7 Tutorial: Statistical Inference in R – C5025HF Research methods and Geographical Information Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1982d92fcc5dfdfe237df2a1a876723.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week7-hypothesis-testing-foundations.html">Week 7: Statistical Tests</a></li><li class="breadcrumb-item"><a href="./week7-statistical-inference-tutorial.html">Week 7 Tutorial: Statistical Inference in R</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Skills for a Credible Literature Review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building a Credible Literature Review</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3: Research and Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-scientific-method.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research and the Scientific Method: Study Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Central Tendency and Dispersion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4: Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Foundations (R)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Data Structures and Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation with dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syntax-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introductory R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indexing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data frames and tidy data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7: Statistical Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7-hypothesis-testing-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: From Variation to Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7-statistical-inference-tutorial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 7 Tutorial: Statistical Inference in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Colab tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8: ANOVA and Non-parametric Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fisher’s F and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">F-Test and ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA - 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nonparam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rank-Based and Exact Tests</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 11: Sampling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-sampling-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-spatial-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Sampling in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 12: Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week12-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 13: Communicating Research</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scientific Reporting (IMRaD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vistut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualisation Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing a Statistical Analysis Plan (SAP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-effective-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Communication with Graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-data-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-work-through-this-notebook" id="toc-how-to-work-through-this-notebook" class="nav-link active" data-scroll-target="#how-to-work-through-this-notebook">How to work through this notebook</a></li>
+  <li><a href="#part-a-parametric-and-chi-square-workflows" id="toc-part-a-parametric-and-chi-square-workflows" class="nav-link" data-scroll-target="#part-a-parametric-and-chi-square-workflows">Part A: Parametric and chi-square workflows</a>
+  <ul class="collapse">
+  <li><a href="#section-01-reproducible-session-setup" id="toc-section-01-reproducible-session-setup" class="nav-link" data-scroll-target="#section-01-reproducible-session-setup">Section 01 — Reproducible session setup</a></li>
+  <li><a href="#section-02-reusable-variable-names" id="toc-section-02-reusable-variable-names" class="nav-link" data-scroll-target="#section-02-reusable-variable-names">Section 02 — Reusable variable names</a></li>
+  </ul></li>
+  <li><a href="#a-continuous-response-in-two-independent-groups" id="toc-a-continuous-response-in-two-independent-groups" class="nav-link" data-scroll-target="#a-continuous-response-in-two-independent-groups">A continuous response in two independent groups</a>
+  <ul class="collapse">
+  <li><a href="#section-03-research-context-question-and-dataset" id="toc-section-03-research-context-question-and-dataset" class="nav-link" data-scroll-target="#section-03-research-context-question-and-dataset">Section 03 — Research context, question and dataset</a></li>
+  <li><a href="#section-04-identify-the-observational-unit-and-variable-types" id="toc-section-04-identify-the-observational-unit-and-variable-types" class="nav-link" data-scroll-target="#section-04-identify-the-observational-unit-and-variable-types">Section 04 — Identify the observational unit and variable types</a></li>
+  <li><a href="#section-05-assign-generic-analysis-variables" id="toc-section-05-assign-generic-analysis-variables" class="nav-link" data-scroll-target="#section-05-assign-generic-analysis-variables">Section 05 — Assign generic analysis variables</a></li>
+  <li><a href="#section-06-from-the-null-hypothesis-to-the-reference-distribution" id="toc-section-06-from-the-null-hypothesis-to-the-reference-distribution" class="nav-link" data-scroll-target="#section-06-from-the-null-hypothesis-to-the-reference-distribution">Section 06 — From the null hypothesis to the reference distribution</a></li>
+  <li><a href="#section-07-check-the-assumptions-of-the-selected-model" id="toc-section-07-check-the-assumptions-of-the-selected-model" class="nav-link" data-scroll-target="#section-07-check-the-assumptions-of-the-selected-model">Section 07 — Check the assumptions of the selected model</a></li>
+  <li><a href="#section-08-run-evaluate-and-report-the-t-test" id="toc-section-08-run-evaluate-and-report-the-t-test" class="nav-link" data-scroll-target="#section-08-run-evaluate-and-report-the-t-test">Section 08 — Run, evaluate and report the t-test</a></li>
+  </ul></li>
+  <li><a href="#two-categorical-variables" id="toc-two-categorical-variables" class="nav-link" data-scroll-target="#two-categorical-variables">Two categorical variables</a>
+  <ul class="collapse">
+  <li><a href="#section-09-research-context-question-and-dataset" id="toc-section-09-research-context-question-and-dataset" class="nav-link" data-scroll-target="#section-09-research-context-question-and-dataset">Section 09 — Research context, question and dataset</a></li>
+  <li><a href="#section-10-identify-the-observational-unit-and-variable-types" id="toc-section-10-identify-the-observational-unit-and-variable-types" class="nav-link" data-scroll-target="#section-10-identify-the-observational-unit-and-variable-types">Section 10 — Identify the observational unit and variable types</a></li>
+  <li><a href="#section-11-assign-generic-analysis-variables" id="toc-section-11-assign-generic-analysis-variables" class="nav-link" data-scroll-target="#section-11-assign-generic-analysis-variables">Section 11 — Assign generic analysis variables</a></li>
+  <li><a href="#section-12-from-the-null-hypothesis-to-the-reference-distribution" id="toc-section-12-from-the-null-hypothesis-to-the-reference-distribution" class="nav-link" data-scroll-target="#section-12-from-the-null-hypothesis-to-the-reference-distribution">Section 12 — From the null hypothesis to the reference distribution</a></li>
+  <li><a href="#section-13-check-expected-counts-and-design-assumptions" id="toc-section-13-check-expected-counts-and-design-assumptions" class="nav-link" data-scroll-target="#section-13-check-expected-counts-and-design-assumptions">Section 13 — Check expected counts and design assumptions</a></li>
+  <li><a href="#section-14-run-evaluate-and-report-the-chi-square-test" id="toc-section-14-run-evaluate-and-report-the-chi-square-test" class="nav-link" data-scroll-target="#section-14-run-evaluate-and-report-the-chi-square-test">Section 14 — Run, evaluate and report the chi-square test</a></li>
+  </ul></li>
+  <li><a href="#two-continuous-variables" id="toc-two-continuous-variables" class="nav-link" data-scroll-target="#two-continuous-variables">Two continuous variables</a>
+  <ul class="collapse">
+  <li><a href="#section-15-research-context-question-and-dataset" id="toc-section-15-research-context-question-and-dataset" class="nav-link" data-scroll-target="#section-15-research-context-question-and-dataset">Section 15 — Research context, question and dataset</a></li>
+  <li><a href="#section-16-identify-the-observational-unit-and-variable-types" id="toc-section-16-identify-the-observational-unit-and-variable-types" class="nav-link" data-scroll-target="#section-16-identify-the-observational-unit-and-variable-types">Section 16 — Identify the observational unit and variable types</a></li>
+  <li><a href="#section-17-assign-generic-analysis-variables" id="toc-section-17-assign-generic-analysis-variables" class="nav-link" data-scroll-target="#section-17-assign-generic-analysis-variables">Section 17 — Assign generic analysis variables</a></li>
+  <li><a href="#section-18-from-the-null-hypothesis-to-the-reference-distribution" id="toc-section-18-from-the-null-hypothesis-to-the-reference-distribution" class="nav-link" data-scroll-target="#section-18-from-the-null-hypothesis-to-the-reference-distribution">Section 18 — From the null hypothesis to the reference distribution</a></li>
+  <li><a href="#section-19-check-pearson-correlation-assumptions" id="toc-section-19-check-pearson-correlation-assumptions" class="nav-link" data-scroll-target="#section-19-check-pearson-correlation-assumptions">Section 19 — Check Pearson correlation assumptions</a></li>
+  <li><a href="#section-20-calculate-pearsons-r-and-its-p-value" id="toc-section-20-calculate-pearsons-r-and-its-p-value" class="nav-link" data-scroll-target="#section-20-calculate-pearsons-r-and-its-p-value">Section 20 — Calculate Pearson’s r and its p-value</a></li>
+  </ul></li>
+  <li><a href="#part-b-alternative-and-non-parametric-workflows" id="toc-part-b-alternative-and-non-parametric-workflows" class="nav-link" data-scroll-target="#part-b-alternative-and-non-parametric-workflows">Part B: Alternative and non-parametric workflows</a>
+  <ul class="collapse">
+  <li><a href="#section-21-move-from-a-main-test-to-an-alternative" id="toc-section-21-move-from-a-main-test-to-an-alternative" class="nav-link" data-scroll-target="#section-21-move-from-a-main-test-to-an-alternative">Section 21 — Move from a main test to an alternative</a></li>
+  <li><a href="#section-22-alternative-to-the-independent-t-test-wilcoxon-rank-sum" id="toc-section-22-alternative-to-the-independent-t-test-wilcoxon-rank-sum" class="nav-link" data-scroll-target="#section-22-alternative-to-the-independent-t-test-wilcoxon-rank-sum">Section 22 — Alternative to the independent t-test: Wilcoxon rank-sum</a></li>
+  <li><a href="#section-23-alternative-to-the-paired-t-test-wilcoxon-signed-rank" id="toc-section-23-alternative-to-the-paired-t-test-wilcoxon-signed-rank" class="nav-link" data-scroll-target="#section-23-alternative-to-the-paired-t-test-wilcoxon-signed-rank">Section 23 — Alternative to the paired t-test: Wilcoxon signed-rank</a></li>
+  <li><a href="#section-24-when-chi-square-needs-an-alternative" id="toc-section-24-when-chi-square-needs-an-alternative" class="nav-link" data-scroll-target="#section-24-when-chi-square-needs-an-alternative">Section 24 — When chi-square needs an alternative</a></li>
+  <li><a href="#section-25-alternative-to-chi-square-fishers-exact-test" id="toc-section-25-alternative-to-chi-square-fishers-exact-test" class="nav-link" data-scroll-target="#section-25-alternative-to-chi-square-fishers-exact-test">Section 25 — Alternative to chi-square: Fisher’s exact test</a></li>
+  <li><a href="#section-26-alternative-to-independent-chi-square-mcnemars-test" id="toc-section-26-alternative-to-independent-chi-square-mcnemars-test" class="nav-link" data-scroll-target="#section-26-alternative-to-independent-chi-square-mcnemars-test">Section 26 — Alternative to independent chi-square: McNemar’s test</a></li>
+  <li><a href="#section-27-alternative-to-pearsons-r-spearmans-rho" id="toc-section-27-alternative-to-pearsons-r-spearmans-rho" class="nav-link" data-scroll-target="#section-27-alternative-to-pearsons-r-spearmans-rho">Section 27 — Alternative to Pearson’s r: Spearman’s rho</a></li>
+  <li><a href="#section-28-another-alternative-to-pearsons-r-kendalls-tau" id="toc-section-28-another-alternative-to-pearsons-r-kendalls-tau" class="nav-link" data-scroll-target="#section-28-another-alternative-to-pearsons-r-kendalls-tau">Section 28 — Another alternative to Pearson’s r: Kendall’s tau</a></li>
+  </ul></li>
+  <li><a href="#final-analysis-checklist" id="toc-final-analysis-checklist" class="nav-link" data-scroll-target="#final-analysis-checklist">Final analysis checklist</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./week7-hypothesis-testing-foundations.html">Week 7: Statistical Tests</a></li><li class="breadcrumb-item"><a href="./week7-statistical-inference-tutorial.html">Week 7 Tutorial: Statistical Inference in R</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 7 Tutorial: Statistical Inference in R</h1>
+<p class="subtitle lead">Reusable workflows for t-tests, chi-square tests, correlation and alternative tests</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>K.J. Mhango </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="how-to-work-through-this-notebook" class="level1">
+<h1>How to work through this notebook</h1>
+<p>Work through the sections in order. Later code cells use objects from earlier sections. During the co-coding session, take turns to lead a section.</p>
+<p>Before you run a code cell:</p>
+<ol type="1">
+<li>Read the research question or task aloud.</li>
+<li>Explain the role of each variable.</li>
+<li>State the null hypothesis when one is required.</li>
+<li>Predict what the code should produce.</li>
+<li>Run the cell and explain the output.</li>
+</ol>
+<p>Sections 1–20 show the main workflows. Sections 21–28 show alternative tests. All data are available in R or in this project. You do not need an internet connection.</p>
+<p>The main principle remains the same throughout:</p>
+<blockquote class="blockquote">
+<p>We compare what we observed with what we expect when the null hypothesis is true.</p>
+</blockquote>
+</section>
+<section id="part-a-parametric-and-chi-square-workflows" class="level1">
+<h1>Part A: Parametric and chi-square workflows</h1>
+<section id="section-01-reproducible-session-setup" class="level2">
+<h2 class="anchored" data-anchor-id="section-01-reproducible-session-setup">Section 01 — Reproducible session setup</h2>
+<p>Always restart the R kernel from the notebook menu. This removes objects from an earlier analysis.</p>
+<p>The setup cell records the R version and the operating system. It also sets a random seed. The seed makes simulated results repeatable.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Confirm that the R kernel has been restarted.</li>
+<li>Explain what the random seed controls.</li>
+<li>Run the cell.</li>
+<li>Identify the R version recorded in the output.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5025</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.2 (2024-10-31 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+
+
+locale:
+[1] C
+system code page: 65001
+
+time zone: Europe/London
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] htmlwidgets_1.6.4 compiler_4.4.2    fastmap_1.2.0     cli_3.6.3        
+ [5] tools_4.4.2       htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.29   
+ [9] knitr_1.49        jsonlite_1.8.9    xfun_0.50         digest_0.6.37    
+[13] rlang_1.1.5       evaluate_1.0.3   </code></pre>
+</div>
+</div>
+<p>The output records the R version and the operating system. This information helps another person repeat the analysis.</p>
+</section>
+<section id="section-02-reusable-variable-names" class="level2">
+<h2 class="anchored" data-anchor-id="section-02-reusable-variable-names">Section 02 — Reusable variable names</h2>
+<p>Datasets use different column names. For example, a plant response can be <code>height</code>, <code>weight</code>, <code>yield</code>, or <code>biomass</code>. Generic names let you reuse the same R code.</p>
+<p>Use these conventions:</p>
+<ul>
+<li><code>y_variable</code> for a numeric response or outcome;</li>
+<li><code>x_variable</code> for a numeric explanatory variable;</li>
+<li><code>categories</code> when the analysis has one categorical variable;</li>
+<li><code>category_a</code> and <code>category_b</code> when the analysis has two categorical variables;</li>
+<li><code>pair_id</code> for the identifier in a paired design.</li>
+</ul>
+<p>The source data stay unchanged. We use the generic names in a separate data frame.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Read each generic name and state the type of variable it should contain.</li>
+<li>Explain why generic names make later code reusable.</li>
+<li>Run the cell to create the naming guide.</li>
+<li>Refer to the guide when assigning variables later.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>analysis_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"Numeric response"</span>, <span class="st">"Numeric explanatory variable"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Single categorical variable"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"First of two categories"</span>, <span class="st">"Second of two categories"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Paired identifier"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">generic_name =</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"x_variable"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"categories"</span>, <span class="st">"category_a"</span>, <span class="st">"category_b"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"pair_id"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>analysis_names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          role generic_name
+1             Numeric response   y_variable
+2 Numeric explanatory variable   x_variable
+3  Single categorical variable   categories
+4      First of two categories   category_a
+5     Second of two categories   category_b
+6            Paired identifier      pair_id</code></pre>
+</div>
+</div>
+<p>The later tests use these generic names. For a new dataset, change the variable assignments. You can then reuse the test code.</p>
+</section>
+</section>
+<section id="a-continuous-response-in-two-independent-groups" class="level1">
+<h1>A continuous response in two independent groups</h1>
+<section id="section-03-research-context-question-and-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="section-03-research-context-question-and-dataset">Section 03 — Research context, question and dataset</h2>
+<p>The <code>PlantGrowth</code> dataset gives the dry weight of plants in one control group and two treatment groups. Start with the research question:</p>
+<blockquote class="blockquote">
+<p>Do plants receiving treatment 2 have a different mean dried weight from control plants?</p>
+</blockquote>
+<p>The question states what you want to learn. First, identify what one row represents. Then identify each variable type.</p>
+<p>Read the question aloud. Then load the data and inspect its structure.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Read the research question aloud.</li>
+<li>State what information the question asks us to compare.</li>
+<li>Run the cell to load and inspect the dataset.</li>
+<li>Avoid naming a statistical test at this stage.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PlantGrowth"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PlantGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   30 obs. of  2 variables:
+ $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PlantGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  weight group
+1   4.17  ctrl
+2   5.58  ctrl
+3   5.18  ctrl
+4   6.11  ctrl
+5   4.50  ctrl
+6   4.61  ctrl</code></pre>
+</div>
+</div>
+<p>Do not choose a test yet. First understand the question and the data.</p>
+</section>
+<section id="section-04-identify-the-observational-unit-and-variable-types" class="level2">
+<h2 class="anchored" data-anchor-id="section-04-identify-the-observational-unit-and-variable-types">Section 04 — Identify the observational unit and variable types</h2>
+<p>One row represents one plant. <code>weight</code> is the continuous response variable. <code>group</code> is the categorical explanatory variable.</p>
+<p>The question compares treatment 2 with the control group. We therefore remove treatment 1. Each group contains different plants. The two groups are independent.</p>
+<p>Summarise the variables before you state the null hypothesis or choose a test.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify what one row represents.</li>
+<li>Classify <code>weight</code> and <code>group</code> by variable type.</li>
+<li>Explain why the two selected groups are independent.</li>
+<li>Run the cell and describe the observed group summaries.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t_source <span class="ot">&lt;-</span> PlantGrowth[PlantGrowth<span class="sc">$</span>group <span class="sc">!=</span> <span class="st">"trt1"</span>, ]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t_source<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(t_source<span class="sc">$</span>group)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(t_source)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     weight      group   
+ Min.   :4.17   ctrl:10  
+ 1st Qu.:5.07   trt2:10  
+ Median :5.28            
+ Mean   :5.28            
+ 3rd Qu.:5.55            
+ Max.   :6.31            </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(t_source<span class="sc">$</span>weight[t_source<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"ctrl"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   4.17    4.55    5.16    5.03    5.29    6.11 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(t_source<span class="sc">$</span>weight[t_source<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"trt2"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   4.92    5.27    5.43    5.53    5.74    6.31 </code></pre>
+</div>
+</div>
+<p>The response is continuous. The explanatory variable has two categories. The observations are independent. The summaries show a difference between the sample means. They do not tell us if this difference is unusual.</p>
+</section>
+<section id="section-05-assign-generic-analysis-variables" class="level2">
+<h2 class="anchored" data-anchor-id="section-05-assign-generic-analysis-variables">Section 05 — Assign generic analysis variables</h2>
+<p>Rename the numeric response as <code>y_variable</code>. Rename the group column as <code>categories</code>. Set the group order as control, then treatment 2. R will calculate the difference as control minus treatment 2.</p>
+<p>For a new dataset, assign its columns to the same generic names. The remaining code can stay the same.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Match the original response to <code>y_variable</code>.</li>
+<li>Match the original grouping variable to <code>categories</code>.</li>
+<li>Check the chosen factor order and explain the direction it creates.</li>
+<li>Run the cell and verify the generic dataset.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>t_data <span class="ot">&lt;-</span> t_source</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(t_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"categories"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>t_data<span class="sc">$</span>categories <span class="ot">&lt;-</span> <span class="fu">factor</span>(t_data<span class="sc">$</span>categories, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ctrl"</span>, <span class="st">"trt2"</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(t_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   20 obs. of  2 variables:
+ $ y_variable: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ categories: Factor w/ 2 levels "ctrl","trt2": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t_data<span class="sc">$</span>categories)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ctrl trt2 
+  10   10 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(t_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  y_variable categories
+1       4.17       ctrl
+2       5.58       ctrl
+3       5.18       ctrl
+4       6.11       ctrl
+5       4.50       ctrl
+6       4.61       ctrl</code></pre>
+</div>
+</div>
+<p>The data now contain the two variables that we need. You can reuse the remaining code with another dataset after you assign the same generic names.</p>
+</section>
+<section id="section-06-from-the-null-hypothesis-to-the-reference-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="section-06-from-the-null-hypothesis-to-the-reference-distribution">Section 06 — From the null hypothesis to the reference distribution</h2>
+<p>Let <span class="math inline">\(\mu_{\text{ctrl}}\)</span> and <span class="math inline">\(\mu_{\text{trt2}}\)</span> represent the population mean weights. The hypotheses are:</p>
+<p><span class="math display">\[
+H_0:\mu_{\text{ctrl}}-\mu_{\text{trt2}}=0
+\]</span></p>
+<p><span class="math display">\[
+H_1:\mu_{\text{ctrl}}-\mu_{\text{trt2}}\ne0
+\]</span></p>
+<p>The question asks about two population means. The null hypothesis says that their difference is zero. Sample means still vary when the null hypothesis is true. Two samples can therefore have different means because of random sampling.</p>
+<p>The response is continuous. First calculate the difference between the sample means. Then divide this difference by its estimated standard error. We do not know the population standard deviations. The resulting statistic therefore uses a t-distribution as its reference distribution.</p>
+<p>This reasoning leads to Welch’s independent-samples t-test. This test does not require equal population variances.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> in words.</li>
+<li>Identify the observed departure as a difference between sample means.</li>
+<li>Explain why we use a t-distribution when we estimate the standard error from the samples.</li>
+<li>Run the cell and interpret the sign of the observed difference.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>control_values <span class="ot">&lt;-</span> t_data<span class="sc">$</span>y_variable[t_data<span class="sc">$</span>categories <span class="sc">==</span> <span class="st">"ctrl"</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>treatment_values <span class="ot">&lt;-</span> t_data<span class="sc">$</span>y_variable[t_data<span class="sc">$</span>categories <span class="sc">==</span> <span class="st">"trt2"</span>]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>control_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(control_values)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>treatment_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(treatment_values)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>observed_mean_difference <span class="ot">&lt;-</span> control_mean <span class="sc">-</span> treatment_mean</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>control_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.032</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>treatment_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.526</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>observed_mean_difference</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.494</code></pre>
+</div>
+</div>
+<p>The sign shows the direction of the difference. A negative value means that the control sample has the lower mean. The test asks if the difference is large compared with ordinary sampling variation.</p>
+</section>
+<section id="section-07-check-the-assumptions-of-the-selected-model" class="level2">
+<h2 class="anchored" data-anchor-id="section-07-check-the-assumptions-of-the-selected-model">Section 07 — Check the assumptions of the selected model</h2>
+<p>Welch’s t-test requires independent observations and a numeric response. It also requires the sample means to have an approximately Gaussian sampling distribution. Check independence from the study design. Each plant must give one observation. The two groups must not contain matched plants.</p>
+<p>Use the boxplot to look for large outliers. Use the Q-Q plots to look for clear departures from a Gaussian shape. The Shapiro-Wilk test gives more information. However, it can miss a departure when the sample is small. Use the plots and the test result together.</p>
+<p>The Shapiro-Wilk test uses the following null hypothesis:</p>
+<p><span class="math display">\[
+H_0:\text{the observations are compatible with a Gaussian population}
+\]</span></p>
+<p>Use the p-value as follows:</p>
+<ul>
+<li>If <span class="math inline">\(p\le0.05\)</span>, reject <span class="math inline">\(H_0\)</span>. The data give evidence of a departure from a Gaussian distribution.</li>
+<li>If <span class="math inline">\(p&gt;0.05\)</span>, do not reject <span class="math inline">\(H_0\)</span>. The test does not show a clear departure from a Gaussian distribution.</li>
+</ul>
+<p>A p-value above 0.05 does not prove that the population is Gaussian. A small sample can hide a departure. Always inspect the Q-Q plot and the outliers too.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>State which assumption depends on the study design.</li>
+<li>Run the diagnostic cell.</li>
+<li>Inspect the boxplot for influential observations.</li>
+<li>Interpret each Shapiro-Wilk p-value, then compare it with the corresponding quantile plot.</li>
+<li>Decide whether the selected model remains reasonable.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(y_variable <span class="sc">~</span> categories, <span class="at">data =</span> t_data,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Group distributions"</span>, <span class="at">xlab =</span> <span class="st">"Group"</span>, <span class="at">ylab =</span> <span class="st">"Plant weight"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(control_values, <span class="at">main =</span> <span class="st">"Q-Q: control"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(control_values)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(treatment_values, <span class="at">main =</span> <span class="st">"Q-Q: treatment 2"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(treatment_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week7-statistical-inference-tutorial_files/figure-html/section-07-check-t-assumptions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(control_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  control_values
+W = 0.96, p-value = 0.7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(treatment_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  treatment_values
+W = 0.94, p-value = 0.6</code></pre>
+</div>
+</div>
+<p>Welch’s test does not require equal population variances. If you find large outliers or strong skew, consider the Wilcoxon rank-sum test in Section 22.</p>
+</section>
+<section id="section-08-run-evaluate-and-report-the-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="section-08-run-evaluate-and-report-the-t-test">Section 08 — Run, evaluate and report the t-test</h2>
+<p>The formula <code>y_variable ~ categories</code> compares the numeric response across the two groups. R uses Welch’s t-test by default. The output gives the t-statistic, degrees of freedom, p-value, confidence interval, and group means.</p>
+<p>Before you run the code, state <span class="math inline">\(H_0\)</span> again. Then compare the p-value with your significance level. Read the confidence interval in the direction that R used.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Restate <span class="math inline">\(H_0\)</span> and choose the significance level.</li>
+<li>Run Welch’s test.</li>
+<li>Locate the statistic, degrees of freedom, p-value, means, and confidence interval.</li>
+<li>Make the statistical decision.</li>
+<li>Report the result in relation to plant weight.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>t_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(y_variable <span class="sc">~</span> categories, <span class="at">data =</span> t_data,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>t_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  y_variable by categories
+t = -2.1, df = 17, p-value = 0.05
+alternative hypothesis: true difference in means between group ctrl and group trt2 is not equal to 0
+95 percent confidence interval:
+ -0.982872 -0.005128
+sample estimates:
+mean in group ctrl mean in group trt2 
+             5.032              5.526 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>t_result<span class="sc">$</span>statistic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     t 
+-2.134 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>t_result<span class="sc">$</span>parameter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   df 
+16.79 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>t_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0479</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>t_result<span class="sc">$</span>conf.int</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.982872 -0.005128
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>t_result<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean in group ctrl mean in group trt2 
+             5.032              5.526 </code></pre>
+</div>
+</div>
+<p>For these data, the p-value is close to 0.05. The confidence interval only just excludes zero. At <span class="math inline">\(\alpha=0.05\)</span>, reject <span class="math inline">\(H_0\)</span>. Report evidence of a difference in population mean weight. Treatment 2 has the higher sample mean. Include the exact p-value, estimated difference, confidence interval, and sample sizes in your report.</p>
+</section>
+</section>
+<section id="two-categorical-variables" class="level1">
+<h1>Two categorical variables</h1>
+<section id="section-09-research-context-question-and-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="section-09-research-context-question-and-dataset">Section 09 — Research context, question and dataset</h2>
+<p>The Titanic dataset has one passenger in each row. We will load it from GitHub. Use the passenger class and survival columns to answer this question:</p>
+<p>Our research question is:</p>
+<blockquote class="blockquote">
+<p>Is passenger class associated with survival on the Titanic?</p>
+</blockquote>
+<p>You need an internet connection when you run the next code cell.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Read the research question aloud.</li>
+<li>Explain what one row represents.</li>
+<li>Run the cell to inspect the source structure.</li>
+<li>Identify the number of passenger rows.</li>
+<li>Avoid selecting a test until the variable types are clear.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>titanic_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv"</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>titanic_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(titanic_url)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(titanic_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   891 obs. of  15 variables:
+ $ survived   : int  0 1 1 1 0 0 0 0 1 1 ...
+ $ pclass     : int  3 1 3 1 3 3 1 3 3 2 ...
+ $ sex        : chr  "male" "female" "female" "female" ...
+ $ age        : num  22 38 26 35 35 NA 54 2 27 14 ...
+ $ sibsp      : int  1 1 0 1 0 0 0 3 0 1 ...
+ $ parch      : int  0 0 0 0 0 0 0 1 2 0 ...
+ $ fare       : num  7.25 71.28 7.92 53.1 8.05 ...
+ $ embarked   : chr  "S" "C" "S" "S" ...
+ $ class      : chr  "Third" "First" "Third" "First" ...
+ $ who        : chr  "man" "woman" "woman" "woman" ...
+ $ adult_male : chr  "True" "False" "False" "False" ...
+ $ deck       : chr  "" "C" "" "C" ...
+ $ embark_town: chr  "Southampton" "Cherbourg" "Southampton" "Southampton" ...
+ $ alive      : chr  "no" "yes" "yes" "yes" ...
+ $ alone      : chr  "False" "False" "True" "False" ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(titanic_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  survived pclass    sex age sibsp parch   fare embarked class   who adult_male
+1        0      3   male  22     1     0  7.250        S Third   man       True
+2        1      1 female  38     1     0 71.283        C First woman      False
+3        1      3 female  26     0     0  7.925        S Third woman      False
+4        1      1 female  35     1     0 53.100        S First woman      False
+5        0      3   male  35     0     0  8.050        S Third   man       True
+6        0      3   male  NA     0     0  8.458        Q Third   man       True
+  deck embark_town alive alone
+1      Southampton    no False
+2    C   Cherbourg   yes False
+3      Southampton   yes  True
+4    C Southampton   yes False
+5      Southampton    no  True
+6       Queenstown    no  True</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(titanic_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 891</code></pre>
+</div>
+</div>
+<p>Do not choose a test yet. First identify the observational unit and the variable types.</p>
+</section>
+<section id="section-10-identify-the-observational-unit-and-variable-types" class="level2">
+<h2 class="anchored" data-anchor-id="section-10-identify-the-observational-unit-and-variable-types">Section 10 — Identify the observational unit and variable types</h2>
+<p>One row represents one passenger. Passenger class and survival are categorical variables. We will count the passengers in each combination of categories.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify one passenger as the observational unit.</li>
+<li>Classify passenger class and survival by variable type.</li>
+<li>Run the cell and describe the category frequencies.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(titanic_data<span class="sc">$</span>class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ First Second  Third 
+   216    184    491 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(titanic_data<span class="sc">$</span>alive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ no yes 
+549 342 </code></pre>
+</div>
+</div>
+<p>These totals describe the data. We will also use them to calculate expected counts.</p>
+</section>
+<section id="section-11-assign-generic-analysis-variables" class="level2">
+<h2 class="anchored" data-anchor-id="section-11-assign-generic-analysis-variables">Section 11 — Assign generic analysis variables</h2>
+<p>Copy passenger class to <code>category_a</code>. Copy survival to <code>category_b</code>. You can reuse the same table code with another row-level dataset.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Assign passenger class to <code>category_a</code>.</li>
+<li>Assign survival to <code>category_b</code>.</li>
+<li>Run the cell and verify that the number of rows has not changed.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>chi_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">category_a =</span> titanic_data<span class="sc">$</span>class,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">category_b =</span> titanic_data<span class="sc">$</span>alive</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chi_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   891 obs. of  2 variables:
+ $ category_a: chr  "Third" "First" "Third" "First" ...
+ $ category_b: chr  "no" "yes" "yes" "yes" ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(chi_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  category_a category_b
+1      Third         no
+2      First        yes
+3      Third        yes
+4      First        yes
+5      Third         no
+6      Third         no</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(chi_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 891</code></pre>
+</div>
+</div>
+<p><code>category_a</code> defines the table rows. <code>category_b</code> defines the table columns.</p>
+</section>
+<section id="section-12-from-the-null-hypothesis-to-the-reference-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="section-12-from-the-null-hypothesis-to-the-reference-distribution">Section 12 — From the null hypothesis to the reference distribution</h2>
+<p>The hypotheses are:</p>
+<p><span class="math display">\[
+H_0:\text{passenger class and survival are independent}
+\]</span></p>
+<p><span class="math display">\[
+H_1:\text{passenger class and survival are associated}
+\]</span></p>
+<p>The question asks if two categorical variables are associated. The null hypothesis says that they are independent. If they are independent, the row totals and column totals determine the expected count in each cell.</p>
+<p>Compare each observed count with its expected count. Square each difference and divide it by the expected count. Add all these values to get Pearson’s chi-square statistic.</p>
+<p><span class="math display">\[
+\chi^2=\sum\frac{(O-E)^2}{E}
+\]</span></p>
+<p>When <span class="math inline">\(H_0\)</span> is true, large values of the statistic are unusual. If the expected counts are large enough, the statistic has an approximate chi-square distribution. We can therefore use Pearson’s chi-square test of association.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>State the independence null hypothesis in words.</li>
+<li>Explain how row and column totals define expected counts.</li>
+<li>Identify the departure as observed counts minus expected counts.</li>
+<li>Explain why a large chi-square statistic gives evidence against independence.</li>
+<li>Run the cell and describe the observed proportions.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>chi_table <span class="ot">&lt;-</span> <span class="fu">table</span>(chi_data<span class="sc">$</span>category_a, chi_data<span class="sc">$</span>category_b)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>chi_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+          no yes
+  First   80 136
+  Second  97  87
+  Third  372 119</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(chi_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+          no yes Sum
+  First   80 136 216
+  Second  97  87 184
+  Third  372 119 491
+  Sum    549 342 891</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(chi_table, <span class="at">margin =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+             no    yes
+  First  0.3704 0.6296
+  Second 0.5272 0.4728
+  Third  0.7576 0.2424</code></pre>
+</div>
+</div>
+<p>The row proportions show survival within each class. Use them to describe the association after the test.</p>
+</section>
+<section id="section-13-check-expected-counts-and-design-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="section-13-check-expected-counts-and-design-assumptions">Section 13 — Check expected counts and design assumptions</h2>
+<p>The chi-square test uses an approximation. The approximation works well when the expected counts are large enough. Use this rule: every expected count must be at least 1, and at least 80% of them must be 5 or more.</p>
+<p>The observations must also be independent. Each person must contribute to one cell only. Use McNemar’s test for paired binary data. Section 26 shows this test.</p>
+<p>Check the expected counts before you interpret the test.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Explain why independence depends on the study design.</li>
+<li>Run the expected-count check.</li>
+<li>Find the smallest expected count.</li>
+<li>Calculate the proportion of expected counts at least 5.</li>
+<li>Decide whether the chi-square approximation is suitable.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>chi_check <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(chi_table)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>chi_check<span class="sc">$</span>expected</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+            no    yes
+  First  133.1  82.91
+  Second 113.4  70.63
+  Third  302.5 188.46</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(chi_check<span class="sc">$</span>expected)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 70.63</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(chi_check<span class="sc">$</span>expected <span class="sc">&gt;=</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>The Titanic table has large expected counts. The chi-square approximation is suitable. Sections 24 and 25 show a test for small counts.</p>
+</section>
+<section id="section-14-run-evaluate-and-report-the-chi-square-test" class="level2">
+<h2 class="anchored" data-anchor-id="section-14-run-evaluate-and-report-the-chi-square-test">Section 14 — Run, evaluate and report the chi-square test</h2>
+<p>The test compares the observed counts with the counts expected under independence. A small p-value means that the differences are too large to explain easily by random sampling under <span class="math inline">\(H_0\)</span>.</p>
+<p>Standardised residuals show which cells make a large contribution to the result. A positive residual means that the observed count is higher than expected. A negative residual means that it is lower than expected.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Restate the independence null hypothesis.</li>
+<li>Run the selected test.</li>
+<li>Locate the statistic, degrees of freedom, p-value, and sample size.</li>
+<li>Use the standardised residuals to identify important cells.</li>
+<li>Report the association without making a causal claim.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>chi_result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(chi_table)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>chi_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  chi_table
+X-squared = 103, df = 2, p-value &lt;2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(chi_result<span class="sc">$</span>stdres, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+            no   yes
+  First  -8.53  8.53
+  Second -2.79  2.79
+  Third   9.62 -9.62</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>chi_result<span class="sc">$</span>statistic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X-squared 
+    102.9 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>chi_result<span class="sc">$</span>parameter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>df 
+ 2 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>chi_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.549e-23</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(chi_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 891</code></pre>
+</div>
+</div>
+<p>The p-value is far below 0.05. Reject <span class="math inline">\(H_0\)</span>. The data give strong evidence of an association between passenger class and survival. Use the row proportions and residuals to describe the pattern.</p>
+</section>
+</section>
+<section id="two-continuous-variables" class="level1">
+<h1>Two continuous variables</h1>
+<section id="section-15-research-context-question-and-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="section-15-research-context-question-and-dataset">Section 15 — Research context, question and dataset</h2>
+<p>The <code>mtcars</code> dataset gives fuel use and other measurements for 32 car models. Use it to examine vehicle weight and fuel economy.</p>
+<p>Our research question is:</p>
+<blockquote class="blockquote">
+<p>Is vehicle weight linearly associated with fuel economy?</p>
+</blockquote>
+<p>Start with the question. Then load the data. Do not choose a correlation method yet.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Read the research question aloud.</li>
+<li>Identify the two quantities named in the question.</li>
+<li>Run the cell to inspect the available variables.</li>
+<li>Check whether the selected columns contain missing values.</li>
+<li>Avoid naming a correlation method at this stage.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mtcars"</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars[<span class="fu">c</span>(<span class="st">"wt"</span>, <span class="st">"mpg"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     wt  mpg
+Mazda RX4         2.620 21.0
+Mazda RX4 Wag     2.875 21.0
+Datsun 710        2.320 22.8
+Hornet 4 Drive    3.215 21.4
+Hornet Sportabout 3.440 18.7
+Valiant           3.460 18.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars[<span class="fu">c</span>(<span class="st">"wt"</span>, <span class="st">"mpg"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       wt            mpg      
+ Min.   :1.51   Min.   :10.4  
+ 1st Qu.:2.58   1st Qu.:15.4  
+ Median :3.33   Median :19.2  
+ Mean   :3.22   Mean   :20.1  
+ 3rd Qu.:3.61   3rd Qu.:22.8  
+ Max.   :5.42   Max.   :33.9  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(mtcars<span class="sc">$</span>wt))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(mtcars<span class="sc">$</span>mpg))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>All 32 rows have values for both variables.</p>
+</section>
+<section id="section-16-identify-the-observational-unit-and-variable-types" class="level2">
+<h2 class="anchored" data-anchor-id="section-16-identify-the-observational-unit-and-variable-types">Section 16 — Identify the observational unit and variable types</h2>
+<p>One row represents one car model. Vehicle weight and fuel economy are continuous numeric variables. Weight is in thousands of pounds. Fuel economy is in miles per US gallon.</p>
+<p>The word <strong>linearly</strong> tells us to look for a straight-line relationship. First describe and plot the variables. Do not select a test yet.</p>
+<p>Calculate a summary for each variable.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify what one row represents.</li>
+<li>Classify weight and fuel economy by variable type.</li>
+<li>Explain what the word <strong>linearly</strong> adds to the question.</li>
+<li>Run the cell and describe the scale and spread of each variable.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars<span class="sc">$</span>wt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.51    2.58    3.33    3.22    3.61    5.42 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mtcars<span class="sc">$</span>wt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9785</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   10.4    15.4    19.2    20.1    22.8    33.9 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mtcars<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.027</code></pre>
+</div>
+</div>
+<p>The summaries show the scale and spread of each variable. A correlation coefficient is a value between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. It has no measurement unit.</p>
+</section>
+<section id="section-17-assign-generic-analysis-variables" class="level2">
+<h2 class="anchored" data-anchor-id="section-17-assign-generic-analysis-variables">Section 17 — Assign generic analysis variables</h2>
+<p>Rename vehicle weight as <code>x_variable</code>. Rename fuel economy as <code>y_variable</code>. These names help us make the plot. If you swap x and y, Pearson’s <span class="math inline">\(r\)</span> does not change.</p>
+<p>The remaining cells use the generic names. For a new analysis, assign two other numeric variables to these names.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Assign vehicle weight to <code>x_variable</code>.</li>
+<li>Assign fuel economy to <code>y_variable</code>.</li>
+<li>Run the cell and verify that both variables are numeric.</li>
+<li>Explain why swapping x and y would not change a correlation coefficient.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>cor_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_variable =</span> mtcars<span class="sc">$</span>wt,</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_variable =</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cor_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   32 obs. of  2 variables:
+ $ x_variable: num  2.62 2.88 2.32 3.21 3.44 ...
+ $ y_variable: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cor_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x_variable y_variable
+1      2.620       21.0
+2      2.875       21.0
+3      2.320       22.8
+4      3.215       21.4
+5      3.440       18.7
+6      3.460       18.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   x_variable     y_variable  
+ Min.   :1.51   Min.   :10.4  
+ 1st Qu.:2.58   1st Qu.:15.4  
+ Median :3.33   Median :19.2  
+ Mean   :3.22   Mean   :20.1  
+ 3rd Qu.:3.61   3rd Qu.:22.8  
+ Max.   :5.42   Max.   :33.9  </code></pre>
+</div>
+</div>
+<p>Both variables must be numeric measurements. A category code can contain numbers, but it is still a categorical variable.</p>
+</section>
+<section id="section-18-from-the-null-hypothesis-to-the-reference-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="section-18-from-the-null-hypothesis-to-the-reference-distribution">Section 18 — From the null hypothesis to the reference distribution</h2>
+<p>The question asks about a linear relationship between two continuous variables. Pearson’s <span class="math inline">\(\rho\)</span> is the population correlation. The hypotheses are:</p>
+<p><span class="math display">\[
+H_0:\rho=0
+\]</span></p>
+<p><span class="math display">\[
+H_1:\rho\ne0
+\]</span></p>
+<p>The null hypothesis says that the population linear correlation is zero. A sample can still have a positive or negative correlation because of random sampling.</p>
+<p>The sample correlation is <span class="math inline">\(r\)</span>. We use the following formula to convert <span class="math inline">\(r\)</span> to a t-statistic. Under <span class="math inline">\(H_0\)</span> and the test assumptions, this statistic has a t-distribution.</p>
+<p><span class="math display">\[
+t=r\sqrt{\frac{n-2}{1-r^2}}
+\]</span></p>
+<p>We can therefore use Pearson’s correlation test.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>State <span class="math inline">\(H_0:\rho=0\)</span> in words.</li>
+<li>Explain how sample correlations can vary when <span class="math inline">\(H_0\)</span> is true.</li>
+<li>Identify <span class="math inline">\(r\)</span> as the sample correlation.</li>
+<li>Explain why the test compares the calculated statistic with a t-distribution.</li>
+<li>Run the cell and interpret the sign of <span class="math inline">\(r\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>observed_r <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_data<span class="sc">$</span>x_variable, cor_data<span class="sc">$</span>y_variable)</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>observed_r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.8677</code></pre>
+</div>
+</div>
+<p>The negative sign means that larger x values tend to occur with smaller y values. The test asks if the correlation is unusual when the population correlation is zero.</p>
+</section>
+<section id="section-19-check-pearson-correlation-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="section-19-check-pearson-correlation-assumptions">Section 19 — Check Pearson correlation assumptions</h2>
+<p>Pearson’s test requires independent observations and an approximately linear relationship. The scatterplot is the main check. Look for a straight-line pattern, separate groups, and large outliers.</p>
+<p>Use the Q-Q plots to check each variable. Large departures from the line can make the p-value and confidence interval less reliable. Large outliers can also have a strong effect on Pearson’s <span class="math inline">\(r\)</span>.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>State which assumptions depend on the sampling design.</li>
+<li>Run the diagnostic plots.</li>
+<li>Inspect the scatterplot for linearity, clusters, and influential observations.</li>
+<li>Inspect both quantile plots.</li>
+<li>Decide whether Pearson’s model remains reasonable.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y_variable <span class="sc">~</span> x_variable, <span class="at">data =</span> cor_data,</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Weight and fuel economy"</span>, <span class="at">xlab =</span> <span class="st">"x_variable"</span>, <span class="at">ylab =</span> <span class="st">"y_variable"</span>,</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_variable <span class="sc">~</span> x_variable, <span class="at">data =</span> cor_data)</span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(linear_model, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(cor_data<span class="sc">$</span>x_variable, <span class="at">main =</span> <span class="st">"Q-Q: x_variable"</span>)</span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(cor_data<span class="sc">$</span>x_variable)</span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(cor_data<span class="sc">$</span>y_variable, <span class="at">main =</span> <span class="st">"Q-Q: y_variable"</span>)</span>
+<span id="cb110-10"><a href="#cb110-10" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(cor_data<span class="sc">$</span>y_variable)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week7-statistical-inference-tutorial_files/figure-html/section-19-check-correlation-assumptions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The scatterplot shows a strong negative pattern. The pattern is approximately linear. Use Spearman’s rho or Kendall’s tau if the pattern is curved but always moves in one direction. You can also consider these tests when large outliers strongly affect Pearson’s <span class="math inline">\(r\)</span>.</p>
+</section>
+<section id="section-20-calculate-pearsons-r-and-its-p-value" class="level2">
+<h2 class="anchored" data-anchor-id="section-20-calculate-pearsons-r-and-its-p-value">Section 20 — Calculate Pearson’s r and its p-value</h2>
+<p>Use <code>cor()</code> to calculate Pearson’s <span class="math inline">\(r\)</span>. Use <code>cor.test()</code> to calculate the p-value for <span class="math inline">\(H_0:\rho=0\)</span>.</p>
+<p>Before you run the cell, state <span class="math inline">\(H_0:\rho=0\)</span> again. Use <span class="math inline">\(r\)</span> to describe the size and direction of the relationship. Use the p-value to make the decision about <span class="math inline">\(H_0\)</span>. Do not use the p-value as a measure of relationship strength.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Restate <span class="math inline">\(H_0\)</span> and choose the significance level.</li>
+<li>Use <code>cor()</code> to calculate Pearson’s <span class="math inline">\(r\)</span>.</li>
+<li>Use <code>cor.test()</code> to calculate the p-value.</li>
+<li>Make the statistical decision.</li>
+<li>Report the direction and strength of the relationship.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>pearson_r <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_data<span class="sc">$</span>x_variable, cor_data<span class="sc">$</span>y_variable)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>pearson_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(cor_data<span class="sc">$</span>x_variable, cor_data<span class="sc">$</span>y_variable,</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>pearson_p_value <span class="ot">&lt;-</span> pearson_test<span class="sc">$</span>p.value</span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>pearson_r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.8677</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>pearson_p_value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.294e-10</code></pre>
+</div>
+</div>
+<p>The result shows a strong negative correlation. The p-value is far below 0.05. Reject <span class="math inline">\(H_0\)</span>. Report evidence of a negative linear association between vehicle weight and fuel economy. In these data, heavier vehicles tend to have lower fuel economy.</p>
+</section>
+</section>
+<section id="part-b-alternative-and-non-parametric-workflows" class="level1">
+<h1>Part B: Alternative and non-parametric workflows</h1>
+<section id="section-21-move-from-a-main-test-to-an-alternative" class="level2">
+<h2 class="anchored" data-anchor-id="section-21-move-from-a-main-test-to-an-alternative">Section 21 — Move from a main test to an alternative</h2>
+<p>Start with the test that matches your research question. Then check its assumptions. If an important assumption does not hold, select an alternative that answers a similar question.</p>
+<p>The table links each main test to an alternative. It also shows the problem that can lead to the alternative.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Read each planned test in the decision map.</li>
+<li>Identify the assumption or design problem.</li>
+<li>Run the cell.</li>
+<li>Explain why the problem leads to the alternative test.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>alternative_map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">planned_test =</span> <span class="fu">c</span>(</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent t-test"</span>,</span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Paired t-test"</span>,</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson's chi-square test"</span>,</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson's chi-square test"</span>,</span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson's correlation"</span></span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">problem =</span> <span class="fu">c</span>(</span>
+<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Large outliers or strong skew in small groups"</span>,</span>
+<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Large outliers in paired differences that remain roughly symmetric"</span>,</span>
+<span id="cb116-12"><a href="#cb116-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Expected cell counts are too small"</span>,</span>
+<span id="cb116-13"><a href="#cb116-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The same people give both binary responses"</span>,</span>
+<span id="cb116-14"><a href="#cb116-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The relationship is monotonic but not linear, or the data are ordinal"</span></span>
+<span id="cb116-15"><a href="#cb116-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb116-16"><a href="#cb116-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="fu">c</span>(</span>
+<span id="cb116-17"><a href="#cb116-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Wilcoxon rank-sum"</span>,</span>
+<span id="cb116-18"><a href="#cb116-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Wilcoxon signed-rank"</span>,</span>
+<span id="cb116-19"><a href="#cb116-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fisher's exact test"</span>,</span>
+<span id="cb116-20"><a href="#cb116-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"McNemar's test"</span>,</span>
+<span id="cb116-21"><a href="#cb116-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Spearman's rho or Kendall's tau"</span></span>
+<span id="cb116-22"><a href="#cb116-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb116-23"><a href="#cb116-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb116-24"><a href="#cb116-24" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb116-25"><a href="#cb116-25" aria-hidden="true" tabindex="-1"></a>  alternative_map,</span>
+<span id="cb116-26"><a href="#cb116-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Planned test"</span>, <span class="st">"Problem"</span>, <span class="st">"Alternative test"</span>)</span>
+<span id="cb116-27"><a href="#cb116-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 54%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Planned test</th>
+<th style="text-align: left;">Problem</th>
+<th style="text-align: left;">Alternative test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Independent t-test</td>
+<td style="text-align: left;">Large outliers or strong skew in small groups</td>
+<td style="text-align: left;">Wilcoxon rank-sum</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Paired t-test</td>
+<td style="text-align: left;">Large outliers in paired differences that remain roughly symmetric</td>
+<td style="text-align: left;">Wilcoxon signed-rank</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pearson’s chi-square test</td>
+<td style="text-align: left;">Expected cell counts are too small</td>
+<td style="text-align: left;">Fisher’s exact test</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pearson’s chi-square test</td>
+<td style="text-align: left;">The same people give both binary responses</td>
+<td style="text-align: left;">McNemar’s test</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pearson’s correlation</td>
+<td style="text-align: left;">The relationship is monotonic but not linear, or the data are ordinal</td>
+<td style="text-align: left;">Spearman’s rho or Kendall’s tau</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Use the table as a guide. The alternative can have a different null hypothesis. Read its null hypothesis before you interpret the result.</p>
+</section>
+<section id="section-22-alternative-to-the-independent-t-test-wilcoxon-rank-sum" class="level2">
+<h2 class="anchored" data-anchor-id="section-22-alternative-to-the-independent-t-test-wilcoxon-rank-sum">Section 22 — Alternative to the independent t-test: Wilcoxon rank-sum</h2>
+<p>Suppose that you planned to use an independent t-test. The groups are small, and the plots show strong skew or large outliers. The Gaussian sampling assumption for the group means might then be unsuitable. You can use the Wilcoxon rank-sum test as an alternative.</p>
+<p>The plant data already use <code>y_variable</code> and <code>categories</code>. The rank-sum test replaces the measurements with ranks. It then compares the ranks in the two independent groups.</p>
+<p>The null hypothesis says that the two population distributions are the same. If the distributions have similar shapes, you can describe the test as a comparison of their locations. If the shapes differ, state whether values in one group tend to be larger than values in the other group.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Return to the original plant-weight question and variable types.</li>
+<li>Identify the t-test assumption that caused you to consider a rank test.</li>
+<li>State the rank-sum null hypothesis.</li>
+<li>Run the cell and interpret the result.</li>
+<li>Compare the conclusion with Welch’s t-test without treating the tests as identical.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>wilcoxon_independent <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>  y_variable <span class="sc">~</span> categories,</span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> t_data,</span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exact =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span></span>
+<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>wilcoxon_independent</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  y_variable by categories
+W = 25, p-value = 0.06
+alternative hypothesis: true location shift is not equal to 0
+95 percent confidence interval:
+ -0.99998  0.03998
+sample estimates:
+difference in location 
+                -0.475 </code></pre>
+</div>
+</div>
+<p>Compare this result with the Welch t-test. The t-test compares means. The rank-sum test compares the order of the values. The tests do not have the same null hypothesis. State which test you used and what its null hypothesis means.</p>
+</section>
+<section id="section-23-alternative-to-the-paired-t-test-wilcoxon-signed-rank" class="level2">
+<h2 class="anchored" data-anchor-id="section-23-alternative-to-the-paired-t-test-wilcoxon-signed-rank">Section 23 — Alternative to the paired t-test: Wilcoxon signed-rank</h2>
+<p>Suppose that you planned to use a paired t-test. This test works with the difference within each pair. Large outliers can make the t-test unsuitable, especially with a small sample. If the paired differences remain roughly symmetric, you can use the Wilcoxon signed-rank test as an alternative.</p>
+<p>The <code>sleep</code> dataset contains two measurements from each of ten people. Put the two measurements for each person in the same row. Use <code>pair_id</code> to keep the correct pairs together.</p>
+<p>The null hypothesis says that the paired differences are centred on zero. Use <code>paired = TRUE</code>. This tells R that the two measurements come from the same people.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify the participant as the observational unit.</li>
+<li>Explain why the two measurements are paired.</li>
+<li>Identify the paired t-test assumption that caused you to select an alternative.</li>
+<li>State the null hypothesis for the paired differences.</li>
+<li>Run the data preparation and test code.</li>
+<li>Interpret the result as within-person change.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sleep"</span>)</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>sleep_group_1 <span class="ot">&lt;-</span> sleep[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>sleep_group_2 <span class="ot">&lt;-</span> sleep[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>paired_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pair_id =</span> sleep_group_1<span class="sc">$</span>ID,</span>
+<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_variable =</span> sleep_group_1<span class="sc">$</span>extra,</span>
+<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_variable =</span> sleep_group_2<span class="sc">$</span>extra</span>
+<span id="cb119-9"><a href="#cb119-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb119-10"><a href="#cb119-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-11"><a href="#cb119-11" aria-hidden="true" tabindex="-1"></a>paired_data<span class="sc">$</span>difference_variable <span class="ot">&lt;-</span> paired_data<span class="sc">$</span>y_variable <span class="sc">-</span> paired_data<span class="sc">$</span>x_variable</span>
+<span id="cb119-12"><a href="#cb119-12" aria-hidden="true" tabindex="-1"></a>paired_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   pair_id x_variable y_variable difference_variable
+1        1        0.7        1.9                 1.2
+2        2       -1.6        0.8                 2.4
+3        3       -0.2        1.1                 1.3
+4        4       -1.2        0.1                 1.3
+5        5       -0.1       -0.1                 0.0
+6        6        3.4        4.4                 1.0
+7        7        3.7        5.5                 1.8
+8        8        0.8        1.6                 0.8
+9        9        0.0        4.6                 4.6
+10      10        2.0        3.4                 1.4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(paired_data<span class="sc">$</span>y_variable, paired_data<span class="sc">$</span>x_variable,</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  paired_data$y_variable and paired_data$x_variable
+V = 45, p-value = 0.009
+alternative hypothesis: true location shift is not equal to 0
+95 percent confidence interval:
+ 1.05 2.95
+sample estimates:
+(pseudo)median 
+           1.4 </code></pre>
+</div>
+</div>
+<p>Interpret the result as change within each person. The test uses the size and direction of the ranked differences.</p>
+</section>
+<section id="section-24-when-chi-square-needs-an-alternative" class="level2">
+<h2 class="anchored" data-anchor-id="section-24-when-chi-square-needs-an-alternative">Section 24 — When chi-square needs an alternative</h2>
+<p>Suppose that you planned to use Pearson’s chi-square test. This test uses a chi-square approximation. The approximation can be poor when expected cell counts are too small. Small samples often cause this problem, but you must check the expected counts.</p>
+<p>The following pilot study has small expected counts. The rows represent <code>category_a</code>. The columns represent <code>category_b</code>. Check the expected counts before you choose the test.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify the two categorical variables and the independent groups.</li>
+<li>Build the observed table by running the cell.</li>
+<li>Inspect the expected counts.</li>
+<li>Explain why small expected counts make the chi-square approximation unreliable.</li>
+<li>Identify the need for an exact alternative before naming it.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>pilot_table <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pilot_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pilot_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Improved"</span>, <span class="st">"No improvement"</span>)</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>pilot_chi <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(pilot_table, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a>pilot_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Improved No improvement
+Treatment        4              3
+Control          1              4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>pilot_chi<span class="sc">$</span>expected</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Improved No improvement
+Treatment    2.917          4.083
+Control      2.083          2.917</code></pre>
+</div>
+</div>
+<p>The expected counts are too small for Pearson’s chi-square test. Use Fisher’s exact test for this independent <span class="math inline">\(2\times2\)</span> table.</p>
+</section>
+<section id="section-25-alternative-to-chi-square-fishers-exact-test" class="level2">
+<h2 class="anchored" data-anchor-id="section-25-alternative-to-chi-square-fishers-exact-test">Section 25 — Alternative to chi-square: Fisher’s exact test</h2>
+<p>You planned to use Pearson’s chi-square test, but the expected counts were too small. Fisher’s exact test is an alternative for an independent <span class="math inline">\(2\times2\)</span> table. It does not use the chi-square approximation.</p>
+<p>Fisher’s test uses the same null hypothesis. The two categorical variables are independent. It calculates an exact p-value for the table.</p>
+<p>This test is useful for small <span class="math inline">\(2\times2\)</span> tables. The odds ratio shows the direction and size of the association.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Restate the independence null hypothesis.</li>
+<li>Explain why the sparse table needs an exact calculation.</li>
+<li>Run Fisher’s test.</li>
+<li>Locate the p-value, odds ratio, and confidence interval.</li>
+<li>Report the result with the small sample size.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>fisher_result <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(pilot_table, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>fisher_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  pilot_table
+p-value = 0.3
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+   0.2536 326.1073
+sample estimates:
+odds ratio 
+     4.609 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>fisher_result<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>odds ratio 
+     4.609 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>fisher_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2929</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>fisher_result<span class="sc">$</span>conf.int</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   0.2536 326.1073
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+</div>
+<p>Interpret the p-value against the independence null hypothesis. Report the table, odds ratio, confidence interval, and sample size. Do not report only the decision.</p>
+</section>
+<section id="section-26-alternative-to-independent-chi-square-mcnemars-test" class="level2">
+<h2 class="anchored" data-anchor-id="section-26-alternative-to-independent-chi-square-mcnemars-test">Section 26 — Alternative to independent chi-square: McNemar’s test</h2>
+<p>Suppose that you planned to use Pearson’s chi-square test for two binary variables. You then notice that the same people gave both responses. The observations are paired, so the independence assumption does not hold. Use McNemar’s test instead.</p>
+<p>One example is disease status before and after treatment. McNemar’s test examines change within the same people.</p>
+<p>The null hypothesis says that the two types of change occur equally often. One type changes from <code>Yes</code> to <code>No</code>. The other type changes from <code>No</code> to <code>Yes</code>.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Identify the paired binary design.</li>
+<li>Distinguish concordant from discordant pairs.</li>
+<li>State the null hypothesis for the two discordant directions.</li>
+<li>Run the cell.</li>
+<li>Interpret the result as evidence about paired change.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>paired_category_table <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">4</span>, <span class="dv">12</span>, <span class="dv">24</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(paired_category_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Before: Yes"</span>, <span class="st">"Before: No"</span>)</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(paired_category_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"After: Yes"</span>, <span class="st">"After: No"</span>)</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>paired_category_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            After: Yes After: No
+Before: Yes         30         4
+Before: No          12        24</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(paired_category_table, <span class="at">correct =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    McNemar's Chi-squared test with continuity correction
+
+data:  paired_category_table
+McNemar's chi-squared = 3.1, df = 1, p-value = 0.08</code></pre>
+</div>
+</div>
+<p>The off-diagonal counts show the people whose status changed. Interpret the result as evidence about change in paired binary responses.</p>
+</section>
+<section id="section-27-alternative-to-pearsons-r-spearmans-rho" class="level2">
+<h2 class="anchored" data-anchor-id="section-27-alternative-to-pearsons-r-spearmans-rho">Section 27 — Alternative to Pearson’s r: Spearman’s rho</h2>
+<p>Suppose that you planned to use Pearson’s correlation. The scatterplot shows a curved relationship that always moves in one direction. This does not meet the linearity assumption. You can use Spearman’s rho as an alternative. You can also use it when the variables are ordinal.</p>
+<p>Spearman’s rho replaces the values with ranks. It then measures the association between the ranks. A monotonic relationship always moves in one direction, but it can be curved.</p>
+<p>The null hypothesis says that the population rank correlation is zero. The variables are already in <code>cor_data</code>. Only the method changes.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Return to the two-variable research question and scatterplot.</li>
+<li>Identify the Pearson assumption that caused you to consider Spearman’s rho.</li>
+<li>State <span class="math inline">\(H_0:\rho_s=0\)</span>.</li>
+<li>Run the cell and locate Spearman’s rho and its p-value.</li>
+<li>Report the monotonic association.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>spearman_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(cor_data<span class="sc">$</span>x_variable, cor_data<span class="sc">$</span>y_variable,</span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method =</span> <span class="st">"spearman"</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>spearman_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Spearman's rank correlation rho
+
+data:  cor_data$x_variable and cor_data$y_variable
+S = 10292, p-value = 1e-11
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+    rho 
+-0.8864 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>spearman_result<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    rho 
+-0.8864 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>spearman_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.488e-11</code></pre>
+</div>
+</div>
+<p>Use Spearman’s <span class="math inline">\(\rho_s\)</span> to report the direction and strength of the monotonic association. Do not call it Pearson’s correlation. Always inspect the scatterplot.</p>
+</section>
+<section id="section-28-another-alternative-to-pearsons-r-kendalls-tau" class="level2">
+<h2 class="anchored" data-anchor-id="section-28-another-alternative-to-pearsons-r-kendalls-tau">Section 28 — Another alternative to Pearson’s r: Kendall’s tau</h2>
+<p>Suppose that you planned to use Pearson’s correlation, but the data do not support a linear analysis. Kendall’s tau is another rank-based alternative. It is useful when the sample is small or the data contain many tied ranks.</p>
+<p>Kendall’s tau compares pairs of observations. A pair is concordant when both variables change in the same direction. A pair is discordant when the variables change in opposite directions.</p>
+<p>The null hypothesis says that the population Kendall association is zero. Run the test with the same generic variables. Then compare the three correlation results. The coefficients use different scales, so do not expect the same values.</p>
+<p><strong>Your task</strong></p>
+<ol type="1">
+<li>Explain concordant and discordant pairs in plain language.</li>
+<li>State <span class="math inline">\(H_0:\tau=0\)</span>.</li>
+<li>Run Kendall’s test and display the three estimates and p-values.</li>
+<li>Compare the direction and evidence across all three methods.</li>
+<li>Explain why the coefficient magnitudes are not directly interchangeable.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>kendall_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(cor_data<span class="sc">$</span>x_variable, cor_data<span class="sc">$</span>y_variable,</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">"kendall"</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a>kendall_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kendall's rank correlation tau
+
+data:  cor_data$x_variable and cor_data$y_variable
+z = -5.8, p-value = 7e-09
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+    tau 
+-0.7278 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>pearson_r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.8677</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>spearman_result<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    rho 
+-0.8864 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>kendall_result<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    tau 
+-0.7278 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>pearson_p_value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.294e-10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>spearman_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.488e-11</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>kendall_result<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.706e-09</code></pre>
+</div>
+</div>
+<p>Choose the final test from the research question, variable types, study design, relationship shape, and assumptions. Return to <span class="math inline">\(H_0\)</span> when you interpret the result. Report the result in the context of the question.</p>
+</section>
+</section>
+<section id="final-analysis-checklist" class="level1">
+<h1>Final analysis checklist</h1>
+<p>Before completing a section, answer these questions:</p>
+<ol type="1">
+<li>What is the research question?</li>
+<li>What does one row or one count represent?</li>
+<li>Which variables are numeric, categorical, paired, or independent?</li>
+<li>How were the source variables assigned to the generic names?</li>
+<li>What is <span class="math inline">\(H_0\)</span>?</li>
+<li>Which reference distribution or exact calculation does the test use?</li>
+<li>Which assumptions can you check with the data?</li>
+<li>Which assumptions depend on the study design?</li>
+<li>What do the statistic, estimate, confidence interval, and p-value mean for the research question?</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,6 +1,14 @@
 project:
   type: website
   output-dir: docs
+  post-render:
+    - node scripts/fix-docs-index-links.mjs
+  resources:
+    - HAU-logo.svg
+    - pics/Laptop_duck.png
+    - pics/mean_mark_boxplot_ggplot2.png
+    - week7-statistical-inference-tutorial.ipynb
+    - data/titanic_passengers.csv
 
 filters:
   - reflection-pauses.lua
@@ -29,19 +37,21 @@ website:
           - syntax-basics.qmd
           - indexing.qmd
           - tidy-data.qmd
-      - section: "Week 5: Statistical Tests"
+      - section: "Week 7: Statistical Tests"
         contents:
-          - eda.qmd
-          - t-test.qmd
-          - chisquare.qmd
-          - correlation.qmd
-      - section: "Week 7: ANOVA and Kruskal-Wallis"
+          - week7-hypothesis-testing-foundations.qmd
+          - week7-statistical-inference-tutorial.qmd
+          - text: "Colab tutorial"
+            href: https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing
+          # - eda.qmd
+          # - t-test.qmd
+          # - chisquare.qmd
+          # - correlation.qmd
+      - section: "Week 8: ANOVA and Non-parametric Tests"
         contents:
           - fisher.qmd
           - anova.qmd
           - 1-way-anova.qmd
-      - section: "Week 8: Non-parametric Tests"
-        contents:
           - nonparam.qmd
       - section: "Week 11: Sampling"
         contents:

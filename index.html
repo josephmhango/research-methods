@@ -206,10 +206,13 @@
       {"title":"Introductory R video 4","file":"https://www.youtube.com/watch?v=BHXI8hNgLWw","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
       {"title":"R stats tutorial 1","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=28161","week":5,"topics":["R fundamentals"],"image":"thumbnails/R_logo.svg"},
       {"title":"Independent study","week":6,"topics":["Reading week"],"image":"img/rmgis.png"},
-      {"title":"Exploratory data analysis and hypothesis framing","file":"docs/eda.html","week":7,"topics":["EDA","Hypothesis testing"],"image":"thumbnails/R_logo.svg"},
-      {"title":"The t-test","file":"docs/t-test.html","week":7,"topics":["Hypothesis testing","T-test"],"image":"thumbnails/R_logo.svg"},
-      {"title":"The chi-square test","file":"docs/chisquare.html","week":7,"topics":["Hypothesis testing","Chi-square"],"image":"thumbnails/R_logo.svg"},
-      {"title":"Correlation analysis","file":"docs/correlation.html","week":7,"topics":["Correlation","Statistics"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Main presentation","file":"docs/week7-hypothesis-testing-foundations.html","week":7,"topics":["Hypothesis testing","Correlation","T-test","Chi-square"],"image":"thumbnails/R_logo.svg","primary":true},
+      {"title":"Main tutorial","file":"docs/week7-statistical-inference-tutorial.html","week":7,"topics":["R tutorial","T-test","Chi-square","Correlation","Non-parametric tests"],"image":"thumbnails/R_logo.svg","primary":true},
+      {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing","week":7,"topics":["R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true},
+      // {"title":"Exploratory data analysis and hypothesis framing","file":"docs/eda.html","week":7,"topics":["EDA","Hypothesis testing"],"image":"thumbnails/R_logo.svg"},
+      // {"title":"The t-test","file":"docs/t-test.html","week":7,"topics":["Hypothesis testing","T-test"],"image":"thumbnails/R_logo.svg"},
+      // {"title":"The chi-square test","file":"docs/chisquare.html","week":7,"topics":["Hypothesis testing","Chi-square"],"image":"thumbnails/R_logo.svg"},
+      // {"title":"Correlation analysis","file":"docs/correlation.html","week":7,"topics":["Correlation","Statistics"],"image":"thumbnails/R_logo.svg"},
       {"title":"Fisher's F and the foundations of ANOVA","file":"docs/fisher.html","week":8,"topics":["ANOVA"],"image":"thumbnails/R_logo.svg"},
       {"title":"ANOVA and its Kruskal-Wallis counterpart","file":"docs/anova.html","week":8,"topics":["ANOVA","Kruskal-Wallis"],"image":"thumbnails/R_logo.svg"},
       {"title":"One-way ANOVA tutorial","file":"docs/1-way-anova.html","week":8,"topics":["ANOVA","R tutorial"],"image":"thumbnails/R_logo.svg"},
@@ -268,8 +271,8 @@
     // Keep the original Week 1 resources together beneath the main materials.
     slides.filter(s => s.week === 1 && s.heading).forEach(s => { s.heading = 5; });
     slides.unshift(
-      {title: 'Main lecture', file: 'https://josephmhango.github.io/research-methods/docs/week1-literature-review.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
-      {title: 'Main practical', file: 'https://josephmhango.github.io/research-methods/docs/week1-literature-review-guide.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
+      {title: 'Main lecture', file: 'docs/week1-literature-review.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
+      {title: 'Main practical', file: 'docs/week1-literature-review-guide.html', week: 1, topics: ['Literature review'], image: 'img/rmgis.png', primary: true},
       {title: 'Video series to watch', file: 'https://vle.harper-adams.ac.uk/course/section.php?id=9751', week: 1, topics: ['Literature review'], image: 'img/rmgis.png'},
       {title: 'Supporting content', week: 1, topics: [], heading: 4, sectionStart: true}
     );
