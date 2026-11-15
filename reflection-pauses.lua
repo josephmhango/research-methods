@@ -87,9 +87,9 @@ local break_before = {
     "post hoc testing"
   },
   ["anova.qmd"] = {
-    "hands‑on: one‑way anova in r",
-    "interpreting the q‑q plot",
-    "kruskal-wallis: the rank-based counterpart"
+    "what problem does anova solve?",
+    "two-way anova: what it means",
+    "anova does not make pairwise comparisons"
   },
   ["1-way-anova.qmd"] = {
     "data and assumptions",
@@ -150,7 +150,11 @@ local break_before = {
 
 local function reflection_blocks(number)
   return {
-    pandoc.Header(2, "Reflection pause " .. number),
+    pandoc.Header(
+      2,
+      "Reflection pause " .. number,
+      pandoc.Attr("reflection-pause-" .. number)
+    ),
     pandoc.Para({
       pandoc.Strong("Pause for reflection."),
       pandoc.Space(),

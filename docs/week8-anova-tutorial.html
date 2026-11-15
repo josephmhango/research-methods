@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="K.J. Mhango">
+
+<title>Week 8 Tutorial: ANOVA in R – C5025HF Research methods and Geographical Information Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./img/rmgis.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1982d92fcc5dfdfe237df2a1a876723.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-efbb02e4ed0905b06c43817ea9b6d073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anova.html">Week 8: ANOVA</a></li><li class="breadcrumb-item"><a href="./week8-anova-tutorial.html">Main tutorial</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./img/rmgis.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1: Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Skills for a Credible Literature Review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1-literature-review-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building a Credible Literature Review</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3: Research and Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-scientific-method.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research and the Scientific Method: Study Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Central Tendency and Dispersion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4: Introduction to R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Foundations (R)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Data Structures and Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Manipulation with dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syntax-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introductory R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./indexing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Indexing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data frames and tidy data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7: Statistical Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7-hypothesis-testing-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: From Variation to Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7-statistical-inference-tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7 Tutorial: Statistical Inference in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Colab tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8: ANOVA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Main presentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week8-anova-tutorial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Main tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://colab.research.google.com/drive/14LsDcM4ClL0cWJbGPPyTQuw5RIfDkAEL?usp=sharing" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Colab tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 11: Sampling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-sampling-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11-spatial-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Sampling in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 12: Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week12-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 13: Communicating Research</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reporting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scientific Reporting (IMRaD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vistut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualisation Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preparing a Statistical Analysis Plan (SAP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-effective-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effective Communication with Graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week13-data-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#session-plan" id="toc-session-plan" class="nav-link active" data-scroll-target="#session-plan">Session plan</a></li>
+  <li><a href="#part-1-whole-class-anova-workflow" id="toc-part-1-whole-class-anova-workflow" class="nav-link" data-scroll-target="#part-1-whole-class-anova-workflow">Part 1: Whole-class ANOVA workflow</a>
+  <ul class="collapse">
+  <li><a href="#section-01-start-a-reproducible-r-session" id="toc-section-01-start-a-reproducible-r-session" class="nav-link" data-scroll-target="#section-01-start-a-reproducible-r-session">Section 01: Start a reproducible R session</a></li>
+  <li><a href="#section-02-read-the-one-way-anova-question" id="toc-section-02-read-the-one-way-anova-question" class="nav-link" data-scroll-target="#section-02-read-the-one-way-anova-question">Section 02: Read the one-way ANOVA question</a></li>
+  <li><a href="#section-03-assign-reusable-variable-names" id="toc-section-03-assign-reusable-variable-names" class="nav-link" data-scroll-target="#section-03-assign-reusable-variable-names">Section 03: Assign reusable variable names</a></li>
+  <li><a href="#section-04-describe-the-observed-group-pattern" id="toc-section-04-describe-the-observed-group-pattern" class="nav-link" data-scroll-target="#section-04-describe-the-observed-group-pattern">Section 04: Describe the observed group pattern</a></li>
+  <li><a href="#section-05-state-the-null-hypothesis-and-fit-one-way-anova" id="toc-section-05-state-the-null-hypothesis-and-fit-one-way-anova" class="nav-link" data-scroll-target="#section-05-state-the-null-hypothesis-and-fit-one-way-anova">Section 05: State the null hypothesis and fit one-way ANOVA</a></li>
+  <li><a href="#section-06-check-the-one-way-anova-assumptions" id="toc-section-06-check-the-one-way-anova-assumptions" class="nav-link" data-scroll-target="#section-06-check-the-one-way-anova-assumptions">Section 06: Check the one-way ANOVA assumptions</a></li>
+  <li><a href="#section-07-read-the-two-way-anova-question" id="toc-section-07-read-the-two-way-anova-question" class="nav-link" data-scroll-target="#section-07-read-the-two-way-anova-question">Section 07: Read the two-way ANOVA question</a></li>
+  <li><a href="#section-08-assign-two-categorical-variables-and-inspect-the-data" id="toc-section-08-assign-two-categorical-variables-and-inspect-the-data" class="nav-link" data-scroll-target="#section-08-assign-two-categorical-variables-and-inspect-the-data">Section 08: Assign two categorical variables and inspect the data</a></li>
+  <li><a href="#section-09-plot-the-interaction-before-testing-it" id="toc-section-09-plot-the-interaction-before-testing-it" class="nav-link" data-scroll-target="#section-09-plot-the-interaction-before-testing-it">Section 09: Plot the interaction before testing it</a></li>
+  <li><a href="#section-10-fit-and-interpret-two-way-anova" id="toc-section-10-fit-and-interpret-two-way-anova" class="nav-link" data-scroll-target="#section-10-fit-and-interpret-two-way-anova">Section 10: Fit and interpret two-way ANOVA</a></li>
+  </ul></li>
+  <li><a href="#part-2-group-investigations" id="toc-part-2-group-investigations" class="nav-link" data-scroll-target="#part-2-group-investigations">Part 2: Group investigations</a></li>
+  <li><a href="#group-a-branch-one-way-anova-and-post-hoc-comparisons" id="toc-group-a-branch-one-way-anova-and-post-hoc-comparisons" class="nav-link" data-scroll-target="#group-a-branch-one-way-anova-and-post-hoc-comparisons">Group A branch: One-way ANOVA and post hoc comparisons</a>
+  <ul class="collapse">
+  <li><a href="#section-a1-insecticide-research-question-and-data" id="toc-section-a1-insecticide-research-question-and-data" class="nav-link" data-scroll-target="#section-a1-insecticide-research-question-and-data">Section A1: Insecticide research question and data</a></li>
+  <li><a href="#section-a2-fit-the-global-one-way-model" id="toc-section-a2-fit-the-global-one-way-model" class="nav-link" data-scroll-target="#section-a2-fit-the-global-one-way-model">Section A2: Fit the global one-way model</a></li>
+  <li><a href="#section-a3-calculate-estimated-marginal-means" id="toc-section-a3-calculate-estimated-marginal-means" class="nav-link" data-scroll-target="#section-a3-calculate-estimated-marginal-means">Section A3: Calculate estimated marginal means</a></li>
+  <li><a href="#section-a4-run-tukey-pairwise-comparisons-and-conclude" id="toc-section-a4-run-tukey-pairwise-comparisons-and-conclude" class="nav-link" data-scroll-target="#section-a4-run-tukey-pairwise-comparisons-and-conclude">Section A4: Run Tukey pairwise comparisons and conclude</a></li>
+  </ul></li>
+  <li><a href="#group-b-branch-two-way-anova-and-interaction-aware-comparisons" id="toc-group-b-branch-two-way-anova-and-interaction-aware-comparisons" class="nav-link" data-scroll-target="#group-b-branch-two-way-anova-and-interaction-aware-comparisons">Group B branch: Two-way ANOVA and interaction-aware comparisons</a>
+  <ul class="collapse">
+  <li><a href="#section-b1-warp-break-research-question-and-data" id="toc-section-b1-warp-break-research-question-and-data" class="nav-link" data-scroll-target="#section-b1-warp-break-research-question-and-data">Section B1: Warp-break research question and data</a></li>
+  <li><a href="#section-b2-plot-and-test-the-interaction" id="toc-section-b2-plot-and-test-the-interaction" class="nav-link" data-scroll-target="#section-b2-plot-and-test-the-interaction">Section B2: Plot and test the interaction</a></li>
+  <li><a href="#section-b3-estimate-tension-means-inside-each-wool-type" id="toc-section-b3-estimate-tension-means-inside-each-wool-type" class="nav-link" data-scroll-target="#section-b3-estimate-tension-means-inside-each-wool-type">Section B3: Estimate tension means inside each wool type</a></li>
+  <li><a href="#section-b4-run-tukey-comparisons-within-each-wool-type" id="toc-section-b4-run-tukey-comparisons-within-each-wool-type" class="nav-link" data-scroll-target="#section-b4-run-tukey-comparisons-within-each-wool-type">Section B4: Run Tukey comparisons within each wool type</a></li>
+  </ul></li>
+  <li><a href="#part-3-five-minute-group-presentations" id="toc-part-3-five-minute-group-presentations" class="nav-link" data-scroll-target="#part-3-five-minute-group-presentations">Part 3: Five-minute group presentations</a>
+  <ul class="collapse">
+  <li><a href="#presentation-structure" id="toc-presentation-structure" class="nav-link" data-scroll-target="#presentation-structure">Presentation structure</a>
+  <ul class="collapse">
+  <li><a href="#research-question-and-model-1-minute" id="toc-research-question-and-model-1-minute" class="nav-link" data-scroll-target="#research-question-and-model-1-minute">1. Research question and model: 1 minute</a></li>
+  <li><a href="#estimated-marginal-means-2-minutes" id="toc-estimated-marginal-means-2-minutes" class="nav-link" data-scroll-target="#estimated-marginal-means-2-minutes">2. Estimated marginal means: 2 minutes</a></li>
+  <li><a href="#adjusted-comparisons-1-minute" id="toc-adjusted-comparisons-1-minute" class="nav-link" data-scroll-target="#adjusted-comparisons-1-minute">3. Adjusted comparisons: 1 minute</a></li>
+  <li><a href="#substantive-conclusion-1-minute" id="toc-substantive-conclusion-1-minute" class="nav-link" data-scroll-target="#substantive-conclusion-1-minute">4. Substantive conclusion: 1 minute</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#final-comparison" id="toc-final-comparison" class="nav-link" data-scroll-target="#final-comparison">Final comparison</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anova.html">Week 8: ANOVA</a></li><li class="breadcrumb-item"><a href="./week8-anova-tutorial.html">Main tutorial</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 8 Tutorial: ANOVA in R</h1>
+<p class="subtitle lead">One-way and two-way ANOVA, estimated marginal means and post hoc comparisons</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>K.J. Mhango </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="session-plan" class="level1">
+<h1>Session plan</h1>
+<p>This notebook mirrors the Week 8 theory session. Work through it in the stated order because later cells use objects created earlier.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th style="text-align: right;">Time</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Preparation</td>
+<td style="text-align: right;">30 minutes</td>
+<td>Read Sections 01–10 without running the code</td>
+</tr>
+<tr class="even">
+<td>Whole-class co-coding</td>
+<td style="text-align: right;">30 minutes</td>
+<td>Run Sections 01–10 in assigned turns</td>
+</tr>
+<tr class="odd">
+<td>Group investigation</td>
+<td style="text-align: right;">30 minutes</td>
+<td>Group A completes Sections A1–A4 and Group B completes Sections B1–B4</td>
+</tr>
+<tr class="even">
+<td>Group presentations</td>
+<td style="text-align: right;">5 minutes per group</td>
+<td>Present the estimated marginal means, important comparisons and substantive conclusion</td>
+</tr>
+</tbody>
+</table>
+<p>During the first 30 minutes, focus on the statistical reasoning. Identify the response, factors, null hypotheses and assumptions before you examine the code.</p>
+<p>During the co-coding stage, one person leads each section. When it is your turn:</p>
+<ol type="1">
+<li>Read the section question aloud.</li>
+<li>Explain what each line of code will do.</li>
+<li>Predict the important part of the output.</li>
+<li>Run the code cell.</li>
+<li>Explain the result in plain language before passing control.</li>
+</ol>
+<p>The code cells contain guided solutions. You should still make a prediction before you run them.</p>
+</section>
+<section id="part-1-whole-class-anova-workflow" class="level1">
+<h1>Part 1: Whole-class ANOVA workflow</h1>
+<section id="section-01-start-a-reproducible-r-session" class="level2">
+<h2 class="anchored" data-anchor-id="section-01-start-a-reproducible-r-session">Section 01: Start a reproducible R session</h2>
+<p>Restart the R kernel before the group begins. This removes objects left by another analysis. The cell sets the number of printed digits and loads the packages used in the notebook.</p>
+<p><code>ggplot2</code> creates the figures by combining a dataset, variables and visual layers. You will learn how to construct <code>ggplot2</code> figures in a later session. For now, focus on what each graph is intended to show, why it helps the analysis and how to interpret its pattern. <code>emmeans</code> will calculate model-adjusted means during the group investigations. The final line records the R session so that another person can identify the software version.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Confirm that the kernel has been restarted.</li>
+<li>Explain why a clean environment matters.</li>
+<li>Run the cell.</li>
+<li>Confirm that both packages load without an error.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.2 (2024-10-31 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
+
+Matrix products: default
+
+
+locale:
+[1] C
+system code page: 65001
+
+time zone: Europe/London
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] emmeans_1.11.0 ggplot2_4.0.0 
+
+loaded via a namespace (and not attached):
+ [1] Matrix_1.7-1       gtable_0.3.6       jsonlite_1.8.9     dplyr_1.1.4       
+ [5] compiler_4.4.2     tidyselect_1.2.1   splines_4.4.2      scales_1.4.0      
+ [9] yaml_2.3.10        fastmap_1.2.0      TH.data_1.1-5      lattice_0.22-6    
+[13] coda_0.19-4.1      R6_2.5.1           generics_0.1.3     knitr_1.49        
+[17] MASS_7.3-61        htmlwidgets_1.6.4  tibble_3.2.1       pillar_1.10.1     
+[21] RColorBrewer_1.1-3 rlang_1.1.5        multcomp_1.4-32    xfun_0.50         
+[25] S7_0.2.0           estimability_1.5.1 cli_3.6.3          withr_3.0.2       
+[29] magrittr_2.0.3     digest_0.6.37      grid_4.4.2         xtable_1.8-4      
+[33] mvtnorm_1.3-3      sandwich_3.1-1     lifecycle_1.0.4    vctrs_0.6.5       
+[37] evaluate_1.0.3     glue_1.8.0         farver_2.1.2       codetools_0.2-20  
+[41] zoo_1.8-12         survival_3.7-0     rmarkdown_2.29     tools_4.4.2       
+[45] pkgconfig_2.0.3    htmltools_0.5.8.1 </code></pre>
+</div>
+</div>
+<p>The output lists the R version, operating system and attached packages. Package startup text is information rather than a statistical result.</p>
+</section>
+<section id="section-02-read-the-one-way-anova-question" class="level2">
+<h2 class="anchored" data-anchor-id="section-02-read-the-one-way-anova-question">Section 02: Read the one-way ANOVA question</h2>
+<p>The <code>PlantGrowth</code> dataset records the dried weight of plants from a control group and two treatment groups.</p>
+<p>Our research question is:</p>
+<blockquote class="blockquote">
+<p>Does mean plant weight differ among the control, Treatment 1 and Treatment 2 populations?</p>
+</blockquote>
+<p>One row represents one plant. <code>weight</code> is a numeric response. <code>group</code> is one categorical explanatory variable with three levels. This structure points towards one-way ANOVA, but first inspect the data.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Read the question aloud.</li>
+<li>State what one row represents.</li>
+<li>Identify the response and factor.</li>
+<li>Run the cell and describe the first rows.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PlantGrowth"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PlantGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  weight group
+1   4.17  ctrl
+2   5.58  ctrl
+3   5.18  ctrl
+4   6.11  ctrl
+5   4.50  ctrl
+6   4.61  ctrl</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PlantGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   30 obs. of  2 variables:
+ $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(PlantGrowth<span class="sc">$</span>group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ctrl trt1 trt2 
+  10   10   10 </code></pre>
+</div>
+</div>
+<p>The table should show ten plants in each group. A balanced design gives each group equal representation, although ANOVA can also analyse unequal group sizes.</p>
+</section>
+<section id="section-03-assign-reusable-variable-names" class="level2">
+<h2 class="anchored" data-anchor-id="section-03-assign-reusable-variable-names">Section 03: Assign reusable variable names</h2>
+<p>The source column names describe this dataset. Generic names make the later code easier to reuse with another numeric response and another grouping factor.</p>
+<p>Use <code>y_variable</code> for the numeric outcome and <code>categories</code> when the analysis contains one categorical factor. Keep the source data unchanged by creating a new data frame.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Match <code>weight</code> to <code>y_variable</code>.</li>
+<li>Match <code>group</code> to <code>categories</code>.</li>
+<li>Run the cell.</li>
+<li>Confirm that the response remains numeric and the group remains a factor.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>one_way_data <span class="ot">&lt;-</span> PlantGrowth</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(one_way_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"categories"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>one_way_data<span class="sc">$</span>categories <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  one_way_data<span class="sc">$</span>categories,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ctrl"</span>, <span class="st">"trt1"</span>, <span class="st">"trt2"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(one_way_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   30 obs. of  2 variables:
+ $ y_variable: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ categories: Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(one_way_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  y_variable categories
+1       4.17       ctrl
+2       5.58       ctrl
+3       5.18       ctrl
+4       6.11       ctrl
+5       4.50       ctrl
+6       4.61       ctrl</code></pre>
+</div>
+</div>
+<p>The order of the levels does not change the global ANOVA F-test. It will affect the direction and labels of later comparisons.</p>
+</section>
+<section id="section-04-describe-the-observed-group-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="section-04-describe-the-observed-group-pattern">Section 04: Describe the observed group pattern</h2>
+<p>ANOVA compares group means, but the raw observations show how much plants vary inside each group. Use <code>summary()</code> for a simple first description, then use the figure to compare the groups directly.</p>
+<p>The figure shows individual plants, a boxplot and a large diamond for each sample mean. Differences among diamonds represent the observed group pattern. The scatter inside each group represents within-group variation. Concentrate on reading these features rather than memorising the <code>ggplot()</code> instructions.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Predict which treatment has the highest sample mean.</li>
+<li>Run <code>summary()</code> and identify the response range and category counts.</li>
+<li>Run the figure.</li>
+<li>Compare variation among the means with variation inside the groups.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(one_way_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   y_variable   categories
+ Min.   :3.59   ctrl:10   
+ 1st Qu.:4.55   trt1:10   
+ Median :5.16   trt2:10   
+ Mean   :5.07             
+ 3rd Qu.:5.53             
+ Max.   :6.31             </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(one_way_data, <span class="fu">aes</span>(categories, y_variable, <span class="at">colour =</span> categories)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.35</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Treatment group"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Plant weight"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Observed plant weights and group means"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week8-anova-tutorial_files/figure-html/section-04-one-way-description-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The sample means are descriptive evidence. ANOVA asks whether their separation is large compared with the ordinary variation among plants within the same group.</p>
+</section>
+<section id="section-05-state-the-null-hypothesis-and-fit-one-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="section-05-state-the-null-hypothesis-and-fit-one-way-anova">Section 05: State the null hypothesis and fit one-way ANOVA</h2>
+<p>Let <span class="math inline">\(\mu_{ctrl}\)</span>, <span class="math inline">\(\mu_{trt1}\)</span> and <span class="math inline">\(\mu_{trt2}\)</span> represent the three population means.</p>
+<p><span class="math display">\[
+H_0:\mu_{ctrl}=\mu_{trt1}=\mu_{trt2}
+\]</span></p>
+<p>The alternative says that at least one population mean differs. It does not claim that every pair differs.</p>
+<p><code>aov()</code> fits the model. <code>summary()</code> produces the ANOVA table. The <code>categories</code> row compares variation associated with the three fitted means against residual variation inside the groups.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>State <span class="math inline">\(H_0\)</span> in words.</li>
+<li>Explain the two parts of the formula.</li>
+<li>Run the cell.</li>
+<li>Identify the F-statistic and p-value for <code>categories</code>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>one_way_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  y_variable <span class="sc">~</span> categories,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> one_way_data</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(one_way_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+categories   2   3.77   1.883    4.85  0.016 *
+Residuals   27  10.49   0.389                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A small p-value gives evidence against equal population means. The global result does not identify the group pairs responsible for the difference. Post-hoc comparisons answer that later question.</p>
+</section>
+<section id="section-06-check-the-one-way-anova-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="section-06-check-the-one-way-anova-assumptions">Section 06: Check the one-way ANOVA assumptions</h2>
+<p>The study design must provide independent plants. The model also assumes approximately Gaussian residuals and similar residual spread across groups.</p>
+<p>The residual-versus-fitted plot checks for changing spread or a systematic curve. A random band around zero supports the model. The Q-Q plot checks the residual distribution. Points that follow the line reasonably well support the Gaussian assumption.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Explain why residuals matter more than the raw response distribution.</li>
+<li>Run the diagnostic plots.</li>
+<li>Describe the residual spread.</li>
+<li>Decide whether the Q-Q pattern shows a serious departure from the reference line.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>one_way_residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(one_way_model)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>one_way_fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(one_way_model)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  one_way_fitted,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  one_way_residuals,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Fitted value"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Residual"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Residual spread"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(one_way_residuals, <span class="at">main =</span> <span class="st">"Residual Q-Q plot"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(one_way_residuals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week8-anova-tutorial_files/figure-html/section-06-one-way-assumptions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Read both plots together. Look for a reasonably even residual spread and a Q-Q pattern that follows the line without a severe or systematic departure. Minor departures do not automatically invalidate ANOVA.</p>
+</section>
+<section id="section-07-read-the-two-way-anova-question" class="level2">
+<h2 class="anchored" data-anchor-id="section-07-read-the-two-way-anova-question">Section 07: Read the two-way ANOVA question</h2>
+<p>The <code>ToothGrowth</code> dataset records tooth growth in guinea pigs given vitamin C through orange juice or ascorbic acid at three dose levels.</p>
+<p>Our research question is:</p>
+<blockquote class="blockquote">
+<p>Does mean tooth growth depend on supplement, dose, or the combination of supplement and dose?</p>
+</blockquote>
+<p>The numeric response is tooth length. The two factors are supplement and dose. Treat dose as a factor because this analysis compares three experimental dose categories.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Read the question aloud.</li>
+<li>Identify the response and both factors.</li>
+<li>Run the cell.</li>
+<li>Confirm that the full design contains six supplement-by-dose combinations.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ToothGrowth"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ToothGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   len supp dose
+1  4.2   VC  0.5
+2 11.5   VC  0.5
+3  7.3   VC  0.5
+4  5.8   VC  0.5
+5  6.4   VC  0.5
+6 10.0   VC  0.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ToothGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   60 obs. of  3 variables:
+ $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
+ $ supp: Factor w/ 2 levels "OJ","VC": 2 2 2 2 2 2 2 2 2 2 ...
+ $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ToothGrowth<span class="sc">$</span>supp, ToothGrowth<span class="sc">$</span>dose)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    
+     0.5  1  2
+  OJ  10 10 10
+  VC  10 10 10</code></pre>
+</div>
+</div>
+<p>The cross-tabulation should show ten guinea pigs in every combination. This is a balanced two-factor design.</p>
+</section>
+<section id="section-08-assign-two-categorical-variables-and-inspect-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="section-08-assign-two-categorical-variables-and-inspect-the-data">Section 08: Assign two categorical variables and inspect the data</h2>
+<p>When an analysis contains two categorical predictors, use <code>category_a</code> and <code>category_b</code>. Here, <code>category_a</code> stores supplement and <code>category_b</code> stores dose.</p>
+<p>The mean for one combination of factor levels is a cell mean. The next section will draw the six cell means directly from the data. First use <code>summary()</code> to check the renamed variables and their ranges.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Explain why dose becomes a factor in this model.</li>
+<li>Run the renaming code.</li>
+<li>Use <code>summary()</code> to inspect the response and both factors.</li>
+<li>Confirm that the response is numeric and both predictors are categorical.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>two_way_data <span class="ot">&lt;-</span> ToothGrowth</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(two_way_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"category_a"</span>, <span class="st">"category_b"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>two_way_data<span class="sc">$</span>category_a <span class="ot">&lt;-</span> <span class="fu">factor</span>(two_way_data<span class="sc">$</span>category_a)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>two_way_data<span class="sc">$</span>category_b <span class="ot">&lt;-</span> <span class="fu">factor</span>(two_way_data<span class="sc">$</span>category_b)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(two_way_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   60 obs. of  3 variables:
+ $ y_variable: num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
+ $ category_a: Factor w/ 2 levels "OJ","VC": 2 2 2 2 2 2 2 2 2 2 ...
+ $ category_b: Factor w/ 3 levels "0.5","1","2": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(two_way_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   y_variable   category_a category_b
+ Min.   : 4.2   OJ:30      0.5:20    
+ 1st Qu.:13.1   VC:30      1  :20    
+ Median :19.2              2  :20    
+ Mean   :18.8                        
+ 3rd Qu.:25.3                        
+ Max.   :33.9                        </code></pre>
+</div>
+</div>
+<p>If the supplement difference changes across dose levels, the design may contain an interaction. The next graph displays the cell means so that you can see the possible direction before the model tests it.</p>
+</section>
+<section id="section-09-plot-the-interaction-before-testing-it" class="level2">
+<h2 class="anchored" data-anchor-id="section-09-plot-the-interaction-before-testing-it">Section 09: Plot the interaction before testing it</h2>
+<p>An interaction means that the effect of one factor depends on the level of another factor. The plot places dose on the horizontal axis and draws one line for each supplement.</p>
+<p>Parallel lines would show a similar supplement difference at every dose. Lines that converge, diverge or cross show a changing difference. The plot describes the direction of the interaction. The model will test whether the change is larger than sampling variation would usually produce.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Predict whether the lines will be parallel.</li>
+<li>Run the plot.</li>
+<li>Describe how the vertical gap changes.</li>
+<li>Avoid making pairwise significance claims from the graph alone.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  two_way_data,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(category_b, y_variable, <span class="at">colour =</span> category_a, <span class="at">group =</span> category_a)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Dose"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean tooth length"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Supplement"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean tooth growth by dose and supplement"</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week8-anova-tutorial_files/figure-html/section-09-two-way-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The lines converge as dose increases. This pattern suggests that the supplement difference depends on dose. The next cell tests that dependency.</p>
+</section>
+<section id="section-10-fit-and-interpret-two-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="section-10-fit-and-interpret-two-way-anova">Section 10: Fit and interpret two-way ANOVA</h2>
+<p>The model formula includes both main effects and their interaction:</p>
+<p><span class="math display">\[
+y=\text{supplement}+\text{dose}+\text{supplement:dose}+\text{error}
+\]</span></p>
+<p>The interaction null hypothesis says that the supplement difference is the same at every dose. Read the interaction row first. If its p-value is small, report the interaction and use simple effects to explain it. Main-effect averages can mislead when the interaction is supported.</p>
+<p><strong>Your assigned turn</strong></p>
+<ol type="1">
+<li>Explain what <code>category_a * category_b</code> adds to the model.</li>
+<li>Run the model and ANOVA table.</li>
+<li>Read the interaction row before the main-effect rows.</li>
+<li>Use the graph to explain the direction of the interaction.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>two_way_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  y_variable <span class="sc">~</span> category_a <span class="sc">*</span> category_b,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> two_way_data</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(two_way_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+category_a             1    205     205   15.57 0.00023 ***
+category_b             2   2426    1213   92.00 &lt; 2e-16 ***
+category_a:category_b  2    108      54    4.11 0.02186 *  
+Residuals             54    712      13                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The interaction p-value tests dependency. The interaction plot shows that the supplement means become closer as dose increases. Post-hoc simple effects would compare supplements at specific doses or doses within a specific supplement.</p>
+</section>
+</section>
+<section id="part-2-group-investigations" class="level1">
+<h1>Part 2: Group investigations</h1>
+<p>Both groups now have 30 minutes. Work only on your assigned branch. The code is a guided solution, but stop before every cell and predict the result.</p>
+<p>Your group should assign one person to each section. One person should collect the <code>emmeans</code> results and substantive conclusions for the five-minute presentation.</p>
+</section>
+<section id="group-a-branch-one-way-anova-and-post-hoc-comparisons" class="level1">
+<h1>Group A branch: One-way ANOVA and post hoc comparisons</h1>
+<section id="section-a1-insecticide-research-question-and-data" class="level2">
+<h2 class="anchored" data-anchor-id="section-a1-insecticide-research-question-and-data">Section A1: Insecticide research question and data</h2>
+<p>The <code>InsectSprays</code> dataset records insect counts after six spray treatments. Lower counts indicate stronger insect control.</p>
+<p>Your research question is:</p>
+<blockquote class="blockquote">
+<p>Does mean insect count differ among the six spray populations?</p>
+</blockquote>
+<p>One row represents one experimental unit. <code>count</code> is the numeric response and <code>spray</code> is the categorical factor.</p>
+<p><strong>Group A task</strong></p>
+<ol type="1">
+<li>Read the question aloud.</li>
+<li>Load and inspect the data.</li>
+<li>Assign the generic names.</li>
+<li>Describe the sample sizes.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"InsectSprays"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>group_a_data <span class="ot">&lt;-</span> InsectSprays</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(group_a_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"categories"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>group_a_data<span class="sc">$</span>categories <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_a_data<span class="sc">$</span>categories)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(group_a_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  y_variable categories
+1         10          A
+2          7          A
+3         20          A
+4         14          A
+5         14          A
+6         12          A</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(group_a_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   72 obs. of  2 variables:
+ $ y_variable: num  10 7 20 14 14 12 10 23 17 20 ...
+ $ categories: Factor w/ 6 levels "A","B","C","D",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(group_a_data<span class="sc">$</span>categories)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ A  B  C  D  E  F 
+12 12 12 12 12 12 </code></pre>
+</div>
+</div>
+<p>The six factor levels make an overall ANOVA test useful. A set of separate t-tests would create many opportunities for false positive results.</p>
+</section>
+<section id="section-a2-fit-the-global-one-way-model" class="level2">
+<h2 class="anchored" data-anchor-id="section-a2-fit-the-global-one-way-model">Section A2: Fit the global one-way model</h2>
+<p>The null hypothesis says that all six population mean counts are equal. The model produces one global F-test for this claim.</p>
+<p>The boxplot gives context for the result. It shows the direction of the observed differences but does not replace the model.</p>
+<p><strong>Group A task</strong></p>
+<ol type="1">
+<li>State the six-mean null hypothesis in words.</li>
+<li>Run the figure and model.</li>
+<li>Identify the global F-statistic and p-value.</li>
+<li>Decide whether post hoc comparisons are justified.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_a_data, <span class="fu">aes</span>(categories, y_variable, <span class="at">colour =</span> categories)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">alpha =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Spray"</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Insect count"</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Insect counts after six spray treatments"</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week8-anova-tutorial_files/figure-html/section-a2-model-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>group_a_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  y_variable <span class="sc">~</span> categories,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> group_a_data</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(group_a_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)    
+categories   5   2669     534    34.7 &lt;2e-16 ***
+Residuals   66   1015      15                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>A small global p-value means that at least one spray population has a different mean insect count. It does not show which sprays differ.</p>
+</section>
+<section id="section-a3-calculate-estimated-marginal-means" class="level2">
+<h2 class="anchored" data-anchor-id="section-a3-calculate-estimated-marginal-means">Section A3: Calculate estimated marginal means</h2>
+<p><code>emmeans()</code> calculates the mean insect count predicted by the fitted model for each spray. In this balanced one-way design, estimated marginal means equal the observed group means.</p>
+<p>The output includes a standard error and confidence interval for each population mean. Compare the estimates substantively before examining pairwise p-values. Lower fitted means indicate better insect control.</p>
+<p><strong>Group A task</strong></p>
+<ol type="1">
+<li>Predict which sprays will have the lowest fitted means.</li>
+<li>Run <code>emmeans()</code>.</li>
+<li>Rank the sprays by expected insect count.</li>
+<li>Identify confidence intervals that overlap strongly.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>group_a_emmeans <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  group_a_model,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> categories</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>group_a_emmeans</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> categories emmean   SE df lower.CL upper.CL
+ A           14.50 1.13 66   12.240    16.76
+ B           15.33 1.13 66   13.073    17.59
+ C            2.08 1.13 66   -0.177     4.34
+ D            4.92 1.13 66    2.656     7.18
+ E            3.50 1.13 66    1.240     5.76
+ F           16.67 1.13 66   14.406    18.93
+
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<p>The fitted means describe the size and direction of the spray differences. Pairwise comparisons now test those differences using the model residual variance.</p>
+</section>
+<section id="section-a4-run-tukey-pairwise-comparisons-and-conclude" class="level2">
+<h2 class="anchored" data-anchor-id="section-a4-run-tukey-pairwise-comparisons-and-conclude">Section A4: Run Tukey pairwise comparisons and conclude</h2>
+<p>Six sprays create 15 possible pairs. Tukey adjustment allows all 15 comparisons while controlling the overall false positive risk.</p>
+<p>The estimate uses the first spray minus the second spray in each label. A positive estimate means that the first spray has the higher expected insect count and therefore weaker insect control.</p>
+<p>The second output keeps only comparisons with Tukey-adjusted p-values below 0.05. Use the full output when reporting results and the shorter output when identifying the main substantive pattern.</p>
+<p><strong>Group A task</strong></p>
+<ol type="1">
+<li>Run the Tukey comparisons.</li>
+<li>Check the direction of each important estimate.</li>
+<li>Identify the sprays associated with the lowest counts.</li>
+<li>Write a two-sentence substantive conclusion.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>group_a_pairs <span class="ot">&lt;-</span> <span class="fu">pairs</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  group_a_emmeans,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust =</span> <span class="st">"tukey"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>group_a_pairs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate  SE df t.ratio p.value
+ A - B      -0.833 1.6 66  -0.520  0.9952
+ A - C      12.417 1.6 66   7.755  &lt;.0001
+ A - D       9.583 1.6 66   5.985  &lt;.0001
+ A - E      11.000 1.6 66   6.870  &lt;.0001
+ A - F      -2.167 1.6 66  -1.353  0.7542
+ B - C      13.250 1.6 66   8.276  &lt;.0001
+ B - D      10.417 1.6 66   6.506  &lt;.0001
+ B - E      11.833 1.6 66   7.391  &lt;.0001
+ B - F      -1.333 1.6 66  -0.833  0.9603
+ C - D      -2.833 1.6 66  -1.770  0.4921
+ C - E      -1.417 1.6 66  -0.885  0.9489
+ C - F     -14.583 1.6 66  -9.108  &lt;.0001
+ D - E       1.417 1.6 66   0.885  0.9489
+ D - F     -11.750 1.6 66  -7.339  &lt;.0001
+ E - F     -13.167 1.6 66  -8.223  &lt;.0001
+
+P value adjustment: tukey method for comparing a family of 6 estimates </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>group_a_pair_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(group_a_pairs)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>group_a_significant <span class="ot">&lt;-</span> group_a_pair_table[</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  group_a_pair_table<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"contrast"</span>, <span class="st">"estimate"</span>, <span class="st">"SE"</span>, <span class="st">"p.value"</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>group_a_significant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   contrast estimate    SE   p.value
+2     A - C   12.417 1.601 1.075e-09
+3     A - D    9.583 1.601 1.442e-06
+4     A - E   11.000 1.601 4.086e-08
+6     B - C   13.250 1.601 1.185e-10
+7     B - D   10.417 1.601 1.794e-07
+8     B - E   11.833 1.601 4.842e-09
+12    C - F  -14.583 1.601 0.000e+00
+14    D - F  -11.750 1.601 5.999e-09
+15    E - F  -13.167 1.601 1.488e-10</code></pre>
+</div>
+</div>
+<p>Your conclusion should name the response and the sprays. Avoid writing only that a result is significant. Explain which sprays produced lower or higher expected insect counts and what that means for insect control.</p>
+</section>
+</section>
+<section id="group-b-branch-two-way-anova-and-interaction-aware-comparisons" class="level1">
+<h1>Group B branch: Two-way ANOVA and interaction-aware comparisons</h1>
+<section id="section-b1-warp-break-research-question-and-data" class="level2">
+<h2 class="anchored" data-anchor-id="section-b1-warp-break-research-question-and-data">Section B1: Warp-break research question and data</h2>
+<p>The <code>warpbreaks</code> dataset records the number of breaks in yarn. The factors are wool type and loom tension.</p>
+<p>Your research question is:</p>
+<blockquote class="blockquote">
+<p>Does mean yarn-break count depend on wool type, tension, or their combination?</p>
+</blockquote>
+<p>One row represents one loom run. <code>breaks</code> is the numeric response. <code>wool</code> and <code>tension</code> are categorical factors.</p>
+<p><strong>Group B task</strong></p>
+<ol type="1">
+<li>Read the research question aloud.</li>
+<li>Load and inspect the data.</li>
+<li>Assign the generic names.</li>
+<li>Confirm that the design contains every wool-by-tension combination.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"warpbreaks"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>group_b_data <span class="ot">&lt;-</span> warpbreaks</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(group_b_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"y_variable"</span>, <span class="st">"category_a"</span>, <span class="st">"category_b"</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>group_b_data<span class="sc">$</span>category_a <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_b_data<span class="sc">$</span>category_a)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>group_b_data<span class="sc">$</span>category_b <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_b_data<span class="sc">$</span>category_b)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(group_b_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  y_variable category_a category_b
+1         26          A          L
+2         30          A          L
+3         54          A          L
+4         25          A          L
+5         70          A          L
+6         52          A          L</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(group_b_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   54 obs. of  3 variables:
+ $ y_variable: num  26 30 54 25 70 52 51 26 67 18 ...
+ $ category_a: Factor w/ 2 levels "A","B": 1 1 1 1 1 1 1 1 1 1 ...
+ $ category_b: Factor w/ 3 levels "L","M","H": 1 1 1 1 1 1 1 1 1 2 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(group_b_data<span class="sc">$</span>category_a, group_b_data<span class="sc">$</span>category_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+    L M H
+  A 9 9 9
+  B 9 9 9</code></pre>
+</div>
+</div>
+<p>The factors form six cells. A two-way model can test the interaction before the group interprets any averaged main effect.</p>
+</section>
+<section id="section-b2-plot-and-test-the-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="section-b2-plot-and-test-the-interaction">Section B2: Plot and test the interaction</h2>
+<p>Draw the interaction plot before fitting the model. The plotted points are the six cell means. The graph shows whether the wool difference changes with tension, while <code>summary()</code> gives a simple check of the variables and their ranges.</p>
+<p>The model includes wool, tension and wool-by-tension interaction terms. Read the interaction p-value first. If the interaction is supported, explain it with simple effects rather than averaged main effects.</p>
+<p><strong>Group B task</strong></p>
+<ol type="1">
+<li>Inspect the data summary and the plotted cell means.</li>
+<li>Describe the line pattern.</li>
+<li>Fit the two-way model.</li>
+<li>Decide whether the interaction needs simple follow-up comparisons.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(group_b_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   y_variable   category_a category_b
+ Min.   :10.0   A:27       L:18      
+ 1st Qu.:18.2   B:27       M:18      
+ Median :26.0              H:18      
+ Mean   :28.1                        
+ 3rd Qu.:34.0                        
+ Max.   :70.0                        </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  group_b_data,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(category_b, y_variable, <span class="at">colour =</span> category_a, <span class="at">group =</span> category_a)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tension"</span>,</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean yarn-break count"</span>,</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Wool"</span>,</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean yarn breaks by wool type and tension"</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="week8-anova-tutorial_files/figure-html/section-b2-model-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>group_b_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  y_variable <span class="sc">~</span> category_a <span class="sc">*</span> category_b,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> group_b_data</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(group_b_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+category_a             1    451     451    3.77 0.05821 .  
+category_b             2   2034    1017    8.50 0.00069 ***
+category_a:category_b  2   1003     501    4.19 0.02104 *  
+Residuals             48   5745     120                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The interaction row tests whether the wool difference remains constant across tension levels. The plot supplies the direction that the ANOVA table cannot show.</p>
+</section>
+<section id="section-b3-estimate-tension-means-inside-each-wool-type" class="level2">
+<h2 class="anchored" data-anchor-id="section-b3-estimate-tension-means-inside-each-wool-type">Section B3: Estimate tension means inside each wool type</h2>
+<p>Because the interaction asks whether the tension pattern depends on wool type, calculate tension means separately within wool A and wool B.</p>
+<p>The notation <code>~ category_b | category_a</code> means: estimate each tension mean, separately for each wool type. These are simple estimated marginal means rather than one tension average across both wool types.</p>
+<p><strong>Group B task</strong></p>
+<ol type="1">
+<li>Explain the meaning of the vertical bar in the formula.</li>
+<li>Run the estimated marginal means.</li>
+<li>Compare the tension pattern inside wool A.</li>
+<li>Compare the tension pattern inside wool B.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>group_b_emmeans <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  group_b_model,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> category_b <span class="sc">|</span> category_a</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>group_b_emmeans</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>category_a = A:
+ category_b emmean   SE df lower.CL upper.CL
+ L            44.6 3.65 48     37.2     51.9
+ M            24.0 3.65 48     16.7     31.3
+ H            24.6 3.65 48     17.2     31.9
+
+category_a = B:
+ category_b emmean   SE df lower.CL upper.CL
+ L            28.2 3.65 48     20.9     35.5
+ M            28.8 3.65 48     21.4     36.1
+ H            18.8 3.65 48     11.4     26.1
+
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<p>The estimated means show the substantive shape of the interaction. The next cell tests the three tension pairs separately within each wool type.</p>
+</section>
+<section id="section-b4-run-tukey-comparisons-within-each-wool-type" class="level2">
+<h2 class="anchored" data-anchor-id="section-b4-run-tukey-comparisons-within-each-wool-type">Section B4: Run Tukey comparisons within each wool type</h2>
+<p><code>pairs()</code> compares low, medium and high tension within wool A, then repeats the comparisons within wool B. Tukey adjustment operates separately within each displayed family of three comparisons.</p>
+<p>The estimate is the first tension mean minus the second. A positive estimate means that the first tension produced more expected yarn breaks.</p>
+<p>The filtered table highlights adjusted p-values below 0.05. Use the estimates and means to explain how tension changes yarn-break counts within each wool type.</p>
+<p><strong>Group B task</strong></p>
+<ol type="1">
+<li>Run all simple pairwise comparisons.</li>
+<li>Identify supported tension differences within wool A.</li>
+<li>Identify supported tension differences within wool B.</li>
+<li>Write a conclusion that explains the interaction rather than averaging over it.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>group_b_pairs <span class="ot">&lt;-</span> <span class="fu">pairs</span>(</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  group_b_emmeans,</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust =</span> <span class="st">"tukey"</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>group_b_pairs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>category_a = A:
+ contrast estimate   SE df t.ratio p.value
+ L - M      20.556 5.16 48   3.986  0.0007
+ L - H      20.000 5.16 48   3.878  0.0009
+ M - H      -0.556 5.16 48  -0.108  0.9936
+
+category_a = B:
+ contrast estimate   SE df t.ratio p.value
+ L - M      -0.556 5.16 48  -0.108  0.9936
+ L - H       9.444 5.16 48   1.831  0.1704
+ M - H      10.000 5.16 48   1.939  0.1389
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>group_b_pair_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(group_b_pairs)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>group_b_significant <span class="ot">&lt;-</span> group_b_pair_table[</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  group_b_pair_table<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"category_a"</span>, <span class="st">"contrast"</span>, <span class="st">"estimate"</span>, <span class="st">"SE"</span>, <span class="st">"p.value"</span>)</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>group_b_significant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  category_a contrast estimate    SE   p.value
+1          A    L - M    20.56 5.157 0.0006573
+2          A    L - H    20.00 5.157 0.0009185</code></pre>
+</div>
+</div>
+<p>Your conclusion should state whether the tension pattern is similar or different across wool types. Use fitted means to describe the direction and Tukey-adjusted p-values to describe the evidence.</p>
+</section>
+</section>
+<section id="part-3-five-minute-group-presentations" class="level1">
+<h1>Part 3: Five-minute group presentations</h1>
+<p>Each group has five minutes. Focus on the estimated marginal means because they show the fitted pattern in the original response units. Use the adjusted comparisons to state which differences have statistical support, then explain what the pattern means in the context of the dataset.</p>
+<section id="presentation-structure" class="level2">
+<h2 class="anchored" data-anchor-id="presentation-structure">Presentation structure</h2>
+<section id="research-question-and-model-1-minute" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-and-model-1-minute">1. Research question and model: 1 minute</h3>
+<ol type="1">
+<li>State the research question.</li>
+<li>Identify the observational unit.</li>
+<li>Name the response and factor or factors.</li>
+<li>State the global ANOVA conclusion in one sentence.</li>
+</ol>
+</section>
+<section id="estimated-marginal-means-2-minutes" class="level3">
+<h3 class="anchored" data-anchor-id="estimated-marginal-means-2-minutes">2. Estimated marginal means: 2 minutes</h3>
+<ol type="1">
+<li>Show the <code>emmeans</code> table.</li>
+<li>Point out the largest and smallest fitted means.</li>
+<li>Explain the pattern in the response units.</li>
+<li>For Group B, compare the tension pattern separately within each wool type.</li>
+</ol>
+</section>
+<section id="adjusted-comparisons-1-minute" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-comparisons-1-minute">3. Adjusted comparisons: 1 minute</h3>
+<ol type="1">
+<li>Show the most important Tukey-adjusted comparisons.</li>
+<li>Explain their direction using the sign of the estimate.</li>
+<li>Separate supported differences from unsupported differences.</li>
+</ol>
+</section>
+<section id="substantive-conclusion-1-minute" class="level3">
+<h3 class="anchored" data-anchor-id="substantive-conclusion-1-minute">4. Substantive conclusion: 1 minute</h3>
+<ol type="1">
+<li>Answer the research question in the context of the dataset.</li>
+<li>Describe effect direction and practical meaning.</li>
+<li>End with the single most useful finding from the estimated marginal means.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="final-comparison" class="level1">
+<h1>Final comparison</h1>
+<p>After both presentations, compare the workflows.</p>
+<ul>
+<li>One-way ANOVA tests one factor and uses post hoc comparisons after a significant global F-test.</li>
+<li>Two-way ANOVA tests two factors and their interaction.</li>
+<li>A supported interaction changes the follow-up question. Compare simple effects within stated factor levels instead of interpreting averaged main effects.</li>
+<li>Estimated marginal means connect the fitted model to clear comparisons in the response units.</li>
+</ul>
+<p>The central habit is to move in sequence: research question, variables, null hypothesis, model, assumptions, fitted means, comparisons and substantive conclusion.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

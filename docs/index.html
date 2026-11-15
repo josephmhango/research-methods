@@ -208,15 +208,14 @@
       {"title":"Independent study","week":6,"topics":["Reading week"],"image":"img/rmgis.png"},
       {"title":"Main presentation","file":"week7-hypothesis-testing-foundations.html","week":7,"topics":["Hypothesis testing","Correlation","T-test","Chi-square"],"image":"thumbnails/R_logo.svg","primary":true},
       {"title":"Main tutorial","file":"week7-statistical-inference-tutorial.html","week":7,"topics":["R tutorial","T-test","Chi-square","Correlation","Non-parametric tests"],"image":"thumbnails/R_logo.svg","primary":true},
-      {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing","week":7,"topics":["R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true},
+      {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing","week":7,"topics":["R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true,"newTab":true},
       // {"title":"Exploratory data analysis and hypothesis framing","file":"eda.html","week":7,"topics":["EDA","Hypothesis testing"],"image":"thumbnails/R_logo.svg"},
       // {"title":"The t-test","file":"t-test.html","week":7,"topics":["Hypothesis testing","T-test"],"image":"thumbnails/R_logo.svg"},
       // {"title":"The chi-square test","file":"chisquare.html","week":7,"topics":["Hypothesis testing","Chi-square"],"image":"thumbnails/R_logo.svg"},
       // {"title":"Correlation analysis","file":"correlation.html","week":7,"topics":["Correlation","Statistics"],"image":"thumbnails/R_logo.svg"},
-      {"title":"Fisher's F and the foundations of ANOVA","file":"fisher.html","week":8,"topics":["ANOVA"],"image":"thumbnails/R_logo.svg"},
-      {"title":"ANOVA and its Kruskal-Wallis counterpart","file":"anova.html","week":8,"topics":["ANOVA","Kruskal-Wallis"],"image":"thumbnails/R_logo.svg"},
-      {"title":"One-way ANOVA tutorial","file":"1-way-anova.html","week":8,"topics":["ANOVA","R tutorial"],"image":"thumbnails/R_logo.svg"},
-      {"title":"Rank-based and exact tests","file":"nonparam.html","week":8,"topics":["Non-parametric statistics","R tutorial"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Main presentation","file":"anova.html","week":8,"topics":["ANOVA","F-test","Interactions","Repeated measures","Estimated marginal means"],"image":"thumbnails/R_logo.svg","primary":true},
+      {"title":"Main tutorial","file":"week8-anova-tutorial.html","week":8,"topics":["ANOVA","R tutorial","Estimated marginal means","Post hoc comparisons"],"image":"thumbnails/R_logo.svg","primary":true},
+      {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/14LsDcM4ClL0cWJbGPPyTQuw5RIfDkAEL?usp=sharing","week":8,"topics":["ANOVA","R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true,"newTab":true},
       {"title":"General information on ArcGIS Pro Installation Requirements","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30914"},
       {"title":"Installation information","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30915"},
       {"title":"Instructions on how to register for an ESRI account and how to download ArcGIS Pro","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30916"},
@@ -260,7 +259,7 @@
       5: "Introductory R",
       6: "Independent Study",
       7: "Statistical Tests",
-      8: "ANOVA, Kruskal-Wallis and Non-parametric Tests",
+      8: "ANOVA",
       9: "Using GIS to analyse and visualise spatial data 1",
       10: "Session 2",
       11: "Sampling",
@@ -396,12 +395,12 @@
       const defHref = (activeSchedule === 'standard' && weekHref[g.week]) || (g.defaultFile ? toHref(g.defaultFile) : '#');
       const thumb = g.image ? `<img class="thumb" src="${g.image}" alt="Week ${g.week} slides" />` : `<div class="thumb" aria-hidden="true"></div>`;
       const list = preSessionItems(g.slides).map(s=>{
-        if (s.videos) return `<li class="watch-item"><div class="pre-session-watch"><h${s.heading}><span aria-hidden="true">▶</span> ${s.title}</h${s.heading}><ul class="slide-list">${s.videos.map(video => `<li><a class="slide-link" href="${toHref(video.file)}">${video.title}</a></li>`).join('')}</ul></div></li>`;
-        if (s.heading) return `<li class="resource-heading"><h${s.heading}>${s.file ? `<a href="${toHref(s.file)}">${s.title}</a>` : s.title}</h${s.heading}></li>`;
+        if (s.videos) return `<li class="watch-item"><div class="pre-session-watch"><h${s.heading}><span aria-hidden="true">▶</span> ${s.title}</h${s.heading}><ul class="slide-list">${s.videos.map(video => `<li><a class="slide-link" href="${toHref(video.file)}"${video.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${video.title}</a></li>`).join('')}</ul></div></li>`;
+        if (s.heading) return `<li class="resource-heading"><h${s.heading}>${s.file ? `<a href="${toHref(s.file)}"${s.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${s.title}</a>` : s.title}</h${s.heading}></li>`;
         if (s.pending) return `<li><span class="pending-resource">${s.title}</span> <small class="pending-label">Link pending</small></li>`;
         if (!s.file) return `<li>${s.title}</li>`;
         const href = toHref(s.file);
-        return `<li><a class="slide-link" href="${href}">${s.title}</a></li>`;
+        return `<li><a class="slide-link" href="${href}"${s.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${s.title}</a></li>`;
       }).join('');
       const count = g.slides.filter(s => !s.heading).length;
       const lead = g.lead ? `<span class="lead-pill">Staff lead: ${g.lead}</span>` : '';

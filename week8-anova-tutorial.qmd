@@ -1,0 +1,652 @@
+---
+title: "Week 8 Tutorial: ANOVA in R"
+subtitle: "One-way and two-way ANOVA, estimated marginal means and post hoc comparisons"
+author: "K.J. Mhango"
+format:
+  html:
+    toc: true
+    number-sections: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Session plan
+
+This notebook mirrors the Week 8 theory session. Work through it in the stated order because later cells use objects created earlier.
+
+| Stage | Time | Activity |
+|---|---:|---|
+| Preparation | 30 minutes | Read Sections 01–10 without running the code |
+| Whole-class co-coding | 30 minutes | Run Sections 01–10 in assigned turns |
+| Group investigation | 30 minutes | Group A completes Sections A1–A4 and Group B completes Sections B1–B4 |
+| Group presentations | 5 minutes per group | Present the estimated marginal means, important comparisons and substantive conclusion |
+
+During the first 30 minutes, focus on the statistical reasoning. Identify the response, factors, null hypotheses and assumptions before you examine the code.
+
+During the co-coding stage, one person leads each section. When it is your turn:
+
+1. Read the section question aloud.
+2. Explain what each line of code will do.
+3. Predict the important part of the output.
+4. Run the code cell.
+5. Explain the result in plain language before passing control.
+
+The code cells contain guided solutions. You should still make a prediction before you run them.
+
+# Part 1: Whole-class ANOVA workflow
+
+## Section 01: Start a reproducible R session
+
+Restart the R kernel before the group begins. This removes objects left by another analysis. The cell sets the number of printed digits and loads the packages used in the notebook.
+
+`ggplot2` creates the figures by combining a dataset, variables and visual layers. You will learn how to construct `ggplot2` figures in a later session. For now, focus on what each graph is intended to show, why it helps the analysis and how to interpret its pattern. `emmeans` will calculate model-adjusted means during the group investigations. The final line records the R session so that another person can identify the software version.
+
+**Your assigned turn**
+
+1. Confirm that the kernel has been restarted.
+2. Explain why a clean environment matters.
+3. Run the cell.
+4. Confirm that both packages load without an error.
+
+```{r}
+#| label: section-01-setup
+options(digits = 4)
+
+library(ggplot2)
+library(emmeans)
+
+sessionInfo()
+```
+
+The output lists the R version, operating system and attached packages. Package startup text is information rather than a statistical result.
+
+## Section 02: Read the one-way ANOVA question
+
+The `PlantGrowth` dataset records the dried weight of plants from a control group and two treatment groups.
+
+Our research question is:
+
+> Does mean plant weight differ among the control, Treatment 1 and Treatment 2 populations?
+
+One row represents one plant. `weight` is a numeric response. `group` is one categorical explanatory variable with three levels. This structure points towards one-way ANOVA, but first inspect the data.
+
+**Your assigned turn**
+
+1. Read the question aloud.
+2. State what one row represents.
+3. Identify the response and factor.
+4. Run the cell and describe the first rows.
+
+```{r}
+#| label: section-02-load-one-way
+data("PlantGrowth")
+
+head(PlantGrowth)
+str(PlantGrowth)
+table(PlantGrowth$group)
+```
+
+The table should show ten plants in each group. A balanced design gives each group equal representation, although ANOVA can also analyse unequal group sizes.
+
+## Section 03: Assign reusable variable names
+
+The source column names describe this dataset. Generic names make the later code easier to reuse with another numeric response and another grouping factor.
+
+Use `y_variable` for the numeric outcome and `categories` when the analysis contains one categorical factor. Keep the source data unchanged by creating a new data frame.
+
+**Your assigned turn**
+
+1. Match `weight` to `y_variable`.
+2. Match `group` to `categories`.
+3. Run the cell.
+4. Confirm that the response remains numeric and the group remains a factor.
+
+```{r}
+#| label: section-03-one-way-names
+one_way_data <- PlantGrowth
+names(one_way_data) <- c("y_variable", "categories")
+
+one_way_data$categories <- factor(
+  one_way_data$categories,
+  levels = c("ctrl", "trt1", "trt2")
+)
+
+str(one_way_data)
+head(one_way_data)
+```
+
+The order of the levels does not change the global ANOVA F-test. It will affect the direction and labels of later comparisons.
+
+## Section 04: Describe the observed group pattern
+
+ANOVA compares group means, but the raw observations show how much plants vary inside each group. Use `summary()` for a simple first description, then use the figure to compare the groups directly.
+
+The figure shows individual plants, a boxplot and a large diamond for each sample mean. Differences among diamonds represent the observed group pattern. The scatter inside each group represents within-group variation. Concentrate on reading these features rather than memorising the `ggplot()` instructions.
+
+**Your assigned turn**
+
+1. Predict which treatment has the highest sample mean.
+2. Run `summary()` and identify the response range and category counts.
+3. Run the figure.
+4. Compare variation among the means with variation inside the groups.
+
+```{r}
+#| label: section-04-one-way-description
+summary(one_way_data)
+
+ggplot(one_way_data, aes(categories, y_variable, colour = categories)) +
+  geom_boxplot(width = 0.35, outlier.shape = NA) +
+  geom_jitter(width = 0.08, size = 2.5, alpha = 0.75) +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 5) +
+  guides(colour = "none") +
+  labs(
+    x = "Treatment group",
+    y = "Plant weight",
+    title = "Observed plant weights and group means"
+  ) +
+  theme_minimal()
+```
+
+The sample means are descriptive evidence. ANOVA asks whether their separation is large compared with the ordinary variation among plants within the same group.
+
+## Section 05: State the null hypothesis and fit one-way ANOVA
+
+Let $\mu_{ctrl}$, $\mu_{trt1}$ and $\mu_{trt2}$ represent the three population means.
+
+$$
+H_0:\mu_{ctrl}=\mu_{trt1}=\mu_{trt2}
+$$
+
+The alternative says that at least one population mean differs. It does not claim that every pair differs.
+
+`aov()` fits the model. `summary()` produces the ANOVA table. The `categories` row compares variation associated with the three fitted means against residual variation inside the groups.
+
+**Your assigned turn**
+
+1. State $H_0$ in words.
+2. Explain the two parts of the formula.
+3. Run the cell.
+4. Identify the F-statistic and p-value for `categories`.
+
+```{r}
+#| label: section-05-one-way-model
+one_way_model <- aov(
+  y_variable ~ categories,
+  data = one_way_data
+)
+
+summary(one_way_model)
+```
+
+A small p-value gives evidence against equal population means. The global result does not identify the group pairs responsible for the difference. Post-hoc comparisons answer that later question.
+
+## Section 06: Check the one-way ANOVA assumptions
+
+The study design must provide independent plants. The model also assumes approximately Gaussian residuals and similar residual spread across groups.
+
+The residual-versus-fitted plot checks for changing spread or a systematic curve. A random band around zero supports the model. The Q-Q plot checks the residual distribution. Points that follow the line reasonably well support the Gaussian assumption.
+
+**Your assigned turn**
+
+1. Explain why residuals matter more than the raw response distribution.
+2. Run the diagnostic plots.
+3. Describe the residual spread.
+4. Decide whether the Q-Q pattern shows a serious departure from the reference line.
+
+```{r}
+#| label: section-06-one-way-assumptions
+one_way_residuals <- residuals(one_way_model)
+one_way_fitted <- fitted(one_way_model)
+
+par(mfrow = c(1, 2))
+
+plot(
+  one_way_fitted,
+  one_way_residuals,
+  xlab = "Fitted value",
+  ylab = "Residual",
+  main = "Residual spread"
+)
+abline(h = 0, lty = 2)
+
+qqnorm(one_way_residuals, main = "Residual Q-Q plot")
+qqline(one_way_residuals)
+
+par(mfrow = c(1, 1))
+```
+
+Read both plots together. Look for a reasonably even residual spread and a Q-Q pattern that follows the line without a severe or systematic departure. Minor departures do not automatically invalidate ANOVA.
+
+## Section 07: Read the two-way ANOVA question
+
+The `ToothGrowth` dataset records tooth growth in guinea pigs given vitamin C through orange juice or ascorbic acid at three dose levels.
+
+Our research question is:
+
+> Does mean tooth growth depend on supplement, dose, or the combination of supplement and dose?
+
+The numeric response is tooth length. The two factors are supplement and dose. Treat dose as a factor because this analysis compares three experimental dose categories.
+
+**Your assigned turn**
+
+1. Read the question aloud.
+2. Identify the response and both factors.
+3. Run the cell.
+4. Confirm that the full design contains six supplement-by-dose combinations.
+
+```{r}
+#| label: section-07-load-two-way
+data("ToothGrowth")
+
+head(ToothGrowth)
+str(ToothGrowth)
+table(ToothGrowth$supp, ToothGrowth$dose)
+```
+
+The cross-tabulation should show ten guinea pigs in every combination. This is a balanced two-factor design.
+
+## Section 08: Assign two categorical variables and inspect the data
+
+When an analysis contains two categorical predictors, use `category_a` and `category_b`. Here, `category_a` stores supplement and `category_b` stores dose.
+
+The mean for one combination of factor levels is a cell mean. The next section will draw the six cell means directly from the data. First use `summary()` to check the renamed variables and their ranges.
+
+**Your assigned turn**
+
+1. Explain why dose becomes a factor in this model.
+2. Run the renaming code.
+3. Use `summary()` to inspect the response and both factors.
+4. Confirm that the response is numeric and both predictors are categorical.
+
+```{r}
+#| label: section-08-two-way-names
+two_way_data <- ToothGrowth
+names(two_way_data) <- c("y_variable", "category_a", "category_b")
+
+two_way_data$category_a <- factor(two_way_data$category_a)
+two_way_data$category_b <- factor(two_way_data$category_b)
+
+str(two_way_data)
+summary(two_way_data)
+```
+
+If the supplement difference changes across dose levels, the design may contain an interaction. The next graph displays the cell means so that you can see the possible direction before the model tests it.
+
+## Section 09: Plot the interaction before testing it
+
+An interaction means that the effect of one factor depends on the level of another factor. The plot places dose on the horizontal axis and draws one line for each supplement.
+
+Parallel lines would show a similar supplement difference at every dose. Lines that converge, diverge or cross show a changing difference. The plot describes the direction of the interaction. The model will test whether the change is larger than sampling variation would usually produce.
+
+**Your assigned turn**
+
+1. Predict whether the lines will be parallel.
+2. Run the plot.
+3. Describe how the vertical gap changes.
+4. Avoid making pairwise significance claims from the graph alone.
+
+```{r}
+#| label: section-09-two-way-plot
+ggplot(
+  two_way_data,
+  aes(category_b, y_variable, colour = category_a, group = category_a)
+) +
+  stat_summary(fun = mean, geom = "line", linewidth = 1.2) +
+  stat_summary(fun = mean, geom = "point", size = 4) +
+  labs(
+    x = "Dose",
+    y = "Mean tooth length",
+    colour = "Supplement",
+    title = "Mean tooth growth by dose and supplement"
+  ) +
+  theme_minimal()
+```
+
+The lines converge as dose increases. This pattern suggests that the supplement difference depends on dose. The next cell tests that dependency.
+
+## Section 10: Fit and interpret two-way ANOVA
+
+The model formula includes both main effects and their interaction:
+
+$$
+y=\text{supplement}+\text{dose}+\text{supplement:dose}+\text{error}
+$$
+
+The interaction null hypothesis says that the supplement difference is the same at every dose. Read the interaction row first. If its p-value is small, report the interaction and use simple effects to explain it. Main-effect averages can mislead when the interaction is supported.
+
+**Your assigned turn**
+
+1. Explain what `category_a * category_b` adds to the model.
+2. Run the model and ANOVA table.
+3. Read the interaction row before the main-effect rows.
+4. Use the graph to explain the direction of the interaction.
+
+```{r}
+#| label: section-10-two-way-model
+two_way_model <- aov(
+  y_variable ~ category_a * category_b,
+  data = two_way_data
+)
+
+summary(two_way_model)
+```
+
+The interaction p-value tests dependency. The interaction plot shows that the supplement means become closer as dose increases. Post-hoc simple effects would compare supplements at specific doses or doses within a specific supplement.
+
+# Part 2: Group investigations
+
+Both groups now have 30 minutes. Work only on your assigned branch. The code is a guided solution, but stop before every cell and predict the result.
+
+Your group should assign one person to each section. One person should collect the `emmeans` results and substantive conclusions for the five-minute presentation.
+
+# Group A branch: One-way ANOVA and post hoc comparisons
+
+## Section A1: Insecticide research question and data
+
+The `InsectSprays` dataset records insect counts after six spray treatments. Lower counts indicate stronger insect control.
+
+Your research question is:
+
+> Does mean insect count differ among the six spray populations?
+
+One row represents one experimental unit. `count` is the numeric response and `spray` is the categorical factor.
+
+**Group A task**
+
+1. Read the question aloud.
+2. Load and inspect the data.
+3. Assign the generic names.
+4. Describe the sample sizes.
+
+```{r}
+#| label: section-a1-data
+data("InsectSprays")
+
+group_a_data <- InsectSprays
+names(group_a_data) <- c("y_variable", "categories")
+group_a_data$categories <- factor(group_a_data$categories)
+
+head(group_a_data)
+str(group_a_data)
+table(group_a_data$categories)
+```
+
+The six factor levels make an overall ANOVA test useful. A set of separate t-tests would create many opportunities for false positive results.
+
+## Section A2: Fit the global one-way model
+
+The null hypothesis says that all six population mean counts are equal. The model produces one global F-test for this claim.
+
+The boxplot gives context for the result. It shows the direction of the observed differences but does not replace the model.
+
+**Group A task**
+
+1. State the six-mean null hypothesis in words.
+2. Run the figure and model.
+3. Identify the global F-statistic and p-value.
+4. Decide whether post hoc comparisons are justified.
+
+```{r}
+#| label: section-a2-model
+ggplot(group_a_data, aes(categories, y_variable, colour = categories)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.08, alpha = 0.65) +
+  guides(colour = "none") +
+  labs(
+    x = "Spray",
+    y = "Insect count",
+    title = "Insect counts after six spray treatments"
+  ) +
+  theme_minimal()
+
+group_a_model <- aov(
+  y_variable ~ categories,
+  data = group_a_data
+)
+
+summary(group_a_model)
+```
+
+A small global p-value means that at least one spray population has a different mean insect count. It does not show which sprays differ.
+
+## Section A3: Calculate estimated marginal means
+
+`emmeans()` calculates the mean insect count predicted by the fitted model for each spray. In this balanced one-way design, estimated marginal means equal the observed group means.
+
+The output includes a standard error and confidence interval for each population mean. Compare the estimates substantively before examining pairwise p-values. Lower fitted means indicate better insect control.
+
+**Group A task**
+
+1. Predict which sprays will have the lowest fitted means.
+2. Run `emmeans()`.
+3. Rank the sprays by expected insect count.
+4. Identify confidence intervals that overlap strongly.
+
+```{r}
+#| label: section-a3-emmeans
+group_a_emmeans <- emmeans(
+  group_a_model,
+  ~ categories
+)
+
+group_a_emmeans
+```
+
+The fitted means describe the size and direction of the spray differences. Pairwise comparisons now test those differences using the model residual variance.
+
+## Section A4: Run Tukey pairwise comparisons and conclude
+
+Six sprays create 15 possible pairs. Tukey adjustment allows all 15 comparisons while controlling the overall false positive risk.
+
+The estimate uses the first spray minus the second spray in each label. A positive estimate means that the first spray has the higher expected insect count and therefore weaker insect control.
+
+The second output keeps only comparisons with Tukey-adjusted p-values below 0.05. Use the full output when reporting results and the shorter output when identifying the main substantive pattern.
+
+**Group A task**
+
+1. Run the Tukey comparisons.
+2. Check the direction of each important estimate.
+3. Identify the sprays associated with the lowest counts.
+4. Write a two-sentence substantive conclusion.
+
+```{r}
+#| label: section-a4-pairs
+group_a_pairs <- pairs(
+  group_a_emmeans,
+  adjust = "tukey"
+)
+
+group_a_pairs
+
+group_a_pair_table <- as.data.frame(group_a_pairs)
+group_a_significant <- group_a_pair_table[
+  group_a_pair_table$p.value < 0.05,
+  c("contrast", "estimate", "SE", "p.value")
+]
+
+group_a_significant
+```
+
+Your conclusion should name the response and the sprays. Avoid writing only that a result is significant. Explain which sprays produced lower or higher expected insect counts and what that means for insect control.
+
+# Group B branch: Two-way ANOVA and interaction-aware comparisons
+
+## Section B1: Warp-break research question and data
+
+The `warpbreaks` dataset records the number of breaks in yarn. The factors are wool type and loom tension.
+
+Your research question is:
+
+> Does mean yarn-break count depend on wool type, tension, or their combination?
+
+One row represents one loom run. `breaks` is the numeric response. `wool` and `tension` are categorical factors.
+
+**Group B task**
+
+1. Read the research question aloud.
+2. Load and inspect the data.
+3. Assign the generic names.
+4. Confirm that the design contains every wool-by-tension combination.
+
+```{r}
+#| label: section-b1-data
+data("warpbreaks")
+
+group_b_data <- warpbreaks
+names(group_b_data) <- c("y_variable", "category_a", "category_b")
+
+group_b_data$category_a <- factor(group_b_data$category_a)
+group_b_data$category_b <- factor(group_b_data$category_b)
+
+head(group_b_data)
+str(group_b_data)
+table(group_b_data$category_a, group_b_data$category_b)
+```
+
+The factors form six cells. A two-way model can test the interaction before the group interprets any averaged main effect.
+
+## Section B2: Plot and test the interaction
+
+Draw the interaction plot before fitting the model. The plotted points are the six cell means. The graph shows whether the wool difference changes with tension, while `summary()` gives a simple check of the variables and their ranges.
+
+The model includes wool, tension and wool-by-tension interaction terms. Read the interaction p-value first. If the interaction is supported, explain it with simple effects rather than averaged main effects.
+
+**Group B task**
+
+1. Inspect the data summary and the plotted cell means.
+2. Describe the line pattern.
+3. Fit the two-way model.
+4. Decide whether the interaction needs simple follow-up comparisons.
+
+```{r}
+#| label: section-b2-model
+summary(group_b_data)
+
+ggplot(
+  group_b_data,
+  aes(category_b, y_variable, colour = category_a, group = category_a)
+) +
+  stat_summary(fun = mean, geom = "line", linewidth = 1.2) +
+  stat_summary(fun = mean, geom = "point", size = 4) +
+  labs(
+    x = "Tension",
+    y = "Mean yarn-break count",
+    colour = "Wool",
+    title = "Mean yarn breaks by wool type and tension"
+  ) +
+  theme_minimal()
+
+group_b_model <- aov(
+  y_variable ~ category_a * category_b,
+  data = group_b_data
+)
+
+summary(group_b_model)
+```
+
+The interaction row tests whether the wool difference remains constant across tension levels. The plot supplies the direction that the ANOVA table cannot show.
+
+## Section B3: Estimate tension means inside each wool type
+
+Because the interaction asks whether the tension pattern depends on wool type, calculate tension means separately within wool A and wool B.
+
+The notation `~ category_b | category_a` means: estimate each tension mean, separately for each wool type. These are simple estimated marginal means rather than one tension average across both wool types.
+
+**Group B task**
+
+1. Explain the meaning of the vertical bar in the formula.
+2. Run the estimated marginal means.
+3. Compare the tension pattern inside wool A.
+4. Compare the tension pattern inside wool B.
+
+```{r}
+#| label: section-b3-emmeans
+group_b_emmeans <- emmeans(
+  group_b_model,
+  ~ category_b | category_a
+)
+
+group_b_emmeans
+```
+
+The estimated means show the substantive shape of the interaction. The next cell tests the three tension pairs separately within each wool type.
+
+## Section B4: Run Tukey comparisons within each wool type
+
+`pairs()` compares low, medium and high tension within wool A, then repeats the comparisons within wool B. Tukey adjustment operates separately within each displayed family of three comparisons.
+
+The estimate is the first tension mean minus the second. A positive estimate means that the first tension produced more expected yarn breaks.
+
+The filtered table highlights adjusted p-values below 0.05. Use the estimates and means to explain how tension changes yarn-break counts within each wool type.
+
+**Group B task**
+
+1. Run all simple pairwise comparisons.
+2. Identify supported tension differences within wool A.
+3. Identify supported tension differences within wool B.
+4. Write a conclusion that explains the interaction rather than averaging over it.
+
+```{r}
+#| label: section-b4-pairs
+group_b_pairs <- pairs(
+  group_b_emmeans,
+  adjust = "tukey"
+)
+
+group_b_pairs
+
+group_b_pair_table <- as.data.frame(group_b_pairs)
+group_b_significant <- group_b_pair_table[
+  group_b_pair_table$p.value < 0.05,
+  c("category_a", "contrast", "estimate", "SE", "p.value")
+]
+
+group_b_significant
+```
+
+Your conclusion should state whether the tension pattern is similar or different across wool types. Use fitted means to describe the direction and Tukey-adjusted p-values to describe the evidence.
+
+# Part 3: Five-minute group presentations
+
+Each group has five minutes. Focus on the estimated marginal means because they show the fitted pattern in the original response units. Use the adjusted comparisons to state which differences have statistical support, then explain what the pattern means in the context of the dataset.
+
+## Presentation structure
+
+### 1. Research question and model: 1 minute
+
+1. State the research question.
+2. Identify the observational unit.
+3. Name the response and factor or factors.
+4. State the global ANOVA conclusion in one sentence.
+
+### 2. Estimated marginal means: 2 minutes
+
+1. Show the `emmeans` table.
+2. Point out the largest and smallest fitted means.
+3. Explain the pattern in the response units.
+4. For Group B, compare the tension pattern separately within each wool type.
+
+### 3. Adjusted comparisons: 1 minute
+
+1. Show the most important Tukey-adjusted comparisons.
+2. Explain their direction using the sign of the estimate.
+3. Separate supported differences from unsupported differences.
+
+### 4. Substantive conclusion: 1 minute
+
+1. Answer the research question in the context of the dataset.
+2. Describe effect direction and practical meaning.
+3. End with the single most useful finding from the estimated marginal means.
+
+# Final comparison
+
+After both presentations, compare the workflows.
+
+- One-way ANOVA tests one factor and uses post hoc comparisons after a significant global F-test.
+- Two-way ANOVA tests two factors and their interaction.
+- A supported interaction changes the follow-up question. Compare simple effects within stated factor levels instead of interpreting averaged main effects.
+- Estimated marginal means connect the fitted model to clear comparisons in the response units.
+
+The central habit is to move in sequence: research question, variables, null hypothesis, model, assumptions, fitted means, comparisons and substantive conclusion.

@@ -1,0 +1,210 @@
+:root {
+  --anova-navy: #082b4c;
+  --anova-blue: #1d5d9b;
+  --anova-mid-blue: #4f8fcf;
+  --anova-pale-blue: #eaf3fb;
+  --anova-white: #ffffff;
+  --anova-ink: #0c2238;
+}
+
+.reveal {
+  color: var(--anova-ink);
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 30px;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section.slide {
+  background:
+    linear-gradient(135deg, rgba(79, 143, 207, 0.09), rgba(255, 255, 255, 0) 44%),
+    var(--anova-white);
+  padding: 28px 42px;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: var(--anova-navy);
+  font-family: "Aptos Display", "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-transform: none;
+}
+
+.reveal h2 {
+  border-left: 8px solid var(--anova-blue);
+  padding-left: 18px;
+  margin-bottom: 0.55em;
+}
+
+.reveal strong {
+  color: var(--anova-navy);
+}
+
+.reveal blockquote {
+  width: auto;
+  margin: 1.1em 0;
+  padding: 0.75em 1em;
+  border-left: 8px solid var(--anova-mid-blue);
+  background: var(--anova-pale-blue);
+  box-shadow: none;
+  color: var(--anova-navy);
+  font-style: normal;
+}
+
+.reveal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72em;
+  margin: 0.6em 0;
+}
+
+.reveal table thead th {
+  background: var(--anova-navy);
+  color: var(--anova-white);
+  font-weight: 700;
+  padding: 0.48em 0.55em;
+}
+
+.reveal table tbody td {
+  border-bottom: 1px solid #dce3ec;
+  padding: 0.43em 0.55em;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background: var(--anova-pale-blue);
+}
+
+.reveal .MathJax_Display {
+  color: var(--anova-navy);
+}
+
+.reveal .slide-number {
+  background: var(--anova-navy);
+  color: var(--anova-white);
+  border-radius: 18px;
+  padding: 5px 12px;
+}
+
+.reveal .progress span {
+  background: var(--anova-blue);
+}
+
+.reveal .controls {
+  color: var(--anova-blue);
+}
+
+.reveal section#title-slide {
+  background: linear-gradient(135deg, #061f38, var(--anova-navy) 50%, var(--anova-blue));
+  color: var(--anova-white);
+  padding: 90px 65px;
+}
+
+.reveal section#title-slide h1,
+.reveal section#title-slide .subtitle,
+.reveal section#title-slide .author {
+  color: var(--anova-white);
+}
+
+.reveal .slides section.slide[id^="reflection-pause"] {
+  background: linear-gradient(135deg, #061f38, var(--anova-navy) 52%, var(--anova-blue));
+  color: var(--anova-white) !important;
+}
+
+.reveal .slides section.slide[id^="reflection-pause"] h2,
+.reveal .slides section.slide[id^="reflection-pause"] p,
+.reveal .slides section.slide[id^="reflection-pause"] li,
+.reveal .slides section.slide[id^="reflection-pause"] strong {
+  color: var(--anova-white) !important;
+}
+
+.reveal .slides section.slide[id^="reflection-pause"] h2 {
+  border-left-color: #8fc1ef;
+}
+
+.reveal figure,
+.reveal .cell-output-display {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Stable figure geometry prevents Reveal from shrinking or hiding plots. */
+.reveal section.slide > img[src*="figure-revealjs"],
+.reveal section.slide > img[data-src*="figure-revealjs"],
+.reveal section.slide > p > img[src*="figure-revealjs"],
+.reveal section.slide > p > img[data-src*="figure-revealjs"] {
+  display: block !important;
+  width: 88% !important;
+  max-width: 900px !important;
+  height: 410px !important;
+  max-height: 410px !important;
+  object-fit: contain !important;
+  margin: 0.35rem auto 0.55rem !important;
+  flex: 0 0 auto !important;
+}
+
+.reveal section.slide > p:has(> img[src*="figure-revealjs"]),
+.reveal section.slide > p:has(> img[data-src*="figure-revealjs"]) {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.reveal .columns img[src*="figure-revealjs"],
+.reveal .columns img[data-src*="figure-revealjs"] {
+  display: block !important;
+  width: 100% !important;
+  max-width: 470px !important;
+  height: 315px !important;
+  max-height: 315px !important;
+  object-fit: contain !important;
+  margin: 0.25rem auto !important;
+}
+
+.reveal img {
+  border-radius: 8px;
+}
+
+.reveal code {
+  color: var(--anova-blue);
+}
+
+.reveal .emoji-crowd {
+  font-size: 1.55em;
+  line-height: 1.45;
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin: 0.45em auto 0.65em;
+  max-width: 900px;
+}
+
+.reveal .emoji-group {
+  font-size: 1.3em;
+  line-height: 1.45;
+  text-align: center;
+  margin: 0.35em 0;
+}
+
+.reveal .concept-label {
+  color: var(--anova-navy);
+  font-weight: 700;
+  text-align: center;
+}
+
+.reveal .contrast-focus {
+  background: var(--anova-pale-blue);
+  border-left: 7px solid var(--anova-mid-blue);
+  padding: 0.42em 0.65em;
+  margin: 0.28em 0;
+  font-size: 0.86em;
+  line-height: 1.25;
+}
+
+.reveal .formula-walkthrough {
+  color: var(--anova-navy);
+  font-size: 1.08em;
+  text-align: center;
+  margin: 0.55em 0;
+}

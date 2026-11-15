@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Harper Adams University">
-  <title>C5025HF Research methods and Geographical Information Systems – F-Test and ANOVA</title>
+  <title>C5025HF Research methods and Geographical Information Systems – ANOVA: From the F-test to Practical Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,75 +29,10 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
   <link rel="stylesheet" href="scroll.css">
+  <link rel="stylesheet" href="anova.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -197,8 +132,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">F-Test and ANOVA</h1>
-  <p class="subtitle">C5025HF</p>
+  <h1 class="title">ANOVA: From the F-test to Practical Models</h1>
+  <p class="subtitle">Theory, model evidence, and interpretation</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,135 +149,227 @@ Harper Adams University
 <ul>
 <li><a href="#/how-to-use-this-guide" id="/toc-how-to-use-this-guide">How to use this guide</a></li>
 <li><a href="#/setup" id="/toc-setup">Setup</a></li>
-<li><a href="#/origins-of-the-ftest" id="/toc-origins-of-the-ftest">Origins of the F‑test</a></li>
-<li><a href="#/from-t-to-f-why-a-ratio" id="/toc-from-t-to-f-why-a-ratio">From t to F: why a ratio?</a></li>
-<li><a href="#/where-the-ftest-appears" id="/toc-where-the-ftest-appears">Where the F‑test appears</a></li>
-<li><a href="#/standalone-ftest-example-comparing-two-variances" id="/toc-standalone-ftest-example-comparing-two-variances">Standalone F‑test example: comparing two variances</a></li>
+<li><a href="#/origins-of-the-f-test-a-mixed-crowd" id="/toc-origins-of-the-f-test-a-mixed-crowd">Origins of the F-test: a mixed crowd</a></li>
+<li><a href="#/mean-and-spread-answer-different-questions" id="/toc-mean-and-spread-answer-different-questions">Mean and spread answer different questions</a></li>
+<li><a href="#/a-variance-difference-has-a-substantive-meaning" id="/toc-a-variance-difference-has-a-substantive-meaning">A variance difference has a substantive meaning</a></li>
+<li><a href="#/the-two-variance-f-test" id="/toc-the-two-variance-f-test">The two-variance F-test</a></li>
+<li><a href="#/standalone-f-test-example-comparing-two-variances" id="/toc-standalone-f-test-example-comparing-two-variances">Standalone F-test example: comparing two variances</a></li>
+<li><a href="#/what-is-anova" id="/toc-what-is-anova">What is ANOVA?</a></li>
+<li><a href="#/from-the-variance-f-test-to-anova" id="/toc-from-the-variance-f-test-to-anova">From the variance F-test to ANOVA</a></li>
+<li><a href="#/the-anova-f-reference-distribution" id="/toc-the-anova-f-reference-distribution">The ANOVA F reference distribution</a></li>
+<li><a href="#/reflection-pause-1" id="/toc-reflection-pause-1">Reflection pause 1</a></li>
 <li><a href="#/what-problem-does-anova-solve" id="/toc-what-problem-does-anova-solve">What problem does ANOVA solve?</a></li>
-<li><a href="#/from-variation-to-sums-of-squares" id="/toc-from-variation-to-sums-of-squares">From variation to sums of squares</a></li>
-<li>Reflection pause 1</li>
-<li><a href="#/handson-oneway-anova-in-r" id="/toc-handson-oneway-anova-in-r">Hands‑on: One‑way ANOVA in R</a></li>
-<li><a href="#/manual-anova-by-hand-and-verification" id="/toc-manual-anova-by-hand-and-verification">Manual ANOVA (by hand) and verification</a>
-<ul>
-<li><a href="#/assumptions-you-should-check" id="/toc-assumptions-you-should-check">Assumptions you should check</a></li>
-</ul></li>
-<li>Reflection pause 2</li>
-<li><a href="#/interpreting-the-qq-plot-in-detail" id="/toc-interpreting-the-qq-plot-in-detail">Interpreting the Q‑Q plot (in detail)</a></li>
-<li><a href="#/which-means-differ-posthoc-comparisons" id="/toc-which-means-differ-posthoc-comparisons">Which means differ? Post‑hoc comparisons</a></li>
-<li><a href="#/reporting-your-result" id="/toc-reporting-your-result">Reporting your result</a></li>
-<li><a href="#/extension-twoway-anova-factor-blocks" id="/toc-extension-twoway-anova-factor-blocks">Extension: Two‑way ANOVA (factor + blocks)</a></li>
-<li><a href="#/ancova-anova-with-a-covariate" id="/toc-ancova-anova-with-a-covariate">ANCOVA: ANOVA with a covariate</a></li>
-<li><a href="#/manova-multiple-responses" id="/toc-manova-multiple-responses">MANOVA: multiple responses</a></li>
-<li><a href="#/repeated-measures-anova-withinsubjects" id="/toc-repeated-measures-anova-withinsubjects">Repeated measures ANOVA (within‑subjects)</a></li>
-<li><a href="#/common-pitfalls-and-tips" id="/toc-common-pitfalls-and-tips">Common pitfalls and tips</a></li>
-<li><a href="#/practice-try-it-yourself" id="/toc-practice-try-it-yourself">Practice: Try it yourself</a></li>
-<li>Reflection pause 3</li>
-<li><a href="#/kruskal-wallis-the-rank-based-counterpart" id="/toc-kruskal-wallis-the-rank-based-counterpart">Kruskal-Wallis: the rank-based counterpart</a>
-<ul>
-<li><a href="#/when-the-anova-assumptions-are-unsuitable" id="/toc-when-the-anova-assumptions-are-unsuitable">When the ANOVA assumptions are unsuitable</a></li>
-<li><a href="#/anova-and-kruskal-wallis-on-the-same-example" id="/toc-anova-and-kruskal-wallis-on-the-same-example">ANOVA and Kruskal-Wallis on the same example</a></li>
-<li><a href="#/visualise-before-choosing" id="/toc-visualise-before-choosing">Visualise before choosing</a></li>
-<li><a href="#/follow-up-comparisons" id="/toc-follow-up-comparisons">Follow-up comparisons</a></li>
-<li><a href="#/reporting-the-rank-based-analysis" id="/toc-reporting-the-rank-based-analysis">Reporting the rank-based analysis</a></li>
-</ul></li>
+<li><a href="#/one-way-anova-what-it-means" id="/toc-one-way-anova-what-it-means">One-way ANOVA: what it means</a></li>
+<li><a href="#/plantgrowth-columns-used-in-the-model" id="/toc-plantgrowth-columns-used-in-the-model"><code>PlantGrowth</code>: columns used in the model</a></li>
+<li><a href="#/one-way-anova-the-model-evidence" id="/toc-one-way-anova-the-model-evidence">One-way ANOVA: the model evidence</a></li>
+<li><a href="#/one-way-anova-assumptions" id="/toc-one-way-anova-assumptions">One-way ANOVA: assumptions</a></li>
+<li><a href="#/one-way-anova-reading-the-output" id="/toc-one-way-anova-reading-the-output">One-way ANOVA: reading the output</a></li>
+<li><a href="#/reflection-pause-2" id="/toc-reflection-pause-2">Reflection pause 2</a></li>
+<li><a href="#/two-way-anova-what-it-means" id="/toc-two-way-anova-what-it-means">Two-way ANOVA: what it means</a></li>
+<li><a href="#/toothgrowth-columns-used-in-the-model" id="/toc-toothgrowth-columns-used-in-the-model"><code>ToothGrowth</code>: columns used in the model</a></li>
+<li><a href="#/the-group-means-reveal-the-interaction-pattern" id="/toc-the-group-means-reveal-the-interaction-pattern">The group means reveal the interaction pattern</a></li>
+<li><a href="#/what-the-interaction-row-tells-us" id="/toc-what-the-interaction-row-tells-us">What the interaction row tells us</a></li>
+<li><a href="#/covariates-and-interactions-in-anova" id="/toc-covariates-and-interactions-in-anova">Covariates and interactions in ANOVA</a></li>
+<li><a href="#/mtcars-columns-used-in-the-model" id="/toc-mtcars-columns-used-in-the-model"><code>mtcars</code>: columns used in the model</a></li>
+<li><a href="#/covariate-interaction-adjusted-means-at-the-same-weight" id="/toc-covariate-interaction-adjusted-means-at-the-same-weight">Covariate interaction: adjusted means at the same weight</a></li>
+<li><a href="#/covariate-interaction-model-output" id="/toc-covariate-interaction-model-output">Covariate interaction: model output</a></li>
+<li><a href="#/the-interaction-rule-of-thumb" id="/toc-the-interaction-rule-of-thumb">The interaction rule of thumb</a></li>
+<li><a href="#/simple-effects-one-slice-at-a-time" id="/toc-simple-effects-one-slice-at-a-time">Simple effects: one slice at a time</a></li>
+<li><a href="#/simple-effects-by-car-weight" id="/toc-simple-effects-by-car-weight">Simple effects by car weight</a></li>
+<li><a href="#/reading-the-simple-effects" id="/toc-reading-the-simple-effects">Reading the simple effects</a></li>
+<li><a href="#/simple-slopes-how-weight-changes-mpg" id="/toc-simple-slopes-how-weight-changes-mpg">Simple slopes: how weight changes mpg</a></li>
+<li><a href="#/when-an-overall-factor-f-test-helps" id="/toc-when-an-overall-factor-f-test-helps">When an overall factor F-test helps</a></li>
+<li><a href="#/repeated-measures-anova-what-it-means" id="/toc-repeated-measures-anova-what-it-means">Repeated-measures ANOVA: what it means</a></li>
+<li><a href="#/sleep-columns-used-in-the-model" id="/toc-sleep-columns-used-in-the-model"><code>sleep</code>: columns used in the model</a></li>
+<li><a href="#/why-the-model-needs-an-error-term" id="/toc-why-the-model-needs-an-error-term">Why the model needs an error term</a></li>
+<li><a href="#/what-id-group-means" id="/toc-what-id-group-means">What <code>ID / group</code> means</a></li>
+<li><a href="#/repeated-measures-observed-trajectories" id="/toc-repeated-measures-observed-trajectories">Repeated measures: observed trajectories</a></li>
+<li><a href="#/repeated-measures-reading-the-output" id="/toc-repeated-measures-reading-the-output">Repeated measures: reading the output</a></li>
+<li><a href="#/error-structures-for-other-designs" id="/toc-error-structures-for-other-designs">Error structures for other designs</a></li>
+<li><a href="#/reflection-pause-3" id="/toc-reflection-pause-3">Reflection pause 3</a></li>
+<li><a href="#/anova-does-not-make-pairwise-comparisons" id="/toc-anova-does-not-make-pairwise-comparisons">ANOVA does not make pairwise comparisons</a></li>
+<li><a href="#/tukeys-hsd-for-pairwise-comparisons" id="/toc-tukeys-hsd-for-pairwise-comparisons">Tukey’s HSD for pairwise comparisons</a></li>
+<li><a href="#/raw-means-can-mix-treatment-and-site-effects" id="/toc-raw-means-can-mix-treatment-and-site-effects">Raw means can mix treatment and site effects</a></li>
+<li><a href="#/estimated-marginal-means" id="/toc-estimated-marginal-means">Estimated marginal means</a></li>
+<li><a href="#/estimated-marginal-means-model-evidence" id="/toc-estimated-marginal-means-model-evidence">Estimated marginal means: model evidence</a></li>
+<li><a href="#/estimated-marginal-means-with-tukey-adjustment" id="/toc-estimated-marginal-means-with-tukey-adjustment">Estimated marginal means with Tukey adjustment</a></li>
+<li><a href="#/planned-contrasts-focused-questions" id="/toc-planned-contrasts-focused-questions">Planned contrasts: focused questions</a></li>
+<li><a href="#/planned-contrasts-turning-a-question-into-weights" id="/toc-planned-contrasts-turning-a-question-into-weights">Planned contrasts: turning a question into weights</a></li>
+<li><a href="#/independent-planned-contrasts" id="/toc-independent-planned-contrasts">Independent planned contrasts</a></li>
+<li><a href="#/evaluating-assumptions" id="/toc-evaluating-assumptions">Evaluating assumptions</a></li>
+<li><a href="#/broken-assumptions-a-path-to-glms-and-glmms" id="/toc-broken-assumptions-a-path-to-glms-and-glmms">Broken assumptions: a path to GLMs and GLMMs</a></li>
 </ul>
 </nav>
 </section>
 <section id="how-to-use-this-guide" class="slide level2">
 <h2>How to use this guide</h2>
-<p>This guide is written for you. You’ll read short explanations, then immediately run R code yourself to reproduce the results. Every step shows both the code and the output you should expect.</p>
-<ul>
-<li>By the end, you will be able to:
-<ul>
-<li>Explain what ANOVA tests and when to use it.</li>
-<li>Fit a one-way ANOVA in R and interpret the output.</li>
-<li>Check model assumptions with plots and simple tests.</li>
-<li>Run and interpret post‑hoc comparisons (Tukey HSD and adjusted t‑tests).</li>
-<li>Understand the idea of two‑way ANOVA (factor + blocks, interaction).</li>
-</ul></li>
-</ul>
+<p>This lecture builds the reasoning behind ANOVA. The figures and model outputs come from R, while the code remains hidden.</p>
+<p>For each model, ask four questions:</p>
+<ol type="1">
+<li>What is the observational unit?</li>
+<li>Which factors or covariates explain variation?</li>
+<li>Which source of variation provides the correct comparison?</li>
+<li>What does the result mean for the research question?</li>
+</ol>
+<p>The practical session will later show how to write and adapt the code.</p>
 </section>
 <section id="setup" class="slide level2">
 <h2>Setup</h2>
-<p>You only need base R for everything in this guide. One optional test uses the <code>car</code> package.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: run once if you want to use Levene's test</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("car")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The lecture uses four datasets that come with R:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Response</th>
+<th>Design question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PlantGrowth</code></td>
+<td>Plant weight</td>
+<td>Do three treatment means differ?</td>
+</tr>
+<tr class="even">
+<td><code>ToothGrowth</code></td>
+<td>Tooth length</td>
+<td>Do supplement and dose work together?</td>
+</tr>
+<tr class="odd">
+<td><code>mtcars</code></td>
+<td>Fuel economy</td>
+<td>Does the weight relationship differ by transmission?</td>
+</tr>
+<tr class="even">
+<td><code>sleep</code></td>
+<td>Extra sleep</td>
+<td>Do the same people respond differently to two treatments?</td>
+</tr>
+</tbody>
+</table>
+<p>The examples move from independent groups to designs with interactions and repeated observations.</p>
+</section>
+<section id="origins-of-the-f-test-a-mixed-crowd" class="slide level2">
+<h2>Origins of the F-test: a mixed crowd</h2>
+<p>Suppose we can score happiness as 1 for unhappy, 2 for neutral, and 3 for very happy.</p>
+<div class="emoji-crowd" aria-label="A mixed crowd of brown and yellow groups with different happiness levels">
+<p>🙋🏽 &nbsp; 🧑 &nbsp; 🙍🏽 &nbsp; 🙋 &nbsp; 🙍 &nbsp; 🧑🏽<br> 🙋 &nbsp; 🙋🏽 &nbsp; 🧑 &nbsp; 🙍🏽 &nbsp; 🧑🏽 &nbsp; 🙍</p>
 </div>
-<p>If you use RStudio: open a new R script or Quarto document, and copy/paste the code chunks as you go.</p>
+<p>Someone claims that happiness differs between the brown and yellow groups. Before testing that claim, we must decide what kind of difference we mean.</p>
 </section>
-<section id="origins-of-the-ftest" class="slide level2">
-<h2>Origins of the F‑test</h2>
-<ul>
-<li>William Sealy Gosset (pen name “Student”) developed the small‑sample t‑test while working at Guinness to improve quality control.</li>
-<li>Ronald A. Fisher formalised variance partitioning and introduced the F‑statistic for comparing mean square quantities.</li>
-<li>The F‑distribution is associated with Fisher and popularised by Snedecor (hence the letter “F”).</li>
-<li>Big idea: compare explained variation to unexplained variation using a ratio of mean squares.</li>
-</ul>
-</section>
-<section id="from-t-to-f-why-a-ratio" class="slide level2">
-<h2>From t to F: why a ratio?</h2>
-<ul>
-<li>If a model explains real structure, the “between” mean square should exceed the “within” mean square.</li>
-<li>Under a true null, both mean squares estimate the same variance → their ratio should be near 1.</li>
-<li>With normal errors, these scaled sums of squares follow chi‑squared distributions; their ratio follows an F‑distribution with appropriate degrees of freedom.</li>
-</ul>
-</section>
-<section id="where-the-ftest-appears" class="slide level2">
-<h2>Where the F‑test appears</h2>
-<ul>
-<li>One‑way and multi‑factor ANOVA global tests (“are any means different?”).</li>
-<li>Regression: overall model significance test.</li>
-<li>Standalone variance comparison: test whether two normal populations have equal variances.</li>
-</ul>
-</section>
-<section id="standalone-ftest-example-comparing-two-variances" class="slide level2">
-<h2>Standalone F‑test example: comparing two variances</h2>
-<p>We’ll simulate two normal samples with different variances and test <span class="math inline">\(\sigma_x^2 = \sigma_y^2\)</span>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.0</span>)</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fl">1.6</span>)</span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(x, y)  <span class="co"># F-test for equality of variances</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="mean-and-spread-answer-different-questions" class="slide level2">
+<h2>Mean and spread answer different questions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="concept-label">
+Brown group
 </div>
-<p>How to interpret:</p>
-<ul>
-<li><p>H0: the population variances are equal. A small p‑value suggests different variances.</p></li>
-<li><p>This test is sensitive to non‑normality; use with caution if distributions are heavy‑tailed or skewed.</p></li>
-</ul>
+<div class="emoji-group">
+🙍🏽 &nbsp; 🧑🏽 &nbsp; 🙋🏽<br>🙍🏽 &nbsp; 🧑🏽 &nbsp; 🙋🏽
+</div>
+<p>A <strong>t-test</strong> asks whether the average happiness score differs between the two groups.</p>
+</div><div class="column" style="width:50%;">
+<div class="concept-label">
+Yellow group
+</div>
+<div class="emoji-group">
+🙍 &nbsp; 🧑 &nbsp; 🙋<br>🙍 &nbsp; 🧑 &nbsp; 🙋
+</div>
+<p>An <strong>F-test of variances</strong> asks whether happiness scores spread out by different amounts.</p>
+</div></div>
+<p>If the groups come from populations with the same variance, their scores should show similar spread. Equal variance does not require identical proportions in every happiness category.</p>
 </section>
-<section id="what-problem-does-anova-solve" class="slide level2">
-<h2>What problem does ANOVA solve?</h2>
-<p>When you compare more than two group means (e.g., yields under fertilisers A, B, C), running many t‑tests inflates the chance of a false positive (Type I error). ANOVA answers one global question:</p>
-<ul>
-<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu_1 = \mu_2 = \dots = \mu_k\)</span> (all group means equal)</li>
-<li><span class="math inline">\(H_1\)</span>: at least one mean differs</li>
-</ul>
-<p>It uses a single F‑statistic to compare “between‑groups” variation to “within‑groups” variation.</p>
+<section id="a-variance-difference-has-a-substantive-meaning" class="slide level2">
+<h2>A variance difference has a substantive meaning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="concept-label">
+Scores concentrated near neutral
+</div>
+<div class="emoji-group">
+🧑🏽 &nbsp; 🧑🏽 &nbsp; 🙋🏽<br>🧑🏽 &nbsp; 🙍🏽 &nbsp; 🧑🏽
+</div>
+</div><div class="column" style="width:50%;">
+<div class="concept-label">
+Scores concentrated at the extremes
+</div>
+<div class="emoji-group">
+🙍 &nbsp; 🙋 &nbsp; 🙍<br>🙋 &nbsp; 🙍 &nbsp; 🙋
+</div>
+</div></div>
+<p>The two groups can have a similar mean but different variance. One group clusters near the centre, while the other contains more extreme scores.</p>
+<p>The F-test asks whether the observed difference in spread is larger than sampling variation would usually produce.</p>
 </section>
-<section id="from-variation-to-sums-of-squares" class="slide level2">
-<h2>From variation to sums of squares</h2>
-<ul>
-<li>Total variation is partitioned into:
-<ul>
-<li>Between‑groups (explained by the factor/treatment)</li>
-<li>Within‑groups (unexplained residual/error)</li>
-</ul></li>
-<li>Notation:
-<ul>
-<li><span class="math inline">\(SS_T\)</span> = total sum of squares</li>
-<li><span class="math inline">\(SS_B\)</span> = between‑groups sum of squares (treatment)</li>
-<li><span class="math inline">\(SS_W\)</span> = within‑groups sum of squares (residual/error)</li>
-</ul></li>
-</ul>
-<p>We convert sums of squares to mean squares by dividing by degrees of freedom:</p>
-<ul>
-<li><span class="math inline">\(MS_B = SS_B / (k - 1)\)</span>, where (k) is the number of groups</li>
-<li><span class="math inline">\(MS_W = SS_W / (N - k)\)</span>, where (N) is the total number of observations</li>
-</ul>
-<p>The F‑statistic is the ratio: <span class="math inline">\(F = \frac{\text{MS}_B}{\text{MS}_W}\)</span>. If all group means are truly equal, the ratio tends to be near 1; larger values suggest group means differ.</p>
+<section id="the-two-variance-f-test" class="slide level2">
+<h2>The two-variance F-test</h2>
+<p>The F-statistic first has a simple job. It compares the variance from one group with the variance from another group.</p>
+<p><span class="math display">\[
+H_0:\sigma_1^2=\sigma_2^2
+\]</span></p>
+<p><span class="math display">\[
+F=\frac{s_1^2}{s_2^2}
+\]</span></p>
+<p>Place the larger sample variance in the numerator for an intuitive reading. Similar variances give an F-value near 1. A value far above 1 means that one sample spreads out much more than the other.</p>
+<p>The F reference distribution uses <span class="math inline">\(n_1-1\)</span> and <span class="math inline">\(n_2-1\)</span> degrees of freedom to judge how unusual the ratio is under <span class="math inline">\(H_0\)</span>.</p>
 </section>
-<section class="slide level2">
+<section id="standalone-f-test-example-comparing-two-variances" class="slide level2">
+<h2>Standalone F-test example: comparing two variances</h2>
+<p>The standalone F-test compares two population variances:</p>
+<p><span class="math display">\[
+H_0:\sigma^2_{\text{control}}=\sigma^2_{\text{treatment 2}}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/standalone-f-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The reference distribution assumes independent Gaussian observations. A small p-value gives evidence that the two population variances differ.</p>
+</section>
+<section id="what-is-anova" class="slide level2">
+<h2>What is ANOVA?</h2>
+<p><strong>ANOVA</strong> stands for <strong>analysis of variance</strong>. It is one global F-test of whether a numeric response has the same population mean across several groups.</p>
+<p>Use it when the response is numeric and a categorical factor defines three or more groups. For happiness scores, the null hypothesis is:</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k
+\]</span></p>
+<p>ANOVA tests all <span class="math inline">\(k\)</span> means together instead of running a t-test for every pair. A significant result means that at least one mean differs. Focused comparisons later identify the pattern.</p>
+<p>Although the question concerns means, ANOVA answers it by comparing variance associated with the group means against variance among observations inside the groups.</p>
+</section>
+<section id="from-the-variance-f-test-to-anova" class="slide level2">
+<h2>From the variance F-test to ANOVA</h2>
+<p>ANOVA keeps the same ratio idea but changes what the two variance estimates represent.</p>
+<p><span class="math display">\[
+F=\frac{MS_{\text{model}}}{MS_{\text{error}}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(MS_{\text{model}}\)</span> estimates variation associated with the group means or another model term.</li>
+<li><span class="math inline">\(MS_{\text{error}}\)</span> estimates ordinary variation among comparable observations.</li>
+</ul>
+<p>A <strong>mean square</strong>, written as <span class="math inline">\(MS\)</span>, is a sum of squared deviations divided by its degrees of freedom. This division turns the sum of squares into a variance estimate.</p>
+</section>
+<section id="the-anova-f-reference-distribution" class="slide level2">
+<h2>The ANOVA F reference distribution</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/f-distribution-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The curve shows F-values expected when the null model is true. Values near 1 are common. Large values lie in the right tail and challenge the claim that the model and error mean squares estimate the same variance.</p>
+</section>
+<section id="reflection-pause-1" class="slide level2">
 <h2>Reflection pause 1</h2>
 <p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
 <ul>
@@ -351,115 +378,136 @@ Harper Adams University
 <li>What question would you like to resolve before continuing?</li>
 </ul>
 </section>
-<section id="handson-oneway-anova-in-r" class="slide level2">
-<h2>Hands‑on: One‑way ANOVA in R</h2>
-<p>We’ll create a small dataset with one numeric response (<code>yield</code>) and one factor (<code>fert</code>).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>fert <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">yield =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">21</span>,</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">34</span>,</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">28</span>),</span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fert =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">4</span>))</span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="what-problem-does-anova-solve" class="slide level2">
+<h2>What problem does ANOVA solve?</h2>
+<p>The same mixed crowd can be reorganised in many ways. We could group people by colour, happiness category, or combinations of both.</p>
+<div class="emoji-crowd" aria-label="The same observations reorganised into several groups">
+<p>🙍🏽 🧑🏽 🙋🏽 &nbsp;&nbsp; | &nbsp;&nbsp; 🙍 🧑 🙋<br> 🙍🏽 🙍 &nbsp;&nbsp; | &nbsp;&nbsp; 🧑🏽 🧑 &nbsp;&nbsp; | &nbsp;&nbsp; 🙋🏽 🙋</p>
 </div>
-<p>Take a quick look:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fert)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fert)</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fert<span class="sc">$</span>fert)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Optional: visualise group differences before modelling.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(yield <span class="sc">~</span> fert, <span class="at">data =</span> fert,</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Fertiliser"</span>, <span class="at">ylab =</span> <span class="st">"Yield"</span>,</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#8dd3c7"</span>,<span class="st">"#ffffb3"</span>,<span class="st">"#bebada"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Fit the ANOVA model and view the ANOVA table:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> fert, <span class="at">data =</span> fert)</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>How to read the table:</p>
-<ul>
-<li><p>Df: degrees of freedom (treatment and residual)</p></li>
-<li><p>Sum Sq: <span class="math inline">\(SS_B\)</span> and <span class="math inline">\(SS_W\)</span></p></li>
-<li><p>Mean Sq: <span class="math inline">\(MS_B\)</span> and <span class="math inline">\(MS_W\)</span></p></li>
-<li><p>F value: the test statistic <span class="math inline">\(F = \frac{\text{MS}_B}{\text{MS}_W}\)</span></p></li>
-<li><p>Pr(&gt;F): the p‑value (small p suggests at least one mean differs)</p></li>
-</ul>
+<p>Each regrouping creates possible comparisons. If we keep trying t-tests, we increase the chance of finding a difference that arose by chance.</p>
+<p>ANOVA protects the first decision by asking one global question across all <span class="math inline">\(k\)</span> groups:</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k
+\]</span></p>
+<p>A significant F-test says that at least one population mean differs. It does not identify the pair or pattern, so focused comparisons come later.</p>
 </section>
-<section id="manual-anova-by-hand-and-verification" class="slide level2">
-<h2>Manual ANOVA (by hand) and verification</h2>
-<p>Let’s compute the ANOVA components directly and confirm they match <code>aov()</code>:</p>
+<section id="one-way-anova-what-it-means" class="slide level2">
+<h2>One-way ANOVA: what it means</h2>
+<p>One-way ANOVA has one continuous response and one categorical explanatory variable.</p>
+<p>For <code>PlantGrowth</code>:</p>
+<ul>
+<li>one row represents one plant</li>
+<li><code>weight</code> is the response</li>
+<li><code>group</code> identifies control, treatment 1, or treatment 2</li>
+</ul>
+<p>The model compares variation among the three fitted means with variation among plants in the same group.</p>
+</section>
+<section id="plantgrowth-columns-used-in-the-model" class="slide level2">
+<h2><code>PlantGrowth</code>: columns used in the model</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Group means and counts</span></span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(fert<span class="sc">$</span>yield, fert<span class="sc">$</span>fert, mean)</span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>group_counts <span class="ot">&lt;-</span> <span class="fu">table</span>(fert<span class="sc">$</span>fert)</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>grand_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(fert<span class="sc">$</span>yield)</span>
-<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Between-groups sum of squares (SSB)</span></span>
-<span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> <span class="fu">sum</span>(group_counts <span class="sc">*</span> (group_means <span class="sc">-</span> grand_mean)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb7-8"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Within-groups sum of squares (SSW)</span></span>
-<span id="cb7-10"><a aria-hidden="true" tabindex="-1"></a>SSW <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">unlist</span>(<span class="fu">tapply</span>(fert<span class="sc">$</span>yield, fert<span class="sc">$</span>fert, <span class="cf">function</span>(v) <span class="fu">sum</span>((v <span class="sc">-</span> <span class="fu">mean</span>(v))<span class="sc">^</span><span class="dv">2</span>))))</span>
-<span id="cb7-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom</span></span>
-<span id="cb7-13"><a aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">length</span>(group_means)</span>
-<span id="cb7-14"><a aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(fert)</span>
-<span id="cb7-15"><a aria-hidden="true" tabindex="-1"></a>df_between <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb7-16"><a aria-hidden="true" tabindex="-1"></a>df_within  <span class="ot">&lt;-</span> N <span class="sc">-</span> k</span>
-<span id="cb7-17"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Mean squares and F</span></span>
-<span id="cb7-19"><a aria-hidden="true" tabindex="-1"></a>MSB <span class="ot">&lt;-</span> SSB <span class="sc">/</span> df_between</span>
-<span id="cb7-20"><a aria-hidden="true" tabindex="-1"></a>MSW <span class="ot">&lt;-</span> SSW <span class="sc">/</span> df_within</span>
-<span id="cb7-21"><a aria-hidden="true" tabindex="-1"></a>F_manual <span class="ot">&lt;-</span> MSB <span class="sc">/</span> MSW</span>
-<span id="cb7-22"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Assemble a manual ANOVA table</span></span>
-<span id="cb7-24"><a aria-hidden="true" tabindex="-1"></a>anova_manual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-25"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">Source =</span> <span class="fu">c</span>(<span class="st">"fert"</span>, <span class="st">"Residuals"</span>),</span>
-<span id="cb7-26"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">Df     =</span> <span class="fu">c</span>(df_between, df_within),</span>
-<span id="cb7-27"><a aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Sum Sq</span><span class="st">`</span><span class="ot">=</span> <span class="fu">c</span>(SSB, SSW),</span>
-<span id="cb7-28"><a aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Mean Sq</span><span class="st">`</span><span class="ot">=</span> <span class="fu">c</span>(MSB, MSW),</span>
-<span id="cb7-29"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb7-30"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-31"><a aria-hidden="true" tabindex="-1"></a>anova_manual</span>
-<span id="cb7-32"><a aria-hidden="true" tabindex="-1"></a>F_manual</span>
-<span id="cb7-33"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with aov()</span></span>
-<span id="cb7-35"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">aov</span>(yield <span class="sc">~</span> fert, <span class="at">data =</span> fert))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Plant weight</th>
+<th style="text-align: left;">Treatment group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4.17</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.58</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5.18</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6.11</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.50</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.61</td>
+<td style="text-align: left;">ctrl</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>You should see identical sums of squares, degrees of freedom, mean squares, and F.</p>
-<h3 id="assumptions-you-should-check">Assumptions you should check</h3>
-<p>ANOVA relies on:</p>
+</div>
+<p>Each row represents one plant. The response column contains the measured weight, and the group column records which treatment the plant received.</p>
+</section>
+<section id="one-way-anova-the-model-evidence" class="slide level2">
+<h2>One-way ANOVA: the model evidence</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/one-way-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The group means differ, but plants within each group also vary. The F-test judges the group pattern relative to that within-group variation.</p>
+</section>
+<section id="one-way-anova-assumptions" class="slide level2">
+<h2>One-way ANOVA: assumptions</h2>
+<p>The model needs:</p>
 <ol type="1">
-<li><p>Independence of observations (this is a design issue).</p></li>
-<li><p>Approximately normal residuals.</p></li>
-<li><p>Homogeneity of variances across groups.</p></li>
+<li><strong>Independent observational units.</strong> Each plant contributes one outcome.</li>
+<li><strong>A continuous response.</strong> Plant weight has a meaningful numeric scale.</li>
+<li><strong>Approximately Gaussian residuals.</strong> The unexplained values should not show severe skew or extreme outliers.</li>
+<li><strong>Similar residual variances.</strong> The spread should be reasonably similar across groups.</li>
 </ol>
-<p>The standard diagnostic plots are a good start:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>What to look for:</p>
-<ul>
-<li><p>Residuals vs Fitted: no strong patterns or funnels.</p></li>
-<li><p>Normal Q‑Q: points near a straight line.</p></li>
-</ul>
-<p>Formal checks (optional and context‑dependent):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Normality of residuals</span></span>
-<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(fit))</span>
-<span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Homogeneity of variances (choose one)</span></span>
-<span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(yield <span class="sc">~</span> fert, <span class="at">data =</span> fert)        <span class="co"># Bartlett's test (sensitive to non‑normality)</span></span>
-<span id="cb9-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># If you installed 'car':</span></span>
-<span id="cb9-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># car::leveneTest(yield ~ fert, data = fert)    # Levene's test (more robust)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>If assumptions look poor: consider transforming the response (e.g., log), using a robust method, or revisiting the design/measurement process.</p>
+<p>Independence comes from the study design. Residual plots can help evaluate the distribution and spread assumptions.</p>
 </section>
-<section class="slide level2">
+<section id="one-way-anova-reading-the-output" class="slide level2">
+<h2>One-way ANOVA: reading the output</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of squares</th>
+<th style="text-align: right;">Mean square</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">group</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.77</td>
+<td style="text-align: right;">1.88</td>
+<td style="text-align: right;">4.85</td>
+<td style="text-align: right;">0.0159</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">10.49</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The group row gives <span class="math inline">\(F(2,27)=4.85\)</span> and <span class="math inline">\(p=0.016\)</span>. The data therefore give evidence that the population means are not all equal.</p>
+<p>The result remains global. We still need model-based comparisons to identify the group pattern.</p>
+</section>
+<section id="reflection-pause-2" class="slide level2">
 <h2>Reflection pause 2</h2>
 <p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
 <ul>
@@ -468,259 +516,560 @@ Harper Adams University
 <li>What question would you like to resolve before continuing?</li>
 </ul>
 </section>
-<section id="interpreting-the-qq-plot-in-detail" class="slide level2">
-<h2>Interpreting the Q‑Q plot (in detail)</h2>
-<p>First, plot the residuals explicitly so you can inspect their shape.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fit)</span>
-<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res, <span class="at">main =</span> <span class="st">"Normal Q-Q Plot of Residuals"</span>)</span>
-<span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(res, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(res, <span class="at">breaks =</span> <span class="dv">10</span>, <span class="at">col =</span> <span class="st">"gray90"</span>, <span class="at">main =</span> <span class="st">"Histogram of Residuals"</span>,</span>
-<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Residual"</span>)</span>
-<span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>How to read the Q‑Q plot:</p>
+<section id="two-way-anova-what-it-means" class="slide level2">
+<h2>Two-way ANOVA: what it means</h2>
+<p>The <code>ToothGrowth</code> study recorded tooth growth in 60 guinea pigs after they received vitamin C through one of two supplements and at one of three doses.</p>
 <ul>
-<li>Points close to the straight line → residuals are approximately normal.</li>
-<li>S‑shaped curve (points above the line on the left and below on the right, or vice versa) → skewness.</li>
-<li>Points that bow away at both ends → heavy tails (more extreme residuals than normal).</li>
-<li>Points that stay close in the middle but diverge strongly at ends → tail problems that can affect small‑sample inference.</li>
+<li><strong>Response:</strong> tooth length</li>
+<li><strong>Factor 1:</strong> orange juice or ascorbic acid</li>
+<li><strong>Factor 2:</strong> dose of 0.5, 1, or 2 milligrams per day</li>
 </ul>
-<p>What to do:</p>
-<ul>
-<li><p>Minor deviations are usually fine; focus on large, systematic patterns.</p></li>
-<li><p>Consider transformations (e.g., log) for right‑skewed positive data, or a different model if deviations reflect design issues.</p></li>
-</ul>
+<p>The research question is whether mean tooth growth responds to dose in the same way for both supplements.</p>
 </section>
-<section id="which-means-differ-posthoc-comparisons" class="slide level2">
-<h2>Which means differ? Post‑hoc comparisons</h2>
-<p>ANOVA tells you there is a difference somewhere. To find where, use multiple comparisons that control familywise error.</p>
-<p>Tukey’s Honest Significant Difference (HSD):</p>
+<section id="toothgrowth-columns-used-in-the-model" class="slide level2">
+<h2><code>ToothGrowth</code>: columns used in the model</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Tooth length</th>
+<th style="text-align: left;">Supplement</th>
+<th style="text-align: right;">Dose (mg/day)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4.2</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">11.5</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7.3</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.8</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6.4</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10.0</td>
+<td style="text-align: left;">Ascorbic acid</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>You can also visualise the Tukey intervals:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(fit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Pairwise t‑tests with p‑value adjustment (alternative approach):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(fert<span class="sc">$</span>yield, fert<span class="sc">$</span>fert, <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>How to interpret:</p>
-<ul>
-<li><p>Each pair shows a difference in means, a confidence interval (Tukey), and an adjusted p‑value.</p></li>
-<li><p>If a confidence interval does not include 0, or the adjusted p‑value is small, that pair differs.</p></li>
-</ul>
+<p>The first rows happen to show one supplement and one dose. The full dataset contains every supplement-by-dose combination, with ten guinea pigs in each combination.</p>
 </section>
-<section id="reporting-your-result" class="slide level2">
-<h2>Reporting your result</h2>
-<p>Use clear, reproducible language. Replace the placeholders with your numbers:</p>
-<p>“Yield differed by fertiliser treatment (one‑way ANOVA, F(df1, df2) = Fvalue, p = pvalue). Tukey’s HSD indicated that [list groups] differed.”</p>
-<p>Example structure: - State the ANOVA result (F, degrees of freedom, p‑value). - Briefly summarise which pairs differ based on Tukey (with direction).</p>
+<section id="the-group-means-reveal-the-interaction-pattern" class="slide level2">
+<h2>The group means reveal the interaction pattern</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/two-way-interaction-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>At each dose, the vertical gap between the points shows the difference between the two supplement means. The gap becomes smaller as dose increases, so the lines converge.</p>
+<p>Parallel lines would show a similar supplement difference at every dose. These non-parallel lines suggest that the supplement effect depends on dose.</p>
 </section>
-<section id="extension-twoway-anova-factor-blocks" class="slide level2">
-<h2>Extension: Two‑way ANOVA (factor + blocks)</h2>
-<p>Now you’ll add a blocking factor (e.g., position) to reduce unexplained variation.</p>
+<section id="what-the-interaction-row-tells-us" class="slide level2">
+<h2>What the interaction row tells us</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a>twoway <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fert  =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>)),</span>
-<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">block =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb14-5"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a aria-hidden="true" tabindex="-1"></a>twoway<span class="sc">$</span>yield <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">22</span>,</span>
-<span id="cb14-8"><a aria-hidden="true" tabindex="-1"></a>                  <span class="dv">34</span>, <span class="dv">33</span>, <span class="dv">36</span>, <span class="dv">35</span>,</span>
-<span id="cb14-9"><a aria-hidden="true" tabindex="-1"></a>                  <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">29</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">0</span>, <span class="fl">0.6</span>)</span>
-<span id="cb14-10"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a aria-hidden="true" tabindex="-1"></a>tw_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> fert <span class="sc">+</span> block, <span class="at">data =</span> twoway)</span>
-<span id="cb14-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tw_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of squares</th>
+<th style="text-align: right;">Mean square</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">supp</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">205.35</td>
+<td style="text-align: right;">205.35</td>
+<td style="text-align: right;">15.57</td>
+<td style="text-align: right;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dose_group</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2426.43</td>
+<td style="text-align: right;">1213.22</td>
+<td style="text-align: right;">92.00</td>
+<td style="text-align: right;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">supp:dose_group</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">108.32</td>
+<td style="text-align: right;">54.16</td>
+<td style="text-align: right;">4.11</td>
+<td style="text-align: right;">0.0219</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">712.11</td>
+<td style="text-align: right;">13.19</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Interpretation:</p>
-<ul>
-<li><p><code>fert</code>: main treatment effect.</p></li>
-<li><p><code>block</code>: accounts for position/batch effects.</p></li>
-<li><p>Residual: remaining noise.</p></li>
-</ul>
-<p>You can also test for interaction (does the fertiliser effect depend on block?):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>tw_fit2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> fert <span class="sc">*</span> block, <span class="at">data =</span> twoway)</span>
-<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tw_fit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>The interaction row tests this null hypothesis:</p>
+<blockquote>
+<p>The difference between the supplement means is the same at every dose.</p>
+</blockquote>
+<p>Here, <span class="math inline">\(F(2,54)=4.11\)</span> and <span class="math inline">\(p=0.022\)</span>. The data give evidence that the supplement difference depends on dose.</p>
+<p>The ANOVA table establishes that a dependency exists, but it does not show its direction. The graph shows that the supplement means converge as dose increases. Later pairwise comparisons can test the supplement difference at each dose.</p>
+<p>A high interaction p-value would mean that the data do not give clear evidence that the supplement difference changes with dose.</p>
 </section>
-<section id="ancova-anova-with-a-covariate" class="slide level2">
-<h2>ANCOVA: ANOVA with a covariate</h2>
-<p>Why you need it:</p>
+<section id="covariates-and-interactions-in-anova" class="slide level2">
+<h2>Covariates and interactions in ANOVA</h2>
+<p>A covariate is a continuous explanatory variable. Adding it lets the model compare group means after accounting for a continuous trend.</p>
+<p>For fuel economy:</p>
 <ul>
-<li><p>Sometimes groups differ partly because of a continuous baseline variable (e.g., initial size, starting weight, pre‑test score).</p></li>
-<li><p>ANCOVA adjusts group comparisons for that covariate, improving precision and providing “fair” comparisons at the same covariate level.</p></li>
-<li><p>Conceptually, you fit parallel regression lines with a common slope across groups and compare their intercepts (adjusted means).</p></li>
+<li><code>mpg</code> is the response</li>
+<li>transmission type is the categorical factor</li>
+<li>vehicle weight is the covariate</li>
 </ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>n_per <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>ancova <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fert =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each =</span> n_per)),</span>
-<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">size0 =</span> <span class="fu">rnorm</span>(<span class="dv">3</span> <span class="sc">*</span> n_per, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># True treatment effect and slope</span></span>
-<span id="cb16-8"><a aria-hidden="true" tabindex="-1"></a>beta0 <span class="ot">&lt;-</span> <span class="dv">5</span>; slope <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb16-9"><a aria-hidden="true" tabindex="-1"></a>trt_effect <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="dv">0</span>, <span class="at">B =</span> <span class="fl">1.2</span>, <span class="at">C =</span> <span class="fl">2.0</span>)</span>
-<span id="cb16-10"><a aria-hidden="true" tabindex="-1"></a>ancova<span class="sc">$</span>yield <span class="ot">&lt;-</span> <span class="fu">with</span>(ancova, beta0 <span class="sc">+</span> trt_effect[fert] <span class="sc">+</span> slope <span class="sc">*</span> size0 <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(ancova), <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb16-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Parallel slopes model (no interaction)</span></span>
-<span id="cb16-13"><a aria-hidden="true" tabindex="-1"></a>fit_ancova <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> fert <span class="sc">+</span> size0, <span class="at">data =</span> ancova)</span>
-<span id="cb16-14"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_ancova)</span>
-<span id="cb16-15"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: test for non-parallel slopes</span></span>
-<span id="cb16-17"><a aria-hidden="true" tabindex="-1"></a>fit_ancova_int <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> fert <span class="sc">*</span> size0, <span class="at">data =</span> ancova)</span>
-<span id="cb16-18"><a aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_ancova, fit_ancova_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Visualising parallel slopes (from the ANCOVA fit):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a>lm_ancova <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> fert <span class="sc">+</span> size0, <span class="at">data =</span> ancova)</span>
-<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="st">"#1b9e77"</span>, <span class="at">B =</span> <span class="st">"#d95f02"</span>, <span class="at">C =</span> <span class="st">"#7570b3"</span>)</span>
-<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yield <span class="sc">~</span> size0, <span class="at">data =</span> ancova, <span class="at">col =</span> cols[fert], <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"ANCOVA: parallel slopes by treatment"</span>, <span class="at">xlab =</span> <span class="st">"Baseline size (size0)"</span>, <span class="at">ylab =</span> <span class="st">"Yield"</span>)</span>
-<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">levels</span>(ancova<span class="sc">$</span>fert), <span class="at">col =</span> cols, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span>
-<span id="cb17-6"><a aria-hidden="true" tabindex="-1"></a>slope_hat <span class="ot">&lt;-</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"size0"</span>]</span>
-<span id="cb17-7"><a aria-hidden="true" tabindex="-1"></a>intercepts <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb17-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"(Intercept)"</span>],</span>
-<span id="cb17-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"fertB"</span>],</span>
-<span id="cb17-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"(Intercept)"</span>] <span class="sc">+</span> <span class="fu">coef</span>(lm_ancova)[<span class="st">"fertC"</span>]</span>
-<span id="cb17-11"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-12"><a aria-hidden="true" tabindex="-1"></a>xg <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(ancova<span class="sc">$</span>size0), <span class="fu">max</span>(ancova<span class="sc">$</span>size0), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
-<span id="cb17-13"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">names</span>(intercepts)) {</span>
-<span id="cb17-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xg, intercepts[g] <span class="sc">+</span> slope_hat <span class="sc">*</span> xg, <span class="at">col =</span> cols[g], <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb17-15"><a aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Interpretation:</p>
-<ul>
-<li><p><code>size0</code> reduces residual variation by explaining baseline differences; <code>fert</code> tests adjusted group shifts.</p></li>
-<li><p>If the <code>fert:size0</code> interaction is not significant, parallel slopes are a good summary; if significant, the treatment effect depends on the covariate.</p></li>
-</ul>
-<p>Assumptions (in addition to ANOVA’s):</p>
-<ul>
-<li><p>Linearity between the covariate and the response within groups.</p></li>
-<li><p>Homogeneous slopes across groups (if using the parallel slopes model).</p></li>
-<li><p>Covariate measured without substantial error and not affected by treatment (pre‑treatment).</p></li>
-</ul>
+<p>Vehicle weight relates to fuel economy and may also differ between transmission groups. The model therefore compares the expected mean fuel economy of automatic and manual cars at the same weight.</p>
+<p>The transmission-by-weight interaction asks whether this adjusted mean difference changes as vehicle weight changes.</p>
 </section>
-<section id="manova-multiple-responses" class="slide level2">
-<h2>MANOVA: multiple responses</h2>
-<p>Why you need it:</p>
-<ul>
-<li><p>Many experiments record multiple, correlated outcomes (e.g., plant height and leaf area; multiple biochemical markers).</p></li>
-<li><p>Running separate ANOVAs inflates the familywise error rate and ignores correlation structure.</p></li>
-<li><p>MANOVA tests for differences in the multivariate mean vector across groups, leveraging correlation to increase power and control Type I error.</p></li>
-</ul>
-<p>What it provides:</p>
-<ul>
-<li><p>A single global test (e.g., Wilks’ Lambda) for whether groups differ on the joint set of responses.</p></li>
-<li><p>If significant, you can follow up with univariate ANOVAs and multivariate visualisation to understand where differences arise.</p></li>
-</ul>
+<section id="mtcars-columns-used-in-the-model" class="slide level2">
+<h2><code>mtcars</code>: columns used in the model</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">fert =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">15</span>))</span>
-<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.4</span>), <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">0.9</span>))</span>
-<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="dv">2</span>)  <span class="co"># positive correlation</span></span>
-<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># If MASS is not available, fall back to independent normals</span></span>
-<span id="cb18-8"><a aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"MASS"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb18-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
-<span id="cb18-10"><a aria-hidden="true" tabindex="-1"></a>  y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">1</span>, <span class="st">"A"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">1</span>,<span class="dv">1</span>])),</span>
-<span id="cb18-11"><a aria-hidden="true" tabindex="-1"></a>          <span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">1</span>, <span class="st">"B"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">1</span>,<span class="dv">1</span>])),</span>
-<span id="cb18-12"><a aria-hidden="true" tabindex="-1"></a>          <span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">1</span>, <span class="st">"C"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">1</span>,<span class="dv">1</span>])))</span>
-<span id="cb18-13"><a aria-hidden="true" tabindex="-1"></a>  y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">2</span>, <span class="st">"A"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">2</span>,<span class="dv">2</span>])),</span>
-<span id="cb18-14"><a aria-hidden="true" tabindex="-1"></a>          <span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">2</span>, <span class="st">"B"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">2</span>,<span class="dv">2</span>])),</span>
-<span id="cb18-15"><a aria-hidden="true" tabindex="-1"></a>          <span class="fu">rnorm</span>(<span class="dv">15</span>, mu[<span class="dv">2</span>, <span class="st">"C"</span>], <span class="fu">sqrt</span>(Sigma[<span class="dv">2</span>,<span class="dv">2</span>])))</span>
-<span id="cb18-16"><a aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb18-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
-<span id="cb18-18"><a aria-hidden="true" tabindex="-1"></a>  yA <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">15</span>, <span class="at">mu =</span> mu[, <span class="st">"A"</span>], <span class="at">Sigma =</span> Sigma)</span>
-<span id="cb18-19"><a aria-hidden="true" tabindex="-1"></a>  yB <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">15</span>, <span class="at">mu =</span> mu[, <span class="st">"B"</span>], <span class="at">Sigma =</span> Sigma)</span>
-<span id="cb18-20"><a aria-hidden="true" tabindex="-1"></a>  yC <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">15</span>, <span class="at">mu =</span> mu[, <span class="st">"C"</span>], <span class="at">Sigma =</span> Sigma)</span>
-<span id="cb18-21"><a aria-hidden="true" tabindex="-1"></a>  y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(yA[,<span class="dv">1</span>], yB[,<span class="dv">1</span>], yC[,<span class="dv">1</span>])</span>
-<span id="cb18-22"><a aria-hidden="true" tabindex="-1"></a>  y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(yA[,<span class="dv">2</span>], yB[,<span class="dv">2</span>], yC[,<span class="dv">2</span>])</span>
-<span id="cb18-23"><a aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-24"><a aria-hidden="true" tabindex="-1"></a>m<span class="sc">$</span>y1 <span class="ot">&lt;-</span> y1</span>
-<span id="cb18-25"><a aria-hidden="true" tabindex="-1"></a>m<span class="sc">$</span>y2 <span class="ot">&lt;-</span> y2</span>
-<span id="cb18-26"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a aria-hidden="true" tabindex="-1"></a>fit_man <span class="ot">&lt;-</span> <span class="fu">manova</span>(<span class="fu">cbind</span>(y1, y2) <span class="sc">~</span> fert, <span class="at">data =</span> m)</span>
-<span id="cb18-28"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_man, <span class="at">test =</span> <span class="st">"Wilks"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Fuel economy (mpg)</th>
+<th style="text-align: left;">Transmission</th>
+<th style="text-align: right;">Weight (1,000 lb)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">2.620</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">2.875</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">22.8</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">2.320</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">21.4</td>
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">3.215</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">18.7</td>
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">3.440</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18.1</td>
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">3.460</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Quick visual check of separation:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="st">"#1b9e77"</span>, <span class="at">B =</span> <span class="st">"#d95f02"</span>, <span class="at">C =</span> <span class="st">"#7570b3"</span>)</span>
-<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m<span class="sc">$</span>y1, m<span class="sc">$</span>y2, <span class="at">col =</span> cols[m<span class="sc">$</span>fert], <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"y1"</span>, <span class="at">ylab =</span> <span class="st">"y2"</span>, <span class="at">main =</span> <span class="st">"Scatter of responses by treatment"</span>)</span>
-<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">levels</span>(m<span class="sc">$</span>fert), <span class="at">col =</span> cols, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Interpretation and assumptions:</p>
-<ul>
-<li><p>A significant Wilks’ test suggests group centroids differ in the 2D space.</p></li>
-<li><p>Assumptions: multivariate normality of residuals, equal covariance matrices across groups (Box’s M), and independence. With small samples, be cautious.</p></li>
-<li><p>Follow‑ups: inspect univariate ANOVAs and confidence ellipses (or discriminant analysis) to interpret which responses drive the separation.</p></li>
-</ul>
+<p>Each row represents one car model. The analysis compares transmission means while accounting for vehicle weight.</p>
 </section>
-<section id="repeated-measures-anova-withinsubjects" class="slide level2">
-<h2>Repeated measures ANOVA (within‑subjects)</h2>
-<p>Why you need it:</p>
-<ul>
-<li><p>The same subject (or plot) is measured under multiple conditions or times; repeated measures increase efficiency but violate independence.</p></li>
-<li><p>Repeated measures ANOVA accounts for within‑subject correlation by modelling subjects as a random block and testing the within‑subject factor.</p></li>
-</ul>
+<section id="covariate-interaction-adjusted-means-at-the-same-weight" class="slide level2">
+<h2>Covariate interaction: adjusted means at the same weight</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a>subjects <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
-<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a>rm_dat <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">subject =</span> subjects, <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>)))</span>
-<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Random subject intercepts</span></span>
-<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a>subj_eff <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(subjects), <span class="dv">0</span>, <span class="fl">0.8</span>)</span>
-<span id="cb20-6"><a aria-hidden="true" tabindex="-1"></a>rm_dat<span class="sc">$</span>response <span class="ot">&lt;-</span> <span class="fu">with</span>(rm_dat,</span>
-<span id="cb20-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span> <span class="sc">+</span> (treatment <span class="sc">==</span> <span class="st">"B"</span>)<span class="sc">*</span><span class="fl">0.8</span> <span class="sc">+</span> (treatment <span class="sc">==</span> <span class="st">"C"</span>)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span></span>
-<span id="cb20-8"><a aria-hidden="true" tabindex="-1"></a>  subj_eff[subject] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(rm_dat), <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb20-9"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-10"><a aria-hidden="true" tabindex="-1"></a>fit_rm <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> treatment <span class="sc">+</span> <span class="fu">Error</span>(subject<span class="sc">/</span>treatment), <span class="at">data =</span> rm_dat)</span>
-<span id="cb20-11"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_rm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/covariate-interaction-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
 </div>
-<p>Simple visualisation of subject trajectories:</p>
+</div>
+</div>
+<p>At each selected weight, the two large points are the expected mean fuel economies for automatic and manual cars. Their vertical gap is the adjusted transmission difference at that weight.</p>
+<p>The lines are not parallel, so this adjusted mean difference changes with weight. The same pattern can be described as a difference between the two weight slopes.</p>
+</section>
+<section id="covariate-interaction-model-output" class="slide level2">
+<h2>Covariate interaction: model output</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(subjects), <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span>, <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">length</span>(<span class="fu">levels</span>(rm_dat<span class="sc">$</span>treatment))), <span class="at">ylim =</span> <span class="fu">range</span>(rm_dat<span class="sc">$</span>response),</span>
-<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt =</span> <span class="st">"n"</span>, <span class="at">xlab =</span> <span class="st">"Treatment"</span>, <span class="at">ylab =</span> <span class="st">"Response"</span>, <span class="at">main =</span> <span class="st">"Subject trajectories across treatments"</span>)</span>
-<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">levels</span>(rm_dat<span class="sc">$</span>treatment)), <span class="at">labels =</span> <span class="fu">levels</span>(rm_dat<span class="sc">$</span>treatment))</span>
-<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="fu">levels</span>(subjects)) {</span>
-<span id="cb21-6"><a aria-hidden="true" tabindex="-1"></a>  ds <span class="ot">&lt;-</span> <span class="fu">subset</span>(rm_dat, subject <span class="sc">==</span> s)</span>
-<span id="cb21-7"><a aria-hidden="true" tabindex="-1"></a>  ord <span class="ot">&lt;-</span> <span class="fu">order</span>(ds<span class="sc">$</span>treatment)</span>
-<span id="cb21-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ord), ds<span class="sc">$</span>response[ord], <span class="at">col =</span> cols[<span class="fu">as.integer</span>(s)], <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
-<span id="cb21-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ord), ds<span class="sc">$</span>response[ord], <span class="at">col =</span> cols[<span class="fu">as.integer</span>(s)], <span class="at">pch =</span> <span class="dv">19</span>)</span>
-<span id="cb21-10"><a aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">t</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">31.42</td>
+<td style="text-align: right;">3.02</td>
+<td style="text-align: right;">10.40</td>
+<td style="text-align: right;">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transmissionManual</td>
+<td style="text-align: right;">14.88</td>
+<td style="text-align: right;">4.26</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: right;">0.00162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wt</td>
+<td style="text-align: right;">-3.79</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">-4.82</td>
+<td style="text-align: right;">&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transmissionManual:wt</td>
+<td style="text-align: right;">-5.30</td>
+<td style="text-align: right;">1.44</td>
+<td style="text-align: right;">-3.67</td>
+<td style="text-align: right;">0.00102</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Interpretation and assumptions:</p>
-<ul>
-<li><p>The within‑subject test of <code>treatment</code> appears under <code>Within</code> in the <code>Error: subject:treatment</code> stratum.</p></li>
-<li><p>Sphericity (equal variances of differences between all pairs of levels) is an additional assumption for factors with &gt;2 levels; if violated, corrections (Greenhouse–Geisser, Huynh–Feldt) are used. In more complex designs, consider linear mixed models.</p></li>
-</ul>
+</div>
+<p>The term <code>transmissionManual:wt</code> is written from the viewpoint of the manual-versus-automatic difference. Its coefficient is <span class="math inline">\(-5.30\)</span> with <span class="math inline">\(p=0.001\)</span>.</p>
+<p>For every increase of 1,000 lb, the expected manual advantage decreases by 5.30 miles per gallon. The low p-value gives evidence that the manual-versus-automatic difference changes with weight.</p>
+<p>The interaction coefficient does not represent one overall difference between transmission means because the difference has a different value at each weight.</p>
 </section>
-<section id="common-pitfalls-and-tips" class="slide level2">
-<h2>Common pitfalls and tips</h2>
-<ul>
-<li><p>Unequal group sizes are fine, but extreme imbalance can reduce power.</p></li>
-<li><p>Strong outliers can inflate <span class="math inline">\(SS_W\)</span> or distort group means—investigate them.</p></li>
-<li><p>With small samples, non‑normal residuals can make p‑values less reliable.</p></li>
-<li><p>Violated independence (e.g., repeated measures) calls for different models (e.g., mixed effects).</p></li>
-</ul>
-</section>
-<section id="practice-try-it-yourself" class="slide level2">
-<h2>Practice: Try it yourself</h2>
+<section id="the-interaction-rule-of-thumb" class="slide level2">
+<h2>The interaction rule of thumb</h2>
 <ol type="1">
-<li><p>Create your own dataset with 4 groups and 6 observations per group. Make two groups similar and two clearly different. Run the full workflow (boxplot → ANOVA → diagnostics → Tukey), and write a two‑sentence report.</p></li>
-<li><p>Modify the dataset so one group has a much larger variance. What happens to the diagnostics and post‑hoc results?</p></li>
-<li><p>Build a two‑way dataset with a small block effect. Compare <code>aov(yield ~ group)</code> vs <code>aov(yield ~ group + block)</code>. How does adding blocks change the residual variation and the p‑value for <code>group</code>?</p></li>
+<li><p><strong>The interaction is not significant.</strong> The data do not show that the effect changes across conditions. If the research design permits it, remove the interaction and fit a parallel, additive model. A Type II test can then give a clean overall test of each main effect.</p></li>
+<li><p><strong>The interaction is significant.</strong> Report the interaction test. Stop interpreting the main-effect rows from Type I, Type II, or Type III tables because each main effect averages across a relationship that changes. Use simple effects or simple slopes to explain the interaction.</p></li>
 </ol>
+<p>In this example, the interaction p-value is 0.001. We therefore focus on how the transmission difference changes with weight.</p>
 </section>
-<section class="slide level2">
+<section id="simple-effects-one-slice-at-a-time" class="slide level2">
+<h2>Simple effects: one slice at a time</h2>
+<p>A <strong>simple effect</strong> is the effect of one predictor at one specified level or value of another predictor. It takes one vertical slice through the interaction graph.</p>
+<p>The transmission <strong>main effect</strong> asks whether manual and automatic cars differ after averaging across car weights. That average can hide the interaction.</p>
+<p>A transmission <strong>simple effect</strong> asks the same comparison at one realistic weight:</p>
+<ul>
+<li>At 2,000 lb, do manual and automatic cars have different expected mean mpg?</li>
+<li>At 3,200 lb, do they differ at an average weight?</li>
+<li>At 4,500 lb, do they differ among heavy cars?</li>
+</ul>
+</section>
+<section id="simple-effects-by-car-weight" class="slide level2">
+<h2>Simple effects by car weight</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 19%">
+<col style="width: 22%">
+<col style="width: 6%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Weight (1,000 lb)</th>
+<th style="text-align: right;">Automatic mean mpg</th>
+<th style="text-align: right;">Manual mean mpg</th>
+<th style="text-align: right;">Manual - Automatic</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">23.84</td>
+<td style="text-align: right;">28.13</td>
+<td style="text-align: right;">4.28</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">0.021</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">19.30</td>
+<td style="text-align: right;">17.22</td>
+<td style="text-align: right;">-2.08</td>
+<td style="text-align: right;">1.41</td>
+<td style="text-align: right;">0.152</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.5</td>
+<td style="text-align: right;">14.38</td>
+<td style="text-align: right;">5.42</td>
+<td style="text-align: right;">-8.96</td>
+<td style="text-align: right;">2.76</td>
+<td style="text-align: right;">0.003</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A positive manual-minus-automatic difference favours manual cars. A negative difference favours automatic cars. Each p-value tests <span class="math inline">\(H_0\)</span>: the two transmission means are equal at that stated weight.</p>
+</section>
+<section id="reading-the-simple-effects" class="slide level2">
+<h2>Reading the simple effects</h2>
+<ul>
+<li><strong>Light cars at 2,000 lb:</strong> the estimated manual advantage is 4.28 mpg, with <span class="math inline">\(p=0.021\)</span>. The data support a higher mean mpg for manual cars at this weight.</li>
+<li><strong>Cars at 3,200 lb:</strong> the estimated difference is <span class="math inline">\(-2.08\)</span> mpg, with <span class="math inline">\(p=0.152\)</span>. The estimate now favours automatic cars, but the data do not give clear evidence of a difference at this weight.</li>
+<li><strong>Heavy cars at 4,500 lb:</strong> the estimated difference is <span class="math inline">\(-8.96\)</span> mpg, with <span class="math inline">\(p=0.003\)</span>. The data support a higher mean mpg for automatic cars at this weight.</li>
+</ul>
+<p>The simple effects show the interaction directly: the manual advantage among light cars reverses as weight increases.</p>
+</section>
+<section id="simple-slopes-how-weight-changes-mpg" class="slide level2">
+<h2>Simple slopes: how weight changes mpg</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Transmission</th>
+<th style="text-align: right;">MPG change per 1,000 lb</th>
+<th style="text-align: right;">Lower 95% CI</th>
+<th style="text-align: right;">Upper 95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Automatic</td>
+<td style="text-align: right;">-3.79</td>
+<td style="text-align: right;">-5.40</td>
+<td style="text-align: right;">-2.18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">-9.08</td>
+<td style="text-align: right;">-11.57</td>
+<td style="text-align: right;">-6.60</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For automatic cars, an extra 1,000 lb is associated with 3.79 fewer miles per gallon. For manual cars, the estimated reduction is 9.08 miles per gallon.</p>
+<p>The interaction is the difference between these slopes: <span class="math inline">\(-9.08-(-3.79)=-5.30\)</span>. Each 1,000 lb increase reduces the expected manual-versus-automatic difference by 5.30 miles per gallon.</p>
+<p>A <strong>simple effect</strong> compares transmissions at one weight. A <strong>simple slope</strong> describes the weight-mpg relationship within one transmission group. <code>emmeans</code> estimates the first quantity, while <code>emtrends</code> estimates the second.</p>
+</section>
+<section id="when-an-overall-factor-f-test-helps" class="slide level2">
+<h2>When an overall factor F-test helps</h2>
+<p>For beginners, the coefficient table from <code>lm()</code> and the interaction plot usually provide the clearest starting point.</p>
+<ul>
+<li>With a factor that has three or more levels and no supported interaction, <code>lm()</code> gives separate contrasts against one reference group. Type II <code>car::Anova()</code> adds one overall F-test and p-value for the whole factor.</li>
+<li>With a two-level factor and no interaction, the <code>lm()</code> t-test and the factor F-test answer the same one-degree-of-freedom question. Their p-values match because <span class="math inline">\(F=t^2\)</span>.</li>
+<li>With a supported interaction that contains a factor with three or more levels, <code>car::Anova()</code> can give one overall interaction F-test. Ignore its main-effect rows and use <code>emmeans</code> or <code>emtrends</code> to explain the interaction.</li>
+</ul>
+</section>
+<section id="repeated-measures-anova-what-it-means" class="slide level2">
+<h2>Repeated-measures ANOVA: what it means</h2>
+<p>Repeated measures occur when one observational unit supplies several outcomes.</p>
+<p>In <code>sleep</code>, one person supplies an outcome under treatment 1 and another outcome under treatment 2. Measurements from the same person share biology and context, so they are related.</p>
+<p>A standard one-way ANOVA would treat all 20 rows as independent. Repeated-measures ANOVA preserves the pairing and evaluates change within people.</p>
+</section>
+<section id="sleep-columns-used-in-the-model" class="slide level2">
+<h2><code>sleep</code>: columns used in the model</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Person</th>
+<th style="text-align: left;">Treatment</th>
+<th style="text-align: right;">Extra sleep (hours)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">0.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">-1.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">-0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">-1.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">-0.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Treatment 1</td>
+<td style="text-align: right;">3.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The same person appears once under each treatment. The repeated identifier tells the model which rows belong to the same response profile.</p>
+</section>
+<section id="why-the-model-needs-an-error-term" class="slide level2">
+<h2>Why the model needs an error term</h2>
+<p>Every F-test needs a denominator that represents ordinary variation for the comparison.</p>
+<p>For the treatment effect, the correct error source is the variation in how people change between treatments. The overall differences between people belong to a separate source of variation.</p>
+<p>The R term <code>Error()</code> tells <code>aov()</code> how to split the unexplained variation into these <strong>error strata</strong>. It does not create a new error metric. It identifies which variation should form the denominator of each F-test.</p>
+</section>
+<section id="what-id-group-means" class="slide level2">
+<h2>What <code>ID / group</code> means</h2>
+<p>First identify the grouping unit across which independent response profiles are repeated. Here, <code>ID</code> identifies each person.</p>
+<p>Then identify the axis along which observations repeat within that grouping unit. Here, <code>group</code> identifies the treatments measured within each person.</p>
+<p><code>ID / group</code> expands to:</p>
+<p><span class="math display">\[
+ID + ID:group
+\]</span></p>
+<ul>
+<li><code>ID</code> represents stable differences between people.</li>
+<li><code>ID:group</code> represents variation among the treatment profiles of different people.</li>
+</ul>
+<p>The slash records this grouping hierarchy.</p>
+</section>
+<section id="repeated-measures-observed-trajectories" class="slide level2">
+<h2>Repeated measures: observed trajectories</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/repeated-measures-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each grey line is one person’s response profile across the treatment conditions. The dark line is the mean profile.</p>
+<p>Repeated-measures ANOVA asks whether the mean profile changes systematically across conditions, relative to variation in the shapes of individual profiles. With two conditions, each profile has one change. With three or more conditions, the same logic tests a fuller trajectory.</p>
+</section>
+<section id="repeated-measures-reading-the-output" class="slide level2">
+<h2>Repeated measures: reading the output</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Source</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of squares</th>
+<th style="text-align: right;">Mean square</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">group</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">12.48</td>
+<td style="text-align: right;">12.48</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">0.00283</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">6.81</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The treatment F-test uses the <code>ID:group</code> residual mean square as its denominator. It gives <span class="math inline">\(F(1,9)=16.50\)</span> and <span class="math inline">\(p=0.003\)</span>.</p>
+<p>The mean extra sleep increases within people under treatment 2. The pairing makes this conclusion more precise because stable differences between people do not enter the treatment error term.</p>
+</section>
+<section id="error-structures-for-other-designs" class="slide level2">
+<h2>Error structures for other designs</h2>
+<p>The same reasoning transfers to other studies:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study design</th>
+<th>Grouping hierarchy and repeated axis</th>
+<th>Error structure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>People measured over time</td>
+<td><code>ID</code> and <code>time</code></td>
+<td><code>Error(ID / time)</code></td>
+</tr>
+<tr class="even">
+<td>Two conditions at several times</td>
+<td><code>ID</code>, <code>condition</code>, and <code>time</code></td>
+<td><code>Error(ID / (condition * time))</code></td>
+</tr>
+<tr class="odd">
+<td>Plots nested within blocks</td>
+<td><code>block</code> contains several <code>plot</code> units</td>
+<td><code>Error(block / plot)</code></td>
+</tr>
+<tr class="even">
+<td>Treatment between people, time within people</td>
+<td><code>ID</code> and <code>time</code></td>
+<td>Treatment and time in the model, <code>Error(ID / time)</code></td>
+</tr>
+</tbody>
+</table>
+<p>The term before the slash identifies a grouping level, not automatically the observational unit. In <code>Error(block / plot)</code>, blocks group several plots, while plots sit within blocks. The measured unit may be the plot or a smaller unit inside it, depending on the study design.</p>
+</section>
+<section id="reflection-pause-3" class="slide level2">
 <h2>Reflection pause 3</h2>
 <p><strong>Pause for reflection.</strong> Use two minutes to consolidate the concept that has just concluded.</p>
 <ul>
@@ -729,75 +1078,284 @@ Harper Adams University
 <li>What question would you like to resolve before continuing?</li>
 </ul>
 </section>
-<section>
-<section id="kruskal-wallis-the-rank-based-counterpart" class="title-slide slide level1 center">
-<h1>Kruskal-Wallis: the rank-based counterpart</h1>
-
+<section id="anova-does-not-make-pairwise-comparisons" class="slide level2">
+<h2>ANOVA does not make pairwise comparisons</h2>
+<p>ANOVA answers one global question: do any population means differ?</p>
+<p>It does not tell us which groups differ. We need follow-up comparisons for that purpose.</p>
+<p>Every extra comparison gives us another chance to find a small p-value by luck. An adjustment adds a penalty for this statistical fishing.</p>
 </section>
-<section id="when-the-anova-assumptions-are-unsuitable" class="slide level2">
-<h2>When the ANOVA assumptions are unsuitable</h2>
-<p>The Kruskal-Wallis test provides a rank-based comparison for three or more independent groups. It is especially useful when the outcome is ordinal, severe skew or influential outliers make a mean-based analysis difficult to defend, or the available data do not support the distributional assumptions used for the ANOVA model.</p>
-<p>The hypotheses are:</p>
+<section id="tukeys-hsd-for-pairwise-comparisons" class="slide level2">
+<h2>Tukey’s HSD for pairwise comparisons</h2>
+<p><strong>Tukey’s HSD</strong> compares every pair of group means and gives p-values that already include an all-pairs penalty.</p>
+<p>Use Tukey’s method when the question requires every pairwise comparison among the factor levels.</p>
+<p>The output gives one estimated difference and one Tukey-adjusted p-value for each pair. The adjustment reduces the chance of declaring a chance difference significant while we search across all pairs.</p>
+<p>The next decision is which means Tukey should compare. Model-adjusted means from <code>emmeans</code> are safer than raw means when the design is unbalanced or contains covariates.</p>
+</section>
+<section id="raw-means-can-mix-treatment-and-site-effects" class="slide level2">
+<h2>Raw means can mix treatment and site effects</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/raw-vs-emm-figure-1.png" loading="eager" decoding="sync" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Treatment A contains many observations from high-fertility sites, while treatment B contains many from low-fertility sites. The raw means therefore mix treatment and site.</p>
+<p>The model-adjusted means compare both treatments using the same balance of site types. They show the treatment comparison after accounting for site.</p>
+</section>
+<section id="estimated-marginal-means" class="slide level2">
+<h2>Estimated marginal means</h2>
+<p>An estimated marginal mean is a mean predicted by the fitted ANOVA model. The model calculates each treatment mean while holding covariates to a common value or averaging other factors in the same way for every treatment.</p>
+<p>This provides a fairer comparison when:</p>
 <ul>
-<li><span class="math inline">\(H_0\)</span>: the groups have the same distribution of ranks;</li>
-<li><span class="math inline">\(H_A\)</span>: at least one group tends to produce different ranks.</li>
+<li>cell sizes are unequal because of missing observations</li>
+<li>a factorial design has an uneven composition</li>
+<li>a covariate needs adjustment</li>
 </ul>
-<p>When group distributions have similar shapes, the result is often interpreted as evidence about differences in location or medians.</p>
+<p>When the design is balanced and no covariate adjustment is needed, observed means and estimated marginal means are the same.</p>
+<p>The safest general workflow is to obtain the means from the fitted model with <code>emmeans</code>, then run the pairwise comparisons on those means and request the required adjustment.</p>
 </section>
-<section id="anova-and-kruskal-wallis-on-the-same-example" class="slide level2">
-<h2>ANOVA and Kruskal-Wallis on the same example</h2>
+<section id="estimated-marginal-means-model-evidence" class="slide level2">
+<h2>Estimated marginal means: model evidence</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">factor</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
-<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>kruskal_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
-<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span>
-<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a>kruskal_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Group</th>
+<th style="text-align: right;">Estimated marginal mean</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">Lower 95% CI</th>
+<th style="text-align: right;">Upper 95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl</td>
+<td style="text-align: right;">5.03</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">4.63</td>
+<td style="text-align: right;">5.44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">trt1</td>
+<td style="text-align: right;">4.66</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">4.26</td>
+<td style="text-align: right;">5.07</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt2</td>
+<td style="text-align: right;">5.53</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">5.12</td>
+<td style="text-align: right;">5.93</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>The ANOVA F-test compares variation between group means with variation within groups, while Kruskal-Wallis converts observations to ranks and compares the rank patterns across groups.</p>
+</div>
+<p><code>PlantGrowth</code> has ten plants in each group, so the estimated marginal means equal the observed group means.</p>
+<p>The confidence intervals describe uncertainty in each population mean. Pairwise contrasts then compare these fitted means using the model’s residual variation.</p>
 </section>
-<section id="visualise-before-choosing" class="slide level2">
-<h2>Visualise before choosing</h2>
+<section id="estimated-marginal-means-with-tukey-adjustment" class="slide level2">
+<h2>Estimated marginal means with Tukey adjustment</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
-<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>  Petal.Length <span class="sc">~</span> Species,</span>
-<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris,</span>
-<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#1b9e77"</span>, <span class="st">"#d95f02"</span>, <span class="st">"#7570b3"</span>),</span>
-<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Species"</span>,</span>
-<span id="cb23-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Petal length"</span>,</span>
-<span id="cb23-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Petal length across three species"</span></span>
-<span id="cb23-8"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(</span>
-<span id="cb23-10"><a aria-hidden="true" tabindex="-1"></a>  Petal.Length <span class="sc">~</span> Species,</span>
-<span id="cb23-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris,</span>
-<span id="cb23-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">vertical =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"jitter"</span>,</span>
-<span id="cb23-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb23-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.4</span>),</span>
-<span id="cb23-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb23-17"><a aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: right;">Difference</th>
+<th style="text-align: right;">SE</th>
+<th style="text-align: right;">t</th>
+<th style="text-align: right;">Tukey-adjusted p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ctrl - trt1</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">1.33</td>
+<td style="text-align: right;">0.391</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ctrl - trt2</td>
+<td style="text-align: right;">-0.49</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">-1.77</td>
+<td style="text-align: right;">0.198</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trt1 - trt2</td>
+<td style="text-align: right;">-0.86</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">-3.10</td>
+<td style="text-align: right;">0.012</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+<p>The treatment 1 versus treatment 2 comparison has an adjusted p-value of 0.012. The other pairs do not cross the 0.05 threshold after Tukey adjustment.</p>
+<p>The comparison uses estimated marginal means. Tukey controls the family-wise error across all three pairwise tests.</p>
 </section>
-<section id="follow-up-comparisons" class="slide level2">
-<h2>Follow-up comparisons</h2>
-<p>A significant Kruskal-Wallis test shows that a difference exists somewhere among the groups and does not identify the differing pairs. Pairwise Wilcoxon rank-sum tests with an adjustment for multiple comparisons provide one accessible follow-up approach.</p>
+<section id="planned-contrasts-focused-questions" class="slide level2">
+<h2>Planned contrasts: focused questions</h2>
+<p>With four groups, Tukey tests six pairs. Every extra test adds a multiple-testing penalty, including pairs that may not answer the research question.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="concept-label">
+Tukey: every pair
+</div>
+<p>Control ↔︎ Trt 1, Trt 2, and Trt 3<br>
+Trt 1 ↔︎ Trt 2 and Trt 3<br>
+Trt 2 ↔︎ Trt 3</p>
+</div><div class="column" style="width:50%;">
+<div class="concept-label">
+🎯 Planned questions
+</div>
+<div class="contrast-focus">
+Do the treatments work overall?<br><strong>Average of Trt 1–3 versus control</strong>
+</div>
+<div class="contrast-focus">
+Do the new treatments beat the old options?<br><strong>Average of Trt 2–3 versus control and Trt 1</strong>
+</div>
+</div></div>
+</section>
+<section id="planned-contrasts-turning-a-question-into-weights" class="slide level2">
+<h2>Planned contrasts: turning a question into weights</h2>
+<p>Suppose the fitted means are Control = 5, Treatment 1 = 10, Treatment 2 = 15, and Treatment 3 = 22.</p>
+<p><strong>Question:</strong> How much higher is the average of Treatments 2 and 3 than the average of Control and Treatment 1?</p>
+<div class="formula-walkthrough">
+<p><span class="math display">\[
+\frac{15+22}{2}-\frac{5+10}{2}=18.5-7.5=11.0
+\]</span></p>
+<p><span class="math display">\[
+(-0.5\times5)+(-0.5\times10)+(0.5\times15)+(0.5\times22)=11.0
+\]</span></p>
+</div>
+<p>The weights sum to zero, so a common shift in all four means cancels out. The positive weights sum to <span class="math inline">\(+1\)</span> and the negative weights sum to <span class="math inline">\(-1\)</span>, which keeps the answer in the original response units.</p>
+</section>
+<section id="independent-planned-contrasts" class="slide level2">
+<h2>Independent planned contrasts</h2>
+<p>With <span class="math inline">\(k\)</span> groups, we can define up to <span class="math inline">\(k-1\)</span> mutually independent contrasts. Four groups therefore support three independent questions.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group (fitted mean)</th>
+<th style="text-align: right;">Q1: New pair vs old pair</th>
+<th style="text-align: right;">Q2: Within old pair</th>
+<th style="text-align: right;">Q3: Within new pair</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control (5)</td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td>Treatment 1 (10)</td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">+1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Treatment 2 (15)</td>
+<td style="text-align: right;">+0.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1</td>
+</tr>
+<tr class="even">
+<td>Treatment 3 (22)</td>
+<td style="text-align: right;">+0.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">+1</td>
+</tr>
+<tr class="odd">
+<td><strong>Resulting difference</strong></td>
+<td style="text-align: right;"><strong>+11.0</strong></td>
+<td style="text-align: right;"><strong>+5.0</strong></td>
+<td style="text-align: right;"><strong>+7.0</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Each column divides the groups in a different direction. These are <strong>orthogonal contrasts</strong>, so they carry distinct information. In R, pass the weight vectors to <code>emmeans::contrast()</code>.</p>
+</section>
+<section id="evaluating-assumptions" class="slide level2">
+<h2>Evaluating assumptions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.wilcox.test</span>(</span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> iris<span class="sc">$</span>Petal.Length,</span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">g =</span> iris<span class="sc">$</span>Species,</span>
-<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
-<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">exact =</span> <span class="cn">FALSE</span></span>
-<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/residual-fitted-plot-1.png" loading="eager" decoding="sync" width="480"></p>
+</figure>
 </div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="anova_files/figure-revealjs/qq-plot-1.png" loading="eager" decoding="sync" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p>Look for a strong curve, a funnel, or an extreme point. The Q-Q plot should follow the line reasonably well. Independence still comes from the study design.</p>
 </section>
-<section id="reporting-the-rank-based-analysis" class="slide level2">
-<h2>Reporting the rank-based analysis</h2>
-<p>Report the Kruskal-Wallis statistic, degrees of freedom, p-value, group sample sizes, medians, and interquartile ranges. When follow-up tests are used, report the adjustment method and the adjusted pairwise p-values.</p>
-<p>An example structure is: “Petal length differed among species, Kruskal-Wallis <span class="math inline">\(H(2) = ...\)</span>, <span class="math inline">\(p &lt; ...\)</span>. Holm-adjusted pairwise comparisons indicated that … . Group medians and interquartile ranges were … .”</p>
+<section id="broken-assumptions-a-path-to-glms-and-glmms" class="slide level2">
+<h2>Broken assumptions: a path to GLMs and GLMMs</h2>
+<p>Choose the next model from the response and the dependence structure.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Model direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binary response</td>
+<td>Binomial generalised linear model</td>
+</tr>
+<tr class="even">
+<td>Counts with a mean-variance relationship</td>
+<td>Poisson or negative-binomial model</td>
+</tr>
+<tr class="odd">
+<td>Repeated or grouped continuous outcomes</td>
+<td>Linear mixed model</td>
+</tr>
+<tr class="even">
+<td>Non-Gaussian outcomes with grouping</td>
+<td>Generalised linear mixed model</td>
+</tr>
+</tbody>
+</table>
+<p>A new model changes the assumed response distribution or the correlation structure. It cannot repair weak measurements or a poor study design.</p>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

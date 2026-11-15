@@ -3,11 +3,13 @@ project:
   output-dir: docs
   post-render:
     - node scripts/fix-docs-index-links.mjs
+    - node scripts/fix-anova-figures.mjs
   resources:
     - HAU-logo.svg
     - pics/Laptop_duck.png
     - pics/mean_mark_boxplot_ggplot2.png
     - week7-statistical-inference-tutorial.ipynb
+    - week8-anova-tutorial.ipynb
     - data/titanic_passengers.csv
 
 filters:
@@ -43,16 +45,20 @@ website:
           - week7-statistical-inference-tutorial.qmd
           - text: "Colab tutorial"
             href: https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing
+            target: _blank
           # - eda.qmd
           # - t-test.qmd
           # - chisquare.qmd
           # - correlation.qmd
-      - section: "Week 8: ANOVA and Non-parametric Tests"
+      - section: "Week 8: ANOVA"
         contents:
-          - fisher.qmd
-          - anova.qmd
-          - 1-way-anova.qmd
-          - nonparam.qmd
+          - text: "Main presentation"
+            href: anova.qmd
+          - text: "Main tutorial"
+            href: week8-anova-tutorial.qmd
+          - text: "Colab tutorial"
+            href: https://colab.research.google.com/drive/14LsDcM4ClL0cWJbGPPyTQuw5RIfDkAEL?usp=sharing
+            target: _blank
       - section: "Week 11: Sampling"
         contents:
           - week11-sampling-theory.qmd

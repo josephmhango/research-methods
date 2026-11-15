@@ -3060,23 +3060,23 @@
   {
     "objectID": "anova.html#how-to-use-this-guide",
     "href": "anova.html#how-to-use-this-guide",
-    "title": "F-Test and ANOVA",
+    "title": "ANOVA: From the F-test to Practical Models",
     "section": "How to use this guide",
-    "text": "How to use this guide\nThis guide is written for you. You’ll read short explanations, then immediately run R code yourself to reproduce the results. Every step shows both the code and the output you should expect.\n\nBy the end, you will be able to:\n\nExplain what ANOVA tests and when to use it.\nFit a one-way ANOVA in R and interpret the output.\nCheck model assumptions with plots and simple tests.\nRun and interpret post‑hoc comparisons (Tukey HSD and adjusted t‑tests).\nUnderstand the idea of two‑way ANOVA (factor + blocks, interaction).",
+    "text": "How to use this guide\nThis lecture builds the reasoning behind ANOVA. The figures and model outputs come from R, while the code remains hidden.\nFor each model, ask four questions:\n\nWhat is the observational unit?\nWhich factors or covariates explain variation?\nWhich source of variation provides the correct comparison?\nWhat does the result mean for the research question?\n\nThe practical session will later show how to write and adapt the code.",
     "crumbs": [
-      "Week 7: ANOVA and Kruskal-Wallis",
-      "F-Test and ANOVA"
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
     ]
   },
   {
     "objectID": "anova.html#setup",
     "href": "anova.html#setup",
-    "title": "F-Test and ANOVA",
+    "title": "ANOVA: From the F-test to Practical Models",
     "section": "Setup",
-    "text": "Setup\nYou only need base R for everything in this guide. One optional test uses the car package.\n\n# Optional: run once if you want to use Levene's test\n# install.packages(\"car\")\n\nIf you use RStudio: open a new R script or Quarto document, and copy/paste the code chunks as you go.",
+    "text": "Setup\nThe lecture uses four datasets that come with R:\n\n\n\n\n\n\n\n\nDataset\nResponse\nDesign question\n\n\n\n\nPlantGrowth\nPlant weight\nDo three treatment means differ?\n\n\nToothGrowth\nTooth length\nDo supplement and dose work together?\n\n\nmtcars\nFuel economy\nDoes the weight relationship differ by transmission?\n\n\nsleep\nExtra sleep\nDo the same people respond differently to two treatments?\n\n\n\nThe examples move from independent groups to designs with interactions and repeated observations.",
     "crumbs": [
-      "Week 7: ANOVA and Kruskal-Wallis",
-      "F-Test and ANOVA"
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
     ]
   },
   {
@@ -3093,12 +3093,12 @@
   {
     "objectID": "anova.html#from-t-to-f-why-a-ratio",
     "href": "anova.html#from-t-to-f-why-a-ratio",
-    "title": "F-Test and ANOVA",
+    "title": "ANOVA: From the F-test to Practical Models",
     "section": "From t to F: why a ratio?",
-    "text": "From t to F: why a ratio?\n\nIf a model explains real structure, the “between” mean square should exceed the “within” mean square.\nUnder a true null, both mean squares estimate the same variance → their ratio should be near 1.\nWith normal errors, these scaled sums of squares follow chi‑squared distributions; their ratio follows an F‑distribution with appropriate degrees of freedom.",
+    "text": "From t to F: why a ratio?\nANOVA separates response variation into an explained part and an unexplained part.\n\\[\nF=\\frac{MS_{\\text{model}}}{MS_{\\text{error}}}\n\\]\n\n\\(MS_{\\text{model}}\\) measures variation linked to the model term.\n\\(MS_{\\text{error}}\\) measures ordinary variation among comparable observations.\n\nUnder \\(H_0\\), both mean squares estimate the same underlying variance. Their ratio is usually near 1. A large ratio means that the model term explains more variation than the chosen error source would normally produce.\nFisher extended this ratio idea so that a model can compare variation associated with group means against ordinary variation within groups.",
     "crumbs": [
-      "Week 7: ANOVA and Kruskal-Wallis",
-      "F-Test and ANOVA"
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
     ]
   },
   {
@@ -3126,12 +3126,12 @@
   {
     "objectID": "anova.html#what-problem-does-anova-solve",
     "href": "anova.html#what-problem-does-anova-solve",
-    "title": "F-Test and ANOVA",
+    "title": "ANOVA: From the F-test to Practical Models",
     "section": "What problem does ANOVA solve?",
-    "text": "What problem does ANOVA solve?\nWhen you compare more than two group means (e.g., yields under fertilisers A, B, C), running many t‑tests inflates the chance of a false positive (Type I error). ANOVA answers one global question:\n\n\\(H_0\\): \\(\\mu_1 = \\mu_2 = \\dots = \\mu_k\\) (all group means equal)\n\\(H_1\\): at least one mean differs\n\nIt uses a single F‑statistic to compare “between‑groups” variation to “within‑groups” variation.",
+    "text": "What problem does ANOVA solve?\nThe same mixed crowd can be reorganised in many ways. We could group people by colour, happiness category, or combinations of both.\n\n🙍🏽 🧑🏽 🙋🏽    |    🙍 🧑 🙋 🙍🏽 🙍    |    🧑🏽 🧑    |    🙋🏽 🙋\n\nEach regrouping creates possible comparisons. If we keep trying t-tests, we increase the chance of finding a difference that arose by chance.\nANOVA protects the first decision by asking one global question across all \\(k\\) groups:\n\\[\nH_0:\\mu_1=\\mu_2=\\cdots=\\mu_k\n\\]\nA significant F-test says that at least one population mean differs. It does not identify the pair or pattern, so focused comparisons come later.",
     "crumbs": [
-      "Week 7: ANOVA and Kruskal-Wallis",
-      "F-Test and ANOVA"
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
     ]
   },
   {
@@ -10795,5 +10795,1198 @@
     "title": "Data Structures",
     "section": "Practice Exercises",
     "text": "Practice Exercises"
+  },
+  {
+    "objectID": "anova.html#origins-of-the-f-test",
+    "href": "anova.html#origins-of-the-f-test",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Origins of the F-test",
+    "text": "Origins of the F-test\nWilliam Sealy Gosset developed the t-test for comparisons based on small samples. Ronald Fisher developed ANOVA and the F-statistic for models with several sources of variation.\nThe central question stayed the same:\n\nIs the observed pattern large relative to the variation that ordinary sampling can produce?\n\nA t-test answers this question for one standardised difference. ANOVA answers it with a ratio of variances.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#standalone-f-test-example-comparing-two-variances",
+    "href": "anova.html#standalone-f-test-example-comparing-two-variances",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Standalone F-test example: comparing two variances",
+    "text": "Standalone F-test example: comparing two variances\nThe standalone F-test compares two population variances:\n\\[\nH_0:\\sigma^2_{\\text{control}}=\\sigma^2_{\\text{treatment 2}}\n\\]\n\n\n\n\n\n\n\n\n\nThe reference distribution assumes independent Gaussian observations. A small p-value gives evidence that the two population variances differ.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#one-way-anova-what-it-means",
+    "href": "anova.html#one-way-anova-what-it-means",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "One-way ANOVA: what it means",
+    "text": "One-way ANOVA: what it means\nOne-way ANOVA has one continuous response and one categorical explanatory variable.\nFor PlantGrowth:\n\none row represents one plant\nweight is the response\ngroup identifies control, treatment 1, or treatment 2\n\nThe model compares variation among the three fitted means with variation among plants in the same group.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#one-way-anova-assumptions",
+    "href": "anova.html#one-way-anova-assumptions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "One-way ANOVA: assumptions",
+    "text": "One-way ANOVA: assumptions\nThe model needs:\n\nIndependent observational units. Each plant contributes one outcome.\nA continuous response. Plant weight has a meaningful numeric scale.\nApproximately Gaussian residuals. The unexplained values should not show severe skew or extreme outliers.\nSimilar residual variances. The spread should be reasonably similar across groups.\n\nIndependence comes from the study design. Residual plots can help evaluate the distribution and spread assumptions.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#one-way-anova-example-in-r",
+    "href": "anova.html#one-way-anova-example-in-r",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "One-way ANOVA: example in R",
+    "text": "One-way ANOVA: example in R\nStart with a plot. Then fit the model.\n\none_way_data &lt;- PlantGrowth\n\nboxplot(\n  weight ~ group,\n  data = one_way_data,\n  xlab = \"Group\",\n  ylab = \"Plant weight\",\n  col = c(\"#8dd3c7\", \"#ffffb3\", \"#bebada\")\n)\n\none_way_fit &lt;- aov(weight ~ group, data = one_way_data)\nsummary(one_way_fit)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \ngroup        2   3.77   1.883    4.85  0.016 *\nResiduals   27  10.49   0.389                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe boxplot shows the observed group differences. The ANOVA table tests whether those differences are large relative to the variation within the groups.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#one-way-anova-reading-the-output",
+    "href": "anova.html#one-way-anova-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "One-way ANOVA: reading the output",
+    "text": "One-way ANOVA: reading the output\n\n\n\n\n\nTerm\nDf\nSum of squares\nMean square\nF\np\n\n\n\n\ngroup\n2\n3.77\n1.88\n4.85\n0.0159\n\n\nResiduals\n27\n10.49\n0.39\nNA\nNA\n\n\n\n\n\nThe group row gives \\(F(2,27)=4.85\\) and \\(p=0.016\\). The data therefore give evidence that the population means are not all equal.\nThe result remains global. We still need model-based comparisons to identify the group pattern.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-what-it-means",
+    "href": "anova.html#two-way-anova-what-it-means",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: what it means",
+    "text": "Two-way ANOVA: what it means\nThe ToothGrowth study recorded tooth growth in 60 guinea pigs after they received vitamin C through one of two supplements and at one of three doses.\n\nResponse: tooth length\nFactor 1: orange juice or ascorbic acid\nFactor 2: dose of 0.5, 1, or 2 milligrams per day\n\nThe research question is whether mean tooth growth responds to dose in the same way for both supplements.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-assumptions",
+    "href": "anova.html#two-way-anova-assumptions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: assumptions",
+    "text": "Two-way ANOVA: assumptions\nTwo-way ANOVA uses the main ANOVA assumptions:\n\nThe observations are independent.\nThe residuals are approximately Gaussian.\nThe residual variance is similar across the factor combinations.\nEach factor combination has enough observations for comparison.\n\nPlot the factor combinations before fitting the model. Empty or very small cells can make an interaction difficult to estimate.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-example-in-r",
+    "href": "anova.html#two-way-anova-example-in-r",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: example in R",
+    "text": "Two-way ANOVA: example in R\n\ntwo_way_data &lt;- ToothGrowth\ntwo_way_data$dose_group &lt;- factor(two_way_data$dose)\n\nwith(\n  two_way_data,\n  interaction.plot(\n    x.factor = dose_group,\n    trace.factor = supp,\n    response = len,\n    xlab = \"Dose\",\n    ylab = \"Mean tooth length\",\n    trace.label = \"Supplement\"\n  )\n)\n\ntwo_way_fit &lt;- aov(len ~ supp * dose_group, data = two_way_data)\nsummary(two_way_fit)\n\n                Df Sum Sq Mean Sq F value  Pr(&gt;F)    \nsupp             1    205     205   15.57 0.00023 ***\ndose_group       2   2426    1213   92.00 &lt; 2e-16 ***\nsupp:dose_group  2    108      54    4.11 0.02186 *  \nResiduals       54    712      13                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe * asks R to fit both main effects and their interaction.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-reading-the-output",
+    "href": "anova.html#two-way-anova-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: reading the output",
+    "text": "Two-way ANOVA: reading the output\nRead the interaction row first.\n\nsupp:dose_group tests whether the supplement effect changes with dose.\nA small interaction p-value means that the main effects need careful interpretation.\nIf the interaction gives little evidence against its null hypothesis, interpret the two main-effect rows.\n\nUse the interaction plot to describe the pattern. Lines with different slopes suggest an interaction. The p-value tells you whether the data give statistical evidence for that pattern.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariates-and-interactions-in-anova-what-they-mean",
+    "href": "anova.html#covariates-and-interactions-in-anova-what-they-mean",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariates and interactions in ANOVA: what they mean",
+    "text": "Covariates and interactions in ANOVA: what they mean\nA covariate is a continuous explanatory variable. Adding a covariate lets you compare groups after accounting for that variable. This model is often called ANCOVA.\nAn interaction between a factor and a covariate tests whether the slope differs between groups.\nFor vehicle fuel economy:\n\nmpg is the continuous response.\ntransmission is the categorical factor.\nwt is the continuous covariate.\ntransmission:wt tests whether the weight slope differs by transmission type.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariates-and-interactions-example-in-r",
+    "href": "anova.html#covariates-and-interactions-example-in-r",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariates and interactions: example in R",
+    "text": "Covariates and interactions: example in R\n\ncovariate_data &lt;- mtcars\ncovariate_data$transmission &lt;- factor(\n  covariate_data$am,\n  levels = c(0, 1),\n  labels = c(\"Automatic\", \"Manual\")\n)\n\ncovariate_fit &lt;- aov(\n  mpg ~ transmission * wt,\n  data = covariate_data\n)\n\nsummary(covariate_fit)\n\n                Df Sum Sq Mean Sq F value  Pr(&gt;F)    \ntransmission     1    405     405    60.3 1.8e-08 ***\nwt               1    443     443    65.9 7.7e-09 ***\ntransmission:wt  1     90      90    13.4   0.001 ** \nResiduals       28    188       7                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe model estimates a separate weight slope for each transmission group when the interaction is present.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariates-and-interactions-reading-the-output",
+    "href": "anova.html#covariates-and-interactions-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariates and interactions: reading the output",
+    "text": "Covariates and interactions: reading the output\nRead the terms in this order:\n\ntransmission:wt tests whether the slopes differ.\nwt tests the weight slope for the reference transmission group.\ntransmission compares transmissions when wt equals zero.\n\nThe final comparison is usually not useful because a vehicle cannot have zero weight. Centre the covariate to give the factor term a useful reference point.\n\ncovariate_data$weight_centred &lt;- covariate_data$wt - mean(covariate_data$wt)\n\ncentred_fit &lt;- aov(\n  mpg ~ transmission * weight_centred,\n  data = covariate_data\n)\n\nsummary(centred_fit)\n\n                            Df Sum Sq Mean Sq F value  Pr(&gt;F)    \ntransmission                 1    405     405    60.3 1.8e-08 ***\nweight_centred               1    443     443    65.9 7.7e-09 ***\ntransmission:weight_centred  1     90      90    13.4   0.001 ** \nResiduals                   28    188       7                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe transmission row now compares groups at the mean vehicle weight.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#repeated-measures-anova-what-it-means",
+    "href": "anova.html#repeated-measures-anova-what-it-means",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Repeated-measures ANOVA: what it means",
+    "text": "Repeated-measures ANOVA: what it means\nRepeated measures occur when one observational unit supplies several outcomes.\nIn sleep, one person supplies an outcome under treatment 1 and another outcome under treatment 2. Measurements from the same person share biology and context, so they are related.\nA standard one-way ANOVA would treat all 20 rows as independent. Repeated-measures ANOVA preserves the pairing and evaluates change within people.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#repeated-measures-anova-example-in-r",
+    "href": "anova.html#repeated-measures-anova-example-in-r",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Repeated-measures ANOVA: example in R",
+    "text": "Repeated-measures ANOVA: example in R\n\nrepeated_data &lt;- sleep\nrepeated_data$group &lt;- factor(repeated_data$group)\n\nwith(\n  repeated_data,\n  interaction.plot(\n    x.factor = group,\n    trace.factor = ID,\n    response = extra,\n    xlab = \"Treatment\",\n    ylab = \"Extra sleep\",\n    trace.label = \"Person\"\n  )\n)\n\nrepeated_fit &lt;- aov(\n  extra ~ group + Error(ID / group),\n  data = repeated_data\n)\n\nsummary(repeated_fit)\n\n\nError: ID\n          Df Sum Sq Mean Sq F value Pr(&gt;F)\nResiduals  9   58.1    6.45               \n\nError: ID:group\n          Df Sum Sq Mean Sq F value Pr(&gt;F)   \ngroup      1  12.48   12.48    16.5 0.0028 **\nResiduals  9   6.81    0.76                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nError(ID / group) tells R that treatment measurements are nested within each person.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#repeated-measures-anova-reading-the-output",
+    "href": "anova.html#repeated-measures-anova-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Repeated-measures ANOVA: reading the output",
+    "text": "Repeated-measures ANOVA: reading the output\nThe output contains separate error sections.\n\nError: ID describes variation between people.\nError: ID:group contains the treatment test within people.\nRead the group p-value in the within-person section.\n\nWith two conditions, sphericity is satisfied automatically. With three or more conditions, check sphericity or use a suitable correction. Mixed models provide more flexibility for missing values and complex repeated designs.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#multiple-comparisons-why-adjustment-matters",
+    "href": "anova.html#multiple-comparisons-why-adjustment-matters",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Multiple comparisons: why adjustment matters",
+    "text": "Multiple comparisons: why adjustment matters\nThe global F-test controls one decision. Follow-up comparisons create a family of decisions.\nIf every comparison uses \\(0.05\\) without adjustment, the chance of at least one false positive increases with the number of comparisons.\nThe comparison method must answer two questions:\n\nWhich model-based quantities should we compare?\nHow should we adjust for the number and structure of those comparisons?",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#tukeys-hsd",
+    "href": "anova.html#tukeys-hsd",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Tukey’s HSD",
+    "text": "Tukey’s HSD\nTukey’s Honest Significant Difference method compares every pair of group means. It controls the family-wise error rate across the full set of comparisons.\nUse it after an ANOVA when all pairwise comparisons are relevant.\nFor each pair, R gives:\n\nthe estimated difference in means\na confidence interval\nan adjusted p-value\n\nTukey’s method uses the fitted ANOVA model and its residual variation.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#bonferroni-correction",
+    "href": "anova.html#bonferroni-correction",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Bonferroni correction",
+    "text": "Bonferroni correction\nThe Bonferroni method adjusts for the number of comparisons. For \\(m\\) comparisons, it can multiply each p-value by \\(m\\).\nUse it when you have a small set of planned comparisons.\n\npairwise.t.test(\n  x = one_way_data$weight,\n  g = one_way_data$group,\n  p.adjust.method = \"bonferroni\"\n)\n\n\n    Pairwise comparisons using t tests with pooled SD \n\ndata:  one_way_data$weight and one_way_data$group \n\n     ctrl trt1\ntrt1 0.58 -   \ntrt2 0.26 0.01\n\nP value adjustment method: bonferroni \n\n\nBonferroni is simple and cautious. It can have low power when the analysis contains many comparisons.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#estimated-marginal-means",
+    "href": "anova.html#estimated-marginal-means",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Estimated marginal means",
+    "text": "Estimated marginal means\nAn estimated marginal mean is a mean predicted by the fitted ANOVA model. The model calculates each treatment mean while holding covariates to a common value or averaging other factors in the same way for every treatment.\nThis provides a fairer comparison when:\n\ncell sizes are unequal because of missing observations\na factorial design has an uneven composition\na covariate needs adjustment\n\nWhen the design is balanced and no covariate adjustment is needed, observed means and estimated marginal means are the same.\nThe safest general workflow is to obtain the means from the fitted model with emmeans, then run the pairwise comparisons on those means and request the required adjustment.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#tukeys-hsd-example-in-r",
+    "href": "anova.html#tukeys-hsd-example-in-r",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Tukey’s HSD: example in R",
+    "text": "Tukey’s HSD: example in R\n\ntukey_result &lt;- TukeyHSD(one_way_fit, \"group\")\ntukey_result\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = weight ~ group, data = one_way_data)\n\n$group\n            diff    lwr  upr p adj\ntrt1-ctrl -0.371 -1.062 0.32 0.391\ntrt2-ctrl  0.494 -0.197 1.19 0.198\ntrt2-trt1  0.865  0.174 1.56 0.012\n\nplot(tukey_result)\nabline(v = 0, lty = 2, col = \"grey40\")\n\n\nThe vertical zero line represents no difference between the two population means.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#multiple-comparisons-reading-the-output",
+    "href": "anova.html#multiple-comparisons-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Multiple comparisons: reading the output",
+    "text": "Multiple comparisons: reading the output\nFor each Tukey comparison:\n\ndiff is the estimated difference between the two group means.\nlwr and upr give the confidence interval.\np adj is the adjusted p-value.\n\nA confidence interval that excludes zero gives evidence of a difference. The sign of diff gives the direction.\nReport the pair, estimated difference, confidence interval, and adjusted p-value. Link the result back to the response variable.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#evaluating-assumptions-design-and-plots",
+    "href": "anova.html#evaluating-assumptions-design-and-plots",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Evaluating assumptions: design and plots",
+    "text": "Evaluating assumptions: design and plots\nStart with the study design because a plot cannot prove independence.\nThen inspect the residuals from the fitted model.\n\npar(mfrow = c(1, 2))\nplot(one_way_fit, which = 1)\nplot(one_way_fit, which = 2)\n\npar(mfrow = c(1, 1))\n\n\nThe residuals-versus-fitted plot should not show a strong curve or funnel.\nThe Q-Q plot should follow the reference line reasonably well.\nInvestigate large residuals that could control the result.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#evaluating-assumptions-simple-tests",
+    "href": "anova.html#evaluating-assumptions-simple-tests",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Evaluating assumptions: simple tests",
+    "text": "Evaluating assumptions: simple tests\nFormal tests provide extra information. They do not replace the design check or plots.\n\nshapiro.test(residuals(one_way_fit))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(one_way_fit)\nW = 1, p-value = 0.4\n\nbartlett.test(weight ~ group, data = one_way_data)\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  weight by group\nBartlett's K-squared = 3, df = 2, p-value = 0.2\n\n\nFor each test:\n\n\\(p\\le0.05\\) gives evidence against the tested assumption.\n\\(p&gt;0.05\\) means that the test did not detect a clear problem.\n\nSmall samples can hide problems. Large samples can detect small departures that have little practical effect. Use all the evidence together.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#broken-assumptions-a-path-to-glms-and-glmms",
+    "href": "anova.html#broken-assumptions-a-path-to-glms-and-glmms",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Broken assumptions: a path to GLMs and GLMMs",
+    "text": "Broken assumptions: a path to GLMs and GLMMs\nChoose the next model from the response and the dependence structure.\n\n\n\n\n\n\n\nProblem\nModel direction\n\n\n\n\nBinary response\nBinomial generalised linear model\n\n\nCounts with a mean-variance relationship\nPoisson or negative-binomial model\n\n\nRepeated or grouped continuous outcomes\nLinear mixed model\n\n\nNon-Gaussian outcomes with grouping\nGeneralised linear mixed model\n\n\n\nA new model changes the assumed response distribution or the correlation structure. It cannot repair weak measurements or a poor study design.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#one-way-anova-the-model-evidence",
+    "href": "anova.html#one-way-anova-the-model-evidence",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "One-way ANOVA: the model evidence",
+    "text": "One-way ANOVA: the model evidence\n\n\n\n\n\n\n\n\n\nThe group means differ, but plants within each group also vary. The F-test judges the group pattern relative to that within-group variation.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#interactions-as-a-difference-in-differences",
+    "href": "anova.html#interactions-as-a-difference-in-differences",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Interactions as a difference in differences",
+    "text": "Interactions as a difference in differences\nAn interaction has a direct substantive meaning.\nSuppose the supplement difference is 5 units at a low dose and 0 units at a high dose. The interaction compares those differences:\n\\[\n\\text{Interaction}=5-0=5\n\\]\nParallel lines imply a constant difference. Non-parallel lines mean that the effect of one factor depends on the level of the other factor.\nThe main effects average across the other factor. This average can hide the pattern when an interaction is present.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-the-interaction-pattern",
+    "href": "anova.html#two-way-anova-the-interaction-pattern",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: the interaction pattern",
+    "text": "Two-way ANOVA: the interaction pattern\n\n\n\n\n\n\n\n\n\nThe lines converge. Orange juice has an advantage at lower doses, while the supplements give almost identical means at dose 2.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-anova-model-output",
+    "href": "anova.html#two-way-anova-model-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way ANOVA: model output",
+    "text": "Two-way ANOVA: model output\n\n\n\n\n\nTerm\nDf\nSum of squares\nMean square\nF\np\n\n\n\n\nsupp\n1\n205.35\n205.35\n15.57\n&lt;0.001\n\n\ndose_group\n2\n2426.43\n1213.22\n92.00\n&lt;0.001\n\n\nsupp:dose_group\n2\n108.32\n54.16\n4.11\n0.0219\n\n\nResiduals\n54\n712.11\n13.19\nNA\nNA\n\n\n\n\n\nThe interaction row gives \\(F(2,54)=4.11\\) and \\(p=0.022\\). The supplement difference changes across dose levels.\nThis result changes the substantive question. We should compare supplements within each dose instead of reporting one supplement effect averaged across all doses.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#two-way-interaction-substantive-interpretation",
+    "href": "anova.html#two-way-interaction-substantive-interpretation",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Two-way interaction: substantive interpretation",
+    "text": "Two-way interaction: substantive interpretation\n\n\n\n\n\nDose\nComparison\nDifference\nSE\np\n\n\n\n\n0.5\nOJ - VC\n5.25\n1.62\n0.00209\n\n\n1\nOJ - VC\n5.93\n1.62\n&lt; 0.001\n\n\n2\nOJ - VC\n-0.08\n1.62\n0.96089\n\n\n\n\n\nAt dose 0.5, orange juice produces teeth that are 5.25 units longer on average. At dose 1, the advantage is 5.93 units. At dose 2, the estimated difference is only \\(-0.08\\) units.\nThe interaction therefore says that the orange-juice advantage weakens as the dose increases and disappears at the highest dose.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariates-and-interactions-in-anova",
+    "href": "anova.html#covariates-and-interactions-in-anova",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariates and interactions in ANOVA",
+    "text": "Covariates and interactions in ANOVA\nA covariate is a continuous explanatory variable. Adding it lets the model compare group means after accounting for a continuous trend.\nFor fuel economy:\n\nmpg is the response\ntransmission type is the categorical factor\nvehicle weight is the covariate\n\nVehicle weight relates to fuel economy and may also differ between transmission groups. The model therefore compares the expected mean fuel economy of automatic and manual cars at the same weight.\nThe transmission-by-weight interaction asks whether this adjusted mean difference changes as vehicle weight changes.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariate-interaction-difference-in-slopes",
+    "href": "anova.html#covariate-interaction-difference-in-slopes",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariate interaction: difference in slopes",
+    "text": "Covariate interaction: difference in slopes\n\n\n\n\n\n\n\n\n\nThe model compares the two slopes. It asks whether an increase of 1,000 lb has the same expected association with fuel economy for both transmission groups.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariate-interaction-model-output",
+    "href": "anova.html#covariate-interaction-model-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariate interaction: model output",
+    "text": "Covariate interaction: model output\n\n\n\n\n\nTerm\nEstimate\nSE\nt\np\n\n\n\n\n(Intercept)\n31.42\n3.02\n10.40\n&lt; 0.001\n\n\ntransmissionManual\n14.88\n4.26\n3.49\n0.00162\n\n\nwt\n-3.79\n0.79\n-4.82\n&lt; 0.001\n\n\ntransmissionManual:wt\n-5.30\n1.44\n-3.67\n0.00102\n\n\n\n\n\nThe term transmissionManual:wt is written from the viewpoint of the manual-versus-automatic difference. Its coefficient is \\(-5.30\\) with \\(p=0.001\\).\nFor every increase of 1,000 lb, the expected manual advantage decreases by 5.30 miles per gallon. The low p-value gives evidence that the manual-versus-automatic difference changes with weight.\nThe interaction coefficient does not represent one overall difference between transmission means because the difference has a different value at each weight.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariate-interaction-substantive-interpretation",
+    "href": "anova.html#covariate-interaction-substantive-interpretation",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariate interaction: substantive interpretation",
+    "text": "Covariate interaction: substantive interpretation\n\n\n\n\n\nTransmission\nMPG change per 1,000 lb\nLower 95% CI\nUpper 95% CI\n\n\n\n\nAutomatic\n-3.79\n-5.40\n-2.18\n\n\nManual\n-9.08\n-11.57\n-6.60\n\n\n\n\n\nFor automatic cars, an extra 1,000 lb is associated with 3.79 fewer miles per gallon. For manual cars, the estimated reduction is 9.08 miles per gallon.\nThe interaction is the difference between these slopes: \\(-9.08-(-3.79)=-5.30\\). Each 1,000 lb increase reduces the expected manual-versus-automatic difference by 5.30 miles per gallon.\nTo compare transmissions substantively, choose a meaningful weight and read the two adjusted means at that weight. The plot shows those comparisons at 2,500 lb and 4,000 lb.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#why-the-model-needs-an-error-term",
+    "href": "anova.html#why-the-model-needs-an-error-term",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Why the model needs an error term",
+    "text": "Why the model needs an error term\nEvery F-test needs a denominator that represents ordinary variation for the comparison.\nFor the treatment effect, the correct error source is the variation in how people change between treatments. The overall differences between people belong to a separate source of variation.\nThe R term Error() tells aov() how to split the unexplained variation into these error strata. It does not create a new error metric. It identifies which variation should form the denominator of each F-test.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#what-id-group-means",
+    "href": "anova.html#what-id-group-means",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "What ID / group means",
+    "text": "What ID / group means\nFirst identify the grouping unit across which independent response profiles are repeated. Here, ID identifies each person.\nThen identify the axis along which observations repeat within that grouping unit. Here, group identifies the treatments measured within each person.\nID / group expands to:\n\\[\nID + ID:group\n\\]\n\nID represents stable differences between people.\nID:group represents variation among the treatment profiles of different people.\n\nThe slash records this grouping hierarchy.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#repeated-measures-observed-trajectories",
+    "href": "anova.html#repeated-measures-observed-trajectories",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Repeated measures: observed trajectories",
+    "text": "Repeated measures: observed trajectories\n\n\n\n\n\n\n\n\n\nEach grey line is one person’s response profile across the treatment conditions. The dark line is the mean profile.\nRepeated-measures ANOVA asks whether the mean profile changes systematically across conditions, relative to variation in the shapes of individual profiles. With two conditions, each profile has one change. With three or more conditions, the same logic tests a fuller trajectory.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#repeated-measures-reading-the-output",
+    "href": "anova.html#repeated-measures-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Repeated measures: reading the output",
+    "text": "Repeated measures: reading the output\n\n\n\n\n\nSource\nDf\nSum of squares\nMean square\nF\np\n\n\n\n\ngroup\n1\n12.48\n12.48\n16.5\n0.00283\n\n\nResiduals\n9\n6.81\n0.76\nNA\nNA\n\n\n\n\n\nThe treatment F-test uses the ID:group residual mean square as its denominator. It gives \\(F(1,9)=16.50\\) and \\(p=0.003\\).\nThe mean extra sleep increases within people under treatment 2. The pairing makes this conclusion more precise because stable differences between people do not enter the treatment error term.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#error-structures-for-other-designs",
+    "href": "anova.html#error-structures-for-other-designs",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Error structures for other designs",
+    "text": "Error structures for other designs\nThe same reasoning transfers to other studies:\n\n\n\n\n\n\n\n\nStudy design\nGrouping hierarchy and repeated axis\nError structure\n\n\n\n\nPeople measured over time\nID and time\nError(ID / time)\n\n\nTwo conditions at several times\nID, condition, and time\nError(ID / (condition * time))\n\n\nPlots nested within blocks\nblock contains several plot units\nError(block / plot)\n\n\nTreatment between people, time within people\nID and time\nTreatment and time in the model, Error(ID / time)\n\n\n\nThe term before the slash identifies a grouping level, not automatically the observational unit. In Error(block / plot), blocks group several plots, while plots sit within blocks. The measured unit may be the plot or a smaller unit inside it, depending on the study design.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#tukey-and-bonferroni-adjustments",
+    "href": "anova.html#tukey-and-bonferroni-adjustments",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Tukey and Bonferroni adjustments",
+    "text": "Tukey and Bonferroni adjustments\nTukey’s HSD compares every pair of group means and gives p-values that already include an all-pairs penalty.\nBonferroni is a general alternative. It makes each comparison pass a stricter threshold. It is easy to apply, but the penalty can become severe when we test many comparisons.\nTukey and Bonferroni are alternative adjustment methods. We do not usually apply Bonferroni on top of Tukey’s adjusted p-values.\nThe next decision is which means we should compare.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#raw-means-can-give-an-unfair-comparison",
+    "href": "anova.html#raw-means-can-give-an-unfair-comparison",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Raw means can give an unfair comparison",
+    "text": "Raw means can give an unfair comparison\n\n\n\n\n\n\n\n\n\nThe raw means mix treatment effects with different site composition. The model-based means compare both treatments using the same balance of site types.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#estimated-marginal-means-model-evidence",
+    "href": "anova.html#estimated-marginal-means-model-evidence",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Estimated marginal means: model evidence",
+    "text": "Estimated marginal means: model evidence\n\n\n\n\n\nGroup\nEstimated marginal mean\nSE\nLower 95% CI\nUpper 95% CI\n\n\n\n\nctrl\n5.03\n0.2\n4.63\n5.44\n\n\ntrt1\n4.66\n0.2\n4.26\n5.07\n\n\ntrt2\n5.53\n0.2\n5.12\n5.93\n\n\n\n\n\nPlantGrowth has ten plants in each group, so the estimated marginal means equal the observed group means.\nThe confidence intervals describe uncertainty in each population mean. Pairwise contrasts then compare these fitted means using the model’s residual variation.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#estimated-marginal-means-with-tukey-adjustment",
+    "href": "anova.html#estimated-marginal-means-with-tukey-adjustment",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Estimated marginal means with Tukey adjustment",
+    "text": "Estimated marginal means with Tukey adjustment\n\n\n\n\n\nComparison\nDifference\nSE\nt\nTukey-adjusted p\n\n\n\n\nctrl - trt1\n0.37\n0.28\n1.33\n0.391\n\n\nctrl - trt2\n-0.49\n0.28\n-1.77\n0.198\n\n\ntrt1 - trt2\n-0.86\n0.28\n-3.10\n0.012\n\n\n\n\n\nThe treatment 1 versus treatment 2 comparison has an adjusted p-value of 0.012. The other pairs do not cross the 0.05 threshold after Tukey adjustment.\nThe comparison uses estimated marginal means. Tukey controls the family-wise error across all three pairwise tests.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#non-exhaustive-planned-contrasts",
+    "href": "anova.html#non-exhaustive-planned-contrasts",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Non-exhaustive planned contrasts",
+    "text": "Non-exhaustive planned contrasts\nA planned contrast tests a specific scientific comparison. It does not require every possible pair.\nExamples include:\n\ncontrol versus the average of all treatments\na low dose versus the average of two higher doses\na linear increase across ordered doses\n\nPlan contrasts from the research question before inspecting the outcome. A smaller, justified family receives a smaller adjustment penalty than an exhaustive set of comparisons.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#specifying-a-planned-contrast",
+    "href": "anova.html#specifying-a-planned-contrast",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Specifying a planned contrast",
+    "text": "Specifying a planned contrast\nA contrast assigns weights to the estimated marginal means. The weights sum to zero.\n\n\n\n\n\n\n\n\nGroup\nControl versus average treatment\nTreatment 2 versus treatment 1\n\n\n\n\nControl\n-1\n0\n\n\nTreatment 1\n0.5\n-1\n\n\nTreatment 2\n0.5\n1\n\n\n\nThe first contrast compares the control mean with the average of both treatment means. The second compares the two treatments directly.\nMultiplying every weight by the same constant changes the estimate’s scale, so use weights that keep the comparison easy to interpret.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-reading-the-output",
+    "href": "anova.html#planned-contrasts-reading-the-output",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: reading the output",
+    "text": "Planned contrasts: reading the output\n\n\n\n\n\nContrast\nEstimate\nSE\nt\nHolm-adjusted p\n\n\n\n\nControl vs average treatment\n0.06\n0.24\n0.25\n0.80086\n\n\nTreatment 2 vs treatment 1\n0.86\n0.28\n3.10\n0.00892\n\n\n\n\n\nThe control mean differs little from the average treatment mean. Treatment 2 exceeds treatment 1 by 0.87 weight units.\nHolm adjustment covers the two planned tests. An all-pairs analysis would include three tests and answer a broader question.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#evaluating-assumptions",
+    "href": "anova.html#evaluating-assumptions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Evaluating assumptions",
+    "text": "Evaluating assumptions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLook for a strong curve, a funnel, or an extreme point. The Q-Q plot should follow the line reasonably well. Independence still comes from the study design.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-group-means-reveal-the-interaction-pattern",
+    "href": "anova.html#the-group-means-reveal-the-interaction-pattern",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The group means reveal the interaction pattern",
+    "text": "The group means reveal the interaction pattern\n\n\n\n\n\n\n\n\n\nAt each dose, the vertical gap between the points shows the difference between the two supplement means. The gap becomes smaller as dose increases, so the lines converge.\nParallel lines would show a similar supplement difference at every dose. These non-parallel lines suggest that the supplement effect depends on dose.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#what-the-interaction-row-tells-us",
+    "href": "anova.html#what-the-interaction-row-tells-us",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "What the interaction row tells us",
+    "text": "What the interaction row tells us\n\n\n\n\n\nTerm\nDf\nSum of squares\nMean square\nF\np\n\n\n\n\nsupp\n1\n205.35\n205.35\n15.57\n&lt;0.001\n\n\ndose_group\n2\n2426.43\n1213.22\n92.00\n&lt;0.001\n\n\nsupp:dose_group\n2\n108.32\n54.16\n4.11\n0.0219\n\n\nResiduals\n54\n712.11\n13.19\nNA\nNA\n\n\n\n\n\nThe interaction row tests this null hypothesis:\n\nThe difference between the supplement means is the same at every dose.\n\nHere, \\(F(2,54)=4.11\\) and \\(p=0.022\\). The data give evidence that the supplement difference depends on dose.\nThe ANOVA table establishes that a dependency exists, but it does not show its direction. The graph shows that the supplement means converge as dose increases. Later pairwise comparisons can test the supplement difference at each dose.\nA high interaction p-value would mean that the data do not give clear evidence that the supplement difference changes with dose.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#covariate-interaction-adjusted-means-at-the-same-weight",
+    "href": "anova.html#covariate-interaction-adjusted-means-at-the-same-weight",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Covariate interaction: adjusted means at the same weight",
+    "text": "Covariate interaction: adjusted means at the same weight\n\n\n\n\n\n\n\n\n\nAt each selected weight, the two large points are the expected mean fuel economies for automatic and manual cars. Their vertical gap is the adjusted transmission difference at that weight.\nThe lines are not parallel, so this adjusted mean difference changes with weight. The same pattern can be described as a difference between the two weight slopes.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#origins-of-the-f-test-a-mixed-crowd",
+    "href": "anova.html#origins-of-the-f-test-a-mixed-crowd",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Origins of the F-test: a mixed crowd",
+    "text": "Origins of the F-test: a mixed crowd\nSuppose we can score happiness as 1 for unhappy, 2 for neutral, and 3 for very happy.\n\n🙋🏽   🧑   🙍🏽   🙋   🙍   🧑🏽 🙋   🙋🏽   🧑   🙍🏽   🧑🏽   🙍\n\nSomeone claims that happiness differs between the brown and yellow groups. Before testing that claim, we must decide what kind of difference we mean.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#mean-and-spread-answer-different-questions",
+    "href": "anova.html#mean-and-spread-answer-different-questions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Mean and spread answer different questions",
+    "text": "Mean and spread answer different questions\n\n\n\nBrown group\n\n\n🙍🏽   🧑🏽   🙋🏽🙍🏽   🧑🏽   🙋🏽\n\nA t-test asks whether the average happiness score differs between the two groups.\n\n\nYellow group\n\n\n🙍   🧑   🙋🙍   🧑   🙋\n\nAn F-test of variances asks whether happiness scores spread out by different amounts.\n\nIf the groups come from populations with the same variance, their scores should show similar spread. Equal variance does not require identical proportions in every happiness category.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#a-variance-difference-has-a-substantive-meaning",
+    "href": "anova.html#a-variance-difference-has-a-substantive-meaning",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "A variance difference has a substantive meaning",
+    "text": "A variance difference has a substantive meaning\n\n\n\nScores concentrated near neutral\n\n\n🧑🏽   🧑🏽   🙋🏽🧑🏽   🙍🏽   🧑🏽\n\n\n\nScores concentrated at the extremes\n\n\n🙍   🙋   🙍🙋   🙍   🙋\n\n\nThe two groups can have a similar mean but different variance. One group clusters near the centre, while the other contains more extreme scores.\nThe F-test asks whether the observed difference in spread is larger than sampling variation would usually produce.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#plantgrowth-columns-used-in-the-model",
+    "href": "anova.html#plantgrowth-columns-used-in-the-model",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "PlantGrowth: columns used in the model",
+    "text": "PlantGrowth: columns used in the model\n\n\n\n\n\nPlant weight\nTreatment group\n\n\n\n\n4.17\nctrl\n\n\n5.58\nctrl\n\n\n5.18\nctrl\n\n\n6.11\nctrl\n\n\n4.50\nctrl\n\n\n4.61\nctrl\n\n\n\n\n\nEach row represents one plant. The response column contains the measured weight, and the group column records which treatment the plant received.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#toothgrowth-columns-used-in-the-model",
+    "href": "anova.html#toothgrowth-columns-used-in-the-model",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "ToothGrowth: columns used in the model",
+    "text": "ToothGrowth: columns used in the model\n\n\n\n\n\nTooth length\nSupplement\nDose (mg/day)\n\n\n\n\n4.2\nAscorbic acid\n0.5\n\n\n11.5\nAscorbic acid\n0.5\n\n\n7.3\nAscorbic acid\n0.5\n\n\n5.8\nAscorbic acid\n0.5\n\n\n6.4\nAscorbic acid\n0.5\n\n\n10.0\nAscorbic acid\n0.5\n\n\n\n\n\nThe first rows happen to show one supplement and one dose. The full dataset contains every supplement-by-dose combination, with ten guinea pigs in each combination.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#mtcars-columns-used-in-the-model",
+    "href": "anova.html#mtcars-columns-used-in-the-model",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "mtcars: columns used in the model",
+    "text": "mtcars: columns used in the model\n\n\n\n\n\nFuel economy (mpg)\nTransmission\nWeight (1,000 lb)\n\n\n\n\n21.0\nManual\n2.620\n\n\n21.0\nManual\n2.875\n\n\n22.8\nManual\n2.320\n\n\n21.4\nAutomatic\n3.215\n\n\n18.7\nAutomatic\n3.440\n\n\n18.1\nAutomatic\n3.460\n\n\n\n\n\nEach row represents one car model. The analysis compares transmission means while accounting for vehicle weight.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-follow-up-anova-table",
+    "href": "anova.html#the-follow-up-anova-table",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The follow-up ANOVA table",
+    "text": "The follow-up ANOVA table\n\n\n\n\n\nTerm\nSum of squares\nDf\nF\np\n\n\n\n\ntransmission\n0.00\n1\n0.00\n0.98556\n\n\nwt\n442.58\n1\n65.91\n&lt; 0.001\n\n\ntransmission:wt\n90.31\n1\n13.45\n0.00102\n\n\nResiduals\n188.01\n28\nNA\nNA\n\n\n\n\n\nlm() estimates the coefficients. car::Anova() reorganises the same fitted model into F-tests for transmission, weight, and their interaction.\nThe interaction row is the key result here. Its low p-value says that the manual-versus-automatic difference changes with weight. The table confirms dependency, while the plot shows the direction and size of that change.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#type-ii-or-type-iii-sums-of-squares",
+    "href": "anova.html#type-ii-or-type-iii-sums-of-squares",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Type II or Type III sums of squares?",
+    "text": "Type II or Type III sums of squares?\nUse Type II as the usual starting point. For a model without an interaction, Type II and Type III give the same tests for the model terms, while Type II avoids dependence on special contrast settings.\nIf an interaction is weak, Type II usually gives a more direct and more powerful test of the main effects.\nIf an interaction is important, the main effects become averages across a changing relationship. Type III may be required for a specific unweighted marginal question or to match SPSS or SAS output, but it requires sum-to-zero contrasts such as contr.sum.\nWith a supported interaction, the plot and simple effects from emmeans usually answer the scientific question more clearly than either main-effect row.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#sleep-columns-used-in-the-model",
+    "href": "anova.html#sleep-columns-used-in-the-model",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "sleep: columns used in the model",
+    "text": "sleep: columns used in the model\n\n\n\n\n\nPerson\nTreatment\nExtra sleep (hours)\n\n\n\n\n1\nTreatment 1\n0.7\n\n\n2\nTreatment 1\n-1.6\n\n\n3\nTreatment 1\n-0.2\n\n\n4\nTreatment 1\n-1.2\n\n\n5\nTreatment 1\n-0.1\n\n\n6\nTreatment 1\n3.4\n\n\n\n\n\nThe same person appears once under each treatment. The repeated identifier tells the model which rows belong to the same response profile.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#anova-does-not-make-pairwise-comparisons",
+    "href": "anova.html#anova-does-not-make-pairwise-comparisons",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "ANOVA does not make pairwise comparisons",
+    "text": "ANOVA does not make pairwise comparisons\nANOVA answers one global question: do any population means differ?\nIt does not tell us which groups differ. We need follow-up comparisons for that purpose.\nEvery extra comparison gives us another chance to find a small p-value by luck. An adjustment adds a penalty for this statistical fishing.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#raw-means-can-mix-treatment-and-site-effects",
+    "href": "anova.html#raw-means-can-mix-treatment-and-site-effects",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Raw means can mix treatment and site effects",
+    "text": "Raw means can mix treatment and site effects\n\n\n\n\n\n\n\n\n\nTreatment A contains many observations from high-fertility sites, while treatment B contains many from low-fertility sites. The raw means therefore mix treatment and site.\nThe model-adjusted means compare both treatments using the same balance of site types. They show the treatment comparison after accounting for site.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-beyond-comparing-every-pair",
+    "href": "anova.html#planned-contrasts-beyond-comparing-every-pair",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: beyond comparing every pair",
+    "text": "Planned contrasts: beyond comparing every pair\nTukey’s HSD tests every pair. With four groups, that means six comparisons, including comparisons that may not answer the research question.\n\n\n\nTukey: every pair\n\nControl ↔︎ Treatment 1\nControl ↔︎ Treatment 2\nControl ↔︎ Treatment 3\nTreatment 1 ↔︎ Treatment 2\nTreatment 1 ↔︎ Treatment 3\nTreatment 2 ↔︎ Treatment 3\n\n\n🎯 Planned questions\n\n\nDo the treatments work overall?Average of all treatments versus control\n\n\nDo the new treatments beat the old options?Treatments 2 and 3 versus control and Treatment 1\n\n\nWrite the planned questions before inspecting the outcomes. Fewer justified tests usually mean a smaller multiple-testing penalty and more power for the questions that matter.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-turning-a-question-into-weights",
+    "href": "anova.html#planned-contrasts-turning-a-question-into-weights",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: turning a question into weights",
+    "text": "Planned contrasts: turning a question into weights\nSuppose the fitted means are Control = 5, Treatment 1 = 10, Treatment 2 = 15, and Treatment 3 = 22.\nQuestion: How much higher is the average of Treatments 2 and 3 than the average of Control and Treatment 1?\n\n\\[\n\\frac{15+22}{2}-\\frac{5+10}{2}=18.5-7.5=11.0\n\\]\n\\[\n(-0.5\\times5)+(-0.5\\times10)+(0.5\\times15)+(0.5\\times22)=11.0\n\\]\n\nThe weights sum to zero, so a common shift in all four means cancels out. The positive weights sum to \\(+1\\) and the negative weights sum to \\(-1\\), which keeps the answer in the original response units.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-a-table-of-independent-questions",
+    "href": "anova.html#planned-contrasts-a-table-of-independent-questions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: a table of independent questions",
+    "text": "Planned contrasts: a table of independent questions\nWith \\(k\\) groups, we can define up to \\(k-1\\) mutually independent contrasts. Four groups therefore support three independent questions.\n\n\n\n\n\n\n\n\n\nGroup (fitted mean)\nQ1: New pair vs old pair\nQ2: Within old pair\nQ3: Within new pair\n\n\n\n\nControl (5)\n-0.5\n-1\n0\n\n\nTreatment 1 (10)\n-0.5\n+1\n0\n\n\nTreatment 2 (15)\n+0.5\n0\n-1\n\n\nTreatment 3 (22)\n+0.5\n0\n+1\n\n\nResulting difference\n+11.0\n+5.0\n+7.0\n\n\n\nEach column divides the four groups without reusing the same comparison direction. These are orthogonal contrasts, so each question contributes distinct information.\nIn R, emmeans::contrast() receives these weight vectors and tests each question using the fitted model’s error variation.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-focused-questions",
+    "href": "anova.html#planned-contrasts-focused-questions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: focused questions",
+    "text": "Planned contrasts: focused questions\nWith four groups, Tukey tests six pairs. Every extra test adds a multiple-testing penalty, including pairs that may not answer the research question.\n\n\n\nTukey: every pair\n\nControl ↔︎ Trt 1, Trt 2, and Trt 3\nTrt 1 ↔︎ Trt 2 and Trt 3\nTrt 2 ↔︎ Trt 3\n\n\n🎯 Planned questions\n\n\nDo the treatments work overall?Average of Trt 1–3 versus control\n\n\nDo the new treatments beat the old options?Average of Trt 2–3 versus control and Trt 1",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#planned-contrasts-independent-questions",
+    "href": "anova.html#planned-contrasts-independent-questions",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Planned contrasts: independent questions",
+    "text": "Planned contrasts: independent questions\nWith \\(k\\) groups, we can define up to \\(k-1\\) mutually independent contrasts. Four groups therefore support three independent questions.\n\n\n\n\n\n\n\n\n\nGroup (fitted mean)\nQ1: New pair vs old pair\nQ2: Within old pair\nQ3: Within new pair\n\n\n\n\nControl (5)\n-0.5\n-1\n0\n\n\nTreatment 1 (10)\n-0.5\n+1\n0\n\n\nTreatment 2 (15)\n+0.5\n0\n-1\n\n\nTreatment 3 (22)\n+0.5\n0\n+1\n\n\nResulting difference\n+11.0\n+5.0\n+7.0\n\n\n\nEach column divides the groups in a different direction. These are orthogonal contrasts, so they carry distinct information. In R, pass the weight vectors to emmeans::contrast().",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#independent-planned-contrasts",
+    "href": "anova.html#independent-planned-contrasts",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Independent planned contrasts",
+    "text": "Independent planned contrasts\nWith \\(k\\) groups, we can define up to \\(k-1\\) mutually independent contrasts. Four groups therefore support three independent questions.\n\n\n\n\n\n\n\n\n\nGroup (fitted mean)\nQ1: New pair vs old pair\nQ2: Within old pair\nQ3: Within new pair\n\n\n\n\nControl (5)\n-0.5\n-1\n0\n\n\nTreatment 1 (10)\n-0.5\n+1\n0\n\n\nTreatment 2 (15)\n+0.5\n0\n-1\n\n\nTreatment 3 (22)\n+0.5\n0\n+1\n\n\nResulting difference\n+11.0\n+5.0\n+7.0\n\n\n\nEach column divides the groups in a different direction. These are orthogonal contrasts, so they carry distinct information. In R, pass the weight vectors to emmeans::contrast().",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#reflection-pause-1",
+    "href": "anova.html#reflection-pause-1",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Reflection pause 1",
+    "text": "Reflection pause 1\nPause for reflection. Use two minutes to consolidate the concept that has just concluded.\n\nWhat is the most important idea from the completed section?\nHow would you explain that idea in your own words?\nWhat question would you like to resolve before continuing?",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#reflection-pause-2",
+    "href": "anova.html#reflection-pause-2",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Reflection pause 2",
+    "text": "Reflection pause 2\nPause for reflection. Use two minutes to consolidate the concept that has just concluded.\n\nWhat is the most important idea from the completed section?\nHow would you explain that idea in your own words?\nWhat question would you like to resolve before continuing?",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#reflection-pause-3",
+    "href": "anova.html#reflection-pause-3",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Reflection pause 3",
+    "text": "Reflection pause 3\nPause for reflection. Use two minutes to consolidate the concept that has just concluded.\n\nWhat is the most important idea from the completed section?\nHow would you explain that idea in your own words?\nWhat question would you like to resolve before continuing?",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-ordinary-f-test-compares-two-variances",
+    "href": "anova.html#the-ordinary-f-test-compares-two-variances",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The ordinary F-test compares two variances",
+    "text": "The ordinary F-test compares two variances\nBefore ANOVA, the F-statistic has a simpler job. It compares the variance estimated from one group with the variance estimated from another group.\n\\[\nH_0:\\sigma_1^2=\\sigma_2^2\n\\]\n\\[\nF=\\frac{s_1^2}{s_2^2}\n\\]\nFor an intuitive reading, place the larger sample variance in the numerator. Similar variances give an F-value near 1. A value far above 1 means that one sample spreads out much more than the other.\nThe F reference distribution tells us how large this ratio can become through sampling variation when the population variances are equal. Its degrees of freedom are \\(n_1-1\\) and \\(n_2-1\\).",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#from-the-variance-f-test-to-anova",
+    "href": "anova.html#from-the-variance-f-test-to-anova",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "From the variance F-test to ANOVA",
+    "text": "From the variance F-test to ANOVA\nANOVA keeps the same ratio idea but changes what the two variance estimates represent.\n\\[\nF=\\frac{MS_{\\text{model}}}{MS_{\\text{error}}}\n\\]\n\n\\(MS_{\\text{model}}\\) estimates variation associated with the group means or another model term.\n\\(MS_{\\text{error}}\\) estimates ordinary variation among comparable observations.\n\nA mean square, written as \\(MS\\), is a sum of squared deviations divided by its degrees of freedom. This division turns the sum of squares into a variance estimate.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-anova-f-reference-distribution",
+    "href": "anova.html#the-anova-f-reference-distribution",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The ANOVA F reference distribution",
+    "text": "The ANOVA F reference distribution\n\n\n\n\n\n\n\n\n\nThe curve shows F-values expected when the null model is true. Values near 1 are common. Large values lie in the right tail and challenge the claim that the model and error mean squares estimate the same variance.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-interaction-rule-of-thumb",
+    "href": "anova.html#the-interaction-rule-of-thumb",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The interaction rule of thumb",
+    "text": "The interaction rule of thumb\n\nThe interaction is not significant. The data do not show that the effect changes across conditions. If the research design permits it, remove the interaction and fit a parallel, additive model. A Type II test can then give a clean overall test of each main effect.\nThe interaction is significant. Report the interaction test. Stop interpreting the main-effect rows from Type I, Type II, or Type III tables because each main effect averages across a relationship that changes. Use simple effects or simple slopes to explain the interaction.\n\nIn this example, the interaction p-value is 0.001. We therefore focus on how the transmission difference changes with weight.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#simple-effects-one-slice-at-a-time",
+    "href": "anova.html#simple-effects-one-slice-at-a-time",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Simple effects: one slice at a time",
+    "text": "Simple effects: one slice at a time\nA simple effect is the effect of one predictor at one specified level or value of another predictor. It takes one vertical slice through the interaction graph.\nThe transmission main effect asks whether manual and automatic cars differ after averaging across car weights. That average can hide the interaction.\nA transmission simple effect asks the same comparison at one realistic weight:\n\nAt 2,000 lb, do manual and automatic cars have different expected mean mpg?\nAt 3,200 lb, do they differ at an average weight?\nAt 4,500 lb, do they differ among heavy cars?",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#simple-effects-at-realistic-weights",
+    "href": "anova.html#simple-effects-at-realistic-weights",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Simple effects at realistic weights",
+    "text": "Simple effects at realistic weights\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeight (1,000 lb)\nAutomatic mean mpg\nManual mean mpg\nManual - Automatic\nSE\np\n\n\n\n\n2.0\n23.84\n28.13\n4.28\n1.75\n0.021\n\n\n3.2\n19.30\n17.22\n-2.08\n1.41\n0.152\n\n\n4.5\n14.38\n5.42\n-8.96\n2.76\n0.003\n\n\n\n\n\nThe difference is positive at 2,000 lb, which favours manual cars. It becomes negative at 3,200 lb and more negative at 4,500 lb. The interaction therefore describes a transmission advantage that reverses as weight increases.\nEach p-value tests \\(H_0\\): the two transmission means are equal at that stated weight. The estimates explain the direction and size of the difference, while the p-values describe the evidence at each slice.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#simple-slopes-how-weight-changes-mpg",
+    "href": "anova.html#simple-slopes-how-weight-changes-mpg",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Simple slopes: how weight changes mpg",
+    "text": "Simple slopes: how weight changes mpg\n\n\n\n\n\nTransmission\nMPG change per 1,000 lb\nLower 95% CI\nUpper 95% CI\n\n\n\n\nAutomatic\n-3.79\n-5.40\n-2.18\n\n\nManual\n-9.08\n-11.57\n-6.60\n\n\n\n\n\nFor automatic cars, an extra 1,000 lb is associated with 3.79 fewer miles per gallon. For manual cars, the estimated reduction is 9.08 miles per gallon.\nThe interaction is the difference between these slopes: \\(-9.08-(-3.79)=-5.30\\). Each 1,000 lb increase reduces the expected manual-versus-automatic difference by 5.30 miles per gallon.\nA simple effect compares transmissions at one weight. A simple slope describes the weight-mpg relationship within one transmission group. emmeans estimates the first quantity, while emtrends estimates the second.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#when-caranova-is-useful",
+    "href": "anova.html#when-caranova-is-useful",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "When car::Anova() is useful",
+    "text": "When car::Anova() is useful\nFor beginners, the coefficient table from lm() and the interaction plot usually provide the clearest starting point.\n\nWith a factor that has three or more levels and no supported interaction, lm() gives separate contrasts against one reference group. Type II car::Anova() adds one overall F-test and p-value for the whole factor.\nWith a two-level factor and no interaction, the lm() t-test and the factor F-test answer the same one-degree-of-freedom question. Their p-values match because \\(F=t^2\\).\nWith a supported interaction that contains a factor with three or more levels, car::Anova() can give one overall interaction F-test. Ignore its main-effect rows and use emmeans or emtrends to explain the interaction.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#tukeys-hsd-for-pairwise-comparisons",
+    "href": "anova.html#tukeys-hsd-for-pairwise-comparisons",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Tukey’s HSD for pairwise comparisons",
+    "text": "Tukey’s HSD for pairwise comparisons\nTukey’s HSD compares every pair of group means and gives p-values that already include an all-pairs penalty.\nUse Tukey’s method when the question requires every pairwise comparison among the factor levels.\nThe output gives one estimated difference and one Tukey-adjusted p-value for each pair. The adjustment reduces the chance of declaring a chance difference significant while we search across all pairs.\nThe next decision is which means Tukey should compare. Model-adjusted means from emmeans are safer than raw means when the design is unbalanced or contains covariates.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#the-two-variance-f-test",
+    "href": "anova.html#the-two-variance-f-test",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "The two-variance F-test",
+    "text": "The two-variance F-test\nThe F-statistic first has a simple job. It compares the variance from one group with the variance from another group.\n\\[\nH_0:\\sigma_1^2=\\sigma_2^2\n\\]\n\\[\nF=\\frac{s_1^2}{s_2^2}\n\\]\nPlace the larger sample variance in the numerator for an intuitive reading. Similar variances give an F-value near 1. A value far above 1 means that one sample spreads out much more than the other.\nThe F reference distribution uses \\(n_1-1\\) and \\(n_2-1\\) degrees of freedom to judge how unusual the ratio is under \\(H_0\\).",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#simple-effects-by-car-weight",
+    "href": "anova.html#simple-effects-by-car-weight",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Simple effects by car weight",
+    "text": "Simple effects by car weight\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeight (1,000 lb)\nAutomatic mean mpg\nManual mean mpg\nManual - Automatic\nSE\np\n\n\n\n\n2.0\n23.84\n28.13\n4.28\n1.75\n0.021\n\n\n3.2\n19.30\n17.22\n-2.08\n1.41\n0.152\n\n\n4.5\n14.38\n5.42\n-8.96\n2.76\n0.003\n\n\n\n\n\nA positive manual-minus-automatic difference favours manual cars. A negative difference favours automatic cars. Each p-value tests \\(H_0\\): the two transmission means are equal at that stated weight.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#reading-the-simple-effects",
+    "href": "anova.html#reading-the-simple-effects",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "Reading the simple effects",
+    "text": "Reading the simple effects\n\nLight cars at 2,000 lb: the estimated manual advantage is 4.28 mpg, with \\(p=0.021\\). The data support a higher mean mpg for manual cars at this weight.\nCars at 3,200 lb: the estimated difference is \\(-2.08\\) mpg, with \\(p=0.152\\). The estimate now favours automatic cars, but the data do not give clear evidence of a difference at this weight.\nHeavy cars at 4,500 lb: the estimated difference is \\(-8.96\\) mpg, with \\(p=0.003\\). The data support a higher mean mpg for automatic cars at this weight.\n\nThe simple effects show the interaction directly: the manual advantage among light cars reverses as weight increases.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#when-an-overall-factor-f-test-helps",
+    "href": "anova.html#when-an-overall-factor-f-test-helps",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "When an overall factor F-test helps",
+    "text": "When an overall factor F-test helps\nFor beginners, the coefficient table from lm() and the interaction plot usually provide the clearest starting point.\n\nWith a factor that has three or more levels and no supported interaction, lm() gives separate contrasts against one reference group. Type II car::Anova() adds one overall F-test and p-value for the whole factor.\nWith a two-level factor and no interaction, the lm() t-test and the factor F-test answer the same one-degree-of-freedom question. Their p-values match because \\(F=t^2\\).\nWith a supported interaction that contains a factor with three or more levels, car::Anova() can give one overall interaction F-test. Ignore its main-effect rows and use emmeans or emtrends to explain the interaction.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "anova.html#what-is-anova",
+    "href": "anova.html#what-is-anova",
+    "title": "ANOVA: From the F-test to Practical Models",
+    "section": "What is ANOVA?",
+    "text": "What is ANOVA?\nANOVA stands for analysis of variance. It is one global F-test of whether a numeric response has the same population mean across several groups.\nUse it when the response is numeric and a categorical factor defines three or more groups. For happiness scores, the null hypothesis is:\n\\[\nH_0:\\mu_1=\\mu_2=\\cdots=\\mu_k\n\\]\nANOVA tests all \\(k\\) means together instead of running a t-test for every pair. A significant result means that at least one mean differs. Focused comparisons later identify the pattern.\nAlthough the question concerns means, ANOVA answers it by comparing variance associated with the group means against variance among observations inside the groups.",
+    "crumbs": [
+      "Week 8: ANOVA and Non-parametric Tests",
+      "ANOVA: From the F-test to Practical Models"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html",
+    "href": "week8-anova-tutorial.html",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "",
+    "text": "This notebook mirrors the Week 8 theory session. Work through it in the stated order because later cells use objects created earlier.\n\n\n\n\n\n\n\n\nStage\nTime\nActivity\n\n\n\n\nPreparation\n30 minutes\nRead Sections 01–10 without running the code\n\n\nWhole-class co-coding\n30 minutes\nRun Sections 01–10 in assigned turns\n\n\nGroup investigation\n30 minutes\nGroup A completes Sections A1–A4 and Group B completes Sections B1–B4\n\n\nGroup presentations\n5 minutes per group\nPresent the estimated marginal means, important comparisons and substantive conclusion\n\n\n\nDuring the first 30 minutes, focus on the statistical reasoning. Identify the response, factors, null hypotheses and assumptions before you examine the code.\nDuring the co-coding stage, one person leads each section. When it is your turn:\n\nRead the section question aloud.\nExplain what each line of code will do.\nPredict the important part of the output.\nRun the code cell.\nExplain the result in plain language before passing control.\n\nThe code cells contain guided solutions. You should still make a prediction before you run them.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-01-start-a-reproducible-r-session",
+    "href": "week8-anova-tutorial.html#section-01-start-a-reproducible-r-session",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 01: Start a reproducible R session",
+    "text": "Section 01: Start a reproducible R session\nRestart the R kernel before the group begins. This removes objects left by another analysis. The cell sets the number of printed digits and loads the packages used in the notebook.\nggplot2 creates the figures by combining a dataset, variables and visual layers. You will learn how to construct ggplot2 figures in a later session. For now, focus on what each graph is intended to show, why it helps the analysis and how to interpret its pattern. emmeans will calculate model-adjusted means during the group investigations. The final line records the R session so that another person can identify the software version.\nYour assigned turn\n\nConfirm that the kernel has been restarted.\nExplain why a clean environment matters.\nRun the cell.\nConfirm that both packages load without an error.\n\n\noptions(digits = 4)\n\nlibrary(ggplot2)\nlibrary(emmeans)\n\nsessionInfo()\n\nR version 4.4.2 (2024-10-31 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26200)\n\nMatrix products: default\n\n\nlocale:\n[1] C\nsystem code page: 65001\n\ntime zone: Europe/London\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] emmeans_1.11.0 ggplot2_4.0.0 \n\nloaded via a namespace (and not attached):\n [1] Matrix_1.7-1       gtable_0.3.6       jsonlite_1.8.9     dplyr_1.1.4       \n [5] compiler_4.4.2     tidyselect_1.2.1   splines_4.4.2      scales_1.4.0      \n [9] yaml_2.3.10        fastmap_1.2.0      TH.data_1.1-5      lattice_0.22-6    \n[13] coda_0.19-4.1      R6_2.5.1           generics_0.1.3     knitr_1.49        \n[17] MASS_7.3-61        htmlwidgets_1.6.4  tibble_3.2.1       pillar_1.10.1     \n[21] RColorBrewer_1.1-3 rlang_1.1.5        multcomp_1.4-32    xfun_0.50         \n[25] S7_0.2.0           estimability_1.5.1 cli_3.6.3          withr_3.0.2       \n[29] magrittr_2.0.3     digest_0.6.37      grid_4.4.2         xtable_1.8-4      \n[33] mvtnorm_1.3-3      sandwich_3.1-1     lifecycle_1.0.4    vctrs_0.6.5       \n[37] evaluate_1.0.3     glue_1.8.0         farver_2.1.2       codetools_0.2-20  \n[41] zoo_1.8-12         survival_3.7-0     rmarkdown_2.29     tools_4.4.2       \n[45] pkgconfig_2.0.3    htmltools_0.5.8.1 \n\n\nThe output lists the R version, operating system and attached packages. Package startup text is information rather than a statistical result.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-02-read-the-one-way-anova-question",
+    "href": "week8-anova-tutorial.html#section-02-read-the-one-way-anova-question",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 02: Read the one-way ANOVA question",
+    "text": "Section 02: Read the one-way ANOVA question\nThe PlantGrowth dataset records the dried weight of plants from a control group and two treatment groups.\nOur research question is:\n\nDoes mean plant weight differ among the control, Treatment 1 and Treatment 2 populations?\n\nOne row represents one plant. weight is a numeric response. group is one categorical explanatory variable with three levels. This structure points towards one-way ANOVA, but first inspect the data.\nYour assigned turn\n\nRead the question aloud.\nState what one row represents.\nIdentify the response and factor.\nRun the cell and describe the first rows.\n\n\ndata(\"PlantGrowth\")\n\nhead(PlantGrowth)\n\n  weight group\n1   4.17  ctrl\n2   5.58  ctrl\n3   5.18  ctrl\n4   6.11  ctrl\n5   4.50  ctrl\n6   4.61  ctrl\n\nstr(PlantGrowth)\n\n'data.frame':   30 obs. of  2 variables:\n $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...\n $ group : Factor w/ 3 levels \"ctrl\",\"trt1\",..: 1 1 1 1 1 1 1 1 1 1 ...\n\ntable(PlantGrowth$group)\n\n\nctrl trt1 trt2 \n  10   10   10 \n\n\nThe table should show ten plants in each group. A balanced design gives each group equal representation, although ANOVA can also analyse unequal group sizes.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-03-assign-reusable-variable-names",
+    "href": "week8-anova-tutorial.html#section-03-assign-reusable-variable-names",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 03: Assign reusable variable names",
+    "text": "Section 03: Assign reusable variable names\nThe source column names describe this dataset. Generic names make the later code easier to reuse with another numeric response and another grouping factor.\nUse y_variable for the numeric outcome and categories when the analysis contains one categorical factor. Keep the source data unchanged by creating a new data frame.\nYour assigned turn\n\nMatch weight to y_variable.\nMatch group to categories.\nRun the cell.\nConfirm that the response remains numeric and the group remains a factor.\n\n\none_way_data &lt;- PlantGrowth\nnames(one_way_data) &lt;- c(\"y_variable\", \"categories\")\n\none_way_data$categories &lt;- factor(\n  one_way_data$categories,\n  levels = c(\"ctrl\", \"trt1\", \"trt2\")\n)\n\nstr(one_way_data)\n\n'data.frame':   30 obs. of  2 variables:\n $ y_variable: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...\n $ categories: Factor w/ 3 levels \"ctrl\",\"trt1\",..: 1 1 1 1 1 1 1 1 1 1 ...\n\nhead(one_way_data)\n\n  y_variable categories\n1       4.17       ctrl\n2       5.58       ctrl\n3       5.18       ctrl\n4       6.11       ctrl\n5       4.50       ctrl\n6       4.61       ctrl\n\n\nThe order of the levels does not change the global ANOVA F-test. It will affect the direction and labels of later comparisons.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-04-describe-the-observed-group-pattern",
+    "href": "week8-anova-tutorial.html#section-04-describe-the-observed-group-pattern",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 04: Describe the observed group pattern",
+    "text": "Section 04: Describe the observed group pattern\nANOVA compares group means, but the raw observations show how much plants vary inside each group. Use summary() for a simple first description, then use the figure to compare the groups directly.\nThe figure shows individual plants, a boxplot and a large diamond for each sample mean. Differences among diamonds represent the observed group pattern. The scatter inside each group represents within-group variation. Concentrate on reading these features rather than memorising the ggplot() instructions.\nYour assigned turn\n\nPredict which treatment has the highest sample mean.\nRun summary() and identify the response range and category counts.\nRun the figure.\nCompare variation among the means with variation inside the groups.\n\n\nsummary(one_way_data)\n\n   y_variable   categories\n Min.   :3.59   ctrl:10   \n 1st Qu.:4.55   trt1:10   \n Median :5.16   trt2:10   \n Mean   :5.07             \n 3rd Qu.:5.53             \n Max.   :6.31             \n\nggplot(one_way_data, aes(categories, y_variable, colour = categories)) +\n  geom_boxplot(width = 0.35, outlier.shape = NA) +\n  geom_jitter(width = 0.08, size = 2.5, alpha = 0.75) +\n  stat_summary(fun = mean, geom = \"point\", shape = 18, size = 5) +\n  guides(colour = \"none\") +\n  labs(\n    x = \"Treatment group\",\n    y = \"Plant weight\",\n    title = \"Observed plant weights and group means\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThe sample means are descriptive evidence. ANOVA asks whether their separation is large compared with the ordinary variation among plants within the same group.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-05-state-the-null-hypothesis-and-fit-one-way-anova",
+    "href": "week8-anova-tutorial.html#section-05-state-the-null-hypothesis-and-fit-one-way-anova",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 05: State the null hypothesis and fit one-way ANOVA",
+    "text": "Section 05: State the null hypothesis and fit one-way ANOVA\nLet \\(\\mu_{ctrl}\\), \\(\\mu_{trt1}\\) and \\(\\mu_{trt2}\\) represent the three population means.\n\\[\nH_0:\\mu_{ctrl}=\\mu_{trt1}=\\mu_{trt2}\n\\]\nThe alternative says that at least one population mean differs. It does not claim that every pair differs.\naov() fits the model. summary() produces the ANOVA table. The categories row compares variation associated with the three fitted means against residual variation inside the groups.\nYour assigned turn\n\nState \\(H_0\\) in words.\nExplain the two parts of the formula.\nRun the cell.\nIdentify the F-statistic and p-value for categories.\n\n\none_way_model &lt;- aov(\n  y_variable ~ categories,\n  data = one_way_data\n)\n\nsummary(one_way_model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)  \ncategories   2   3.77   1.883    4.85  0.016 *\nResiduals   27  10.49   0.389                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nA small p-value gives evidence against equal population means. The global result does not identify the group pairs responsible for the difference. Post-hoc comparisons answer that later question.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-06-check-the-one-way-anova-assumptions",
+    "href": "week8-anova-tutorial.html#section-06-check-the-one-way-anova-assumptions",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 06: Check the one-way ANOVA assumptions",
+    "text": "Section 06: Check the one-way ANOVA assumptions\nThe study design must provide independent plants. The model also assumes approximately Gaussian residuals and similar residual spread across groups.\nThe residual-versus-fitted plot checks for changing spread or a systematic curve. A random band around zero supports the model. The Q-Q plot checks the residual distribution. Points that follow the line reasonably well support the Gaussian assumption.\nYour assigned turn\n\nExplain why residuals matter more than the raw response distribution.\nRun the diagnostic plots.\nDescribe the residual spread.\nDecide whether the Q-Q pattern shows a serious departure from the reference line.\n\n\none_way_residuals &lt;- residuals(one_way_model)\none_way_fitted &lt;- fitted(one_way_model)\n\npar(mfrow = c(1, 2))\n\nplot(\n  one_way_fitted,\n  one_way_residuals,\n  xlab = \"Fitted value\",\n  ylab = \"Residual\",\n  main = \"Residual spread\"\n)\nabline(h = 0, lty = 2)\n\nqqnorm(one_way_residuals, main = \"Residual Q-Q plot\")\nqqline(one_way_residuals)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nRead both plots together. Look for a reasonably even residual spread and a Q-Q pattern that follows the line without a severe or systematic departure. Minor departures do not automatically invalidate ANOVA.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-07-read-the-two-way-anova-question",
+    "href": "week8-anova-tutorial.html#section-07-read-the-two-way-anova-question",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 07: Read the two-way ANOVA question",
+    "text": "Section 07: Read the two-way ANOVA question\nThe ToothGrowth dataset records tooth growth in guinea pigs given vitamin C through orange juice or ascorbic acid at three dose levels.\nOur research question is:\n\nDoes mean tooth growth depend on supplement, dose, or the combination of supplement and dose?\n\nThe numeric response is tooth length. The two factors are supplement and dose. Treat dose as a factor because this analysis compares three experimental dose categories.\nYour assigned turn\n\nRead the question aloud.\nIdentify the response and both factors.\nRun the cell.\nConfirm that the full design contains six supplement-by-dose combinations.\n\n\ndata(\"ToothGrowth\")\n\nhead(ToothGrowth)\n\n   len supp dose\n1  4.2   VC  0.5\n2 11.5   VC  0.5\n3  7.3   VC  0.5\n4  5.8   VC  0.5\n5  6.4   VC  0.5\n6 10.0   VC  0.5\n\nstr(ToothGrowth)\n\n'data.frame':   60 obs. of  3 variables:\n $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...\n $ supp: Factor w/ 2 levels \"OJ\",\"VC\": 2 2 2 2 2 2 2 2 2 2 ...\n $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...\n\ntable(ToothGrowth$supp, ToothGrowth$dose)\n\n    \n     0.5  1  2\n  OJ  10 10 10\n  VC  10 10 10\n\n\nThe cross-tabulation should show ten guinea pigs in every combination. This is a balanced two-factor design.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-08-assign-two-categorical-variables-and-calculate-cell-means",
+    "href": "week8-anova-tutorial.html#section-08-assign-two-categorical-variables-and-calculate-cell-means",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 08: Assign two categorical variables and calculate cell means",
+    "text": "Section 08: Assign two categorical variables and calculate cell means\nWhen an analysis contains two categorical predictors, use category_a and category_b. Here, category_a stores supplement and category_b stores dose.\nThe mean for one combination of factor levels is a cell mean. The six cell means provide the most direct description of a two-way design.\nYour assigned turn\n\nExplain why dose becomes a factor in this model.\nRun the renaming code.\nCalculate the six cell means.\nIdentify where the supplement difference appears largest and smallest.\n\n\ntwo_way_data &lt;- ToothGrowth\nnames(two_way_data) &lt;- c(\"y_variable\", \"category_a\", \"category_b\")\n\ntwo_way_data$category_a &lt;- factor(two_way_data$category_a)\ntwo_way_data$category_b &lt;- factor(two_way_data$category_b)\n\ntwo_way_means &lt;- aggregate(\n  y_variable ~ category_a + category_b,\n  data = two_way_data,\n  FUN = mean\n)\n\nstr(two_way_data)\n\n'data.frame':   60 obs. of  3 variables:\n $ y_variable: num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...\n $ category_a: Factor w/ 2 levels \"OJ\",\"VC\": 2 2 2 2 2 2 2 2 2 2 ...\n $ category_b: Factor w/ 3 levels \"0.5\",\"1\",\"2\": 1 1 1 1 1 1 1 1 1 1 ...\n\ntwo_way_means\n\n  category_a category_b y_variable\n1         OJ        0.5      13.23\n2         VC        0.5       7.98\n3         OJ          1      22.70\n4         VC          1      16.77\n5         OJ          2      26.06\n6         VC          2      26.14\n\n\nIf the supplement difference changes across dose levels, the design may contain an interaction. The cell means show the possible direction before the model tests it."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-09-plot-the-interaction-before-testing-it",
+    "href": "week8-anova-tutorial.html#section-09-plot-the-interaction-before-testing-it",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 09: Plot the interaction before testing it",
+    "text": "Section 09: Plot the interaction before testing it\nAn interaction means that the effect of one factor depends on the level of another factor. The plot places dose on the horizontal axis and draws one line for each supplement.\nParallel lines would show a similar supplement difference at every dose. Lines that converge, diverge or cross show a changing difference. The plot describes the direction of the interaction. The model will test whether the change is larger than sampling variation would usually produce.\nYour assigned turn\n\nPredict whether the lines will be parallel.\nRun the plot.\nDescribe how the vertical gap changes.\nAvoid making pairwise significance claims from the graph alone.\n\n\nggplot(\n  two_way_data,\n  aes(category_b, y_variable, colour = category_a, group = category_a)\n) +\n  stat_summary(fun = mean, geom = \"line\", linewidth = 1.2) +\n  stat_summary(fun = mean, geom = \"point\", size = 4) +\n  labs(\n    x = \"Dose\",\n    y = \"Mean tooth length\",\n    colour = \"Supplement\",\n    title = \"Mean tooth growth by dose and supplement\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThe lines converge as dose increases. This pattern suggests that the supplement difference depends on dose. The next cell tests that dependency.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-10-fit-and-interpret-two-way-anova",
+    "href": "week8-anova-tutorial.html#section-10-fit-and-interpret-two-way-anova",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 10: Fit and interpret two-way ANOVA",
+    "text": "Section 10: Fit and interpret two-way ANOVA\nThe model formula includes both main effects and their interaction:\n\\[\ny=\\text{supplement}+\\text{dose}+\\text{supplement:dose}+\\text{error}\n\\]\nThe interaction null hypothesis says that the supplement difference is the same at every dose. Read the interaction row first. If its p-value is small, report the interaction and use simple effects to explain it. Main-effect averages can mislead when the interaction is supported.\nYour assigned turn\n\nExplain what category_a * category_b adds to the model.\nRun the model and ANOVA table.\nRead the interaction row before the main-effect rows.\nUse the graph to explain the direction of the interaction.\n\n\ntwo_way_model &lt;- aov(\n  y_variable ~ category_a * category_b,\n  data = two_way_data\n)\n\nsummary(two_way_model)\n\n                      Df Sum Sq Mean Sq F value  Pr(&gt;F)    \ncategory_a             1    205     205   15.57 0.00023 ***\ncategory_b             2   2426    1213   92.00 &lt; 2e-16 ***\ncategory_a:category_b  2    108      54    4.11 0.02186 *  \nResiduals             54    712      13                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe interaction p-value tests dependency. The interaction plot shows that the supplement means become closer as dose increases. Post-hoc simple effects would compare supplements at specific doses or doses within a specific supplement.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a1-insecticide-research-question-and-data",
+    "href": "week8-anova-tutorial.html#section-a1-insecticide-research-question-and-data",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A1: Insecticide research question and data",
+    "text": "Section A1: Insecticide research question and data\nThe InsectSprays dataset records insect counts after six spray treatments. Lower counts indicate stronger insect control.\nYour research question is:\n\nDoes mean insect count differ among the six spray populations?\n\nOne row represents one experimental unit. count is the numeric response and spray is the categorical factor.\nGroup A task\n\nRead the question aloud.\nLoad and inspect the data.\nAssign the generic names.\nDescribe the sample sizes.\n\n\ndata(\"InsectSprays\")\n\ngroup_a_data &lt;- InsectSprays\nnames(group_a_data) &lt;- c(\"y_variable\", \"categories\")\ngroup_a_data$categories &lt;- factor(group_a_data$categories)\n\nhead(group_a_data)\n\n  y_variable categories\n1         10          A\n2          7          A\n3         20          A\n4         14          A\n5         14          A\n6         12          A\n\nstr(group_a_data)\n\n'data.frame':   72 obs. of  2 variables:\n $ y_variable: num  10 7 20 14 14 12 10 23 17 20 ...\n $ categories: Factor w/ 6 levels \"A\",\"B\",\"C\",\"D\",..: 1 1 1 1 1 1 1 1 1 1 ...\n\ntable(group_a_data$categories)\n\n\n A  B  C  D  E  F \n12 12 12 12 12 12 \n\n\nThe six factor levels make an overall ANOVA test useful. A set of separate t-tests would create many opportunities for false positive results.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a2-fit-the-global-one-way-model",
+    "href": "week8-anova-tutorial.html#section-a2-fit-the-global-one-way-model",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A2: Fit the global one-way model",
+    "text": "Section A2: Fit the global one-way model\nThe null hypothesis says that all six population mean counts are equal. The model produces one global F-test for this claim.\nThe boxplot gives context for the result. It shows the direction of the observed differences but does not replace the model.\nGroup A task\n\nState the six-mean null hypothesis in words.\nRun the figure and model.\nIdentify the global F-statistic and p-value.\nDecide whether post hoc comparisons are justified.\n\n\nggplot(group_a_data, aes(categories, y_variable, colour = categories)) +\n  geom_boxplot(outlier.shape = NA) +\n  geom_jitter(width = 0.08, alpha = 0.65) +\n  guides(colour = \"none\") +\n  labs(\n    x = \"Spray\",\n    y = \"Insect count\",\n    title = \"Insect counts after six spray treatments\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\ngroup_a_model &lt;- aov(\n  y_variable ~ categories,\n  data = group_a_data\n)\n\nsummary(group_a_model)\n\n            Df Sum Sq Mean Sq F value Pr(&gt;F)    \ncategories   5   2669     534    34.7 &lt;2e-16 ***\nResiduals   66   1015      15                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nA small global p-value means that at least one spray population has a different mean insect count. It does not show which sprays differ.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a3-check-residual-assumptions",
+    "href": "week8-anova-tutorial.html#section-a3-check-residual-assumptions",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A3: Check residual assumptions",
+    "text": "Section A3: Check residual assumptions\nCheck the model before interpreting post hoc tests. The residual plot should show a reasonably stable spread. The Q-Q plot should follow its line without severe departures.\nThe Shapiro-Wilk p-value tests residual Gaussianity. A p-value above 0.05 means that the test has not found clear evidence against the Gaussian assumption. Use the plots to judge the size of any departure.\nGroup A task\n\nRun both diagnostic plots.\nRun the Shapiro-Wilk test.\nDecide whether a departure looks serious enough to change the analysis.\nRecord one sentence for the presentation.\n\n\ngroup_a_residuals &lt;- residuals(group_a_model)\ngroup_a_fitted &lt;- fitted(group_a_model)\n\npar(mfrow = c(1, 2))\nplot(group_a_fitted, group_a_residuals, xlab = \"Fitted\", ylab = \"Residual\")\nabline(h = 0, lty = 2)\nqqnorm(group_a_residuals)\nqqline(group_a_residuals)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nshapiro.test(group_a_residuals)\n\n\n    Shapiro-Wilk normality test\n\ndata:  group_a_residuals\nW = 0.96, p-value = 0.02\n\n\nANOVA can tolerate moderate residual departures, especially with equal group sizes. Report what you observed rather than claiming that an assumption is perfectly true."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a4-calculate-estimated-marginal-means",
+    "href": "week8-anova-tutorial.html#section-a4-calculate-estimated-marginal-means",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A4: Calculate estimated marginal means",
+    "text": "Section A4: Calculate estimated marginal means\nemmeans() calculates the mean insect count predicted by the fitted model for each spray. In this balanced one-way design, estimated marginal means equal the observed group means.\nThe output includes a standard error and confidence interval for each population mean. Compare the estimates substantively before examining pairwise p-values. Lower fitted means indicate better insect control.\nGroup A task\n\nPredict which sprays will have the lowest fitted means.\nRun emmeans().\nRank the sprays by expected insect count.\nIdentify confidence intervals that overlap strongly.\n\n\ngroup_a_emmeans &lt;- emmeans(\n  group_a_model,\n  ~ categories\n)\n\ngroup_a_emmeans\n\n categories emmean   SE df lower.CL upper.CL\n A           14.50 1.13 66   12.240    16.76\n B           15.33 1.13 66   13.073    17.59\n C            2.08 1.13 66   -0.177     4.34\n D            4.92 1.13 66    2.656     7.18\n E            3.50 1.13 66    1.240     5.76\n F           16.67 1.13 66   14.406    18.93\n\nConfidence level used: 0.95 \n\n\nThe fitted means describe the size and direction of the spray differences. Pairwise comparisons now test those differences using the model residual variance."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a5-run-tukey-pairwise-comparisons-and-conclude",
+    "href": "week8-anova-tutorial.html#section-a5-run-tukey-pairwise-comparisons-and-conclude",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A5: Run Tukey pairwise comparisons and conclude",
+    "text": "Section A5: Run Tukey pairwise comparisons and conclude\nSix sprays create 15 possible pairs. Tukey adjustment allows all 15 comparisons while controlling the overall false positive risk.\nThe estimate uses the first spray minus the second spray in each label. A positive estimate means that the first spray has the higher expected insect count and therefore weaker insect control.\nThe second output keeps only comparisons with Tukey-adjusted p-values below 0.05. Use the full output when reporting results and the shorter output when identifying the main substantive pattern.\nGroup A task\n\nRun the Tukey comparisons.\nCheck the direction of each important estimate.\nIdentify the sprays associated with the lowest counts.\nWrite a two-sentence substantive conclusion.\n\n\ngroup_a_pairs &lt;- pairs(\n  group_a_emmeans,\n  adjust = \"tukey\"\n)\n\ngroup_a_pairs\n\n contrast estimate  SE df t.ratio p.value\n A - B      -0.833 1.6 66  -0.520  0.9952\n A - C      12.417 1.6 66   7.755  &lt;.0001\n A - D       9.583 1.6 66   5.985  &lt;.0001\n A - E      11.000 1.6 66   6.870  &lt;.0001\n A - F      -2.167 1.6 66  -1.353  0.7542\n B - C      13.250 1.6 66   8.276  &lt;.0001\n B - D      10.417 1.6 66   6.506  &lt;.0001\n B - E      11.833 1.6 66   7.391  &lt;.0001\n B - F      -1.333 1.6 66  -0.833  0.9603\n C - D      -2.833 1.6 66  -1.770  0.4921\n C - E      -1.417 1.6 66  -0.885  0.9489\n C - F     -14.583 1.6 66  -9.108  &lt;.0001\n D - E       1.417 1.6 66   0.885  0.9489\n D - F     -11.750 1.6 66  -7.339  &lt;.0001\n E - F     -13.167 1.6 66  -8.223  &lt;.0001\n\nP value adjustment: tukey method for comparing a family of 6 estimates \n\ngroup_a_pair_table &lt;- as.data.frame(group_a_pairs)\ngroup_a_significant &lt;- group_a_pair_table[\n  group_a_pair_table$p.value &lt; 0.05,\n  c(\"contrast\", \"estimate\", \"SE\", \"p.value\")\n]\n\ngroup_a_significant\n\n   contrast estimate    SE   p.value\n2     A - C   12.417 1.601 1.075e-09\n3     A - D    9.583 1.601 1.442e-06\n4     A - E   11.000 1.601 4.086e-08\n6     B - C   13.250 1.601 1.185e-10\n7     B - D   10.417 1.601 1.794e-07\n8     B - E   11.833 1.601 4.842e-09\n12    C - F  -14.583 1.601 0.000e+00\n14    D - F  -11.750 1.601 5.999e-09\n15    E - F  -13.167 1.601 1.488e-10\n\n\nYour conclusion should name the response and the sprays. Avoid writing only that a result is significant. Explain which sprays produced lower or higher expected insect counts and what that means for insect control."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b1-warp-break-research-question-and-data",
+    "href": "week8-anova-tutorial.html#section-b1-warp-break-research-question-and-data",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B1: Warp-break research question and data",
+    "text": "Section B1: Warp-break research question and data\nThe warpbreaks dataset records the number of breaks in yarn. The factors are wool type and loom tension.\nYour research question is:\n\nDoes mean yarn-break count depend on wool type, tension, or their combination?\n\nOne row represents one loom run. breaks is the numeric response. wool and tension are categorical factors.\nGroup B task\n\nRead the research question aloud.\nLoad and inspect the data.\nAssign the generic names.\nConfirm that the design contains every wool-by-tension combination.\n\n\ndata(\"warpbreaks\")\n\ngroup_b_data &lt;- warpbreaks\nnames(group_b_data) &lt;- c(\"y_variable\", \"category_a\", \"category_b\")\n\ngroup_b_data$category_a &lt;- factor(group_b_data$category_a)\ngroup_b_data$category_b &lt;- factor(group_b_data$category_b)\n\nhead(group_b_data)\n\n  y_variable category_a category_b\n1         26          A          L\n2         30          A          L\n3         54          A          L\n4         25          A          L\n5         70          A          L\n6         52          A          L\n\nstr(group_b_data)\n\n'data.frame':   54 obs. of  3 variables:\n $ y_variable: num  26 30 54 25 70 52 51 26 67 18 ...\n $ category_a: Factor w/ 2 levels \"A\",\"B\": 1 1 1 1 1 1 1 1 1 1 ...\n $ category_b: Factor w/ 3 levels \"L\",\"M\",\"H\": 1 1 1 1 1 1 1 1 1 2 ...\n\ntable(group_b_data$category_a, group_b_data$category_b)\n\n   \n    L M H\n  A 9 9 9\n  B 9 9 9\n\n\nThe factors form six cells. A two-way model can test the interaction before the group interprets any averaged main effect.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b2-plot-and-test-the-interaction",
+    "href": "week8-anova-tutorial.html#section-b2-plot-and-test-the-interaction",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B2: Plot and test the interaction",
+    "text": "Section B2: Plot and test the interaction\nDraw the interaction plot before fitting the model. The plotted points are the six cell means. The graph shows whether the wool difference changes with tension, while summary() gives a simple check of the variables and their ranges.\nThe model includes wool, tension and wool-by-tension interaction terms. Read the interaction p-value first. If the interaction is supported, explain it with simple effects rather than averaged main effects.\nGroup B task\n\nInspect the data summary and the plotted cell means.\nDescribe the line pattern.\nFit the two-way model.\nDecide whether the interaction needs simple follow-up comparisons.\n\n\nsummary(group_b_data)\n\n   y_variable   category_a category_b\n Min.   :10.0   A:27       L:18      \n 1st Qu.:18.2   B:27       M:18      \n Median :26.0              H:18      \n Mean   :28.1                        \n 3rd Qu.:34.0                        \n Max.   :70.0                        \n\nggplot(\n  group_b_data,\n  aes(category_b, y_variable, colour = category_a, group = category_a)\n) +\n  stat_summary(fun = mean, geom = \"line\", linewidth = 1.2) +\n  stat_summary(fun = mean, geom = \"point\", size = 4) +\n  labs(\n    x = \"Tension\",\n    y = \"Mean yarn-break count\",\n    colour = \"Wool\",\n    title = \"Mean yarn breaks by wool type and tension\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\ngroup_b_model &lt;- aov(\n  y_variable ~ category_a * category_b,\n  data = group_b_data\n)\n\nsummary(group_b_model)\n\n                      Df Sum Sq Mean Sq F value  Pr(&gt;F)    \ncategory_a             1    451     451    3.77 0.05821 .  \ncategory_b             2   2034    1017    8.50 0.00069 ***\ncategory_a:category_b  2   1003     501    4.19 0.02104 *  \nResiduals             48   5745     120                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe interaction row tests whether the wool difference remains constant across tension levels. The plot supplies the direction that the ANOVA table cannot show.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b3-check-residual-assumptions",
+    "href": "week8-anova-tutorial.html#section-b3-check-residual-assumptions",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B3: Check residual assumptions",
+    "text": "Section B3: Check residual assumptions\nUse residual diagnostics before the follow-up comparisons. Look for a stable band around zero and a Q-Q pattern that follows the line reasonably well.\nThe Shapiro-Wilk result is one piece of evidence. A small p-value signals a departure from Gaussian residuals, but the plots show whether that departure is mild or severe.\nGroup B task\n\nRun the residual and Q-Q plots.\nRun the Shapiro-Wilk test.\nDescribe the strongest diagnostic concern, if one exists.\nRecord a short assumption statement for the presentation.\n\n\ngroup_b_residuals &lt;- residuals(group_b_model)\ngroup_b_fitted &lt;- fitted(group_b_model)\n\npar(mfrow = c(1, 2))\nplot(group_b_fitted, group_b_residuals, xlab = \"Fitted\", ylab = \"Residual\")\nabline(h = 0, lty = 2)\nqqnorm(group_b_residuals)\nqqline(group_b_residuals)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nshapiro.test(group_b_residuals)\n\n\n    Shapiro-Wilk normality test\n\ndata:  group_b_residuals\nW = 0.99, p-value = 0.8\n\n\nKeep the assumption statement proportionate. State what the diagnostics show and continue with the guided analysis so the group can practise interaction-aware interpretation."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b4-estimate-tension-means-inside-each-wool-type",
+    "href": "week8-anova-tutorial.html#section-b4-estimate-tension-means-inside-each-wool-type",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B4: Estimate tension means inside each wool type",
+    "text": "Section B4: Estimate tension means inside each wool type\nBecause the interaction asks whether the tension pattern depends on wool type, calculate tension means separately within wool A and wool B.\nThe notation ~ category_b | category_a means: estimate each tension mean, separately for each wool type. These are simple estimated marginal means rather than one tension average across both wool types.\nGroup B task\n\nExplain the meaning of the vertical bar in the formula.\nRun the estimated marginal means.\nCompare the tension pattern inside wool A.\nCompare the tension pattern inside wool B.\n\n\ngroup_b_emmeans &lt;- emmeans(\n  group_b_model,\n  ~ category_b | category_a\n)\n\ngroup_b_emmeans\n\ncategory_a = A:\n category_b emmean   SE df lower.CL upper.CL\n L            44.6 3.65 48     37.2     51.9\n M            24.0 3.65 48     16.7     31.3\n H            24.6 3.65 48     17.2     31.9\n\ncategory_a = B:\n category_b emmean   SE df lower.CL upper.CL\n L            28.2 3.65 48     20.9     35.5\n M            28.8 3.65 48     21.4     36.1\n H            18.8 3.65 48     11.4     26.1\n\nConfidence level used: 0.95 \n\n\nThe estimated means show the substantive shape of the interaction. The next cell tests the three tension pairs separately within each wool type."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b5-run-tukey-comparisons-within-each-wool-type",
+    "href": "week8-anova-tutorial.html#section-b5-run-tukey-comparisons-within-each-wool-type",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B5: Run Tukey comparisons within each wool type",
+    "text": "Section B5: Run Tukey comparisons within each wool type\npairs() compares low, medium and high tension within wool A, then repeats the comparisons within wool B. Tukey adjustment operates separately within each displayed family of three comparisons.\nThe estimate is the first tension mean minus the second. A positive estimate means that the first tension produced more expected yarn breaks.\nThe filtered table highlights adjusted p-values below 0.05. Use the estimates and means to explain how tension changes yarn-break counts within each wool type.\nGroup B task\n\nRun all simple pairwise comparisons.\nIdentify supported tension differences within wool A.\nIdentify supported tension differences within wool B.\nWrite a conclusion that explains the interaction rather than averaging over it.\n\n\ngroup_b_pairs &lt;- pairs(\n  group_b_emmeans,\n  adjust = \"tukey\"\n)\n\ngroup_b_pairs\n\ncategory_a = A:\n contrast estimate   SE df t.ratio p.value\n L - M      20.556 5.16 48   3.986  0.0007\n L - H      20.000 5.16 48   3.878  0.0009\n M - H      -0.556 5.16 48  -0.108  0.9936\n\ncategory_a = B:\n contrast estimate   SE df t.ratio p.value\n L - M      -0.556 5.16 48  -0.108  0.9936\n L - H       9.444 5.16 48   1.831  0.1704\n M - H      10.000 5.16 48   1.939  0.1389\n\nP value adjustment: tukey method for comparing a family of 3 estimates \n\ngroup_b_pair_table &lt;- as.data.frame(group_b_pairs)\ngroup_b_significant &lt;- group_b_pair_table[\n  group_b_pair_table$p.value &lt; 0.05,\n  c(\"category_a\", \"contrast\", \"estimate\", \"SE\", \"p.value\")\n]\n\ngroup_b_significant\n\n  category_a contrast estimate    SE   p.value\n1          A    L - M    20.56 5.157 0.0006573\n2          A    L - H    20.00 5.157 0.0009185\n\n\nYour conclusion should state whether the tension pattern is similar or different across wool types. Use fitted means to describe the direction and Tukey-adjusted p-values to describe the evidence."
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#presentation-structure",
+    "href": "week8-anova-tutorial.html#presentation-structure",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Presentation structure",
+    "text": "Presentation structure\n\n1. Research question and model: 1 minute\n\nState the research question.\nIdentify the observational unit.\nName the response and factor or factors.\nState the global ANOVA conclusion in one sentence.\n\n\n\n2. Estimated marginal means: 2 minutes\n\nShow the emmeans table.\nPoint out the largest and smallest fitted means.\nExplain the pattern in the response units.\nFor Group B, compare the tension pattern separately within each wool type.\n\n\n\n3. Adjusted comparisons: 1 minute\n\nShow the most important Tukey-adjusted comparisons.\nExplain their direction using the sign of the estimate.\nSeparate supported differences from unsupported differences.\n\n\n\n4. Substantive conclusion: 1 minute\n\nAnswer the research question in the context of the dataset.\nDescribe effect direction and practical meaning.\nEnd with the single most useful finding from the estimated marginal means.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-08-assign-two-categorical-variables-and-inspect-the-data",
+    "href": "week8-anova-tutorial.html#section-08-assign-two-categorical-variables-and-inspect-the-data",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section 08: Assign two categorical variables and inspect the data",
+    "text": "Section 08: Assign two categorical variables and inspect the data\nWhen an analysis contains two categorical predictors, use category_a and category_b. Here, category_a stores supplement and category_b stores dose.\nThe mean for one combination of factor levels is a cell mean. The next section will draw the six cell means directly from the data. First use summary() to check the renamed variables and their ranges.\nYour assigned turn\n\nExplain why dose becomes a factor in this model.\nRun the renaming code.\nUse summary() to inspect the response and both factors.\nConfirm that the response is numeric and both predictors are categorical.\n\n\ntwo_way_data &lt;- ToothGrowth\nnames(two_way_data) &lt;- c(\"y_variable\", \"category_a\", \"category_b\")\n\ntwo_way_data$category_a &lt;- factor(two_way_data$category_a)\ntwo_way_data$category_b &lt;- factor(two_way_data$category_b)\n\nstr(two_way_data)\n\n'data.frame':   60 obs. of  3 variables:\n $ y_variable: num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...\n $ category_a: Factor w/ 2 levels \"OJ\",\"VC\": 2 2 2 2 2 2 2 2 2 2 ...\n $ category_b: Factor w/ 3 levels \"0.5\",\"1\",\"2\": 1 1 1 1 1 1 1 1 1 1 ...\n\nsummary(two_way_data)\n\n   y_variable   category_a category_b\n Min.   : 4.2   OJ:30      0.5:20    \n 1st Qu.:13.1   VC:30      1  :20    \n Median :19.2              2  :20    \n Mean   :18.8                        \n 3rd Qu.:25.3                        \n Max.   :33.9                        \n\n\nIf the supplement difference changes across dose levels, the design may contain an interaction. The next graph displays the cell means so that you can see the possible direction before the model tests it.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a3-calculate-estimated-marginal-means",
+    "href": "week8-anova-tutorial.html#section-a3-calculate-estimated-marginal-means",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A3: Calculate estimated marginal means",
+    "text": "Section A3: Calculate estimated marginal means\nemmeans() calculates the mean insect count predicted by the fitted model for each spray. In this balanced one-way design, estimated marginal means equal the observed group means.\nThe output includes a standard error and confidence interval for each population mean. Compare the estimates substantively before examining pairwise p-values. Lower fitted means indicate better insect control.\nGroup A task\n\nPredict which sprays will have the lowest fitted means.\nRun emmeans().\nRank the sprays by expected insect count.\nIdentify confidence intervals that overlap strongly.\n\n\ngroup_a_emmeans &lt;- emmeans(\n  group_a_model,\n  ~ categories\n)\n\ngroup_a_emmeans\n\n categories emmean   SE df lower.CL upper.CL\n A           14.50 1.13 66   12.240    16.76\n B           15.33 1.13 66   13.073    17.59\n C            2.08 1.13 66   -0.177     4.34\n D            4.92 1.13 66    2.656     7.18\n E            3.50 1.13 66    1.240     5.76\n F           16.67 1.13 66   14.406    18.93\n\nConfidence level used: 0.95 \n\n\nThe fitted means describe the size and direction of the spray differences. Pairwise comparisons now test those differences using the model residual variance.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-a4-run-tukey-pairwise-comparisons-and-conclude",
+    "href": "week8-anova-tutorial.html#section-a4-run-tukey-pairwise-comparisons-and-conclude",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section A4: Run Tukey pairwise comparisons and conclude",
+    "text": "Section A4: Run Tukey pairwise comparisons and conclude\nSix sprays create 15 possible pairs. Tukey adjustment allows all 15 comparisons while controlling the overall false positive risk.\nThe estimate uses the first spray minus the second spray in each label. A positive estimate means that the first spray has the higher expected insect count and therefore weaker insect control.\nThe second output keeps only comparisons with Tukey-adjusted p-values below 0.05. Use the full output when reporting results and the shorter output when identifying the main substantive pattern.\nGroup A task\n\nRun the Tukey comparisons.\nCheck the direction of each important estimate.\nIdentify the sprays associated with the lowest counts.\nWrite a two-sentence substantive conclusion.\n\n\ngroup_a_pairs &lt;- pairs(\n  group_a_emmeans,\n  adjust = \"tukey\"\n)\n\ngroup_a_pairs\n\n contrast estimate  SE df t.ratio p.value\n A - B      -0.833 1.6 66  -0.520  0.9952\n A - C      12.417 1.6 66   7.755  &lt;.0001\n A - D       9.583 1.6 66   5.985  &lt;.0001\n A - E      11.000 1.6 66   6.870  &lt;.0001\n A - F      -2.167 1.6 66  -1.353  0.7542\n B - C      13.250 1.6 66   8.276  &lt;.0001\n B - D      10.417 1.6 66   6.506  &lt;.0001\n B - E      11.833 1.6 66   7.391  &lt;.0001\n B - F      -1.333 1.6 66  -0.833  0.9603\n C - D      -2.833 1.6 66  -1.770  0.4921\n C - E      -1.417 1.6 66  -0.885  0.9489\n C - F     -14.583 1.6 66  -9.108  &lt;.0001\n D - E       1.417 1.6 66   0.885  0.9489\n D - F     -11.750 1.6 66  -7.339  &lt;.0001\n E - F     -13.167 1.6 66  -8.223  &lt;.0001\n\nP value adjustment: tukey method for comparing a family of 6 estimates \n\ngroup_a_pair_table &lt;- as.data.frame(group_a_pairs)\ngroup_a_significant &lt;- group_a_pair_table[\n  group_a_pair_table$p.value &lt; 0.05,\n  c(\"contrast\", \"estimate\", \"SE\", \"p.value\")\n]\n\ngroup_a_significant\n\n   contrast estimate    SE   p.value\n2     A - C   12.417 1.601 1.075e-09\n3     A - D    9.583 1.601 1.442e-06\n4     A - E   11.000 1.601 4.086e-08\n6     B - C   13.250 1.601 1.185e-10\n7     B - D   10.417 1.601 1.794e-07\n8     B - E   11.833 1.601 4.842e-09\n12    C - F  -14.583 1.601 0.000e+00\n14    D - F  -11.750 1.601 5.999e-09\n15    E - F  -13.167 1.601 1.488e-10\n\n\nYour conclusion should name the response and the sprays. Avoid writing only that a result is significant. Explain which sprays produced lower or higher expected insect counts and what that means for insect control.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b3-estimate-tension-means-inside-each-wool-type",
+    "href": "week8-anova-tutorial.html#section-b3-estimate-tension-means-inside-each-wool-type",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B3: Estimate tension means inside each wool type",
+    "text": "Section B3: Estimate tension means inside each wool type\nBecause the interaction asks whether the tension pattern depends on wool type, calculate tension means separately within wool A and wool B.\nThe notation ~ category_b | category_a means: estimate each tension mean, separately for each wool type. These are simple estimated marginal means rather than one tension average across both wool types.\nGroup B task\n\nExplain the meaning of the vertical bar in the formula.\nRun the estimated marginal means.\nCompare the tension pattern inside wool A.\nCompare the tension pattern inside wool B.\n\n\ngroup_b_emmeans &lt;- emmeans(\n  group_b_model,\n  ~ category_b | category_a\n)\n\ngroup_b_emmeans\n\ncategory_a = A:\n category_b emmean   SE df lower.CL upper.CL\n L            44.6 3.65 48     37.2     51.9\n M            24.0 3.65 48     16.7     31.3\n H            24.6 3.65 48     17.2     31.9\n\ncategory_a = B:\n category_b emmean   SE df lower.CL upper.CL\n L            28.2 3.65 48     20.9     35.5\n M            28.8 3.65 48     21.4     36.1\n H            18.8 3.65 48     11.4     26.1\n\nConfidence level used: 0.95 \n\n\nThe estimated means show the substantive shape of the interaction. The next cell tests the three tension pairs separately within each wool type.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
+  },
+  {
+    "objectID": "week8-anova-tutorial.html#section-b4-run-tukey-comparisons-within-each-wool-type",
+    "href": "week8-anova-tutorial.html#section-b4-run-tukey-comparisons-within-each-wool-type",
+    "title": "Week 8 Tutorial: ANOVA in R",
+    "section": "Section B4: Run Tukey comparisons within each wool type",
+    "text": "Section B4: Run Tukey comparisons within each wool type\npairs() compares low, medium and high tension within wool A, then repeats the comparisons within wool B. Tukey adjustment operates separately within each displayed family of three comparisons.\nThe estimate is the first tension mean minus the second. A positive estimate means that the first tension produced more expected yarn breaks.\nThe filtered table highlights adjusted p-values below 0.05. Use the estimates and means to explain how tension changes yarn-break counts within each wool type.\nGroup B task\n\nRun all simple pairwise comparisons.\nIdentify supported tension differences within wool A.\nIdentify supported tension differences within wool B.\nWrite a conclusion that explains the interaction rather than averaging over it.\n\n\ngroup_b_pairs &lt;- pairs(\n  group_b_emmeans,\n  adjust = \"tukey\"\n)\n\ngroup_b_pairs\n\ncategory_a = A:\n contrast estimate   SE df t.ratio p.value\n L - M      20.556 5.16 48   3.986  0.0007\n L - H      20.000 5.16 48   3.878  0.0009\n M - H      -0.556 5.16 48  -0.108  0.9936\n\ncategory_a = B:\n contrast estimate   SE df t.ratio p.value\n L - M      -0.556 5.16 48  -0.108  0.9936\n L - H       9.444 5.16 48   1.831  0.1704\n M - H      10.000 5.16 48   1.939  0.1389\n\nP value adjustment: tukey method for comparing a family of 3 estimates \n\ngroup_b_pair_table &lt;- as.data.frame(group_b_pairs)\ngroup_b_significant &lt;- group_b_pair_table[\n  group_b_pair_table$p.value &lt; 0.05,\n  c(\"category_a\", \"contrast\", \"estimate\", \"SE\", \"p.value\")\n]\n\ngroup_b_significant\n\n  category_a contrast estimate    SE   p.value\n1          A    L - M    20.56 5.157 0.0006573\n2          A    L - H    20.00 5.157 0.0009185\n\n\nYour conclusion should state whether the tension pattern is similar or different across wool types. Use fitted means to describe the direction and Tukey-adjusted p-values to describe the evidence.",
+    "crumbs": [
+      "Week 8: ANOVA",
+      "Main tutorial"
+    ]
   }
 ]
