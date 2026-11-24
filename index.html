@@ -285,6 +285,21 @@
         }))
       ])
     );
+    const apWeek9Recordings = {
+      7: [
+        {title: 'Statistical tests recording 1', file: 'https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=84ca407e-db2b-48a9-90c5-b4fe00fb047b'},
+        {title: 'Statistical tests recording 2', file: 'https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=69dad928-1ed8-45c9-87d1-b4fe010b6252'}
+      ],
+      8: [
+        {title: 'ANOVA recording', file: 'https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4d65caa2-078d-4c74-9758-b50400951fab'}
+      ]
+    };
+    for (const [sourceWeek, recordings] of Object.entries(apWeek9Recordings)) {
+      const topicIndex = apSlides.findIndex(s => s.week === 9 && s.topicStart && s.title === weekTitles[sourceWeek]);
+      apSlides.splice(topicIndex + 1, 0, ...recordings.map(recording => ({
+        ...recording, week: 9, topics: [weekTitles[sourceWeek]], image: 'thumbnails/R_logo.svg'
+      })));
+    }
     const apPracticalIndex = apSlides.findIndex(s => s.week === 1 && s.title === 'Main practical');
     const apPractical = apSlides[apPracticalIndex];
     apSlides.splice(apPracticalIndex, 1,
