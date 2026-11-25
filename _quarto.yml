@@ -10,6 +10,7 @@ project:
     - pics/mean_mark_boxplot_ggplot2.png
     - week7-statistical-inference-tutorial.ipynb
     - week8-anova-tutorial.ipynb
+    - week8-anova-tutorial.qmd
     - data/titanic_passengers.csv
 
 filters:

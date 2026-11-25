@@ -306,6 +306,13 @@
       week: 9, topics: ['Statistical Tests', 'R tutorial'],
       image: 'thumbnails/R_logo.svg', primary: true, download: true
     });
+    const apAnovaIndex = apSlides.findIndex(s => s.week === 9 && s.topicStart && s.title === weekTitles[8]);
+    apSlides.splice(apAnovaIndex + 1, 0, {
+      title: 'tutorial - "quarto version for RStudio"',
+      file: 'week8-anova-tutorial.qmd',
+      week: 9, topics: ['ANOVA', 'R tutorial'],
+      image: 'thumbnails/R_logo.svg', primary: true, download: true
+    });
     const apPracticalIndex = apSlides.findIndex(s => s.week === 1 && s.title === 'Main practical');
     const apPractical = apSlides[apPracticalIndex];
     apSlides.splice(apPracticalIndex, 1,
