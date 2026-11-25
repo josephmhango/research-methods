@@ -300,6 +300,13 @@
         ...recording, week: 9, topics: [weekTitles[sourceWeek]], image: 'thumbnails/R_logo.svg'
       })));
     }
+    const apStatisticalTestsIndex = apSlides.findIndex(s => s.week === 9 && s.topicStart && s.title === weekTitles[7]);
+    apSlides.splice(apStatisticalTestsIndex + 1, 0, {
+      title: 'tutorial - "quarto version for RStudio"',
+      file: 'docs/week7-statistical-inference-tutorial.qmd',
+      week: 9, topics: ['Statistical Tests', 'R tutorial'],
+      image: 'thumbnails/R_logo.svg', primary: true, download: true
+    });
     const apPracticalIndex = apSlides.findIndex(s => s.week === 1 && s.title === 'Main practical');
     const apPractical = apSlides[apPracticalIndex];
     apSlides.splice(apPracticalIndex, 1,
@@ -351,7 +358,7 @@
       const groups = Array.from(map.entries()).map(([week, items])=>{
         const sorted = activeSchedule === 'ap' || [1, 2, 3, 4, 5, 9, 10, 11, 12, 13].includes(Number(week)) ? items.slice() : items.slice().sort((a,b)=>a.title.localeCompare(b.title, undefined, {numeric:true,sensitivity:'base'}));
         const topics = unique(sorted.flatMap(s=>s.topics||[])).sort((a,b)=>a.localeCompare(b));
-        const first = sorted.find(s => s.file) || sorted[0];
+        const first = sorted.find(s => s.file && !s.download) || sorted[0];
         const lead = staffLeads[activeSchedule][week] || '';
         return { week, title: schedules[activeSchedule].weekTitles[week] || '', slides: sorted, topics, image: first?.image, defaultFile: first?.file, lead };
       });
@@ -415,7 +422,7 @@
         if (s.pending) return `<li><span class="pending-resource">${s.title}</span> <small class="pending-label">Link pending</small></li>`;
         if (!s.file) return `<li>${s.title}</li>`;
         const href = toHref(s.file);
-        return `<li><a class="slide-link" href="${href}"${s.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${s.title}</a></li>`;
+        return `<li><a class="slide-link" href="${href}"${s.download ? ` download="${s.file.split('/').pop()}" data-download` : ''}${s.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${s.title}</a></li>`;
       }).join('');
       const count = g.slides.filter(s => !s.heading).length;
       const lead = g.lead ? `<span class="lead-pill">Staff lead: ${g.lead}</span>` : '';
@@ -431,7 +438,35 @@
       `;
     }
 
+    async function downloadResource(event){
+      event.preventDefault();
+      event.stopPropagation();
+      const link = event.currentTarget;
+      if (link.getAttribute('aria-busy') === 'true') return;
+      link.setAttribute('aria-busy', 'true');
+      try {
+        const response = await fetch(link.href);
+        if (!response.ok) throw new Error('Download failed');
+        const blob = new Blob([await response.arrayBuffer()], {type: 'application/octet-stream'});
+        const url = URL.createObjectURL(blob);
+        const saveLink = document.createElement('a');
+        saveLink.href = url;
+        saveLink.download = link.download;
+        document.body.appendChild(saveLink);
+        saveLink.click();
+        saveLink.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      } catch (error) {
+        alert('The file could not be downloaded. Please try again.');
+      } finally {
+        link.removeAttribute('aria-busy');
+      }
+    }
+
     function bindCardNavigation(){
+      document.querySelectorAll('[data-download]').forEach(link => {
+        link.addEventListener('click', downloadResource);
+      });
       document.querySelectorAll('.card').forEach(card=>{
         const href = card.getAttribute('data-default-href');
         card.addEventListener('click',(e)=>{

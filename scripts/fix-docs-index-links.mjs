@@ -1,9 +1,14 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDirectory, "..");
+// Publish the editable Quarto source alongside the rendered tutorial.
+copyFileSync(
+  resolve(projectRoot, "week7-statistical-inference-tutorial.qmd"),
+  resolve(projectRoot, "docs", "week7-statistical-inference-tutorial.qmd")
+);
 const docsIndex = resolve(projectRoot, "docs", "index.html");
 const original = readFileSync(docsIndex, "utf8");
 
