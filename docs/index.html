@@ -209,6 +209,9 @@
       {"title":"Main presentation","file":"week7-hypothesis-testing-foundations.html","week":7,"topics":["Hypothesis testing","Correlation","T-test","Chi-square"],"image":"thumbnails/R_logo.svg","primary":true},
       {"title":"Main tutorial","file":"week7-statistical-inference-tutorial.html","week":7,"topics":["R tutorial","T-test","Chi-square","Correlation","Non-parametric tests"],"image":"thumbnails/R_logo.svg","primary":true},
       {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/1T5GEaGs3IuPMRjJZp-lTrQgyNS2STxAb?usp=sharing","week":7,"topics":["R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true,"newTab":true},
+      {"title":"Statistical tests recording","file":"https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=afc2a946-f626-44aa-a753-b50d00b8bac1","week":7,"topics":["Statistical Tests","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
+      {"title":"T-test","file":"https://www.youtube.com/watch?v=x1RFWHV2VUU","week":7,"topics":["T-test","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Chi-square","file":"https://www.youtube.com/watch?v=cJRPZ8HD-zI","week":7,"topics":["Chi-square","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
       // {"title":"Exploratory data analysis and hypothesis framing","file":"eda.html","week":7,"topics":["EDA","Hypothesis testing"],"image":"thumbnails/R_logo.svg"},
       // {"title":"The t-test","file":"t-test.html","week":7,"topics":["Hypothesis testing","T-test"],"image":"thumbnails/R_logo.svg"},
       // {"title":"The chi-square test","file":"chisquare.html","week":7,"topics":["Hypothesis testing","Chi-square"],"image":"thumbnails/R_logo.svg"},
@@ -216,6 +219,8 @@
       {"title":"Main presentation","file":"anova.html","week":8,"topics":["ANOVA","F-test","Interactions","Repeated measures","Estimated marginal means"],"image":"thumbnails/R_logo.svg","primary":true},
       {"title":"Main tutorial","file":"week8-anova-tutorial.html","week":8,"topics":["ANOVA","R tutorial","Estimated marginal means","Post hoc comparisons"],"image":"thumbnails/R_logo.svg","primary":true},
       {"title":"Colab tutorial","file":"https://colab.research.google.com/drive/14LsDcM4ClL0cWJbGPPyTQuw5RIfDkAEL?usp=sharing","week":8,"topics":["ANOVA","R tutorial","Colab"],"image":"thumbnails/R_logo.svg","primary":true,"newTab":true},
+      {"title":"ANOVA recording","file":"https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4d65caa2-078d-4c74-9758-b50400951fab","week":8,"topics":["ANOVA","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
+      {"title":"ANOVA","file":"https://www.youtube.com/watch?v=0EA5aPQpqYY","week":8,"topics":["ANOVA","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
       {"title":"General information on ArcGIS Pro Installation Requirements","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","heading":4,"file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30914"},
       {"title":"Installation information","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/course/view.php?id=254#module-30915"},
       {"title":"Instructions on how to register for an ESRI account and how to download ArcGIS Pro","week":9,"topics":["Using GIS to analyse and visualise spatial data 1"],"image":"img/rmgis.png","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=30916"},
@@ -247,6 +252,9 @@
       {"title":"starter geojson","file":"https://vle.harper-adams.ac.uk/mod/resource/view.php?id=32317","week":11,"topics":["Sampling"],"image":"thumbnails/R_logo.svg"},
       {"title":"Slides","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=33519","week":12,"topics":["Regression"],"image":"thumbnails/R_logo.svg"},
       {"title":"Tutorial","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=33522","week":12,"topics":["Regression"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Linear regression","file":"https://www.youtube.com/watch?v=-mGXnm0fHtI","week":12,"topics":["Regression","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
+      {"title":"ggplot2 for regression","file":"https://www.youtube.com/watch?v=HPJn1CMvtmI","week":12,"topics":["Regression","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
+      {"title":"Mixed models","file":"https://www.youtube.com/watch?v=DtvqyqTzoQQ","week":12,"topics":["Regression","Pre-session watch"],"image":"thumbnails/R_logo.svg"},
       {"title":"Slides","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=34260","week":13,"topics":["Scientific reporting"],"image":"thumbnails/R_logo.svg"},
       {"title":"Tutorial","file":"https://vle.harper-adams.ac.uk/mod/url/view.php?id=34261","week":13,"topics":["Scientific reporting"],"image":"thumbnails/R_logo.svg"}
     ];
@@ -285,20 +293,6 @@
         }))
       ])
     );
-    const apWeek9Recordings = {
-      7: [
-        {title: 'Statistical tests recording', file: 'https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=afc2a946-f626-44aa-a753-b50d00b8bac1'}
-      ],
-      8: [
-        {title: 'ANOVA recording', file: 'https://harper-adams.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=4d65caa2-078d-4c74-9758-b50400951fab'}
-      ]
-    };
-    for (const [sourceWeek, recordings] of Object.entries(apWeek9Recordings)) {
-      const topicIndex = apSlides.findIndex(s => s.week === 9 && s.topicStart && s.title === weekTitles[sourceWeek]);
-      apSlides.splice(topicIndex + 1, 0, ...recordings.map(recording => ({
-        ...recording, week: 9, topics: [weekTitles[sourceWeek]], image: 'thumbnails/R_logo.svg'
-      })));
-    }
     const apStatisticalTestsIndex = apSlides.findIndex(s => s.week === 9 && s.topicStart && s.title === weekTitles[7]);
     apSlides.splice(apStatisticalTestsIndex + 1, 0, {
       title: 'tutorial - "quarto version for RStudio"',
@@ -411,9 +405,8 @@
         if (!videos.length) return items;
         return [
           ...(topic ? [topic] : []),
-          ...resources.filter(s => s.primary && !isVideo(s)),
           {title: 'Pre-session watch', heading: topic ? Math.min(topic.heading + 1, 6) : 4, videos},
-          ...resources.filter(s => !isVideo(s) && !s.primary)
+          ...resources.filter(s => !isVideo(s))
         ];
       });
     }
